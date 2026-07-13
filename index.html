@@ -1,0 +1,1540 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" id="metaThemeColor" content="#ffffff">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔒</text></svg>">
+  <title>방탈리스트</title>
+
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&family=Gowun+Dodum&display=swap" rel="stylesheet">
+
+  <style>
+    /* ★ v2.0: 쿠키런 폰트 수정 (woff 직접 링크 → @font-face 정식 등록) */
+    @font-face {
+      font-family: 'CookieRun';
+      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/CookieRun-Regular.woff') format('woff');
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    /* ★ v2.0: 다크모드 대응을 위한 색상 변수화 */
+    :root {
+      --bg: #ffffff;
+      --bg-soft: #f9f9f9;
+      --bg-softer: #f4f4f4;
+      --bg-faint: #fafafa;
+      --bg-card: #ffffff;
+      --text: #333;
+      --strong: #111;
+      --sub: #555;
+      --muted: #666;
+      --faint: #888;
+      --ghost: #aaa;
+      --line: #ddd;
+      --line-soft: #eaeaea;
+      --line-lighter: #f0f0f0;
+      --line-dashed: #eee;
+      --accent: #ff3b3b;
+      --accent-bg: #fff3f3;
+      --accent-line: #ffcccc;
+      --record-bg: #f0f7ff;
+      --record-line: #cce3ff;
+      --record-title: #0056b3;
+      --invert-bg: #111;
+      --invert-text: #fff;
+      --shadow-1: rgba(0,0,0,0.03);
+      --shadow-2: rgba(0,0,0,0.05);
+      --shadow-3: rgba(0,0,0,0.1);
+      --shadow-4: rgba(0,0,0,0.15);
+      --gold: #ffd700;
+    }
+    body.dark {
+      --bg: #141414;
+      --bg-soft: #1e1e1e;
+      --bg-softer: #262626;
+      --bg-faint: #1a1a1a;
+      --bg-card: #1c1c1c;
+      --text: #d8d8d8;
+      --strong: #f5f5f5;
+      --sub: #c0c0c0;
+      --muted: #a8a8a8;
+      --faint: #8a8a8a;
+      --ghost: #6f6f6f;
+      --line: #3c3c3c;
+      --line-soft: #2d2d2d;
+      --line-lighter: #2a2a2a;
+      --line-dashed: #383838;
+      --accent: #ff5c5c;
+      --accent-bg: #3a1e1e;
+      --accent-line: #5a2c2c;
+      --record-bg: #17222e;
+      --record-line: #2a4258;
+      --record-title: #7fb5e8;
+      --invert-bg: #f0f0f0;
+      --invert-text: #111;
+      --shadow-1: rgba(0,0,0,0.25);
+      --shadow-2: rgba(0,0,0,0.3);
+      --shadow-3: rgba(0,0,0,0.45);
+      --shadow-4: rgba(0,0,0,0.5);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* ★ v2.0: 글자 크기 스케일 시스템
+       --fs-user: 설정에서 선택한 크기 / --fs-font: 폰트별 보정치 (손글씨는 작게 보여서 확대) */
+    body {
+      --fs-user: 1;
+      --fs-font: 1;
+      --fs: calc(var(--fs-user) * var(--fs-font));
+      background-color: var(--bg); color: var(--text); line-height: 1.5;
+      transition: background-color 0.3s, color 0.3s, font-family 0.3s;
+    }
+    body.fs-s { --fs-user: 0.9; }
+    body.fs-l { --fs-user: 1.12; }
+    body.font-hand { --fs-font: 1.22; line-height: 1.6; }
+    body.font-cookie { --fs-font: 1.02; }
+    body.font-gowun { --fs-font: 1.02; }
+
+    header { padding: 30px 20px 20px; text-align: center; position: relative; }
+
+    /* ★ v3.0: 티켓 컨셉 헤더 */
+    .ticket { position: relative; display: flex; max-width: 560px; margin: 0 auto 14px; background: var(--bg-card); border: 1.5px solid var(--line); border-radius: 14px; box-shadow: 0 6px 16px var(--shadow-2); }
+    .ticket::before, .ticket::after { content: ''; position: absolute; width: 20px; height: 20px; border-radius: 50%; background: var(--bg); border: 1.5px solid var(--line); left: calc(100% - 106px); transform: translateX(-50%); z-index: 2; }
+    .ticket::before { top: -11.5px; }
+    .ticket::after { bottom: -11.5px; }
+    .ticket-main { flex: 1; min-width: 0; padding: 18px 14px; display: flex; align-items: center; justify-content: center; gap: 12px; }
+    .ticket-stub { width: 106px; flex-shrink: 0; border-left: 2px dashed var(--line); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; padding: 12px 6px; background: var(--bg-soft); border-radius: 0 12.5px 12.5px 0; }
+    .stub-label { font-size: calc(9px * var(--fs)); letter-spacing: 2.5px; color: var(--faint); font-weight: 700; }
+    .stub-no { font-size: calc(17px * var(--fs)); font-weight: 800; color: var(--accent); letter-spacing: 0.5px; white-space: nowrap; }
+    .stub-sub { font-size: calc(8px * var(--fs)); letter-spacing: 2px; color: var(--ghost); font-weight: 600; }
+    h1.main-title { font-size: calc(26px * var(--fs)); font-weight: 700; letter-spacing: -0.5px; color: var(--strong); word-break: keep-all; }
+
+    /* ★ v3.0: 요약 스탯 스트립 */
+    .stat-strip { display: flex; justify-content: center; align-items: center; gap: 8px; flex-wrap: wrap; margin: 0 auto 16px; }
+    .strip-item { display: flex; align-items: center; gap: 4px; font-size: calc(12px * var(--fs)); font-weight: 600; color: var(--muted); background: var(--bg-soft); border: 1px solid var(--line-soft); padding: 5px 12px; border-radius: 20px; white-space: nowrap; }
+    .strip-item b { color: var(--strong); font-weight: 800; }
+    .strip-item.gold b { color: #c9971a; }
+    body.dark .strip-item.gold b { color: #f0c84c; }
+    .title-lock { font-size: 26px; animation: float 3s ease-in-out infinite; display: inline-block; }
+    .title-lock.key { animation-delay: 1.5s; font-size: 24px; }
+    @keyframes float {
+      0% { transform: translateY(0px) rotate(-5deg); }
+      50% { transform: translateY(-6px) rotate(5deg); }
+      100% { transform: translateY(0px) rotate(-5deg); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .title-lock { animation: none; }
+    }
+
+    .settings-btn { position: absolute; top: 20px; right: 20px; background: none; border: none; font-size: 24px; cursor: pointer; color: var(--muted); transition: transform 0.2s; }
+    .settings-btn:hover { transform: rotate(45deg); color: var(--strong); }
+
+    .control-panel { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap;}
+    .btn { padding: 8px 14px; border: 1px solid var(--line); background-color: var(--bg-card); color: var(--text); border-radius: 20px; font-size: calc(13px * var(--fs)); font-weight: 600; cursor: pointer; box-shadow: 0 2px 4px var(--shadow-2); transition: 0.2s; display: flex; align-items: center; gap: 4px; font-family: inherit;}
+    .btn:hover { background-color: var(--invert-bg); color: var(--invert-text); }
+    .refresh-btn { padding: 8px 12px; justify-content: center; }
+
+    .filter-container { display: flex; gap: 15px; padding: 20px 20px 15px; overflow-x: auto; scrollbar-width: none; justify-content: center; }
+    .filter-item { display: flex; flex-direction: column; align-items: center; min-width: 64px; cursor: pointer; gap: 8px; }
+    .filter-icon { width: 56px; height: 56px; border-radius: 50%; background-color: var(--bg-card); border: 1px solid var(--line); display: flex; justify-content: center; align-items: center; font-size: 24px; box-shadow: 0 2px 5px var(--shadow-1); transition: 0.2s;}
+    .filter-item.active .filter-icon { border-color: var(--strong); box-shadow: 0 4px 10px var(--shadow-4); transform: translateY(-2px); }
+    .filter-name { font-size: calc(13px * var(--fs)); font-weight: 500; color: var(--muted); }
+    .filter-item.active .filter-name { color: var(--strong); font-weight: 700; }
+
+    .sub-filter-container { display: none; flex-wrap: wrap; gap: 8px; padding: 5px 20px 20px; justify-content: center; max-width: 900px; margin-left: auto; margin-right: auto; }
+    .sub-filter-container.active { display: flex; }
+    .sub-filter-item { padding: 6px 14px; background: var(--bg-softer); color: var(--muted); border-radius: 20px; font-size: calc(12px * var(--fs)); font-weight: 600; cursor: pointer; white-space: nowrap; transition: 0.2s; border: 1px solid transparent; }
+    .sub-filter-item:hover { background: var(--line-dashed); }
+    .sub-filter-item.active { background: var(--invert-bg); color: var(--invert-text); border-color: var(--invert-bg); box-shadow: 0 2px 6px var(--shadow-3); }
+
+    .toolbar { max-width: 1200px; margin: 0 auto; padding: 0 20px 15px; display: flex; justify-content: space-between; align-items: center; gap: 10px; border-bottom: 1px solid var(--line-soft); }
+    .search-wrapper { display: flex; align-items: center; gap: 5px; flex-grow: 1; max-width: 450px; }
+    .search-filter { padding: 6px 10px; border: 1px solid var(--line); border-radius: 8px; font-size: calc(12px * var(--fs)); outline: none; background: var(--bg-soft); cursor: pointer; font-family: inherit; color: var(--text); height: 34px;}
+    .search-box { display: flex; align-items: center; background: var(--bg-soft); border: 1px solid var(--line); border-radius: 8px; padding: 6px 12px; flex-grow: 1; transition: border-color 0.2s; height: 34px;}
+    .search-box:focus-within { border-color: var(--strong); background: var(--bg-card); box-shadow: 0 2px 6px var(--shadow-2); }
+    .search-icon { font-size: 14px; color: var(--faint); margin-right: 8px; }
+    .search-input { border: none; background: transparent; outline: none; font-size: calc(13px * var(--fs)); font-family: inherit; width: 100%; color: var(--text); }
+    .search-input::placeholder { color: var(--ghost); }
+
+    .sort-wrapper { display: flex; align-items: center; gap: 8px; justify-content: flex-end; }
+    .total-count { font-size: calc(13px * var(--fs)); font-weight: 800; color: var(--accent); background: var(--accent-bg); padding: 6px 12px; border-radius: 8px; border: 1px solid var(--accent-line); white-space: nowrap;}
+    .sort-select { padding: 6px 12px; border: 1px solid var(--line); border-radius: 8px; font-size: calc(12px * var(--fs)); outline: none; background: var(--bg-soft); cursor: pointer; font-family: inherit; color: var(--text); height: 34px;}
+    .sort-select:hover { border-color: var(--ghost); }
+
+    .grid-container { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; padding: 25px 20px 40px; max-width: 1200px; margin: 0 auto; transition: 0.3s;}
+
+    .card { background: var(--bg-card); border: 1px solid var(--line-soft); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; position: relative; box-shadow: 0 4px 10px var(--shadow-1); height: 100%; }
+    /* ★ v3.0: 인생테마 카드 골드 테두리 */
+    .card.life { border: 1.5px solid #e0b322; box-shadow: 0 4px 14px rgba(224, 179, 34, 0.28); }
+    body.dark .card.life { border-color: #d4af37; box-shadow: 0 4px 16px rgba(212, 175, 55, 0.25); }
+    .card-clickable { cursor: pointer; display: flex; flex-direction: column; flex-grow: 1; }
+    .card-clickable:hover .card-img { transform: scale(1.05); }
+    .card-img-wrapper { position: relative; width: 100%; padding-top: 133.33%; overflow: hidden; background-color: var(--bg-faint); border-bottom: 1px solid var(--line-lighter); }
+    .card-img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease;}
+    .award-container { position: absolute; top: 10px; right: 10px; left: 44px; display: flex; flex-direction: column; gap: 4px; align-items: flex-end; pointer-events: none;}
+    .award-badge { background: rgba(0,0,0,0.85); color: var(--gold); padding: 6px 10px; border-radius: 6px; font-size: calc(11px * var(--fs)); font-weight: bold; max-width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; text-align: right; backdrop-filter: blur(2px); }
+
+    /* ★ v2.0: 인생테마 👑 토글 버튼 (카드 좌상단) */
+    .life-toggle { position: absolute; top: 8px; left: 8px; z-index: 5; width: 32px; height: 32px; border-radius: 50%; border: none; background: rgba(0,0,0,0.55); font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: 0.2s; backdrop-filter: blur(2px); line-height: 1; padding: 0;}
+    .life-toggle.off { filter: grayscale(1); opacity: 0.45; }
+    .life-toggle.on { filter: none; opacity: 1; box-shadow: 0 0 8px rgba(255, 215, 0, 0.6); }
+    .life-toggle:hover { transform: scale(1.15); opacity: 1; }
+
+    .card-info { padding: 16px; flex-grow: 1; display: flex; flex-direction: column;}
+    .store-name { font-size: calc(12px * var(--fs)); color: var(--muted); margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100%;}
+    .store-name .region { color: var(--ghost); font-size: calc(11px * var(--fs)); margin-left: 2px; }
+
+    /* ★ v2.0: 고정 px 높이 → em 기반으로 변경 (글자 크기/폰트 변경 시 밀림 방지) */
+    .theme-name { font-size: calc(20px * var(--fs)); font-weight: 800; color: var(--strong); margin-bottom: 4px; line-height: 1.3; word-break: keep-all; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis; height: 2.6em;}
+
+    .my-rating { font-size: calc(18px * var(--fs)); font-weight: 800; color: var(--accent); margin-bottom: 6px; display: flex; align-items: center; gap: 4px;}
+    .my-rating span { font-size: calc(12px * var(--fs)); font-weight: 500; color: var(--sub); }
+
+    /* ★ v3.0: 나의 별점 게이지 바 (인생테마는 골드 게이지) */
+    .rating-bar { height: 5px; border-radius: 3px; background: var(--line-dashed); overflow: hidden; margin: 0 0 12px; }
+    .rating-fill { height: 100%; border-radius: 3px; background: linear-gradient(90deg, #ff8a5c, var(--accent)); }
+    .card.life .rating-fill { background: linear-gradient(90deg, #f5d76e, #e0b322); }
+
+    .sub-info { font-size: calc(11px * var(--fs)); color: var(--muted); background: var(--bg-soft); padding: 8px; border-radius: 6px; margin-bottom: 12px; display: flex; flex-direction: row; justify-content: space-between; align-items: center; white-space: nowrap; }
+    .bottom-info { border-top: 1px dashed var(--line-dashed); padding-top: 12px; display: flex; flex-direction: column; gap: 8px; margin-top: auto;}
+    .info-row { display: flex; justify-content: space-between; align-items: center; font-size: calc(12px * var(--fs)); font-weight: 500; }
+
+    .genre-container { display: flex; flex-wrap: nowrap; gap: 4px; overflow-x: auto; scrollbar-width: none; padding-bottom: 2px;}
+    .genre-container::-webkit-scrollbar { display: none; }
+    .genre-row { flex-shrink: 0; font-size: calc(11px * var(--fs)); color: var(--sub); background: var(--bg-softer); padding: 4px 8px; border-radius: 4px; width: fit-content; word-break: keep-all; line-height: 1.3;}
+
+    /* ★ v3.0: 장르 태그 색상 코딩 (카드 + 상세 모달 공용) */
+    .genre-row.gt-horror, .d-badge.gt-horror { background:#efe7ff; color:#5b3ea6; }
+    .genre-row.gt-thriller, .d-badge.gt-thriller { background:#ffe5e5; color:#c62828; }
+    .genre-row.gt-mystery, .d-badge.gt-mystery { background:#e3ecf9; color:#1e4e8c; }
+    .genre-row.gt-emotion, .d-badge.gt-emotion { background:#ffe6f0; color:#c2185b; }
+    .genre-row.gt-sf, .d-badge.gt-sf { background:#e0f3ff; color:#0277bd; }
+    .genre-row.gt-comic, .d-badge.gt-comic { background:#fff6d6; color:#a07800; }
+    .genre-row.gt-action, .d-badge.gt-action { background:#e2f5e6; color:#2e7d32; }
+    .genre-row.gt-history, .d-badge.gt-history { background:#f3ead9; color:#8a5a2b; }
+    .genre-row.gt-stealth, .d-badge.gt-stealth { background:#e8e8ee; color:#44445c; }
+    .genre-row.gt-puzzle, .d-badge.gt-puzzle { background:#dff4f2; color:#00796b; }
+    .genre-row.gt-story, .d-badge.gt-story { background:#e9e7fb; color:#4a3fae; }
+    body.dark .genre-row.gt-horror, body.dark .d-badge.gt-horror { background:#2c2344; color:#c3aef5; }
+    body.dark .genre-row.gt-thriller, body.dark .d-badge.gt-thriller { background:#42201f; color:#ff9d9d; }
+    body.dark .genre-row.gt-mystery, body.dark .d-badge.gt-mystery { background:#1d2c40; color:#94bdf0; }
+    body.dark .genre-row.gt-emotion, body.dark .d-badge.gt-emotion { background:#3d1f2c; color:#f79ac0; }
+    body.dark .genre-row.gt-sf, body.dark .d-badge.gt-sf { background:#12304a; color:#7fc9f5; }
+    body.dark .genre-row.gt-comic, body.dark .d-badge.gt-comic { background:#3a3216; color:#e8cf6a; }
+    body.dark .genre-row.gt-action, body.dark .d-badge.gt-action { background:#1c3320; color:#8fd69a; }
+    body.dark .genre-row.gt-history, body.dark .d-badge.gt-history { background:#372a1a; color:#d9ab72; }
+    body.dark .genre-row.gt-stealth, body.dark .d-badge.gt-stealth { background:#28283a; color:#b0b0cc; }
+    body.dark .genre-row.gt-puzzle, body.dark .d-badge.gt-puzzle { background:#123330; color:#7fd6c8; }
+    body.dark .genre-row.gt-story, body.dark .d-badge.gt-story { background:#26224a; color:#b1a8f0; }
+
+    /* ★ v2.0: 툴팁 → 모바일 터치 대응 (탭하면 열리고 다시 탭/바깥 탭하면 닫힘) */
+    .pax-tooltip { position: relative; cursor: pointer; color: #2196f3; display: flex; align-items: center; gap: 4px; -webkit-tap-highlight-color: transparent;}
+    .pax-tooltip .tooltip-text { visibility: hidden; width: max-content; max-width: 200px; background-color: #333; color: #fff; text-align: left; border-radius: 6px; padding: 6px 10px; position: absolute; z-index: 10; bottom: 130%; right: 0; opacity: 0; transition: opacity 0.2s; font-weight: normal; font-size: calc(11px * var(--fs)); word-break: keep-all; line-height: 1.4; box-shadow: 0 4px 8px rgba(0,0,0,0.2); pointer-events: none;}
+    .pax-tooltip:hover .tooltip-text, .pax-tooltip.show .tooltip-text { visibility: visible; opacity: 1; }
+
+    .card-actions { display: flex; border-top: 1px solid var(--line-lighter); }
+    .action-btn { flex: 1; padding: 10px; border: none; background: var(--bg-faint); font-size: calc(12px * var(--fs)); cursor: pointer; color: var(--muted); transition: background 0.2s; font-family: inherit;}
+    .action-btn:hover { background: var(--line-dashed); color: var(--strong); }
+    .action-btn:not(:last-child) { border-right: 1px solid var(--line-lighter); }
+
+    /* ★ v2.0: 스켈레톤 로딩 (텍스트 스피너 → 카드 형태) */
+    .skeleton-card { background: var(--bg-card); border: 1px solid var(--line-soft); border-radius: 12px; overflow: hidden; }
+    .sk-img { width: 100%; padding-top: 133.33%; position: relative; overflow: hidden; }
+    .sk-line { height: 14px; border-radius: 4px; margin: 12px 16px 0; overflow: hidden; position: relative;}
+    .sk-line.short { width: 45%; }
+    .sk-line.tall { height: 22px; }
+    .sk-line:last-child { margin-bottom: 16px; }
+    .sk-img::after, .sk-line::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, var(--bg-softer) 25%, var(--line-dashed) 50%, var(--bg-softer) 75%); background-size: 200% 100%; animation: shimmer 1.4s infinite; }
+    @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+    @media (prefers-reduced-motion: reduce) { .sk-img::after, .sk-line::after { animation: none; background: var(--bg-softer); } }
+
+    @media (max-width: 768px) {
+      .control-panel { flex-wrap: nowrap !important; gap: 5px; overflow-x: auto; scrollbar-width: none; padding: 0 10px; justify-content: flex-start; }
+      .control-panel::-webkit-scrollbar { display: none; }
+      .btn { padding: 6px 10px; font-size: calc(11px * var(--fs)); white-space: nowrap; flex-shrink: 0; }
+      .refresh-btn { font-size: 14px; padding: 6px 8px;}
+
+      .toolbar { flex-direction: column; align-items: stretch; gap: 10px; padding-bottom: 15px; }
+      .search-wrapper { max-width: 100%; }
+      .sort-wrapper { justify-content: flex-end; width: 100%; }
+
+      .grid-container { grid-template-columns: repeat(2, 1fr) !important; gap: 12px; padding: 20px 15px 40px; }
+      .card-info { padding: 12px; }
+
+      .theme-name { font-size: calc(16px * var(--fs)); margin-bottom: 2px; height: 2.6em; }
+
+      .my-rating { font-size: calc(15px * var(--fs)); margin-bottom: 5px;}
+      .my-rating span { font-size: calc(10px * var(--fs)); }
+      .rating-bar { height: 4px; margin-bottom: 8px; }
+
+      /* ★ v3.0: 모바일 티켓 헤더 (좁은 화면에서도 밀림 없이 축소) */
+      .ticket { max-width: 100%; }
+      .ticket-main { padding: 14px 8px; gap: 8px; }
+      h1.main-title { font-size: calc(19px * var(--fs)); }
+      .title-lock { font-size: 20px; }
+      .title-lock.key { font-size: 18px; }
+      .ticket-stub { width: 84px; padding: 10px 4px; }
+      .ticket::before, .ticket::after { left: calc(100% - 84px); width: 16px; height: 16px; }
+      .ticket::before { top: -9.5px; }
+      .ticket::after { bottom: -9.5px; }
+      .stub-no { font-size: calc(14px * var(--fs)); }
+      .strip-item { font-size: calc(11px * var(--fs)); padding: 4px 10px; }
+      .stat-strip { gap: 5px; margin-bottom: 12px; padding: 0 10px; }
+
+      .sub-info { font-size: calc(10px * var(--fs)); padding: 6px 4px; justify-content: space-between; align-items: center; gap: 2px; white-space: nowrap; letter-spacing: -0.5px;}
+      .sub-info span { display: flex; align-items: center; gap: 2px; }
+      .info-row { font-size: calc(11px * var(--fs)); }
+      .award-badge { font-size: calc(9px * var(--fs)); padding: 4px 6px; }
+      .award-container { left: 40px; }
+      .life-toggle { width: 28px; height: 28px; font-size: 14px; }
+
+      .card-actions { font-size: 10px; }
+      .action-btn { padding: 8px 4px; font-size: calc(10px * var(--fs));}
+    }
+
+    #scrollTopBtn { display: none; position: fixed; bottom: 25px; right: 25px; z-index: 99; font-size: 16px; border: none; outline: none; background-color: var(--invert-bg); color: var(--invert-text); cursor: pointer; padding: 12px 14px; border-radius: 50%; box-shadow: 0 4px 10px var(--shadow-3); transition: background-color 0.3s;}
+    #scrollTopBtn:hover { opacity: 0.85; }
+
+    .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); justify-content: center; align-items: center; z-index: 100; padding: 20px;}
+    .modal-content { background: var(--bg-card); color: var(--text); padding: 25px; border-radius: 12px; width: 100%; max-width: 600px; max-height: 90vh; overflow-y: auto; position: relative; cursor: default;}
+    .modal-content h2 { color: var(--strong); }
+    .close-btn { position: absolute; top: 15px; right: 20px; background: none; border: none; font-size: 24px; cursor: pointer; color: var(--faint); transition: color 0.2s; z-index: 10;}
+    .close-btn:hover { color: var(--strong); }
+
+    .detail-content { max-width: 800px; padding: 30px; }
+    .detail-layout { display: flex; gap: 30px; flex-wrap: wrap; margin-top:10px;}
+    .detail-img-box { flex: 1; min-width: 250px; max-width: 300px; margin: 0 auto;}
+    .detail-img-box img { width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 12px var(--shadow-3); display: block; object-fit: contain; }
+
+    .detail-info-box { flex: 2; min-width: 280px; display: flex; flex-direction: column; gap: 15px; }
+    .detail-header .d-store { font-size: calc(13px * var(--fs)); color: var(--muted); margin-bottom: 4px; }
+    .detail-header .d-title { font-size: calc(28px * var(--fs)); font-weight: 800; color: var(--strong); line-height: 1.2; word-break: keep-all; margin-bottom: 10px;}
+
+    .detail-badges { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 6px; }
+    .detail-awards { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+
+    .d-badge { background: var(--bg-softer); color: var(--sub); padding: 4px 10px; border-radius: 4px; font-size: calc(12px * var(--fs)); font-weight: 600; display: flex; align-items: center;}
+    .d-badge.award { background: #111; color: var(--gold); }
+    .d-badge.life { background: #fff7e0; color: #b8860b; border: 1px solid #f0d98c; }
+    body.dark .d-badge.life { background: #3a3220; color: #f0c84c; border-color: #5a4c26; }
+    .detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; background: var(--bg-soft); padding: 15px; border-radius: 8px; }
+    .d-grid-item { display: flex; flex-direction: column; gap: 4px; }
+    .d-grid-label { font-size: calc(11px * var(--fs)); color: var(--faint); }
+    .d-grid-val { font-size: calc(14px * var(--fs)); font-weight: 700; color: var(--text); }
+    .d-grid-val.point { color: var(--accent); font-size: calc(18px * var(--fs));}
+    .detail-section { margin-top: 10px; border-top: 1px dashed var(--line-dashed); padding-top: 15px; }
+    .detail-section h3 { font-size: calc(14px * var(--fs)); font-weight: 700; color: var(--strong); margin-bottom: 8px; display: flex; align-items: center; gap: 6px;}
+    .detail-section p { font-size: calc(13px * var(--fs)); color: var(--sub); line-height: 1.6; word-break: keep-all; white-space: pre-line; }
+
+    .my-record-box { background: var(--record-bg); border: 1px solid var(--record-line); padding: 15px; border-radius: 8px; margin-top: 15px; }
+    .my-record-box h3 { color: var(--record-title); font-size: calc(13px * var(--fs)); margin-bottom: 10px; border-bottom: 1px solid var(--record-line); padding-bottom: 6px;}
+    .mr-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: calc(12px * var(--fs)); color: var(--text);}
+    .mr-grid span { color: var(--muted); display: inline-block; width: 65px;}
+    #d_notes { color: var(--text) !important; border-top-color: var(--record-line) !important; }
+
+    @media (max-width: 768px) {
+      /* ★ v2.0: 모바일 상세 모달 여백 축소 (내용 폭 확보) */
+      .modal-overlay { padding: 12px; }
+      .detail-content { padding: 20px 15px; }
+      .detail-layout { gap: 20px; }
+      .mr-grid { grid-template-columns: 1fr !important; gap: 10px !important; }
+      .mr-grid > div { display: flex; flex-direction: row; align-items: flex-start; gap: 10px; word-break: break-all;}
+      .mr-grid span { width: 70px; flex-shrink: 0; }
+    }
+
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .form-group { margin-bottom: 10px; }
+    .form-group.full { grid-column: 1 / -1; }
+    .form-group label { display: block; font-size: calc(11px * var(--fs)); font-weight: 600; color: var(--sub); margin-bottom: 4px; }
+    .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 8px; border: 1px solid var(--line); border-radius: 6px; font-size: calc(12px * var(--fs)); outline: none; background: var(--bg-card); color: var(--text); font-family: inherit;}
+    .form-group input:focus, .form-group textarea:focus { border-color: var(--strong); }
+    .loading-spinner { display: none; text-align: center; padding: 40px; font-weight: bold; color: var(--faint); grid-column: 1/-1;}
+    .url-notice { text-align:center; padding: 50px; color: var(--muted); grid-column: 1/-1; line-height: 1.6; border: 1px dashed var(--line); border-radius: 12px;}
+
+    .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 15px; }
+    .stat-box { background: var(--bg-soft); border-radius: 8px; padding: 15px; border: 1px solid var(--line-dashed); }
+    .stat-box.full { grid-column: 1 / -1; display: flex; justify-content: space-around; background: var(--bg-card); border: 2px solid var(--line-lighter); flex-wrap: wrap; gap: 10px;}
+    .stat-box h3 { font-size: calc(13px * var(--fs)); margin-bottom: 10px; border-bottom: 2px solid var(--strong); padding-bottom: 6px; color: var(--text); display: flex; justify-content: space-between;}
+    .stat-list { list-style: none; padding: 0; font-size: calc(12px * var(--fs)); color: var(--sub); }
+    .stat-list.region-list li { display: flex; justify-content: space-between; width: 100%; padding-right: 0;}
+    .stat-list li { display: flex; justify-content: space-between; margin-bottom: 6px; padding-bottom: 6px; border-bottom: 1px dashed var(--line); }
+    .stat-list li:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+    .stat-highlight { font-size: calc(26px * var(--fs)); font-weight: 800; color: var(--accent); text-align: center; margin: 5px 0; }
+    .stat-label { font-size: calc(12px * var(--fs)); color: var(--faint); text-align: center;}
+
+    /* ★ v2.0: 월별 플레이 막대 차트 */
+    .chart-box { display: block !important; }
+    .chart-box h3 { font-size: calc(13px * var(--fs)); margin-bottom: 12px; border-bottom: 2px solid var(--strong); padding-bottom: 6px; color: var(--text);}
+    .bar-chart { display: flex; align-items: flex-end; gap: 4px; height: 130px; padding-top: 8px; }
+    .bar-col { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; gap: 3px; min-width: 0; height: 100%; }
+    .bar-val { font-size: calc(10px * var(--fs)); color: var(--faint); font-weight: 700; line-height: 1;}
+    .bar { width: 68%; max-width: 26px; background: var(--accent); border-radius: 4px 4px 0 0; min-height: 3px; opacity: 0.85; transition: height 0.4s ease;}
+    .bar.zero { background: var(--line); opacity: 0.6; }
+    .bar-label { font-size: calc(10px * var(--fs)); color: var(--muted); line-height: 1; white-space: nowrap;}
+
+    .awards-content { max-width: 1000px; background: var(--bg-soft); padding: 40px 30px; }
+    .awards-title { text-align: center; font-size: calc(28px * var(--fs)); font-weight: 800; color: var(--strong); margin-bottom: 30px; letter-spacing: -0.5px;}
+    .mobile-break { display: none; }
+    .awards-tabs { display: flex; justify-content: center; gap: 8px; margin-bottom: 30px; flex-wrap: wrap;}
+    .award-tab { padding: 6px 16px; border: 1px solid var(--line); background: var(--bg-card); border-radius: 20px; font-size: calc(13px * var(--fs)); font-weight: 700; color: var(--muted); cursor: pointer; transition: 0.2s; font-family: inherit;}
+    .award-tab:hover { background: var(--bg-softer); }
+    .award-tab.active { background: var(--invert-bg); color: var(--invert-text); border-color: var(--invert-bg); }
+    .awards-top-grid { display: flex; justify-content: center; gap: 20px; margin-bottom: 40px; padding-bottom: 40px; border-bottom: 2px dashed var(--line-dashed); flex-wrap: wrap;}
+    .awards-grid { display: grid; grid-template-columns: repeat(3, 1fr) !important; gap: 40px 20px; margin-bottom: 40px; width: 100%;}
+    .award-card { display: flex; flex-direction: column; align-items: center; text-align: center; height: 100%; justify-content: flex-start; width: 100%; overflow: hidden;}
+    .awards-top-grid .award-card { flex: 0 1 calc(50% - 10px); min-width: 130px; max-width: 200px;}
+
+    /* ★ v2.0: 고정 px 높이 → em 기반 (폰트/크기 변경 시 밀림 방지) */
+    .award-laurel { width: 100%; height: 3.9em; font-size: calc(13px * var(--fs)); font-weight: 800; color: var(--strong); margin-bottom: 12px; line-height: 1.3; word-break: keep-all; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis;}
+    .award-emoji { font-size: calc(14px * var(--fs)); display: inline-block; }
+    .award-emoji.flip { transform: scaleX(-1); }
+
+    .award-img-box { width: 100%; max-width: 200px; aspect-ratio: 3 / 4; position: relative; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 10px var(--shadow-3); margin-bottom: 10px; background: var(--bg-faint); flex-shrink: 0; }
+    .award-img-box img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; }
+
+    .clear-badge { position: absolute; bottom: 8px; right: 8px; background: rgba(0,0,0,0.75); color: #4caf50; padding: 4px 8px; border-radius: 6px; font-size: calc(11px * var(--fs)); font-weight: 900; backdrop-filter: blur(2px); border: 1px solid rgba(76, 175, 80, 0.5); z-index: 10; box-shadow: 0 2px 4px rgba(0,0,0,0.3); }
+
+    .award-store { width: 100%; height: 1.5em; font-size: calc(11px * var(--fs)); color: var(--faint); margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding: 0 2px;}
+    .award-theme { width: 100%; height: 2.4em; font-size: calc(16px * var(--fs)); font-weight: 800; color: var(--strong); line-height: 1.2; word-break: keep-all; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis; margin-top: 2px;}
+
+    @media (max-width: 768px) {
+      .awards-content { padding: 30px 10px; }
+      .awards-title { font-size: calc(22px * var(--fs)); line-height: 1.4; word-break: keep-all; }
+      .mobile-break { display: block; }
+      .awards-grid { gap: 20px 8px !important; margin-bottom: 30px;}
+
+      .award-laurel { font-size: calc(11px * var(--fs)); line-height: 1.4; height: 4.2em; margin-bottom: 6px; -webkit-line-clamp: 3; word-break: break-word;}
+      .award-emoji { font-size: calc(12px * var(--fs)); }
+
+      .award-theme { font-size: calc(12px * var(--fs)); height: 2.5em; -webkit-line-clamp: 2; }
+      .award-store { font-size: calc(9px * var(--fs)); height: 1.55em; }
+      .awards-top-grid .award-card { max-width: 140px; }
+      .award-img-box { border-radius: 6px; }
+      .clear-badge { font-size: calc(9px * var(--fs)); padding: 3px 6px; bottom: 6px; right: 6px;}
+
+      .bar-chart { height: 100px; gap: 2px; }
+      .bar { width: 78%; }
+    }
+  </style>
+</head>
+<body>
+
+  <div>
+    <header>
+      <button class="settings-btn" onclick="openSettings()">⚙️</button>
+      <div class="ticket">
+        <div class="ticket-main">
+          <div class="title-lock">🔒</div>
+          <h1 class="main-title" id="pageTitle">노유's 방탈리스트</h1>
+          <div class="title-lock key">🔑</div>
+        </div>
+        <div class="ticket-stub">
+          <div class="stub-label">ADMIT</div>
+          <div class="stub-no" id="ticketNo">No.000</div>
+          <div class="stub-sub">ESCAPE</div>
+        </div>
+      </div>
+
+      <div class="stat-strip" id="statStrip">
+        <span class="strip-item">🎫 총 <b id="stripTotal">0</b>방</span>
+        <span class="strip-item gold">👑 인생테마 <b id="stripLife">0</b></span>
+        <span class="strip-item">📅 올해 <b id="stripYear">0</b>방</span>
+      </div>
+
+      <div class="control-panel">
+        <button class="btn" onclick="openDataModal()">➕ 새로운 테마 기록</button>
+        <button class="btn" onclick="openAwardsModal()">🏆 방탈 어워즈</button>
+        <button class="btn" onclick="openDashboard()">📊 통계 요약</button>
+        <button class="btn refresh-btn" onclick="fetchData()" title="새로고침">🔄</button>
+      </div>
+    </header>
+
+    <nav class="filter-container" id="primaryNav">
+      <div class="filter-item active" onclick="setPrimaryFilter('all', this)"><div class="filter-icon">🔍</div><div class="filter-name">전체보기</div></div>
+      <div class="filter-item" onclick="setPrimaryFilter('life', this)"><div class="filter-icon">👑</div><div class="filter-name">인생테마</div></div>
+      <div class="filter-item" onclick="setPrimaryFilter('genre', this)"><div class="filter-icon">🏷️</div><div class="filter-name">장르별</div></div>
+      <div class="filter-item" onclick="setPrimaryFilter('region', this)"><div class="filter-icon">🗺️</div><div class="filter-name">지역별</div></div>
+      <div class="filter-item" onclick="setPrimaryFilter('store', this)"><div class="filter-icon">🏬</div><div class="filter-name">매장별</div></div>
+    </nav>
+
+    <div class="sub-filter-container" id="subNav"></div>
+
+    <div class="toolbar">
+      <div class="search-wrapper">
+        <select id="searchType" class="search-filter" onchange="handleSearch()">
+          <option value="all">전체</option>
+          <option value="theme">테마/검색어</option>
+          <option value="companion">일행</option>
+        </select>
+        <div class="search-box">
+          <span class="search-icon">🔍</span>
+          <!-- ★ v2.0: onkeyup → oninput (모바일 한글 IME 실시간 검색 대응) -->
+          <input type="text" id="searchInput" class="search-input" placeholder="검색어를 입력하세요..." oninput="handleSearch()">
+        </div>
+      </div>
+
+      <div class="sort-wrapper">
+        <div class="total-count" id="totalCountDisplay">총 0방</div>
+        <select class="sort-select" id="sortSelect" onchange="applyFiltersAndSort()">
+          <option value="dateDesc">📅 날짜 (최신순)</option>
+          <option value="dateAsc">📅 날짜 (오래된순)</option>
+          <option value="myRatingDesc">⭐ 나의 별점 (높은순)</option>
+          <option value="myRatingAsc">⭐ 나의 별점 (낮은순)</option>
+          <option value="starDesc">📝 평점 (높은순)</option>
+          <option value="starAsc">📝 평점 (낮은순)</option>
+          <option value="diffKoDesc">🔒 코방 난이도 (높은순)</option>
+          <option value="diffKoAsc">🔒 코방 난이도 (낮은순)</option>
+          <option value="titleAsc">🔤 테마명 (가나다순)</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <main class="grid-container" id="themeGrid"></main>
+
+  <button id="scrollTopBtn" onclick="scrollToTop()">▲</button>
+
+  <div class="modal-overlay" id="detailModal">
+    <div class="modal-content detail-content">
+      <button class="close-btn" onclick="closeModal('detailModal')">✕</button>
+      <div class="detail-layout">
+        <div class="detail-img-box"><img id="d_poster" src="" alt="포스터"></div>
+        <div class="detail-info-box">
+          <div class="detail-header">
+            <div class="d-store" id="d_store_region">매장명 [지역]</div>
+            <h2 class="d-title" id="d_theme">테마명</h2>
+            <div class="detail-badges" id="d_badges"></div>
+            <div class="detail-awards" id="d_awards"></div>
+          </div>
+          <div class="detail-grid">
+            <div class="d-grid-item"><span class="d-grid-label">매장 난이도</span><span class="d-grid-val" id="d_diffStore"></span></div>
+            <div class="d-grid-item"><span class="d-grid-label">코방 난이도</span><span class="d-grid-val" id="d_diffKo"></span></div>
+            <div class="d-grid-item"><span class="d-grid-label">매장 공포도</span><span class="d-grid-val" id="d_horror"></span></div>
+            <div class="d-grid-item"><span class="d-grid-label">추천 평점</span><span class="d-grid-val" id="d_star"></span></div>
+            <div class="d-grid-item"><span class="d-grid-label">추천 인원</span><span class="d-grid-val" id="d_recPax"></span></div>
+            <div class="d-grid-item"><span class="d-grid-label">나의 별점</span><span class="d-grid-val point" id="d_myRating"></span></div>
+          </div>
+          <div class="detail-section">
+            <h3>📖 시놉시스 (줄거리)</h3>
+            <p id="d_synopsis"></p>
+          </div>
+          <div class="my-record-box">
+            <h3>📝 나의 플레이 기록</h3>
+            <div class="mr-grid">
+              <div><span>플레이 일자</span> <b id="d_playDate"></b></div>
+              <div><span>인원/일행</span> <b id="d_playPax"></b></div>
+            </div>
+            <div style="margin-top:8px; font-size:calc(12px * var(--fs)); border-top:1px dashed; padding-top:8px; white-space:pre-line;" id="d_notes"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="dataModal">
+    <div class="modal-content">
+      <h2 style="margin-bottom:15px; border-bottom:2px solid var(--strong); padding-bottom:10px;">방탈출 기록</h2>
+      <input type="hidden" id="editIndex">
+      <div class="form-grid">
+        <div class="form-group full"><label>포스터 이미지 (URL)</label><input type="text" id="m_poster" placeholder="인터넷 이미지 링크를 넣으세요"></div>
+        <div class="form-group"><label>지역</label><input type="text" id="m_region"></div>
+        <div class="form-group"><label>매장명</label><input type="text" id="m_store"></div>
+        <div class="form-group"><label>테마명</label><input type="text" id="m_theme"></div>
+        <div class="form-group"><label>검색어(줄임말/한글발음 등)</label><input type="text" id="m_keyword" placeholder="예: 완테드, 원티드"></div>
+        <div class="form-group"><label>추천 평점(코방 등)</label><input type="text" id="m_star"></div>
+        <div class="form-group"><label>코방 난이도</label><input type="text" id="m_diffKo"></div>
+        <div class="form-group"><label>리뷰 수</label><input type="text" id="m_reviews"></div>
+        <div class="form-group"><label>수상 내역 (여러개일 경우 쉼표로 구분)</label><input type="text" id="m_awards"></div>
+        <div class="form-group"><label>장르 (쉼표로 구분)</label><input type="text" id="m_genre" placeholder="예: 공포, 스릴러"></div>
+        <div class="form-group"><label>테마시간 (분 단위)</label><input type="text" id="m_time" placeholder="예: 75"></div>
+        <div class="form-group"><label>추천인원(매장)</label><input type="text" id="m_recPax"></div>
+        <div class="form-group"><label>매장 난이도</label><input type="text" id="m_diffStore"></div>
+        <div class="form-group"><label>매장 공포도</label><input type="text" id="m_horror"></div>
+        <div class="form-group"><label>플레이 일자</label><input type="text" id="m_playDate"></div>
+        <div class="form-group"><label>나의 별점 (예: 9.5)</label><input type="text" id="m_myRating" style="border-color:var(--accent);"></div>
+        <div class="form-group"><label>플레이 인원</label><input type="text" id="m_playPax"></div>
+        <div class="form-group"><label>일행 (쉼표로 구분)</label><input type="text" id="m_companions" placeholder="예: 철수, 영희"></div>
+        <!-- ★ v2.0: 인생테마 수동 지정 필드 -->
+        <div class="form-group"><label>👑 인생테마 직접 지정</label>
+          <select id="m_life">
+            <option value="">자동 (별점 기준)</option>
+            <option value="👑">👑 인생테마 지정</option>
+          </select>
+        </div>
+        <div class="form-group full"><label>시놉시스 (줄거리)</label><textarea id="m_synopsis" rows="3"></textarea></div>
+        <div class="form-group full"><label>비고</label><textarea id="m_notes" rows="2"></textarea></div>
+      </div>
+      <div style="display:flex; gap:10px; margin-top:20px;">
+        <button class="btn" style="flex:1; justify-content:center; background:var(--bg-softer);" onclick="closeModal('dataModal')">취소</button>
+        <button class="btn" style="flex:1; justify-content:center; background:var(--invert-bg); color:var(--invert-text);" onclick="saveRecord()">저장하기</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="dashboardModal">
+    <div class="modal-content">
+      <button class="close-btn" onclick="closeModal('dashboardModal')">✕</button>
+      <h2 style="margin-bottom:15px; border-bottom:2px solid var(--strong); padding-bottom:10px;">📊 방탈출 통계 요약</h2>
+      <div class="stat-grid">
+        <div class="stat-box full">
+          <div><div class="stat-label">총 플레이 횟수</div><div class="stat-highlight" id="statTotal">0방</div></div>
+          <div><div class="stat-label" id="statYearLabel">올해 플레이</div><div class="stat-highlight" id="statYear">0방</div></div>
+          <div><div class="stat-label">평균 나의 별점</div><div class="stat-highlight" id="statAvg">⭐ 0.00</div></div>
+        </div>
+        <!-- ★ v2.0: 월별 플레이 막대 차트 -->
+        <div class="stat-box full chart-box">
+          <h3 id="chartTitle">📈 월별 플레이 추이</h3>
+          <div class="bar-chart" id="statMonthly"></div>
+        </div>
+        <div class="stat-box"><h3>👥 일행 TOP 5</h3><ul class="stat-list" id="statComps"></ul></div>
+        <div class="stat-box"><h3>🏷️ 장르 TOP 5</h3><ul class="stat-list" id="statGenres"></ul></div>
+        <div class="stat-box"><h3>🏬 브랜드별 TOP 5</h3><ul class="stat-list" id="statBrands"></ul></div>
+        <div class="stat-box"><h3>📍 지역별 랭킹</h3><ul class="stat-list region-list" id="statRegions"></ul></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="awardsModal">
+    <div class="modal-content awards-content">
+      <button class="close-btn" onclick="closeModal('awardsModal')">✕</button>
+      <h2 class="awards-title">🏆 한국 방탈출 어워즈<br class="mobile-break"> 명예의 전당</h2>
+      <div class="awards-tabs" id="awardsTabs"></div>
+      <div id="awardsContainer"></div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="settingsModal">
+    <div class="modal-content">
+      <h2 style="margin-bottom:15px; border-bottom:2px solid var(--strong); padding-bottom:10px;">환경 설정</h2>
+      <div class="form-group" style="background:var(--bg-softer); padding:15px; border-radius:8px; margin-bottom:15px;">
+        <label style="color:#e91e63; font-size:calc(13px * var(--fs));">🔗 구글 웹 앱 URL (필수)</label>
+        <input type="text" id="s_url" placeholder="https://script.google.com/macros/s/...">
+      </div>
+      <div class="form-group"><label>메인 제목</label><input type="text" id="s_title"></div>
+      <div class="form-group">
+        <label>기본 폰트 설정</label>
+        <select id="s_font">
+          <option value="'Pretendard', sans-serif">프리텐다드 (깔끔, 기본)</option>
+          <option value="'CookieRun', 'Pretendard', sans-serif">쿠키런 (귀여운)</option>
+          <!-- ★ v2.0: 라벨 오타 수정 (나눔바른펜 → 나눔손글씨 펜) -->
+          <option value="'Nanum Pen Script', cursive">나눔손글씨 펜 (손글씨)</option>
+          <option value="'Gowun Dodum', sans-serif">고운돋움 (정갈한)</option>
+        </select>
+      </div>
+      <!-- ★ v2.0: 글자 크기 / 다크모드 / 인생테마 기준 설정 -->
+      <div class="form-group">
+        <label>글자 크기</label>
+        <select id="s_fontSize">
+          <option value="fs-s">작게</option>
+          <option value="fs-m" selected>보통</option>
+          <option value="fs-l">크게</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>화면 테마</label>
+        <select id="s_darkMode">
+          <option value="light">☀️ 라이트 모드</option>
+          <option value="dark">🌙 다크 모드</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>👑 인생테마 자동 기준 (나의 별점이 이 점수 이상이면 자동 포함)</label>
+        <input type="number" id="s_lifeThreshold" step="0.1" min="0" max="10" placeholder="예: 9.0">
+      </div>
+      <div style="display:flex; gap:10px; margin-top:20px;">
+        <button class="btn" style="flex:1; justify-content:center; background:var(--bg-softer);" onclick="closeModal('settingsModal')">취소</button>
+        <button class="btn" style="flex:1; justify-content:center; background:var(--invert-bg); color:var(--invert-text);" onclick="saveSettings()">설정 적용</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let escapeData = [];
+    let allAwardsData = [];
+    let currentPrimary = 'all';
+    let currentSub = 'all';
+
+    /* ★ v2.0: via.placeholder.com → 외부 의존 없는 인라인 SVG (서비스 다운되어도 안 깨짐) */
+    const NO_POSTER = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(
+      '<svg xmlns="http://www.w3.org/2000/svg" width="300" height="400" viewBox="0 0 300 400">' +
+      '<rect width="300" height="400" fill="#e8e8e8"/>' +
+      '<text x="150" y="185" font-size="52" text-anchor="middle">🔒</text>' +
+      '<text x="150" y="240" font-size="17" fill="#999" text-anchor="middle" font-family="sans-serif">No Poster</text>' +
+      '</svg>'
+    );
+    window.NO_POSTER = NO_POSTER;
+
+    /* ★ v2.0: 신규 설정값(글자크기/다크모드/인생테마 기준)을 기존 저장값과 병합 */
+    const DEFAULT_SETTINGS = {
+      url: "", title: "노유's 방탈리스트", font: "'Pretendard', sans-serif",
+      fontSize: "fs-m", darkMode: "light", lifeThreshold: 9.0
+    };
+    let appSettings = Object.assign({}, DEFAULT_SETTINGS, JSON.parse(localStorage.getItem('myEscapeSettingsV6') || '{}'));
+
+    /* ===== 유틸 ===== */
+    function escHtml(str) {
+      return String(str ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+    }
+    function num(v) { const n = parseFloat(v); return isNaN(n) ? null : n; }
+
+    function getMyRating(item) { return item['나의 별점'] ?? item['나의 평점']; }
+    function getHorror(item) {
+      /* ★ v2.0: 공포도 키 불일치 수정 → '공포도(매장)'과 '공포도' 둘 다 인식 */
+      const v = item['공포도(매장)'];
+      return (v !== undefined && v !== null && String(v).trim() !== '') ? v : (item['공포도'] ?? '');
+    }
+    function getPax(item) { return item['플레이인원'] ?? item['플레이 인원'] ?? ''; }
+
+    /* ★ v2.0: 인생테마 판정 - 수동 👑 지정 OR 설정 기준 이상 */
+    function isManualLife(item) {
+      const v = String(item['인생테마'] ?? '').trim();
+      return v !== '' && v !== '-' && v.toUpperCase() !== 'FALSE' && v !== '0' && v.toUpperCase() !== 'X';
+    }
+    function isLife(item) {
+      if (isManualLife(item)) return true;
+      const r = num(getMyRating(item));
+      const threshold = num(appSettings.lifeThreshold) ?? 9.0;
+      return r !== null && r >= threshold;
+    }
+
+    /* ★ v3.0: 장르별 색상/이모지 매핑 */
+    function getGenreStyle(name) {
+      const n = String(name);
+      if (n.includes('공포') || n.includes('호러')) return { emoji: '👻', cls: 'gt-horror' };
+      if (n.includes('스릴러')) return { emoji: '🔪', cls: 'gt-thriller' };
+      if (n.includes('추리') || n.includes('미스터리') || n.includes('범죄') || n.includes('수사')) return { emoji: '🕵️', cls: 'gt-mystery' };
+      if (n.includes('감성') || n.includes('드라마') || n.includes('로맨스') || n.includes('힐링')) return { emoji: '🌸', cls: 'gt-emotion' };
+      if (n.includes('SF') || n.includes('판타지') || n.includes('에스에프') || n.includes('우주')) return { emoji: '🚀', cls: 'gt-sf' };
+      if (n.includes('코미디') || n.includes('코믹') || n.includes('개그') || n.includes('유머') || n.includes('일상')) return { emoji: '🎭', cls: 'gt-comic' };
+      if (n.includes('액션') || n.includes('어드벤처') || n.includes('활동') || n.includes('탐험')) return { emoji: '🧭', cls: 'gt-action' };
+      if (n.includes('역사') || n.includes('동양') || n.includes('사극') || n.includes('전통')) return { emoji: '📜', cls: 'gt-history' };
+      if (n.includes('잠입') || n.includes('아케이드')) return { emoji: '🥷', cls: 'gt-stealth' };
+      if (n.includes('문제') || n.includes('퍼즐') || n.includes('추론')) return { emoji: '🧠', cls: 'gt-puzzle' };
+      if (n.includes('스토리') || n.includes('세계관')) return { emoji: '📖', cls: 'gt-story' };
+      return { emoji: '🏷️', cls: '' };
+    }
+
+    /* ★ v3.0: 티켓 번호 + 스탯 스트립 갱신 */
+    function updateHeaderStats() {
+      const total = escapeData.length;
+      const lifeCount = escapeData.filter(it => isLife(it)).length;
+      const y = new Date().getFullYear();
+      const yearCount = escapeData.filter(it => {
+        const d = new Date(it['플레이일자'] || '');
+        return !isNaN(d.getTime()) && d.getFullYear() === y;
+      }).length;
+      document.getElementById('ticketNo').innerText = 'No.' + String(total).padStart(3, '0');
+      document.getElementById('stripTotal').innerText = total;
+      document.getElementById('stripLife').innerText = lifeCount;
+      document.getElementById('stripYear').innerText = yearCount;
+    }
+
+    /* ===== 모달: 뒤로가기/ESC 대응 ★ v2.0 ===== */
+    function showModal(id) {
+      const el = document.getElementById(id);
+      if (el.style.display === 'flex') return;
+      el.style.display = 'flex';
+      history.pushState({ modal: id }, '');
+    }
+    function closeModal(modalId) {
+      const el = document.getElementById(modalId);
+      if (el.style.display !== 'none' && el.style.display !== '' && history.state && history.state.modal === modalId) {
+        history.back(); /* popstate에서 실제로 닫음 */
+      } else {
+        el.style.display = 'none';
+      }
+    }
+    window.addEventListener('popstate', () => {
+      document.querySelectorAll('.modal-overlay').forEach(m => m.style.display = 'none');
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        const open = [...document.querySelectorAll('.modal-overlay')].find(m => m.style.display === 'flex');
+        if (open) closeModal(open.id);
+      }
+    });
+    window.addEventListener('click', function(event) {
+      if (event.target.classList.contains('modal-overlay')) {
+        closeModal(event.target.id);
+      }
+      /* ★ v2.0: 열려있는 일행 툴팁을 바깥 탭 시 닫기 */
+      if (!event.target.closest('.pax-tooltip')) {
+        document.querySelectorAll('.pax-tooltip.show').forEach(t => t.classList.remove('show'));
+      }
+    });
+
+    window.onscroll = function() {
+      let btn = document.getElementById("scrollTopBtn");
+      if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+        btn.style.display = "block";
+      } else {
+        btn.style.display = "none";
+      }
+    };
+
+    function scrollToTop() {
+      window.scrollTo({top: 0, behavior: 'smooth'});
+    }
+
+    function getApiUrl(sheetName) {
+      if(!appSettings.url) return '';
+      const sep = appSettings.url.includes('?') ? '&' : '?';
+      return `${appSettings.url}${sep}sheet=${encodeURIComponent(sheetName)}`;
+    }
+
+    window.onload = () => { applySettingsToUI(); fetchData(); };
+
+    /* ★ v2.0: 폰트별 보정 클래스 + 글자크기 + 다크모드 일괄 적용 */
+    function applySettingsToUI() {
+      const body = document.body;
+      document.getElementById('pageTitle').innerText = appSettings.title;
+      body.style.fontFamily = appSettings.font;
+
+      body.classList.remove('font-hand', 'font-cookie', 'font-gowun');
+      if (appSettings.font.includes('Nanum Pen')) body.classList.add('font-hand');
+      else if (appSettings.font.includes('CookieRun')) body.classList.add('font-cookie');
+      else if (appSettings.font.includes('Gowun')) body.classList.add('font-gowun');
+
+      body.classList.remove('fs-s', 'fs-m', 'fs-l');
+      body.classList.add(appSettings.fontSize || 'fs-m');
+
+      body.classList.toggle('dark', appSettings.darkMode === 'dark');
+      document.getElementById('metaThemeColor').setAttribute('content', appSettings.darkMode === 'dark' ? '#141414' : '#ffffff');
+    }
+
+    /* ★ v2.0: 스켈레톤 로딩 카드 */
+    function renderSkeleton(count = 8) {
+      const grid = document.getElementById('themeGrid');
+      let html = '';
+      for (let i = 0; i < count; i++) {
+        html += `<div class="skeleton-card">
+          <div class="sk-img"></div>
+          <div class="sk-line short"></div>
+          <div class="sk-line tall"></div>
+          <div class="sk-line"></div>
+        </div>`;
+      }
+      grid.innerHTML = html;
+    }
+
+    async function fetchData() {
+      const grid = document.getElementById('themeGrid');
+      if(!appSettings.url || !appSettings.url.startsWith('http')) {
+        grid.innerHTML = `<div class="url-notice"><strong>⚠️ 연동된 구글 스프레드시트가 없습니다.</strong><br><br>우측 상단의 ⚙️ 설정 버튼을 눌러 발급받은 웹 앱 URL을 입력해 주세요.</div>`;
+        return;
+      }
+      renderSkeleton(8);
+      try {
+        const response = await fetch(getApiUrl('시트1'));
+        escapeData = await response.json();
+        document.getElementById('totalCountDisplay').innerText = `총 ${escapeData.length}방`;
+        updateHeaderStats();
+        applyFiltersAndSort();
+      } catch (error) {
+        grid.innerHTML = `<div class="url-notice" style="color:#d32f2f;"><strong>❌ 데이터 불러오기 실패</strong><br><br>URL 확인 및 구글 시트 1행 제목(띄어쓰기 단어 등)을 점검해 주세요.</div>`;
+      }
+    }
+
+    function handleSearch() {
+      const query = document.getElementById('searchInput').value.trim();
+      if (query.length > 0) {
+        document.querySelectorAll('#primaryNav .filter-item').forEach(el => el.classList.remove('active'));
+        document.querySelector('#primaryNav .filter-item:first-child').classList.add('active');
+        currentPrimary = 'all';
+        currentSub = 'all';
+        document.getElementById('subNav').classList.remove('active');
+      }
+      applyFiltersAndSort();
+    }
+
+    function setPrimaryFilter(type, element) {
+      document.getElementById('searchInput').value = '';
+      document.querySelectorAll('#primaryNav .filter-item').forEach(el => el.classList.remove('active'));
+      element.classList.add('active');
+      currentPrimary = type;
+      currentSub = 'all';
+
+      const subNav = document.getElementById('subNav');
+      subNav.innerHTML = '';
+
+      if (type === 'all' || type === 'life') {
+        subNav.classList.remove('active');
+      } else {
+        subNav.classList.add('active');
+        buildSubFilters(type);
+      }
+      applyFiltersAndSort();
+    }
+
+    /* ★ v2.0: 따옴표/특수문자 안전 처리 - inline onclick → createElement + addEventListener */
+    function buildSubFilters(type) {
+      const subNav = document.getElementById('subNav');
+      let values = [];
+
+      escapeData.forEach(item => {
+        if(type === 'genre' && item['장르']) {
+          String(item['장르']).split(',').forEach(v => values.push(v.trim()));
+        } else if (type === 'region' && item['지역']) {
+          values.push(String(item['지역']).trim());
+        } else if (type === 'store' && item['매장명']) {
+          values.push(String(item['매장명']).trim());
+        }
+      });
+
+      let uniqueValues = [...new Set(values)].filter(v => v !== '');
+
+      if (type === 'region') {
+        const regionOrder = ['서울', '경기', '인천', '강원', '충북', '충남', '대전', '경북', '경남', '대구', '울산', '부산', '전북', '전남', '광주', '제주'];
+        uniqueValues.sort((a, b) => {
+          let idxA = regionOrder.findIndex(r => a.includes(r));
+          let idxB = regionOrder.findIndex(r => b.includes(r));
+          idxA = idxA === -1 ? 999 : idxA;
+          idxB = idxB === -1 ? 999 : idxB;
+          if (idxA !== idxB) return idxA - idxB;
+          return a.localeCompare(b);
+        });
+      } else {
+        uniqueValues.sort((a, b) => a.localeCompare(b));
+      }
+
+      subNav.innerHTML = '';
+      const allBtn = document.createElement('div');
+      allBtn.className = 'sub-filter-item active';
+      allBtn.textContent = '전체보기';
+      allBtn.addEventListener('click', () => setSubFilter('all', allBtn));
+      subNav.appendChild(allBtn);
+
+      uniqueValues.forEach(val => {
+        const btn = document.createElement('div');
+        btn.className = 'sub-filter-item';
+        btn.textContent = val;
+        btn.addEventListener('click', () => setSubFilter(val, btn));
+        subNav.appendChild(btn);
+      });
+    }
+
+    function setSubFilter(val, element) {
+      document.querySelectorAll('.sub-filter-item').forEach(el => el.classList.remove('active'));
+      element.classList.add('active');
+      currentSub = val;
+      applyFiltersAndSort();
+    }
+
+    function applyFiltersAndSort() {
+      let filtered = escapeData;
+
+      const searchType = document.getElementById('searchType').value;
+      const searchQuery = document.getElementById('searchInput').value.replace(/\s+/g, '').toLowerCase();
+
+      if (searchQuery) {
+        filtered = filtered.filter(item => {
+          if (searchType === 'theme') {
+            const tName = String(item['테마명'] || '').replace(/\s+/g, '').toLowerCase();
+            const sWord = String(item['검색어'] || '').replace(/\s+/g, '').toLowerCase();
+            return tName.includes(searchQuery) || sWord.includes(searchQuery);
+          } else if (searchType === 'companion') {
+            return String(item['일행'] || '').replace(/\s+/g, '').toLowerCase().includes(searchQuery);
+          } else {
+            const combinedText = Object.values(item).join('').replace(/\s+/g, '').toLowerCase();
+            return combinedText.includes(searchQuery);
+          }
+        });
+      }
+
+      if (currentPrimary === 'life') {
+        /* ★ v2.0: 수동 👑 지정 + 설정 기준 자동 포함 */
+        filtered = filtered.filter(item => isLife(item));
+      } else if (currentPrimary === 'genre' && currentSub !== 'all') {
+        filtered = filtered.filter(item => String(item['장르'] || '').includes(currentSub));
+      } else if (currentPrimary === 'region' && currentSub !== 'all') {
+        filtered = filtered.filter(item => String(item['지역'] || '').includes(currentSub));
+      } else if (currentPrimary === 'store' && currentSub !== 'all') {
+        filtered = filtered.filter(item => String(item['매장명'] || '').includes(currentSub));
+      }
+
+      /* ★ v2.0: 정렬 수정 - 미기록(별점/난이도 없는) 항목은 오름차순/내림차순 관계없이 항상 뒤로 */
+      const sortValue = document.getElementById('sortSelect').value;
+      const cmpNum = (aVal, bVal, asc) => {
+        const a = num(aVal), b = num(bVal);
+        if (a === null && b === null) return 0;
+        if (a === null) return 1;   /* 미기록은 항상 뒤 */
+        if (b === null) return -1;
+        return asc ? a - b : b - a;
+      };
+
+      filtered = [...filtered].sort((a, b) => {
+        if (sortValue === 'dateDesc') return new Date(b['플레이일자'] || '1900-01-01') - new Date(a['플레이일자'] || '1900-01-01');
+        if (sortValue === 'dateAsc') return new Date(a['플레이일자'] || '1900-01-01') - new Date(b['플레이일자'] || '1900-01-01');
+
+        if (sortValue === 'myRatingDesc') return cmpNum(getMyRating(a), getMyRating(b), false);
+        if (sortValue === 'myRatingAsc') return cmpNum(getMyRating(a), getMyRating(b), true);
+
+        if (sortValue === 'starDesc') return cmpNum(a['별점'], b['별점'], false);
+        if (sortValue === 'starAsc') return cmpNum(a['별점'], b['별점'], true);
+        if (sortValue === 'diffKoDesc') return cmpNum(a['난이도(코방)'], b['난이도(코방)'], false);
+        if (sortValue === 'diffKoAsc') return cmpNum(a['난이도(코방)'], b['난이도(코방)'], true);
+        if (sortValue === 'titleAsc') return String(a['테마명'] || '').localeCompare(String(b['테마명'] || ''));
+        return 0;
+      });
+
+      const isFiltered = (filtered.length !== escapeData.length);
+      document.getElementById('totalCountDisplay').innerText = isFiltered ? `검색결과: ${filtered.length}방` : `총 ${escapeData.length}방`;
+
+      renderCards(filtered);
+    }
+
+    function renderCards(data) {
+      const grid = document.getElementById('themeGrid');
+      grid.innerHTML = '';
+
+      if(data.length === 0) { grid.innerHTML = '<p style="grid-column: 1/-1; text-align:center; padding: 40px; color: var(--faint);">조건에 맞는 기록이 없습니다.</p>'; return; }
+
+      data.forEach(item => {
+        const index = escapeData.findIndex(orig => orig === item);
+        const imgSrc = escHtml(item['포스터'] || NO_POSTER);
+        const companions = escHtml(item['일행'] ? item['일행'] : '기록 없음');
+
+        let awardHTML = '';
+        if (item['수상']) {
+            const awardsList = String(item['수상']).split(',').map(a => a.trim()).filter(a => a !== '');
+            if (awardsList.length > 0) {
+                awardHTML = `<div class="award-container">` + awardsList.map(a => `<div class="award-badge">🏆 ${escHtml(a)}</div>`).join('') + `</div>`;
+            }
+        }
+
+        /* ★ v2.0: 인생테마 👑 토글 버튼 */
+        const manual = isManualLife(item);
+        const life = isLife(item);
+        const crownTitle = manual ? '인생테마 지정 해제' : (life ? '자동 인생테마 (별점 기준) · 탭하여 고정 지정' : '인생테마로 지정');
+        const lifeToggleHTML = `<button class="life-toggle ${life ? 'on' : 'off'}" title="${crownTitle}" onclick="toggleLife(${index}, event)">👑</button>`;
+
+        /* ★ v3.0: 장르 태그 색상 코딩 */
+        let genreHTML = '<span class="genre-row">🏷️ -</span>';
+        if (item['장르']) {
+            const genreList = String(item['장르']).split(',').map(g => g.trim()).filter(g => g !== '');
+            if (genreList.length > 0) {
+                genreHTML = `<div class="genre-container">` + genreList.map(g => {
+                    const gs = getGenreStyle(g);
+                    return `<span class="genre-row ${gs.cls}">${gs.emoji} ${escHtml(g)}</span>`;
+                }).join('') + `</div>`;
+            }
+        }
+
+        let rawDate = String(item['플레이일자'] || '-');
+        let playDate = rawDate.includes('T') ? rawDate.split('T')[0] : rawDate;
+
+        let rawPax = getPax(item);
+        let pax = '-';
+        if (rawPax !== undefined && rawPax !== null && String(rawPax).trim() !== '') {
+            pax = String(rawPax).trim();
+            if (!isNaN(pax)) pax += '인';
+        }
+
+        let myRatingFormat = getMyRating(item) || '-';
+        if (myRatingFormat !== '-' && !isNaN(parseFloat(myRatingFormat))) {
+            myRatingFormat = parseFloat(myRatingFormat).toFixed(1);
+        }
+
+        /* ★ v3.0: 나의 별점 게이지 바 (0~10점 → 0~100% 채움)
+           미기록 카드도 투명한 바 자리를 유지해 카드 높이 밀림 방지 */
+        const ratingNum = num(getMyRating(item));
+        const ratingBarHTML = ratingNum !== null
+          ? `<div class="rating-bar"><div class="rating-fill" style="width:${Math.min(100, Math.max(0, (ratingNum / 10) * 100)).toFixed(0)}%"></div></div>`
+          : `<div class="rating-bar" style="visibility:hidden;"></div>`;
+
+        /* ★ v2.0: loading="lazy" + onerror 대체 이미지 / ★ v3.0: 인생테마 골드 카드 */
+        const cardHTML = `
+          <div class="card ${life ? 'life' : ''}">
+            <div class="card-clickable" onclick="openDetailModal(${index})">
+              <div class="card-img-wrapper">
+                <img src="${imgSrc}" class="card-img" loading="lazy" onerror="this.onerror=null;this.src=window.NO_POSTER;">
+                ${lifeToggleHTML}
+                ${awardHTML}
+              </div>
+              <div class="card-info">
+                <div class="store-name">${escHtml(item['매장명'] || '-')} <span class="region">${item['지역'] ? '[' + escHtml(item['지역']) + ']' : ''}</span></div>
+                <div class="theme-name">${escHtml(item['테마명'] || '-')}</div>
+                <div class="my-rating">⭐ ${escHtml(myRatingFormat)} <span>/ 10.0 (나의 별점)</span></div>
+                ${ratingBarHTML}
+                <div class="sub-info">
+                  <span>📝 평점 ${escHtml(item['별점'] || '-')}</span>
+                  <span>🔒 코방 ${escHtml(item['난이도(코방)'] || '-')}</span>
+                  <span>💬 리뷰 ${escHtml(item['리뷰'] || '-')}</span>
+                </div>
+                <div class="bottom-info">
+                  <div class="info-row">
+                    <div>📅 ${escHtml(playDate)}</div>
+                    <div class="pax-tooltip" onclick="togglePaxTooltip(this, event)">👥 ${escHtml(pax)} <span class="tooltip-text">일행: ${companions}</span></div>
+                  </div>
+                  ${genreHTML}
+                </div>
+              </div>
+            </div>
+            <div class="card-actions">
+              <button class="action-btn" onclick="openDataModal(${index})">✏️ 수정</button>
+              <button class="action-btn" onclick="deleteRecord(${index})">🗑️ 삭제</button>
+            </div>
+          </div>
+        `;
+        grid.insertAdjacentHTML('beforeend', cardHTML);
+      });
+    }
+
+    /* ★ v2.0: 일행 툴팁 터치 토글 (카드 클릭으로 상세가 열리지 않게 전파 차단) */
+    function togglePaxTooltip(el, event) {
+      event.stopPropagation();
+      const wasOpen = el.classList.contains('show');
+      document.querySelectorAll('.pax-tooltip.show').forEach(t => t.classList.remove('show'));
+      if (!wasOpen) el.classList.add('show');
+    }
+
+    /* ===== 시트 컬럼 순서 (저장/수정 시 이 순서대로 전송) ★ v2.0: 마지막에 '인생테마' 추가 ===== */
+    const COLUMN_KEYS = ['포스터', '지역', '매장명', '테마명', '검색어', '별점', '난이도(코방)', '리뷰', '수상', '장르', '테마시간', '추천인원', '난이도(매장)', '공포도(매장)', '플레이일자', '나의 별점', '플레이인원', '일행', '시놉시스', '비고', '인생테마'];
+
+    function itemToRow(item, overrides = {}) {
+      const merged = {
+        '포스터': item['포스터'] ?? '',
+        '지역': item['지역'] ?? '',
+        '매장명': item['매장명'] ?? '',
+        '테마명': item['테마명'] ?? '',
+        '검색어': item['검색어'] ?? '',
+        '별점': item['별점'] ?? '',
+        '난이도(코방)': item['난이도(코방)'] ?? '',
+        '리뷰': item['리뷰'] ?? '',
+        '수상': item['수상'] ?? '',
+        '장르': item['장르'] ?? '',
+        '테마시간': item['테마시간'] ?? '',
+        '추천인원': item['추천인원'] ?? '',
+        '난이도(매장)': item['난이도(매장)'] ?? '',
+        '공포도(매장)': getHorror(item),
+        '플레이일자': item['플레이일자'] ?? '',
+        '나의 별점': getMyRating(item) ?? '',
+        '플레이인원': getPax(item),
+        '일행': item['일행'] ?? '',
+        '시놉시스': item['시놉시스'] ?? '',
+        '비고': item['비고'] ?? '',
+        '인생테마': item['인생테마'] ?? ''
+      };
+      Object.assign(merged, overrides);
+      return COLUMN_KEYS.map(k => merged[k]);
+    }
+
+    /* ★ v2.0: 카드에서 👑 인생테마 토글 → 시트에 바로 저장 */
+    function toggleLife(index, event) {
+      event.stopPropagation();
+      const item = escapeData[index];
+      const newVal = isManualLife(item) ? '' : '👑';
+      const row = itemToRow(item, { '인생테마': newVal });
+      sendDataToServer('edit', row, index);
+    }
+
+    function openDetailModal(index) {
+      const item = escapeData[index];
+
+      const posterEl = document.getElementById('d_poster');
+      posterEl.onerror = function() { this.onerror = null; this.src = NO_POSTER; };
+      posterEl.src = item['포스터'] || NO_POSTER;
+
+      document.getElementById('d_store_region').innerText = `${item['매장명'] || '매장미상'} ${item['지역'] ? '[' + item['지역'] + ']' : ''}`;
+      document.getElementById('d_theme').innerText = item['테마명'] || '테마명 없음';
+
+      let badgesHTML = '';
+      if (isLife(item)) badgesHTML += `<span class="d-badge life">👑 인생테마</span>`;
+      /* ★ v3.0: 상세 모달 장르 뱃지 색상 코딩 */
+      if(item['장르']) String(item['장르']).split(',').forEach(g => {
+        const gName = g.trim();
+        const gs = getGenreStyle(gName);
+        badgesHTML += `<span class="d-badge ${gs.cls}">${gs.emoji} ${escHtml(gName)}</span>`;
+      });
+
+      let timeVal = item['테마시간'];
+      if(timeVal !== undefined && timeVal !== null && String(timeVal).trim() !== '') {
+          let t = String(timeVal).trim();
+          if(!isNaN(t)) t += '분';
+          badgesHTML += `<span class="d-badge">⏱️ ${escHtml(t)}</span>`;
+      }
+      document.getElementById('d_badges').innerHTML = badgesHTML;
+
+      let awardsHTML = '';
+      if(item['수상']) String(item['수상']).split(',').forEach(a => awardsHTML += `<span class="d-badge award">🏆 ${escHtml(a.trim())}</span>`);
+      const awardsContainer = document.getElementById('d_awards');
+      awardsContainer.innerHTML = awardsHTML;
+      awardsContainer.style.display = awardsHTML ? 'flex' : 'none';
+
+      document.getElementById('d_diffStore').innerText = item['난이도(매장)'] || '-';
+      document.getElementById('d_diffKo').innerText = item['난이도(코방)'] || '-';
+      /* ★ v2.0: 공포도 키 통일 (fallback 처리) */
+      document.getElementById('d_horror').innerText = getHorror(item) || '-';
+      document.getElementById('d_star').innerText = item['별점'] || '-';
+      document.getElementById('d_recPax').innerText = item['추천인원'] || '-';
+
+      let myR = getMyRating(item);
+      document.getElementById('d_myRating').innerText = (myR && !isNaN(parseFloat(myR))) ? `⭐ ${parseFloat(myR).toFixed(1)}` : '-';
+
+      document.getElementById('d_synopsis').innerText = item['시놉시스'] || '등록된 시놉시스가 없습니다.';
+
+      let rawDate = String(item['플레이일자'] || '-');
+      document.getElementById('d_playDate').innerText = rawDate.includes('T') ? rawDate.split('T')[0] : rawDate;
+
+      let pax = getPax(item) || '-';
+      if(pax !== '-' && !isNaN(String(pax).trim())) pax = String(pax).trim() + '인';
+
+      let comps = item['일행'] ? `(${item['일행']})` : '';
+      document.getElementById('d_playPax').innerText = `${pax} ${comps}`;
+      document.getElementById('d_notes').innerText = item['비고'] || '';
+
+      showModal('detailModal');
+    }
+
+    const KNOWN_BRANDS = [
+      "후즈데어", "황금열쇠", "호텔 레토 성수", "해피앤딩", "플레이포인트랩", "플레이더월드", "플레이33", "프랭크의 골동품가게", "포인트나인", "판타스트릭", "파노라마", "티켓 투 이스케이프", "트릭 이스케이프", "토끼굴", "키이스케이프", "클레버타운", "퀘스천마크", "코드케이", "코드이스케이프", "초상화 강남", "체셔하우스", "채널27", "찰리이스케이프", "지구별 방탈출", "제로월드", "이스케이프시티", "이스케이퍼스", "이머시브스튜디오", "이룸에이트", "위욜", "오아시스", "오늘의 한 페이지", "엔터팟", "엑소더스", "에필로그", "에피소드 방탈출", "어메이즈드", "씨이스케이프", "싸인 이스케이프", "쇼룸404", "셜록홈즈", "서울 이스케이프 룸", "상상의문", "비트포비아", "비밀의 화원", "블랙헤이븐", "버스티드", "방탈출, 둡두", "무비무드 강남점", "머더파커", "마스터키", "룸즈에이", "룸익스케이프", "룸엘이스케이프", "레다스퀘어", "라이브시네마", "딥띵커", "디코더", "드림이스케이프", "둠 이스케이프", "돌로이스케이프", "도어이스케이프", "더챕터", "단편선", "넥스트에디션", "나의신방", "나비잠", "꿈소풍", "괴담저장소 제일기숙학원", "괴담저장소", "골든타임 이스케이프", "겟어웨이 방탈출", "개꿀이스케이프"
+    ].sort((a, b) => b.length - a.length);
+
+    function getBrandName(rawName) {
+      if (!rawName) return '';
+      const name = String(rawName).trim();
+      for (const brand of KNOWN_BRANDS) {
+        if (name.startsWith(brand) || name.includes(brand)) return brand;
+      }
+      let words = name.split(' ');
+      if (words.length > 1 && words[words.length - 1].endsWith('점')) {
+        words.pop();
+        return words.join(' ');
+      }
+      return name;
+    }
+
+    function openDashboard() {
+      if(!escapeData || escapeData.length === 0) {
+        alert("분석할 데이터가 없습니다. 기록을 먼저 추가해주세요."); return;
+      }
+
+      try {
+        const totalRooms = escapeData.length;
+        let totalRating = 0; let ratingCount = 0;
+        let compMap = {}; let genreMap = {}; let regionMap = {}; let brandMap = {};
+
+        /* ★ v2.0: 올해 플레이 횟수 + 월별 카운트 */
+        const currentYear = new Date().getFullYear();
+        let yearCount = 0;
+        const monthCounts = new Array(12).fill(0);
+
+        escapeData.forEach(item => {
+          let rawRating = getMyRating(item);
+          if(rawRating !== undefined && rawRating !== null && String(rawRating).trim() !== '' && String(rawRating).trim() !== '-') {
+              const rating = parseFloat(rawRating);
+              if(!isNaN(rating) && rating > 0) {
+                  totalRating += rating;
+                  ratingCount++;
+              }
+          }
+
+          const d = new Date(item['플레이일자'] || '');
+          if (!isNaN(d.getTime()) && d.getFullYear() === currentYear) {
+            yearCount++;
+            monthCounts[d.getMonth()]++;
+          }
+
+          if(item['일행']) {
+            String(item['일행']).split(',').map(c => c.trim()).filter(c => c !== '').forEach(c => { compMap[c] = (compMap[c] || 0) + 1; });
+          }
+          if(item['장르']) {
+            String(item['장르']).split(',').map(g => g.trim()).filter(g => g !== '').forEach(g => { genreMap[g] = (genreMap[g] || 0) + 1; });
+          }
+          if(item['지역']) {
+            const r = String(item['지역']).trim();
+            if(r) regionMap[r] = (regionMap[r] || 0) + 1;
+          }
+          if(item['매장명']) {
+            let brand = getBrandName(item['매장명']);
+            if(brand) brandMap[brand] = (brandMap[brand] || 0) + 1;
+          }
+        });
+
+        const avgRating = ratingCount > 0 ? (totalRating / ratingCount).toFixed(2) : "0.00";
+        const getTop5 = (map) => Object.entries(map).sort((a, b) => b[1] - a[1]).slice(0, 5);
+
+        const topComps = getTop5(compMap);
+        const topGenres = getTop5(genreMap);
+        const topBrands = getTop5(brandMap);
+        const topRegions = getTop5(regionMap);
+
+        document.getElementById('statTotal').innerText = totalRooms + "방";
+        document.getElementById('statYearLabel').innerText = `${currentYear}년 플레이`;
+        document.getElementById('statYear').innerText = yearCount + "방";
+        document.getElementById('statAvg').innerText = "⭐ " + avgRating;
+
+        /* ★ v2.0: 월별 막대 차트 렌더링 */
+        document.getElementById('chartTitle').innerText = `📈 ${currentYear}년 월별 플레이 추이`;
+        const maxCount = Math.max(...monthCounts, 1);
+        const chartEl = document.getElementById('statMonthly');
+        chartEl.innerHTML = monthCounts.map((cnt, i) => {
+          const h = cnt === 0 ? 3 : Math.max(8, Math.round((cnt / maxCount) * 88));
+          return `<div class="bar-col">
+            <div class="bar-val">${cnt > 0 ? cnt : ''}</div>
+            <div class="bar ${cnt === 0 ? 'zero' : ''}" style="height:${h}px;"></div>
+            <div class="bar-label">${i + 1}월</div>
+          </div>`;
+        }).join('');
+
+        const renderList = (arr) => arr.length > 0 ? arr.map((c, i) => `<li><span><strong>${i+1}.</strong> ${escHtml(c[0])}</span> <span>${c[1]}회</span></li>`).join('') : '<li><span style="color:var(--faint);">데이터 없음</span></li>';
+        document.getElementById('statComps').innerHTML = renderList(topComps);
+        document.getElementById('statGenres').innerHTML = renderList(topGenres);
+        document.getElementById('statBrands').innerHTML = renderList(topBrands);
+        document.getElementById('statRegions').innerHTML = renderList(topRegions);
+
+        showModal('dashboardModal');
+      } catch (error) {
+        alert("통계 계산 중 오류가 발생했습니다. 구글 시트의 데이터 형식을 확인해주세요.");
+      }
+    }
+
+    function getAwardEmoji(name) {
+      if (name.includes('최고의 테마') || name.includes('올해의 테마')) return '👑';
+      if (name.includes('최고의 카페') || name.includes('올해의 카페') || name.includes('매장') || name.includes('브랜드') || name.includes('제작사')) return '🥇';
+
+      if (name.includes('비수도권') || name.includes('지방')) return '🚆';
+
+      if (name.includes('공포')) return '💀';
+      if (name.includes('스릴러')) return '🔪';
+
+      if (name.includes('문제/기타') || name.includes('문제 / 기타') || name.includes('문제/아케이드') || name.includes('문제 / 아케이드')) return '🎲';
+      if (name.includes('문제') || name.includes('퍼즐')) return '🧠';
+
+      if (name.includes('스토리') || name.includes('세계관') || name.includes('시나리오')) return '📖';
+      if (name.includes('연출') || name.includes('미술') || name.includes('시각')) return '🎬';
+      if (name.includes('인테리어')) return '🖼️';
+      if (name.includes('장치') || name.includes('기계')) return '⚙️';
+      if (name.includes('감성') || name.includes('드라마') || name.includes('로맨스')) return '🌸';
+      if (name.includes('액션') || name.includes('어드벤처') || name.includes('활동성') || name.includes('탐험')) return '🧭';
+      if (name.includes('추리') || name.includes('미스터리') || name.includes('범죄')) return '🕵️';
+      if (name.includes('코미디') || name.includes('코믹') || name.includes('개그') || name.includes('유머') || name.includes('일상')) return '🎭';
+      if (name.includes('SF') || name.includes('판타지') || name.includes('에스에프')) return '🚀';
+      if (name.includes('잠입') || name.includes('아케이드')) return '🥷';
+      if (name.includes('역사') || name.includes('동양') || name.includes('사극')) return '📜';
+      if (name.includes('실험') || name.includes('혁신') || name.includes('기타')) return '🧪';
+      if (name.includes('입문') || name.includes('영업')) return '🐥';
+
+      return '🌿';
+    }
+
+    async function openAwardsModal() {
+      showModal('awardsModal');
+      const container = document.getElementById('awardsContainer');
+      const tabs = document.getElementById('awardsTabs');
+
+      if(allAwardsData.length === 0) {
+        container.innerHTML = '<div class="loading-spinner" style="display:block;">어워즈 데이터를 불러오는 중입니다... ⏳</div>';
+        try {
+          const response = await fetch(getApiUrl('어워즈'));
+          allAwardsData = await response.json();
+        } catch (error) {
+          container.innerHTML = `<div class="url-notice" style="color:#d32f2f;"><strong>❌ 데이터 불러오기 실패</strong><br><br>'어워즈' 시트가 구글 스프레드시트에 제대로 만들어져 있는지 확인해 주세요.</div>`;
+          return;
+        }
+      }
+
+      let years = [...new Set(allAwardsData.map(item => String(item['연도']).trim()))].filter(y => y !== 'undefined' && y !== '');
+
+      years.sort((a, b) => {
+        const aIsSpecial = a.toLowerCase().includes('노유');
+        const bIsSpecial = b.toLowerCase().includes('노유');
+        if (aIsSpecial && !bIsSpecial) return -1;
+        if (!aIsSpecial && bIsSpecial) return 1;
+
+        const numA = parseInt(a); const numB = parseInt(b);
+        if(!isNaN(numA) && !isNaN(numB)) return numB - numA;
+        return a.localeCompare(b);
+      });
+
+      /* ★ v2.0: 따옴표/특수문자 안전 처리 - createElement 방식 */
+      tabs.innerHTML = '';
+      if(years.length > 0) {
+        years.forEach((year, idx) => {
+          const btn = document.createElement('button');
+          btn.className = 'award-tab' + (idx === 0 ? ' active' : '');
+          btn.textContent = year;
+          btn.addEventListener('click', () => filterAwards(year, btn));
+          tabs.appendChild(btn);
+        });
+        filterAwards(years[0], tabs.firstElementChild);
+      } else {
+        container.innerHTML = '<p style="text-align:center; padding:50px; color:var(--faint);">어워즈 시트에 등록된 데이터가 없습니다.</p>';
+      }
+    }
+
+    function filterAwards(year, btn) {
+      document.querySelectorAll('.award-tab').forEach(el => el.classList.remove('active'));
+      if(btn) btn.classList.add('active');
+
+      const container = document.getElementById('awardsContainer');
+      container.innerHTML = '';
+
+      const filtered = allAwardsData.filter(item => String(item['연도']).trim() === String(year));
+
+      if(filtered.length === 0) {
+         container.innerHTML = `<p style="text-align:center; padding:50px; color:var(--faint);">${escHtml(year)} 수상 데이터가 없습니다.</p>`;
+         return;
+      }
+
+      const topAwards = [];
+      const rankedMap = {};
+      const singleAwards = [];
+
+      filtered.forEach(aw => {
+         const name = String(aw['수상부문'] || '-').trim();
+
+         if(name.includes('최고의 테마') || name.includes('최고의 카페') || name.includes('올해의 테마') || name.includes('올해의 카페')) {
+             topAwards.push(aw);
+         }
+         else if (/\d+위/.test(name)) {
+             const baseName = name.replace(/(공동)?\s*\d+위/g, '').trim();
+             if(!rankedMap[baseName]) rankedMap[baseName] = [];
+             rankedMap[baseName].push(aw);
+         }
+         else {
+             singleAwards.push(aw);
+         }
+      });
+
+      const createCard = (aw) => {
+         const awardName = String(aw['수상부문'] || '-').trim();
+         const isStoreAward = awardName.includes('카페') || awardName.includes('매장') || awardName.includes('브랜드') || awardName.includes('제작사');
+
+         const emoji = getAwardEmoji(awardName);
+
+         let storeHtml = `<div class="award-store">${escHtml(aw['매장명'] || '-')}</div>`;
+         let themeHtml = `<div class="award-theme">${escHtml(aw['테마명'] || '-')}</div>`;
+         let clearBadgeHtml = '';
+
+         if (!isStoreAward && aw['테마명']) {
+             const awardThemeClean = String(aw['테마명']).replace(/\s+/g, '').toLowerCase();
+             const isPlayed = escapeData.some(played => String(played['테마명'] || '').replace(/\s+/g, '').toLowerCase() === awardThemeClean);
+             if (isPlayed) {
+                 clearBadgeHtml = `<div class="clear-badge">✅ CLEAR</div>`;
+             }
+         }
+
+         if(isStoreAward) {
+             storeHtml = `<div class="award-store" style="color:transparent; user-select:none;">-</div>`;
+             themeHtml = `<div class="award-theme">${escHtml(aw['매장명'] || '-')}</div>`;
+         }
+
+         return `
+            <div class="award-card">
+              <div class="award-laurel"><span class="award-emoji flip">${emoji}</span>&nbsp;${escHtml(awardName)}&nbsp;<span class="award-emoji">${emoji}</span></div>
+              <div class="award-img-box">
+                <img src="${escHtml(aw['포스터'] || NO_POSTER)}" alt="포스터" loading="lazy" onerror="this.onerror=null;this.src=window.NO_POSTER;">
+                ${clearBadgeHtml}
+              </div>
+              ${storeHtml}
+              ${themeHtml}
+            </div>`;
+      };
+
+      let html = '';
+
+      if(topAwards.length > 0) {
+          topAwards.sort((a,b) => String(a['수상부문']).localeCompare(String(b['수상부문'])));
+          html += `<div class="awards-top-grid">`;
+          topAwards.forEach(aw => html += createCard(aw));
+          html += `</div>`;
+      }
+
+      Object.keys(rankedMap).sort().forEach(baseName => {
+          const group = rankedMap[baseName];
+          group.sort((a,b) => String(a['수상부문']).localeCompare(String(b['수상부문'])));
+          html += `<div class="awards-grid">`;
+          group.forEach(aw => html += createCard(aw));
+          html += `</div>`;
+      });
+
+      if(singleAwards.length > 0) {
+          singleAwards.sort((a,b) => String(a['수상부문']).localeCompare(String(b['수상부문'])));
+          html += `<div class="awards-grid">`;
+          singleAwards.forEach(aw => html += createCard(aw));
+          html += `</div>`;
+      }
+
+      container.innerHTML = html;
+    }
+
+    async function sendDataToServer(action, rowData, index) {
+      if(!appSettings.url) { alert("설정창에서 URL을 먼저 입력해주세요!"); return; }
+      renderSkeleton(4);
+      const payload = { sheetName: '시트1', action: action, row: rowData, index: index };
+      try {
+        await fetch(appSettings.url, { method: 'POST', body: JSON.stringify(payload) });
+        fetchData();
+      } catch(e) { alert("서버 연동 중 오류가 발생했습니다."); fetchData(); }
+    }
+
+    /* ★ v2.0: 폼 필드에 인생테마(m_life) 추가 + 공포도 fallback 읽기 */
+    const FORM_IDS = ['m_poster', 'm_region', 'm_store', 'm_theme', 'm_keyword', 'm_star', 'm_diffKo', 'm_reviews', 'm_awards', 'm_genre', 'm_time', 'm_recPax', 'm_diffStore', 'm_horror', 'm_playDate', 'm_myRating', 'm_playPax', 'm_companions', 'm_synopsis', 'm_notes', 'm_life'];
+
+    function openDataModal(index = -1) {
+      document.getElementById('editIndex').value = index === -1 ? "" : index;
+
+      if (index === -1) {
+        FORM_IDS.forEach(id => document.getElementById(id).value = '');
+      } else {
+        const item = escapeData[index];
+        const values = {
+          m_poster: item['포스터'], m_region: item['지역'], m_store: item['매장명'],
+          m_theme: item['테마명'], m_keyword: item['검색어'], m_star: item['별점'],
+          m_diffKo: item['난이도(코방)'], m_reviews: item['리뷰'], m_awards: item['수상'],
+          m_genre: item['장르'], m_time: item['테마시간'], m_recPax: item['추천인원'],
+          m_diffStore: item['난이도(매장)'],
+          m_horror: getHorror(item),        /* ★ 공포도 키 통일 */
+          m_playDate: item['플레이일자'],
+          m_myRating: getMyRating(item),
+          m_playPax: getPax(item),
+          m_companions: item['일행'], m_synopsis: item['시놉시스'], m_notes: item['비고'],
+          m_life: isManualLife(item) ? '👑' : ''
+        };
+        FORM_IDS.forEach(id => { document.getElementById(id).value = values[id] ?? ''; });
+      }
+      showModal('dataModal');
+    }
+
+    function saveRecord() {
+      const rowData = FORM_IDS.map(id => document.getElementById(id).value);
+      const editIdx = document.getElementById('editIndex').value;
+      closeModal('dataModal');
+      sendDataToServer(editIdx === "" ? 'add' : 'edit', rowData, editIdx === "" ? null : parseInt(editIdx));
+    }
+
+    function deleteRecord(index) {
+      if (confirm("정말 이 기록을 삭제하시겠습니까?")) sendDataToServer('delete', null, index);
+    }
+
+    function openSettings() {
+      document.getElementById('s_url').value = appSettings.url;
+      document.getElementById('s_title').value = appSettings.title;
+      document.getElementById('s_font').value = appSettings.font;
+      document.getElementById('s_fontSize').value = appSettings.fontSize || 'fs-m';
+      document.getElementById('s_darkMode').value = appSettings.darkMode || 'light';
+      document.getElementById('s_lifeThreshold').value = appSettings.lifeThreshold ?? 9.0;
+      showModal('settingsModal');
+    }
+
+    function saveSettings() {
+      appSettings.url = document.getElementById('s_url').value.trim();
+      appSettings.title = document.getElementById('s_title').value;
+      appSettings.font = document.getElementById('s_font').value;
+      appSettings.fontSize = document.getElementById('s_fontSize').value;
+      appSettings.darkMode = document.getElementById('s_darkMode').value;
+      const th = parseFloat(document.getElementById('s_lifeThreshold').value);
+      appSettings.lifeThreshold = isNaN(th) ? 9.0 : th;
+      localStorage.setItem('myEscapeSettingsV6', JSON.stringify(appSettings));
+      applySettingsToUI(); fetchData();
+      closeModal('settingsModal');
+    }
+  </script>
+</body>
+</html>
