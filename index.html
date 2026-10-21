@@ -137,6 +137,19 @@
     body.font-cookie { --fs-font: 1.02; }
     body.font-gowun { --fs-font: 1.03; }
 
+    /* 공통 SVG 아이콘 스타일 */
+    .ico-svg {
+      width: 16px;
+      height: 16px;
+      vertical-align: -2.5px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      flex-shrink: 0;
+    }
+
     /* 최상단 도메인 스위처 */
     .domain-bar { display: flex; justify-content: center; margin-bottom: 16px; }
     .domain-switcher {
@@ -159,7 +172,7 @@
       cursor: pointer;
       display: inline-flex;
       align-items: center;
-      gap: 6px;
+      gap: 7px;
       font-family: inherit;
       transition: all 0.2s ease;
     }
@@ -231,6 +244,27 @@
     .stub-sub { font-size: calc(8px * var(--fs)); letter-spacing: 2px; color: var(--muted); font-weight: 700; }
     h1.main-title { font-size: calc(25px * var(--fs)); font-weight: 800; letter-spacing: -0.03em; color: var(--strong); word-break: keep-all; }
 
+    .title-symbol {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      background: var(--accent-bg);
+      border: 1px solid var(--accent-line);
+      color: var(--accent);
+      font-size: 18px;
+      animation: float 3s ease-in-out infinite;
+      flex-shrink: 0;
+    }
+    .title-symbol.right { animation-delay: 1.5s; }
+    .title-symbol svg { width: 19px; height: 19px; stroke: currentColor; fill: none; stroke-width: 2.1; }
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-4px); }
+    }
+
     /* 요약 스탯 스트립 */
     .stat-strip { display: flex; justify-content: center; align-items: center; gap: 8px; flex-wrap: wrap; margin: 0 auto 16px; }
     .strip-item {
@@ -251,13 +285,6 @@
     .strip-item.gold { background: var(--gold-bg); border-color: var(--gold-border); }
     .strip-item.gold b { color: #d97706; }
     body.dark .strip-item.gold b { color: #fbbf24; }
-
-    .title-lock { font-size: 25px; animation: float 3s ease-in-out infinite; display: inline-block; }
-    .title-lock.key { animation-delay: 1.5s; font-size: 23px; }
-    @keyframes float {
-      0%, 100% { transform: translateY(0px) rotate(-4deg); }
-      50% { transform: translateY(-5px) rotate(4deg); }
-    }
 
     .settings-btn {
       position: absolute;
@@ -364,7 +391,7 @@
       flex-shrink: 0;
     }
     .filter-item:hover { border-color: var(--muted); transform: translateY(-1px); }
-    .filter-icon { font-size: 16px; line-height: 1; }
+    .filter-icon { font-size: 14px; line-height: 1; display: inline-flex; align-items: center; color: var(--accent); font-weight: 900; }
     .filter-name { font-size: calc(13px * var(--fs)); font-weight: 700; color: var(--sub); }
     .filter-item.active {
       background-color: var(--invert-bg);
@@ -372,6 +399,7 @@
       box-shadow: 0 4px 12px var(--shadow-3);
     }
     .filter-item.active .filter-name { color: var(--invert-text); }
+    .filter-item.active .filter-icon { color: #fbbf24; }
 
     .sub-filter-container {
       display: none;
@@ -470,7 +498,7 @@
       height: 38px;
     }
 
-    /* 카드 그리드 */
+    /* ===== 메인 포스터 카드 디자인 ===== */
     .grid-container {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -478,6 +506,7 @@
       padding: 24px 20px 50px;
       max-width: 1240px;
       margin: 0 auto;
+      align-items: stretch;
     }
 
     .card {
@@ -550,18 +579,22 @@
       backdrop-filter: blur(4px);
       border: 1px solid rgba(253, 224, 71, 0.25);
     }
+
+    /* 뮤지컬·연극 상단 구분 배지 */
     .stage-type-badge {
-      background: rgba(15, 23, 42, 0.84);
-      color: #fff;
-      padding: 4px 9px;
+      background: rgba(15, 23, 42, 0.86);
+      color: #f8fafc;
+      padding: 4px 10px;
       border-radius: 6px;
-      font-size: calc(11px * var(--fs));
+      font-size: calc(10.5px * var(--fs));
       font-weight: 800;
+      letter-spacing: 0.04em;
       backdrop-filter: blur(4px);
-      border: 1px solid rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.22);
     }
-    .stage-type-badge.musical { color: #fda4af; border-color: rgba(253, 164, 175, 0.4); }
-    .stage-type-badge.play { color: #93c5fd; border-color: rgba(147, 197, 253, 0.4); }
+    .stage-type-badge.musical { color: #fecdd3; border-color: rgba(254, 205, 211, 0.45); }
+    .stage-type-badge.play { color: #bae6fd; border-color: rgba(186, 230, 253, 0.45); }
+    .stage-type-badge.nth { color: #fde047; border-color: rgba(253, 224, 71, 0.45); }
 
     .life-toggle {
       position: absolute;
@@ -586,52 +619,155 @@
     .life-toggle.on { filter: none; opacity: 1; background: rgba(15, 23, 42, 0.88); border-color: #fbbf24; box-shadow: 0 0 10px rgba(251, 191, 36, 0.6); }
     .life-toggle:hover { transform: scale(1.12); opacity: 1; }
 
-    .card-info { padding: 15px 16px 14px; flex-grow: 1; display: flex; flex-direction: column; }
-    .store-row { display: flex; align-items: center; justify-content: space-between; gap: 6px; margin-bottom: 4px; }
-    .store-name { font-size: calc(12px * var(--fs)); font-weight: 600; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .region-pill { font-size: calc(10.5px * var(--fs)); font-weight: 700; color: var(--sub); background: var(--bg-soft); padding: 2px 7px; border-radius: 5px; flex-shrink: 0; }
-
-    .theme-name {
-      font-size: calc(18.5px * var(--fs));
-      font-weight: 800;
-      color: var(--strong);
-      margin-bottom: 10px;
-      line-height: 1.32;
-      letter-spacing: -0.025em;
-      word-break: keep-all;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      height: 2.64em;
+    .card-info {
+      padding: 15px 16px 14px;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
     }
 
-    .rating-header { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 5px; }
-    .my-rating { font-size: calc(18px * var(--fs)); font-weight: 900; color: var(--accent); display: flex; align-items: baseline; gap: 4px; }
+    .store-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 6px;
+      margin-bottom: 6px;
+      flex-wrap: wrap;
+    }
+    .store-name {
+      font-size: calc(12.5px * var(--fs));
+      font-weight: 700;
+      color: var(--muted);
+      line-height: 1.38;
+      word-break: keep-all;
+      overflow-wrap: anywhere;
+      flex: 1;
+      min-width: 0;
+    }
+    .region-pill {
+      font-size: calc(11px * var(--fs));
+      font-weight: 800;
+      color: var(--sub);
+      background: var(--bg-soft);
+      border: 1px solid var(--line);
+      padding: 2px 8px;
+      border-radius: 6px;
+      flex-shrink: 0;
+      line-height: 1.35;
+    }
+    .region-pill.nth-pill {
+      color: var(--accent);
+      background: var(--accent-bg);
+      border-color: var(--accent-line);
+    }
+
+    .theme-name {
+      font-size: calc(18px * var(--fs));
+      font-weight: 800;
+      color: var(--strong);
+      margin-bottom: 12px;
+      line-height: 1.35;
+      letter-spacing: -0.025em;
+      word-break: keep-all;
+      overflow-wrap: anywhere;
+    }
+
+    .rating-diff-box {
+      background: var(--bg-faint);
+      border: 1px solid var(--line-soft);
+      border-radius: var(--radius-sm);
+      padding: 9px 11px;
+      margin-bottom: 12px;
+    }
+    .rating-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-bottom: 7px;
+    }
+    .my-rating {
+      font-size: calc(17px * var(--fs));
+      font-weight: 900;
+      color: var(--accent);
+      display: inline-flex;
+      align-items: baseline;
+      gap: 3px;
+    }
     .card.life .my-rating { color: #d97706; }
     body.dark .card.life .my-rating { color: #fbbf24; }
-    .my-rating span { font-size: calc(11.5px * var(--fs)); font-weight: 600; color: var(--faint); }
+    .my-rating span { font-size: calc(11px * var(--fs)); font-weight: 600; color: var(--faint); }
 
-    .rating-bar { height: 5px; border-radius: 999px; background: var(--bg-soft); overflow: hidden; margin: 0 0 12px; }
+    .ko-diff-badge {
+      font-size: calc(11.5px * var(--fs));
+      font-weight: 800;
+      color: var(--sub);
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      padding: 3px 9px;
+      border-radius: 6px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      white-space: nowrap;
+    }
+    .ko-diff-badge b { color: var(--strong); font-weight: 900; }
+
+    .ticket-info-right {
+      margin-top: 6px;
+      font-size: calc(11px * var(--fs));
+      color: var(--sub);
+      font-weight: 700;
+      word-break: keep-all;
+      text-align: right;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .date-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: calc(11.5px * var(--fs));
+      font-weight: 700;
+      color: var(--sub);
+      background: var(--bg-soft);
+      border: 1px solid var(--line);
+      padding: 2px 9px;
+      border-radius: 999px;
+      line-height: 1.35;
+      white-space: nowrap;
+    }
+
+    .rating-bar { height: 5px; border-radius: 999px; background: var(--bg-softer); overflow: hidden; margin: 0; }
     .rating-fill { height: 100%; border-radius: 999px; background: linear-gradient(90deg, #fb923c, var(--accent)); }
     body.mode-stage .rating-fill { background: linear-gradient(90deg, #f43f5e, #be123c); }
     .card.life .rating-fill { background: linear-gradient(90deg, #fcd34d, #f59e0b); }
 
-    .sub-info {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
+    .stage-meta-box {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
       background: var(--bg-faint);
       border: 1px solid var(--line-soft);
       border-radius: var(--radius-sm);
-      padding: 7px 4px;
+      padding: 8px 10px;
       margin-bottom: 12px;
-      text-align: center;
+      font-size: calc(11.5px * var(--fs));
     }
-    .sub-info-col { display: flex; flex-direction: column; gap: 1px; border-right: 1px solid var(--line-soft); padding: 0 4px; min-width: 0; }
-    .sub-info-col:last-child { border-right: none; }
-    .sub-info-label { font-size: calc(10px * var(--fs)); color: var(--faint); font-weight: 600; }
-    .sub-info-val { font-size: calc(11.5px * var(--fs)); color: var(--sub); font-weight: 800; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .stage-meta-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      color: var(--sub);
+      font-weight: 700;
+      word-break: keep-all;
+    }
+    .stage-meta-label { color: var(--faint); font-weight: 600; flex-shrink: 0; }
 
     .bottom-info {
       position: relative;
@@ -644,10 +780,8 @@
     }
     .info-row { display: flex; justify-content: space-between; align-items: center; font-size: calc(12px * var(--fs)); font-weight: 600; color: var(--sub); }
 
-    .genre-container { display: flex; flex-wrap: nowrap; gap: 4px; overflow-x: auto; scrollbar-width: none; padding-bottom: 2px; }
-    .genre-container::-webkit-scrollbar { display: none; }
+    .genre-container { display: flex; flex-wrap: wrap; gap: 4px; }
     .genre-row {
-      flex-shrink: 0;
       font-size: calc(11px * var(--fs));
       font-weight: 700;
       color: var(--sub);
@@ -741,7 +875,7 @@
     .action-btn:hover { background: var(--bg-soft); color: var(--strong); }
     .action-btn:not(:last-child) { border-right: 1px solid var(--line-soft); }
 
-    /* ===== 포스터 캘린더 뷰 (방탈출 / 관극 독립 섹션) ===== */
+    /* ===== 포스터 캘린더 뷰 ===== */
     .calendar-section {
       display: none;
       max-width: 1080px;
@@ -986,8 +1120,8 @@
       border-radius: 4px;
       margin-bottom: 3px;
     }
-    .cal-log-store { font-size: calc(11.5px * var(--fs)); color: var(--muted); font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .cal-log-theme { font-size: calc(15px * var(--fs)); color: var(--strong); font-weight: 800; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin: 1px 0 4px; }
+    .cal-log-store { font-size: calc(11.5px * var(--fs)); color: var(--muted); font-weight: 600; word-break: keep-all; }
+    .cal-log-theme { font-size: calc(15px * var(--fs)); color: var(--strong); font-weight: 800; word-break: keep-all; margin: 1px 0 4px; }
     .cal-log-meta { font-size: calc(12px * var(--fs)); color: var(--sub); font-weight: 600; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
 
     /* 스켈레톤 로딩 */
@@ -1252,6 +1386,29 @@
     .award-store { width: 100%; height: 1.5em; font-size: calc(11px * var(--fs)); color: var(--muted); margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding: 0 2px; }
     .award-theme { width: 100%; height: 2.4em; font-size: calc(16px * var(--fs)); font-weight: 800; color: var(--strong); line-height: 1.2; word-break: keep-all; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis; margin-top: 2px; }
 
+    /* 토스트 및 커스텀 확인창 */
+    .app-toast {
+      position: fixed;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: var(--invert-bg);
+      color: var(--invert-text);
+      padding: 11px 20px;
+      border-radius: 999px;
+      font-size: calc(13px * var(--fs));
+      font-weight: 700;
+      box-shadow: 0 8px 24px var(--shadow-3);
+      z-index: 300;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.22s ease, transform 0.22s ease;
+    }
+    .app-toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
     @media (max-width: 1024px) {
       .grid-container { grid-template-columns: repeat(3, 1fr); }
     }
@@ -1262,8 +1419,8 @@
       .ticket { max-width: 100%; }
       .ticket-main { padding: 14px 10px; gap: 8px; }
       h1.main-title { font-size: calc(19px * var(--fs)); }
-      .title-lock { font-size: 20px; }
-      .title-lock.key { font-size: 18px; }
+      .title-symbol { width: 28px; height: 28px; }
+      .title-symbol svg { width: 15px; height: 15px; }
       .ticket-stub { width: 88px; padding: 10px 4px; }
       .ticket::before, .ticket::after { left: calc(100% - 88px); width: 16px; height: 16px; }
       .ticket::before { top: -9.5px; }
@@ -1287,14 +1444,14 @@
       .search-wrapper { max-width: 100%; }
       .sort-wrapper { justify-content: space-between; width: 100%; }
 
-      .grid-container { grid-template-columns: repeat(2, 1fr) !important; gap: 12px; padding: 16px 14px 40px; }
+      .grid-container { grid-template-columns: repeat(2, 1fr) !important; gap: 12px; padding: 16px 12px 40px; }
       .card-info { padding: 12px; }
-      .theme-name { font-size: calc(15.5px * var(--fs)); margin-bottom: 8px; }
-      .my-rating { font-size: calc(15.5px * var(--fs)); }
-      .my-rating span { font-size: calc(10px * var(--fs)); }
-      .sub-info { padding: 5px 2px; margin-bottom: 10px; }
-      .sub-info-label { font-size: calc(9px * var(--fs)); }
-      .sub-info-val { font-size: calc(10.5px * var(--fs)); }
+      .theme-name { font-size: calc(15px * var(--fs)); margin-bottom: 10px; }
+      .rating-diff-box { padding: 7px 8px; margin-bottom: 10px; }
+      .my-rating { font-size: calc(14.5px * var(--fs)); }
+      .my-rating span { font-size: calc(9.5px * var(--fs)); }
+      .ko-diff-badge { font-size: calc(10.5px * var(--fs)); padding: 2px 6px; }
+      .date-badge { font-size: calc(10.5px * var(--fs)); padding: 2px 7px; }
       .info-row { font-size: calc(11px * var(--fs)); }
       .award-badge { font-size: calc(9.5px * var(--fs)); padding: 4px 6px; }
       .life-toggle { width: 28px; height: 28px; font-size: 13px; top: 7px; left: 7px; }
@@ -1333,19 +1490,25 @@
     <header>
       <button class="settings-btn" onclick="openSettings()" title="환경 설정">⚙️</button>
 
-      <!-- 최상단 도메인 스위처 (방탈출 vs 뮤지컬·연극 완전 분리) -->
+      <!-- 상단 모드 스위처 -->
       <div class="domain-bar">
         <div class="domain-switcher">
-          <button class="domain-btn active" id="domainBtnEscape" onclick="switchDomain('escape')">🔒 방탈출</button>
-          <button class="domain-btn" id="domainBtnStage" onclick="switchDomain('stage')">🎭 뮤지컬·연극</button>
+          <button class="domain-btn active" id="domainBtnEscape" onclick="switchDomain('escape')">
+            <svg class="ico-svg" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            방탈출
+          </button>
+          <button class="domain-btn" id="domainBtnStage" onclick="switchDomain('stage')">
+            <svg class="ico-svg" viewBox="0 0 24 24"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M13 5v2"/><path d="M13 17v2"/><path d="M13 11v2"/></svg>
+            뮤지컬·연극
+          </button>
         </div>
       </div>
 
       <div class="ticket">
         <div class="ticket-main">
-          <div class="title-lock" id="titleIconLeft">🔒</div>
+          <div class="title-symbol" id="titleIconLeft"></div>
           <h1 class="main-title" id="pageTitle">노유's 방탈리스트</h1>
-          <div class="title-lock key" id="titleIconRight">🔑</div>
+          <div class="title-symbol right" id="titleIconRight"></div>
         </div>
         <div class="ticket-stub">
           <div class="stub-label" id="stubLabelTop">ADMIT</div>
@@ -1363,7 +1526,7 @@
 
       <!-- 2) 뮤지컬·연극 전용 상단 스탯 스트립 -->
       <div class="stat-strip" id="stageStatStrip" style="display:none;">
-        <span class="strip-item">🎟️ 총 <b id="stageStripTotal">0</b>편</span>
+        <span class="strip-item">🎫 총 <b id="stageStripTotal">0</b>편</span>
         <span class="strip-item gold">👑 인생극 <b id="stageStripLife">0</b></span>
         <span class="strip-item">📅 올해 <b id="stageStripYear">0</b>편</span>
       </div>
@@ -1386,7 +1549,7 @@
       </div>
     </header>
 
-    <!-- 메인 뷰 스위처 (카드 리스트 vs 포스터 캘린더) -->
+    <!-- 메인 뷰 스위처 -->
     <div class="view-switcher-wrap">
       <div class="view-switcher">
         <button class="view-tab active" id="tabViewList" onclick="switchMainView('list')">🃏 카드 리스트</button>
@@ -1395,16 +1558,16 @@
     </div>
 
     <!-- ==========================================================
-         [A] 방탈출 전용 뷰 영역 (리스트 + 방탈출 전용 캘린더)
+         [A] 방탈출 전용 뷰 영역
          ========================================================== -->
     <div id="escapeDomainContainer">
       <div id="escapeListFilterSection">
         <nav class="filter-container" id="escapePrimaryNav">
-          <div class="filter-item active" onclick="setEscapePrimaryFilter('all', this)"><span class="filter-icon">🔍</span><span class="filter-name">전체보기</span></div>
+          <div class="filter-item active" onclick="setEscapePrimaryFilter('all', this)"><span class="filter-icon">✦</span><span class="filter-name">전체보기</span></div>
           <div class="filter-item" onclick="setEscapePrimaryFilter('life', this)"><span class="filter-icon">👑</span><span class="filter-name">인생테마</span></div>
-          <div class="filter-item" onclick="setEscapePrimaryFilter('genre', this)"><span class="filter-icon">🏷️</span><span class="filter-name">장르별</span></div>
-          <div class="filter-item" onclick="setEscapePrimaryFilter('region', this)"><span class="filter-icon">🗺️</span><span class="filter-name">지역별</span></div>
-          <div class="filter-item" onclick="setEscapePrimaryFilter('store', this)"><span class="filter-icon">🏬</span><span class="filter-name">매장별</span></div>
+          <div class="filter-item" onclick="setEscapePrimaryFilter('genre', this)"><span class="filter-icon">#</span><span class="filter-name">장르별</span></div>
+          <div class="filter-item" onclick="setEscapePrimaryFilter('region', this)"><span class="filter-icon">📍</span><span class="filter-name">지역별</span></div>
+          <div class="filter-item" onclick="setEscapePrimaryFilter('store', this)"><span class="filter-icon">🏠</span><span class="filter-name">매장별</span></div>
         </nav>
         <div class="sub-filter-container" id="escapeSubNav"></div>
 
@@ -1426,10 +1589,8 @@
             <select class="sort-select" id="escapeSortSelect" onchange="applyEscapeFiltersAndSort()">
               <option value="dateDesc">📅 날짜 (최신순)</option>
               <option value="dateAsc">📅 날짜 (오래된순)</option>
-              <option value="myRatingDesc">⭐ 나의 별점 (높은순)</option>
-              <option value="myRatingAsc">⭐ 나의 별점 (낮은순)</option>
-              <option value="starDesc">📝 평점 (높은순)</option>
-              <option value="starAsc">📝 평점 (낮은순)</option>
+              <option value="myRatingDesc">⭐ 나의 평점 (높은순)</option>
+              <option value="myRatingAsc">⭐ 나의 평점 (낮은순)</option>
               <option value="diffKoDesc">🔒 코방 난이도 (높은순)</option>
               <option value="diffKoAsc">🔒 코방 난이도 (낮은순)</option>
               <option value="titleAsc">🔤 테마명 (가나다순)</option>
@@ -1438,7 +1599,6 @@
         </div>
       </div>
 
-      <!-- 방탈출 카드 그리드 -->
       <main class="grid-container" id="escapeGrid"></main>
 
       <!-- 방탈출 전용 포스터 캘린더 -->
@@ -1470,7 +1630,7 @@
             <span class="cal-sum-val" id="escapeCalSumDays">0일</span>
           </div>
           <div class="cal-sum-card">
-            <span class="cal-sum-label">이달의 평균 별점</span>
+            <span class="cal-sum-label">이달의 평균 평점</span>
             <span class="cal-sum-val" id="escapeCalSumAvg">⭐ 0.00</span>
           </div>
           <div class="cal-sum-card">
@@ -1497,17 +1657,17 @@
     </div>
 
     <!-- ==========================================================
-         [B] 뮤지컬·연극 전용 뷰 영역 (리스트 + 관극 전용 캘린더)
+         [B] 뮤지컬·연극 전용 뷰 영역
          ========================================================== -->
     <div id="stageDomainContainer" style="display:none;">
       <div id="stageListFilterSection">
         <nav class="filter-container" id="stagePrimaryNav">
-          <div class="filter-item active" onclick="setStagePrimaryFilter('all', this)"><span class="filter-icon">🔍</span><span class="filter-name">전체보기</span></div>
+          <div class="filter-item active" onclick="setStagePrimaryFilter('all', this)"><span class="filter-icon">✦</span><span class="filter-name">전체보기</span></div>
           <div class="filter-item" onclick="setStagePrimaryFilter('life', this)"><span class="filter-icon">👑</span><span class="filter-name">인생극</span></div>
-          <div class="filter-item" onclick="setStagePrimaryFilter('type', this)"><span class="filter-icon">🎭</span><span class="filter-name">구분 (뮤지컬/연극)</span></div>
-          <div class="filter-item" onclick="setStagePrimaryFilter('place', this)"><span class="filter-icon">🏛️</span><span class="filter-name">장소별</span></div>
-          <div class="filter-item" onclick="setStagePrimaryFilter('cast', this)"><span class="filter-icon">🌟</span><span class="filter-name">캐스팅별</span></div>
-          <div class="filter-item" onclick="setStagePrimaryFilter('title', this)"><span class="filter-icon">🎬</span><span class="filter-name">작품별</span></div>
+          <div class="filter-item" onclick="setStagePrimaryFilter('type', this)"><span class="filter-icon">🎫</span><span class="filter-name">구분 (뮤지컬/연극)</span></div>
+          <div class="filter-item" onclick="setStagePrimaryFilter('place', this)"><span class="filter-icon">📍</span><span class="filter-name">공연장별</span></div>
+          <div class="filter-item" onclick="setStagePrimaryFilter('cast', this)"><span class="filter-icon">★</span><span class="filter-name">캐스팅별</span></div>
+          <div class="filter-item" onclick="setStagePrimaryFilter('title', this)"><span class="filter-icon">📖</span><span class="filter-name">작품별</span></div>
         </nav>
         <div class="sub-filter-container" id="stageSubNav"></div>
 
@@ -1541,7 +1701,6 @@
         </div>
       </div>
 
-      <!-- 뮤지컬·연극 카드 그리드 -->
       <main class="grid-container" id="stageGrid"></main>
 
       <!-- 뮤지컬·연극 전용 포스터 캘린더 -->
@@ -1617,7 +1776,7 @@
           </div>
           <div class="detail-grid" id="d_grid_box"></div>
           <div class="detail-section" id="d_cast_section" style="display:none;">
-            <h3>🌟 캐스팅 (출연 배우)</h3>
+            <h3>✦ 캐스팅 (출연 배우)</h3>
             <div class="detail-badges" id="d_cast_badges" style="margin-top:4px;"></div>
           </div>
           <div class="detail-section">
@@ -1644,29 +1803,27 @@
       <input type="hidden" id="editIndex">
       <input type="hidden" id="editDomain">
 
-      <!-- 1) 방탈출 전용 입력 폼 (시트1) -->
+      <!-- 1) 방탈출 전용 입력 폼 -->
       <div class="form-grid" id="escapeFormGrid">
         <div class="form-group full"><label>포스터 이미지 (URL)</label><input type="text" id="m_poster" placeholder="인터넷 이미지 링크를 넣으세요"></div>
         <div class="form-group"><label>지역</label><input type="text" id="m_region"></div>
         <div class="form-group"><label>매장명</label><input type="text" id="m_store"></div>
         <div class="form-group"><label>테마명</label><input type="text" id="m_theme"></div>
         <div class="form-group"><label>검색어(줄임말/한글발음 등)</label><input type="text" id="m_keyword" placeholder="예: 완테드, 원티드"></div>
-        <div class="form-group"><label>추천 평점(코방 등)</label><input type="text" id="m_star"></div>
-        <div class="form-group"><label>코방 난이도</label><input type="text" id="m_diffKo"></div>
-        <div class="form-group"><label>리뷰 수</label><input type="text" id="m_reviews"></div>
-        <div class="form-group"><label>수상 내역 (쉼표로 구분)</label><input type="text" id="m_awards"></div>
-        <div class="form-group"><label>장르 (쉼표로 구분)</label><input type="text" id="m_genre" placeholder="예: 공포, 스릴러"></div>
-        <div class="form-group"><label>테마시간 (분 단위)</label><input type="text" id="m_time" placeholder="예: 75"></div>
-        <div class="form-group"><label>추천인원(매장)</label><input type="text" id="m_recPax"></div>
+        <div class="form-group"><label>코방 난이도</label><input type="text" id="m_diffKo" placeholder="예: 3.5"></div>
         <div class="form-group"><label>매장 난이도</label><input type="text" id="m_diffStore"></div>
         <div class="form-group"><label>매장 공포도</label><input type="text" id="m_horror"></div>
+        <div class="form-group"><label>추천인원(매장)</label><input type="text" id="m_recPax"></div>
+        <div class="form-group"><label>테마시간 (분 단위)</label><input type="text" id="m_time" placeholder="예: 75"></div>
+        <div class="form-group"><label>장르 (쉼표로 구분)</label><input type="text" id="m_genre" placeholder="예: 공포, 스릴러"></div>
+        <div class="form-group full"><label>수상 내역 (쉼표로 구분)</label><input type="text" id="m_awards"></div>
         <div class="form-group"><label>플레이 일자 (YYYY-MM-DD)</label><input type="text" id="m_playDate" placeholder="예: 2026-10-20"></div>
-        <div class="form-group"><label>나의 별점 (예: 9.5)</label><input type="text" id="m_myRating" style="border-color:var(--accent);"></div>
+        <div class="form-group"><label>나의 평점 (예: 9.5)</label><input type="text" id="m_myRating" style="border-color:var(--accent);"></div>
         <div class="form-group"><label>플레이 인원</label><input type="text" id="m_playPax"></div>
         <div class="form-group"><label>일행 (쉼표로 구분)</label><input type="text" id="m_companions" placeholder="예: 철수, 영희"></div>
-        <div class="form-group"><label>👑 인생테마 직접 지정</label>
+        <div class="form-group full"><label>👑 인생테마 직접 지정</label>
           <select id="m_life">
-            <option value="">자동 (별점 기준)</option>
+            <option value="">자동 (평점 기준)</option>
             <option value="👑">👑 인생테마 지정</option>
           </select>
         </div>
@@ -1674,7 +1831,7 @@
         <div class="form-group full"><label>비고</label><textarea id="m_notes" rows="2"></textarea></div>
       </div>
 
-      <!-- 2) 뮤지컬·연극 전용 입력 폼 (뮤지컬연극 시트 A열~P열) -->
+      <!-- 2) 뮤지컬·연극 전용 입력 폼 (A열~Q열 대응) -->
       <div class="form-grid" id="stageFormGrid" style="display:none;">
         <div class="form-group"><label>A열 · NO (관극 번호)</label><input type="text" id="st_no" placeholder="예: 1"></div>
         <div class="form-group"><label>C열 · 구분 (뮤지컬 / 연극)</label>
@@ -1687,10 +1844,10 @@
         <div class="form-group full"><label>B열 · 포스터 이미지 (URL)</label><input type="text" id="st_poster" placeholder="공연 포스터 이미지 링크를 넣으세요"></div>
         <div class="form-group"><label>D열 · 장소 (공연장)</label><input type="text" id="st_place" placeholder="예: 샤롯데씨어터"></div>
         <div class="form-group"><label>E열 · 제목 (작품명)</label><input type="text" id="st_title" placeholder="예: 지킬앤하이드"></div>
-        <div class="form-group"><label>F열 · 플레이일자 (YYYY-MM-DD)</label><input type="text" id="st_date" placeholder="예: 2026-10-20"></div>
-        <div class="form-group"><label>G열 · 시간 (공연 시각/회차)</label><input type="text" id="st_time1" placeholder="예: 19:30"></div>
+        <div class="form-group"><label>F열 · 관람일 (YYYY-MM-DD)</label><input type="text" id="st_date" placeholder="예: 2026-10-20"></div>
+        <div class="form-group"><label>G열 · 공연시간</label><input type="text" id="st_time1" placeholder="예: 17:00"></div>
         <div class="form-group"><label>H열 · 티켓 (좌석/가격/예매처)</label><input type="text" id="st_ticket" placeholder="예: VIP석 1층 5열"></div>
-        <div class="form-group"><label>I열 · 시간 (러닝타임 등)</label><input type="text" id="st_time2" placeholder="예: 170분"></div>
+        <div class="form-group"><label>I열 · 러닝타임</label><input type="text" id="st_time2" placeholder="예: 150분"></div>
         <div class="form-group"><label>J열 · 인원</label><input type="text" id="st_pax" placeholder="예: 2"></div>
         <div class="form-group"><label>K열 · 일행 (쉼표로 구분)</label><input type="text" id="st_companions" placeholder="예: 철수, 영희"></div>
         <div class="form-group full"><label>L열 · 캐스팅 (출연 배우, 쉼표로 구분)</label><input type="text" id="st_cast" placeholder="예: 홍광호, 아이비, 민경아"></div>
@@ -1701,6 +1858,7 @@
             <option value="👑">👑 인생극 지정</option>
           </select>
         </div>
+        <div class="form-group full"><label>Q열 · 재회차 관람 (입력 시 카드 우측 상단 뱃지 노출)</label><input type="text" id="st_nth" placeholder="예: 2회차, 3회차 (초연/1회차 등 미표기 시 비워두세요)"></div>
         <div class="form-group full"><label>N열 · 시놉시스 (줄거리)</label><textarea id="st_synopsis" rows="3"></textarea></div>
         <div class="form-group full"><label>M열 · 비고 (관극 후기/메모)</label><textarea id="st_notes" rows="2"></textarea></div>
       </div>
@@ -1712,9 +1870,7 @@
     </div>
   </div>
 
-  <!-- ==========================================================
-       [모달 1] 방탈출 전용 통계 대시보드 모달 (완전 분리)
-       ========================================================== -->
+  <!-- [모달 1] 방탈출 전용 통계 대시보드 모달 -->
   <div class="modal-overlay" id="escapeDashboardModal">
     <div class="modal-content dashboard-content">
       <button class="close-btn" onclick="closeModal('escapeDashboardModal')">✕</button>
@@ -1726,7 +1882,7 @@
         <div class="stat-box full">
           <div><div class="stat-label">총 플레이 횟수</div><div class="stat-highlight" id="escStatTotal">0방</div></div>
           <div><div class="stat-label" id="escStatYearLabel">올해 플레이</div><div class="stat-highlight" id="escStatYear">0방</div></div>
-          <div><div class="stat-label">평균 나의 별점</div><div class="stat-highlight" id="escStatAvg">⭐ 0.00</div></div>
+          <div><div class="stat-label">평균 나의 평점</div><div class="stat-highlight" id="escStatAvg">⭐ 0.00</div></div>
         </div>
         <div class="stat-box full chart-box">
           <h3 id="escChartTitle">📈 월별 방탈출 추이</h3>
@@ -1738,12 +1894,12 @@
           <div id="escMoreCompsWrap"></div>
         </div>
         <div class="stat-box">
-          <h3><span>🏷️ 장르 랭킹</span><span class="stat-count-pill" id="escCountGenres">0개</span></h3>
+          <h3><span># 장르 랭킹</span><span class="stat-count-pill" id="escCountGenres">0개</span></h3>
           <ul class="stat-list" id="escStatGenres"></ul>
           <div id="escMoreGenresWrap"></div>
         </div>
         <div class="stat-box">
-          <h3><span>🏬 브랜드별 랭킹</span><span class="stat-count-pill" id="escCountBrands">0곳</span></h3>
+          <h3><span>🏠 브랜드별 랭킹</span><span class="stat-count-pill" id="escCountBrands">0곳</span></h3>
           <ul class="stat-list" id="escStatBrands"></ul>
           <div id="escMoreBrandsWrap"></div>
         </div>
@@ -1756,9 +1912,7 @@
     </div>
   </div>
 
-  <!-- ==========================================================
-       [모달 2] 뮤지컬·연극 전용 통계 대시보드 모달 (완전 분리)
-       ========================================================== -->
+  <!-- [모달 2] 뮤지컬·연극 전용 통계 대시보드 모달 -->
   <div class="modal-overlay" id="stageDashboardModal">
     <div class="modal-content dashboard-content">
       <button class="close-btn" onclick="closeModal('stageDashboardModal')">✕</button>
@@ -1771,24 +1925,24 @@
           <div><div class="stat-label">총 관극 횟수</div><div class="stat-highlight" id="stgStatTotal">0편</div></div>
           <div><div class="stat-label" id="stgStatYearLabel">올해 관극</div><div class="stat-highlight" id="stgStatYear">0편</div></div>
           <div><div class="stat-label">평균 나의 평점</div><div class="stat-highlight" id="stgStatAvg">⭐ 0.00</div></div>
-          <div><div class="stat-label">뮤지컬 / 연극 비중</div><div class="stat-highlight" id="stgStatRatio" style="font-size:calc(18px * var(--fs)); margin-top:10px;">0 : 0</div></div>
+          <div><div class="stat-label">뮤지컬 / 연극 비중</div><div class="stat-highlight" id="stgStatRatio" style="font-size:calc(16px * var(--fs)); margin-top:10px;">0 : 0</div></div>
         </div>
         <div class="stat-box full chart-box">
           <h3 id="stgChartTitle">📈 월별 관극 추이</h3>
           <div class="bar-chart" id="stgStatMonthly"></div>
         </div>
         <div class="stat-box">
-          <h3><span>🌟 캐스팅(배우) 랭킹</span><span class="stat-count-pill" id="stgCountCast">0명</span></h3>
+          <h3><span>✦ 캐스팅(배우) 랭킹</span><span class="stat-count-pill" id="stgCountCast">0명</span></h3>
           <ul class="stat-list" id="stgStatCast"></ul>
           <div id="stgMoreCastWrap"></div>
         </div>
         <div class="stat-box">
-          <h3><span>🎬 다회차 작품 랭킹</span><span class="stat-count-pill" id="stgCountTitles">0작품</span></h3>
+          <h3><span>📖 다회차 작품 랭킹</span><span class="stat-count-pill" id="stgCountTitles">0작품</span></h3>
           <ul class="stat-list" id="stgStatTitles"></ul>
           <div id="stgMoreTitlesWrap"></div>
         </div>
         <div class="stat-box">
-          <h3><span>🏛️ 공연장(장소) 랭킹</span><span class="stat-count-pill" id="stgCountPlaces">0곳</span></h3>
+          <h3><span>📍 공연장(장소) 랭킹</span><span class="stat-count-pill" id="stgCountPlaces">0곳</span></h3>
           <ul class="stat-list" id="stgStatPlaces"></ul>
           <div id="stgMorePlacesWrap"></div>
         </div>
@@ -1820,10 +1974,10 @@
         <input type="text" id="s_url" placeholder="https://script.google.com/macros/s/...">
       </div>
       <div class="form-grid">
-        <div class="form-group"><label>🔒 방탈출 메인 제목</label><input type="text" id="s_title" placeholder="노유's 방탈리스트"></div>
-        <div class="form-group"><label>🎭 뮤지컬·연극 메인 제목</label><input type="text" id="s_stageTitle" placeholder="노유's 관극리스트"></div>
-        <div class="form-group"><label>🔒 방탈출 시트 이름</label><input type="text" id="s_escapeSheet" placeholder="시트1"></div>
-        <div class="form-group"><label>🎭 뮤지컬·연극 시트 이름</label><input type="text" id="s_stageSheet" placeholder="뮤지컬연극"></div>
+        <div class="form-group"><label>방탈출 메인 제목</label><input type="text" id="s_title" placeholder="노유's 방탈리스트"></div>
+        <div class="form-group"><label>뮤지컬·연극 메인 제목</label><input type="text" id="s_stageTitle" placeholder="노유's 관극리스트"></div>
+        <div class="form-group"><label>방탈출 시트 이름</label><input type="text" id="s_escapeSheet" placeholder="시트1"></div>
+        <div class="form-group"><label>뮤지컬·연극 시트 이름</label><input type="text" id="s_stageSheet" placeholder="뮤지컬연극"></div>
       </div>
       <div class="form-group">
         <label>기본 폰트 설정</label>
@@ -1863,10 +2017,26 @@
     </div>
   </div>
 
+  <!-- 삭제 확인 모달 -->
+  <div class="modal-overlay" id="confirmModal">
+    <div class="modal-content" style="max-width: 380px; text-align: center;">
+      <h2 style="font-size: calc(18px * var(--fs)); margin-bottom: 10px;">기록 삭제</h2>
+      <p id="confirmModalMsg" style="font-size: calc(13.5px * var(--fs)); color: var(--sub); margin-bottom: 20px;">정말 이 기록을 삭제하시겠습니까?</p>
+      <div style="display: flex; gap: 10px;">
+        <button class="btn" style="flex: 1; justify-content: center; background: var(--bg-softer);" onclick="closeModal('confirmModal')">취소</button>
+        <button class="btn" style="flex: 1; justify-content: center; background: var(--accent); color: #fff; border-color: var(--accent);" onclick="confirmDeleteAction()">삭제</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="appToast" class="app-toast"></div>
+
   <script>
-    /* =========================================================================
-       ★ v5.1: 방탈출(escape)과 뮤지컬·연극(stage) 데이터 및 상태 완벽 분리
-       ========================================================================= */
+    const SVG_LOCK = '<svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>';
+    const SVG_KEY = '<svg viewBox="0 0 24 24"><circle cx="7.5" cy="15.5" r="5.5"/><path d="m21 2-9.6 9.6"/><path d="m15.5 7.5 3 3L22 7l-3-3"/></svg>';
+    const SVG_TICKET = '<svg viewBox="0 0 24 24"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M13 5v2"/><path d="M13 17v2"/><path d="M13 11v2"/></svg>';
+    const SVG_SPARKLE = '<svg viewBox="0 0 24 24"><path d="M12 3l2.4 6.6L21 12l-6.6 2.4L12 21l-2.4-6.6L3 12l6.6-2.4L12 3z"/></svg>';
+
     let currentDomain = 'escape'; // 'escape' | 'stage'
     let currentMainView = 'list'; // 'list' | 'calendar'
 
@@ -1886,7 +2056,7 @@
     // 2) 뮤지컬·연극 전용 데이터 & 상태
     let stageData = [];
     let stageLoaded = false;
-    let stageSheetFallbackDetected = false; // GAS가 시트1을 잘못 반환했는지 감지
+    let stageSheetFallbackDetected = false;
     let stagePrimary = 'all';
     let stageSub = 'all';
     let stageCalState = {
@@ -1898,12 +2068,12 @@
     };
 
     let allAwardsData = [];
+    let pendingDelete = null;
 
     const NO_POSTER = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(
       '<svg xmlns="http://www.w3.org/2000/svg" width="300" height="400" viewBox="0 0 300 400">' +
       '<rect width="300" height="400" fill="#e5e8ef"/>' +
-      '<text x="150" y="185" font-size="52" text-anchor="middle">🎟️</text>' +
-      '<text x="150" y="240" font-size="16" fill="#64748b" font-weight="bold" text-anchor="middle" font-family="sans-serif">NO POSTER</text>' +
+      '<text x="150" y="195" font-size="18" fill="#64748b" font-weight="bold" text-anchor="middle" font-family="sans-serif">NO POSTER</text>' +
       '</svg>'
     );
     window.NO_POSTER = NO_POSTER;
@@ -1919,18 +2089,61 @@
       darkMode: "light",
       lifeThreshold: 9.0
     };
-    let appSettings = Object.assign({}, DEFAULT_SETTINGS, JSON.parse(localStorage.getItem('myEscapeSettingsV6') || '{}'));
+
+    let savedSettings = {};
+    try {
+      savedSettings = JSON.parse(localStorage.getItem('myEscapeSettingsV6') || '{}');
+    } catch (e) {
+      savedSettings = {};
+    }
+    let appSettings = Object.assign({}, DEFAULT_SETTINGS, savedSettings);
 
     /* ===== 공통 유틸 ===== */
+    function showToast(msg) {
+      const t = document.getElementById('appToast');
+      if (!t) return;
+      t.textContent = msg;
+      t.classList.add('show');
+      clearTimeout(window._toastTimer);
+      window._toastTimer = setTimeout(() => t.classList.remove('show'), 2600);
+    }
+
     function escHtml(str) {
       return String(str ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
     }
     function num(v) { const n = parseFloat(v); return isNaN(n) ? null : n; }
 
+    /* ★ 시트 날짜가 UTC 변환(T15:00:00.000Z 등)으로 하루씩 앞당겨지는 오류 완벽 해결 */
     function normalizeDateStr(raw) {
-      if (!raw) return '';
+      if (raw === undefined || raw === null || raw === '') return '';
       let s = String(raw).trim();
-      if (s.includes('T')) s = s.split('T')[0];
+      if (!s || s === '-') return '';
+
+      if (s.includes('T')) {
+        const dt = new Date(s);
+        if (!isNaN(dt.getTime())) {
+          try {
+            const parts = new Intl.DateTimeFormat('en-CA', {
+              timeZone: 'Asia/Seoul',
+              year: 'numeric',
+              month: '2-digit',
+              day: '2-digit'
+            }).formatToParts(dt);
+            const y = parts.find(p => p.type === 'year')?.value;
+            const m = parts.find(p => p.type === 'month')?.value;
+            const d = parts.find(p => p.type === 'day')?.value;
+            if (y && m && d) return `${y}-${m}-${d}`;
+          } catch (e) {
+            const kst = new Date(dt.getTime() + 9 * 3600 * 1000);
+            const y = kst.getUTCFullYear();
+            const m = String(kst.getUTCMonth() + 1).padStart(2, '0');
+            const d = String(kst.getUTCDate()).padStart(2, '0');
+            return `${y}-${m}-${d}`;
+          }
+        }
+        s = s.split('T')[0];
+      }
+
       const match = s.match(/(\d{4})[-./년\s]*(\d{1,2})[-./월\s]*(\d{1,2})/);
       if (match) {
         const y = match[1];
@@ -1938,23 +2151,115 @@
         const d = String(parseInt(match[3], 10)).padStart(2, '0');
         return `${y}-${m}-${d}`;
       }
+
       const dt = new Date(s);
       if (!isNaN(dt.getTime())) {
-        const y = dt.getFullYear();
-        const m = String(dt.getMonth() + 1).padStart(2, '0');
-        const d = String(dt.getDate()).padStart(2, '0');
-        return `${y}-${m}-${d}`;
+        try {
+          const parts = new Intl.DateTimeFormat('en-CA', {
+            timeZone: 'Asia/Seoul',
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit'
+          }).formatToParts(dt);
+          const y = parts.find(p => p.type === 'year')?.value;
+          const m = parts.find(p => p.type === 'month')?.value;
+          const d = parts.find(p => p.type === 'day')?.value;
+          if (y && m && d) return `${y}-${m}-${d}`;
+        } catch (e) {
+          const y = dt.getFullYear();
+          const m = String(dt.getMonth() + 1).padStart(2, '0');
+          const d = String(dt.getDate()).padStart(2, '0');
+          return `${y}-${m}-${d}`;
+        }
       }
       return '';
     }
 
-    /* ★ 방탈출 전용 필드 접근자 (절대 뮤지컬연극 키와 섞이지 않음) */
-    function getEscapeRating(item) { return item['나의 별점']; }
+    /* ★ 시트에서 시간 형태(예: 17:00 -> 1899-12-30T08:32:08.000Z)로 넘어오는 공연시간 완벽 변환 */
+    function normalizeTimeStr(raw) {
+      if (raw === undefined || raw === null || raw === '') return '';
+      if (typeof raw === 'number' && raw >= 0 && raw < 1) {
+        const totalMin = Math.round(raw * 24 * 60);
+        const hh = String(Math.floor(totalMin / 60) % 24).padStart(2, '0');
+        const mm = String(totalMin % 60).padStart(2, '0');
+        return `${hh}:${mm}`;
+      }
+      let s = String(raw).trim();
+      if (!s || s === '-') return '';
+
+      if (s.includes('T')) {
+        const dt = new Date(s);
+        if (!isNaN(dt.getTime())) {
+          const rounded = new Date(dt.getTime() + 30000);
+          try {
+            const parts = new Intl.DateTimeFormat('en-GB', {
+              timeZone: 'Asia/Seoul',
+              hour: '2-digit',
+              minute: '2-digit',
+              hour12: false
+            }).formatToParts(rounded);
+            let hh = parts.find(p => p.type === 'hour')?.value || '00';
+            const mm = parts.find(p => p.type === 'minute')?.value || '00';
+            if (hh === '24') hh = '00';
+            return `${hh}:${mm}`;
+          } catch (e) {
+            const hh = String(rounded.getHours()).padStart(2, '0');
+            const mm = String(rounded.getMinutes()).padStart(2, '0');
+            return `${hh}:${mm}`;
+          }
+        }
+      }
+
+      const hmMatch = s.match(/^(\d{1,2}):(\d{2})(?::\d{2})?$/);
+      if (hmMatch) {
+        return `${String(parseInt(hmMatch[1], 10)).padStart(2, '0')}:${hmMatch[2]}`;
+      }
+      return s;
+    }
+
+    function getEscapeDate(item) {
+      if (!item || typeof item !== 'object') return '';
+      const directKeys = ['플레이일자', '플레이 일자', '관람일자', '관람일', '날짜', '일자'];
+      for (const k of directKeys) {
+        const val = item[k];
+        if (val !== undefined && val !== null && String(val).trim() !== '') return val;
+      }
+      for (const key of Object.keys(item)) {
+        const clean = key.replace(/\s+/g, '');
+        if (clean.includes('플레이일') || clean.includes('관람일') || clean === '날짜' || clean === '일자') {
+          const val = item[key];
+          if (val !== undefined && val !== null && String(val).trim() !== '') return val;
+        }
+      }
+      return '';
+    }
+
+    function getEscapeRating(item) {
+      if (!item || typeof item !== 'object') return '';
+      const directKeys = ['나의 평점', '나의 별점', '나의평점', '나의별점', '내 평점', '내 별점', '내평점', '내별점'];
+      for (const k of directKeys) {
+        const val = item[k];
+        if (val !== undefined && val !== null && String(val).trim() !== '' && String(val).trim() !== '-') {
+          return val;
+        }
+      }
+      for (const key of Object.keys(item)) {
+        const clean = key.replace(/\s+/g, '');
+        if (clean.includes('나의평점') || clean.includes('나의별점') || clean === '내평점' || clean === '내별점' || clean === '평점') {
+          const val = item[key];
+          if (val !== undefined && val !== null && String(val).trim() !== '' && String(val).trim() !== '-') {
+            return val;
+          }
+        }
+      }
+      return '';
+    }
+
     function getEscapeHorror(item) {
       const v = item['공포도(매장)'];
       return (v !== undefined && v !== null && String(v).trim() !== '') ? v : (item['공포도'] ?? '');
     }
-    function getEscapePax(item) { return item['플레이인원'] ?? item['플레이 인원'] ?? ''; }
+    function getEscapePax(item) { return item['플레이인원'] ?? item['플레이 인원'] ?? item['인원'] ?? ''; }
     function isEscapeManualLife(item) {
       const v = String(item['인생테마'] ?? '').trim();
       return v !== '' && v !== '-' && v.toUpperCase() !== 'FALSE' && v !== '0' && v.toUpperCase() !== 'X';
@@ -1966,16 +2271,144 @@
       return r !== null && r >= threshold;
     }
 
-    /* ★ 뮤지컬·연극 전용 필드 접근자 (절대 방탈출 키와 섞이지 않음) */
-    function getStageRating(item) { return item['나의 평점']; }
-    function getStagePax(item) { return item['인원'] ?? ''; }
-    function getStageTimeG(item) { return item['시간_1'] ?? item['시간1'] ?? item['공연시간'] ?? item['시간'] ?? ''; }
-    function getStageTimeI(item) {
-      if (item['시간_2'] !== undefined) return item['시간_2'];
-      if (item['시간2'] !== undefined) return item['시간2'];
-      if (item['러닝타임'] !== undefined) return item['러닝타임'];
+    /* ★ 뮤지컬·연극 전용 필드 접근자 (시트 열 이름 완벽 호환) */
+    function getStageDate(item) {
+      if (!item || typeof item !== 'object') return '';
+      const directKeys = ['관람일자', '관람일', '플레이일자', '관람 일자', '관람 일', '플레이 일자', '날짜', '일자'];
+      for (const k of directKeys) {
+        const val = item[k];
+        if (val !== undefined && val !== null && String(val).trim() !== '') return val;
+      }
+      for (const key of Object.keys(item)) {
+        const clean = key.replace(/\s+/g, '');
+        if (clean.includes('관람일') || clean.includes('플레이일') || clean === '날짜' || clean === '일자') {
+          const val = item[key];
+          if (val !== undefined && val !== null && String(val).trim() !== '') return val;
+        }
+      }
       return '';
     }
+
+    function getStageRating(item) {
+      if (!item || typeof item !== 'object') return '';
+      const directKeys = ['나의 평점', '나의 별점', '나의평점', '나의별점', '내 평점', '내평점', '평점'];
+      for (const k of directKeys) {
+        const val = item[k];
+        if (val !== undefined && val !== null && String(val).trim() !== '' && String(val).trim() !== '-') {
+          return val;
+        }
+      }
+      for (const key of Object.keys(item)) {
+        const clean = key.replace(/\s+/g, '');
+        if (clean.includes('나의평점') || clean.includes('나의별점') || clean === '내평점' || clean === '평점') {
+          const val = item[key];
+          if (val !== undefined && val !== null && String(val).trim() !== '' && String(val).trim() !== '-') {
+            return val;
+          }
+        }
+      }
+      return '';
+    }
+
+    function getStagePax(item) { return item['인원'] ?? item['관람인원'] ?? item['플레이인원'] ?? ''; }
+
+    /* G열: 공연시간 (17:00 등 시간 형태) */
+    function getStageTimeG(item) {
+      if (!item || typeof item !== 'object') return '';
+      const directKeys = ['공연시간', '공연 시간', '시간_1', '시간1', '관람시간', '시작시간'];
+      for (const k of directKeys) {
+        const val = item[k];
+        if (val !== undefined && val !== null && String(val).trim() !== '' && String(val).trim() !== '-') {
+          return normalizeTimeStr(val);
+        }
+      }
+      for (const key of Object.keys(item)) {
+        const clean = key.replace(/\s+/g, '');
+        if (clean === '공연시간' || clean === '관람시간' || clean === '시작시간' || clean === '시간_1' || clean === '시간1') {
+          const val = item[key];
+          if (val !== undefined && val !== null && String(val).trim() !== '' && String(val).trim() !== '-') {
+            return normalizeTimeStr(val);
+          }
+        }
+      }
+      if (item['시간'] !== undefined && item['시간'] !== null && String(item['시간']).trim() !== '') {
+        const raw = String(item['시간']).trim();
+        if (raw.includes(':') || raw.includes('T')) return normalizeTimeStr(raw);
+        if (item['러닝타임'] !== undefined || item['시간_2'] !== undefined) return normalizeTimeStr(raw);
+      }
+      return '';
+    }
+
+    /* I열: 러닝타임 (150분 형태로 반환) */
+    function getStageTimeI(item) {
+      if (!item || typeof item !== 'object') return '';
+      const directKeys = ['러닝타임', '러닝 타임', '시간_2', '시간2', '런타임', '공연런타임'];
+      for (const k of directKeys) {
+        const val = item[k];
+        if (val !== undefined && val !== null && String(val).trim() !== '' && String(val).trim() !== '-') {
+          return String(val).trim();
+        }
+      }
+      for (const key of Object.keys(item)) {
+        const clean = key.replace(/\s+/g, '');
+        if (clean.includes('러닝타임') || clean.includes('런타임') || clean === '시간_2' || clean === '시간2') {
+          const val = item[key];
+          if (val !== undefined && val !== null && String(val).trim() !== '' && String(val).trim() !== '-') {
+            return String(val).trim();
+          }
+        }
+      }
+      if (item['시간'] !== undefined && item['시간'] !== null) {
+        const raw = String(item['시간']).trim();
+        if (raw.endsWith('분') || (/^\d+$/.test(raw) && parseInt(raw, 10) >= 30)) {
+          return raw;
+        }
+      }
+      return '';
+    }
+
+    function formatRunningTime(raw) {
+      if (raw === undefined || raw === null) return '';
+      let s = String(raw).trim();
+      if (!s || s === '-') return '';
+      if (!isNaN(s)) return s + '분';
+      return s;
+    }
+
+    /* Q열: 재회차 관람 (예: "2회차") */
+    function getStageNth(item) {
+      if (!item || typeof item !== 'object') return '';
+      const directKeys = ['재회차', '회차', '관람회차', '다회차', '재관람', 'N회차', 'n회차', '회차정보', '재회차관람', 'Q', 'Q열', ''];
+      for (const k of directKeys) {
+        if (k in item) {
+          const val = String(item[k] ?? '').trim();
+          if (val !== '' && val !== '-' && val !== '0' && val.toUpperCase() !== 'FALSE') {
+            return val;
+          }
+        }
+      }
+      for (const key of Object.keys(item)) {
+        const clean = key.replace(/\s+/g, '');
+        if (clean.includes('회차') || clean.includes('재관람')) {
+          const val = String(item[key] ?? '').trim();
+          if (val !== '' && val !== '-' && val !== '0' && val.toUpperCase() !== 'FALSE') {
+            return val;
+          }
+        }
+      }
+      // 시트 Q열의 헤더명이 임의의 이름이거나 비어있을 때 "2회차" 같은 패턴 자동 감지
+      const knownStageCols = new Set(['NO', '포스터', '구분', '장소', '제목', '플레이일자', '관람일자', '관람일', '시간', '시간_1', '시간1', '공연시간', '티켓', '시간_2', '시간2', '러닝타임', '인원', '플레이인원', '일행', '캐스팅', '비고', '시놉시스', '나의 평점', '나의평점', '평점', '인생극']);
+      for (const key of Object.keys(item)) {
+        if (!knownStageCols.has(key.trim())) {
+          const val = String(item[key] ?? '').trim();
+          if (val !== '' && val !== '-' && /\d+\s*회차/.test(val)) {
+            return val;
+          }
+        }
+      }
+      return '';
+    }
+
     function isStageManualLife(item) {
       const v = String(item['인생극'] ?? '').trim();
       return v !== '' && v !== '-' && v.toUpperCase() !== 'FALSE' && v !== '0' && v.toUpperCase() !== 'X';
@@ -1987,7 +2420,7 @@
       return r !== null && r >= threshold;
     }
 
-    /* ★ 행(Row) 스키마 검증: 방탈출 데이터가 관극 배열로 유입되는 것을 원천 차단 */
+    /* 행(Row) 스키마 검증 */
     function isEscapeSchemaRow(row) {
       if (!row || typeof row !== 'object') return false;
       return ('테마명' in row) || ('매장명' in row) || ('난이도(코방)' in row);
@@ -1995,7 +2428,7 @@
     function isStageSchemaRow(row) {
       if (!row || typeof row !== 'object') return false;
       if (isEscapeSchemaRow(row) && !('제목' in row) && !('캐스팅' in row)) return false;
-      return ('제목' in row) || ('장소' in row) || ('구분' in row) || ('캐스팅' in row) || ('인생극' in row);
+      return ('제목' in row) || ('장소' in row) || ('구분' in row) || ('캐스팅' in row) || ('인생극' in row) || ('관람일' in row) || ('관람일자' in row) || ('공연시간' in row) || ('러닝타임' in row);
     }
 
     function getApiUrl(sheetName) {
@@ -2003,6 +2436,12 @@
       const sep = appSettings.url.includes('?') ? '&' : '?';
       const enc = encodeURIComponent(sheetName);
       return `${appSettings.url}${sep}sheet=${enc}&sheetName=${enc}`;
+    }
+
+    function updateHeaderIcons() {
+      const isStage = currentDomain === 'stage';
+      document.getElementById('titleIconLeft').innerHTML = isStage ? SVG_TICKET : SVG_LOCK;
+      document.getElementById('titleIconRight').innerHTML = isStage ? SVG_SPARKLE : SVG_KEY;
     }
 
     /* ===== 최상단 도메인 전환 (방탈출 <-> 뮤지컬·연극) ===== */
@@ -2014,22 +2453,18 @@
       document.getElementById('domainBtnStage').classList.toggle('active', isStage);
       document.body.classList.toggle('mode-stage', isStage);
 
-      // 상단 티켓 배너 전환
-      document.getElementById('titleIconLeft').innerText = isStage ? '🎭' : '🔒';
-      document.getElementById('titleIconRight').innerText = isStage ? '🎟️' : '🔑';
+      updateHeaderIcons();
       document.getElementById('pageTitle').innerText = isStage
         ? (appSettings.stageTitle || "노유's 관극리스트")
         : (appSettings.title || "노유's 방탈리스트");
       document.getElementById('stubLabelTop').innerText = isStage ? 'STAGE' : 'ADMIT';
       document.getElementById('stubLabelBottom').innerText = isStage ? 'PLAYBILL' : 'TICKET LOG';
 
-      // 상단 스탯 스트립 & 컨트롤 바 물리적 분리 표시
       document.getElementById('escapeStatStrip').style.display = isStage ? 'none' : 'flex';
       document.getElementById('stageStatStrip').style.display = isStage ? 'flex' : 'none';
       document.getElementById('escapeControlPanel').style.display = isStage ? 'none' : 'flex';
       document.getElementById('stageControlPanel').style.display = isStage ? 'flex' : 'none';
 
-      // 메인 컨테이너 물리적 분리 표시
       document.getElementById('escapeDomainContainer').style.display = isStage ? 'none' : 'block';
       document.getElementById('stageDomainContainer').style.display = isStage ? 'block' : 'none';
 
@@ -2067,12 +2502,10 @@
     function syncMainViewDisplay() {
       const isCal = currentMainView === 'calendar';
 
-      // 방탈출 뷰 토글
       document.getElementById('escapeListFilterSection').style.display = isCal ? 'none' : 'block';
       document.getElementById('escapeGrid').style.display = isCal ? 'none' : 'grid';
       document.getElementById('escapeCalendarSection').classList.toggle('active', isCal);
 
-      // 뮤지컬·연극 뷰 토글
       document.getElementById('stageListFilterSection').style.display = isCal ? 'none' : 'block';
       document.getElementById('stageGrid').style.display = isCal ? 'none' : 'grid';
       document.getElementById('stageCalendarSection').classList.toggle('active', isCal);
@@ -2096,7 +2529,7 @@
       }
     }
 
-    /* ===== 데이터 Fetch (방탈출 / 뮤지컬·연극 완전 분리) ===== */
+    /* ===== 데이터 Fetch ===== */
     function renderSkeletonTo(gridId, count = 8) {
       const grid = document.getElementById(gridId);
       let html = '';
@@ -2146,12 +2579,11 @@
         const raw = await res.json();
         const arr = Array.isArray(raw) ? raw : [];
 
-        // ★ 핵심 방어 로직: 서버가 실수로 방탈출(시트1) 데이터를 내려보냈는지 검사
         const hasEscapeRows = arr.length > 0 && arr.every(r => isEscapeSchemaRow(r) && !('제목' in r));
         stageSheetFallbackDetected = hasEscapeRows;
 
         if (hasEscapeRows) {
-          stageData = []; // 방탈출 데이터가 관극 통계/캘린더에 섞이지 않도록 0건으로 완전 차단
+          stageData = [];
         } else {
           stageData = arr.filter(r => isStageSchemaRow(r));
         }
@@ -2170,7 +2602,7 @@
       const total = escapeData.length;
       const lifeCount = escapeData.filter(it => isEscapeLife(it)).length;
       const y = new Date().getFullYear();
-      const yearCount = escapeData.filter(it => normalizeDateStr(it['플레이일자']).startsWith(String(y))).length;
+      const yearCount = escapeData.filter(it => normalizeDateStr(getEscapeDate(it)).startsWith(String(y))).length;
 
       document.getElementById('escapeStripTotal').innerText = total;
       document.getElementById('escapeStripLife').innerText = lifeCount;
@@ -2182,7 +2614,7 @@
       const total = stageData.length;
       const lifeCount = stageData.filter(it => isStageLife(it)).length;
       const y = new Date().getFullYear();
-      const yearCount = stageData.filter(it => normalizeDateStr(it['플레이일자']).startsWith(String(y))).length;
+      const yearCount = stageData.filter(it => normalizeDateStr(getStageDate(it)).startsWith(String(y))).length;
 
       document.getElementById('stageStripTotal').innerText = total;
       document.getElementById('stageStripLife').innerText = lifeCount;
@@ -2191,7 +2623,7 @@
     }
 
     /* =========================================================================
-       [A] 방탈출 전용 필터 / 정렬 / 카드 / 캘린더 / 통계
+       [A] 방탈출 전용 필터 / 정렬 / 카드 / 캘린더
        ========================================================================= */
     function getGenreStyle(name) {
       const n = String(name);
@@ -2200,13 +2632,13 @@
       if (n.includes('추리') || n.includes('미스터리') || n.includes('범죄') || n.includes('수사')) return { emoji: '🕵️', cls: 'gt-mystery' };
       if (n.includes('감성') || n.includes('드라마') || n.includes('로맨스') || n.includes('힐링')) return { emoji: '🌸', cls: 'gt-emotion' };
       if (n.includes('SF') || n.includes('판타지') || n.includes('에스에프') || n.includes('우주')) return { emoji: '🚀', cls: 'gt-sf' };
-      if (n.includes('코미디') || n.includes('코믹') || n.includes('개그') || n.includes('유머') || n.includes('일상')) return { emoji: '🎭', cls: 'gt-comic' };
+      if (n.includes('코미디') || n.includes('코믹') || n.includes('개그') || n.includes('유머') || n.includes('일상')) return { emoji: '😊', cls: 'gt-comic' };
       if (n.includes('액션') || n.includes('어드벤처') || n.includes('활동') || n.includes('탐험')) return { emoji: '🧭', cls: 'gt-action' };
       if (n.includes('역사') || n.includes('동양') || n.includes('사극') || n.includes('전통')) return { emoji: '📜', cls: 'gt-history' };
       if (n.includes('잠입') || n.includes('아케이드')) return { emoji: '🥷', cls: 'gt-stealth' };
       if (n.includes('문제') || n.includes('퍼즐') || n.includes('추론')) return { emoji: '🧠', cls: 'gt-puzzle' };
       if (n.includes('스토리') || n.includes('세계관')) return { emoji: '📖', cls: 'gt-story' };
-      return { emoji: '🏷️', cls: '' };
+      return { emoji: '#', cls: '' };
     }
 
     function handleEscapeSearch() {
@@ -2336,12 +2768,10 @@
       };
 
       filtered = [...filtered].sort((a, b) => {
-        if (sortValue === 'dateDesc') return new Date(normalizeDateStr(b['플레이일자']) || '1900-01-01') - new Date(normalizeDateStr(a['플레이일자']) || '1900-01-01');
-        if (sortValue === 'dateAsc') return new Date(normalizeDateStr(a['플레이일자']) || '1900-01-01') - new Date(normalizeDateStr(b['플레이일자']) || '1900-01-01');
+        if (sortValue === 'dateDesc') return (normalizeDateStr(getEscapeDate(b)) || '1900-01-01').localeCompare(normalizeDateStr(getEscapeDate(a)) || '1900-01-01');
+        if (sortValue === 'dateAsc') return (normalizeDateStr(getEscapeDate(a)) || '1900-01-01').localeCompare(normalizeDateStr(getEscapeDate(b)) || '1900-01-01');
         if (sortValue === 'myRatingDesc') return cmpNum(getEscapeRating(a), getEscapeRating(b), false);
         if (sortValue === 'myRatingAsc') return cmpNum(getEscapeRating(a), getEscapeRating(b), true);
-        if (sortValue === 'starDesc') return cmpNum(a['별점'], b['별점'], false);
-        if (sortValue === 'starAsc') return cmpNum(a['별점'], b['별점'], true);
         if (sortValue === 'diffKoDesc') return cmpNum(a['난이도(코방)'], b['난이도(코방)'], false);
         if (sortValue === 'diffKoAsc') return cmpNum(a['난이도(코방)'], b['난이도(코방)'], true);
         if (sortValue === 'titleAsc') return String(a['테마명'] || '').localeCompare(String(b['테마명'] || ''));
@@ -2372,7 +2802,7 @@
 
         const manual = isEscapeManualLife(item);
         const life = isEscapeLife(item);
-        const crownTitle = manual ? '인생테마 지정 해제' : (life ? '자동 인생테마 (별점 기준) · 탭하여 고정 지정' : '인생테마로 지정');
+        const crownTitle = manual ? '인생테마 지정 해제' : (life ? '자동 인생테마 (평점 기준) · 탭하여 고정 지정' : '인생테마로 지정');
         const lifeToggleHTML = `<button class="life-toggle ${life ? 'on' : 'off'}" title="${crownTitle}" onclick="toggleLife(${index}, 'escape', event)">👑</button>`;
 
         let awardHTML = '';
@@ -2383,7 +2813,7 @@
           }
         }
 
-        let genreHTML = '<span class="genre-row">🏷️ 미분류</span>';
+        let genreHTML = '<span class="genre-row"># 미분류</span>';
         if (item['장르']) {
           const genreList = String(item['장르']).split(',').map(g => g.trim()).filter(g => g !== '');
           if (genreList.length > 0) {
@@ -2394,7 +2824,8 @@
           }
         }
 
-        let playDate = normalizeDateStr(item['플레이일자']) || (item['플레이일자'] ? String(item['플레이일자']) : '-');
+        const rawDate = getEscapeDate(item);
+        let playDate = normalizeDateStr(rawDate) || (rawDate ? String(rawDate) : '-');
         let rawPax = getEscapePax(item);
         let pax = '-';
         if (rawPax !== undefined && rawPax !== null && String(rawPax).trim() !== '') {
@@ -2402,15 +2833,17 @@
           if (!isNaN(pax)) pax += '인';
         }
 
-        let myRatingFormat = getEscapeRating(item) || '-';
-        if (myRatingFormat !== '-' && !isNaN(parseFloat(myRatingFormat))) {
-          myRatingFormat = parseFloat(myRatingFormat).toFixed(1);
-        }
+        const rawRating = getEscapeRating(item);
+        const ratingNum = num(rawRating);
+        const myRatingFormat = ratingNum !== null ? ratingNum.toFixed(1) : '-';
 
-        const ratingNum = num(getEscapeRating(item));
         const ratingBarHTML = ratingNum !== null
           ? `<div class="rating-bar"><div class="rating-fill" style="width:${Math.min(100, Math.max(0, (ratingNum / 10) * 100)).toFixed(0)}%"></div></div>`
-          : `<div class="rating-bar" style="visibility:hidden;"></div>`;
+          : `<div class="rating-bar"><div class="rating-fill" style="width:0%"></div></div>`;
+
+        const diffKoVal = item['난이도(코방)'] !== undefined && String(item['난이도(코방)']).trim() !== ''
+          ? String(item['난이도(코방)']).trim()
+          : '-';
 
         const cardHTML = `
           <div class="card ${life ? 'life' : ''}">
@@ -2426,27 +2859,16 @@
                   ${item['지역'] ? `<span class="region-pill">${escHtml(item['지역'])}</span>` : ''}
                 </div>
                 <div class="theme-name">${escHtml(item['테마명'] || '-')}</div>
-                <div class="rating-header">
-                  <div class="my-rating">⭐ ${escHtml(myRatingFormat)} <span>/ 10.0</span></div>
-                </div>
-                ${ratingBarHTML}
-                <div class="sub-info">
-                  <div class="sub-info-col">
-                    <span class="sub-info-label">추천 평점</span>
-                    <span class="sub-info-val">📝 ${escHtml(item['별점'] || '-')}</span>
+                <div class="rating-diff-box">
+                  <div class="rating-header">
+                    <div class="my-rating">⭐ ${escHtml(myRatingFormat)} <span>/ 10</span></div>
+                    <div class="ko-diff-badge">🔒 코방 <b>${escHtml(diffKoVal)}</b></div>
                   </div>
-                  <div class="sub-info-col">
-                    <span class="sub-info-label">코방 난이도</span>
-                    <span class="sub-info-val">🔒 ${escHtml(item['난이도(코방)'] || '-')}</span>
-                  </div>
-                  <div class="sub-info-col">
-                    <span class="sub-info-label">리뷰 수</span>
-                    <span class="sub-info-val">💬 ${escHtml(item['리뷰'] || '-')}</span>
-                  </div>
+                  ${ratingBarHTML}
                 </div>
                 <div class="bottom-info">
                   <div class="info-row">
-                    <div>📅 ${escHtml(playDate)}</div>
+                    <span class="date-badge">📅 ${escHtml(playDate)}</span>
                     <div class="pax-tooltip" onclick="togglePaxTooltip(this, event)">👥 ${escHtml(pax)} <span class="tooltip-text">일행: ${companions}</span></div>
                   </div>
                   ${genreHTML}
@@ -2470,7 +2892,7 @@
       const currentY = new Date().getFullYear();
       let years = new Set([currentY, currentY - 1, currentY + 1]);
       escapeData.forEach(it => {
-        const norm = normalizeDateStr(it['플레이일자']);
+        const norm = normalizeDateStr(getEscapeDate(it));
         if (norm) years.add(parseInt(norm.slice(0, 4), 10));
       });
       const sortedYears = [...years].filter(y => !isNaN(y) && y > 1990).sort((a, b) => b - a);
@@ -2508,7 +2930,7 @@
     function jumpEscapeCalLatest(silent = false) {
       let latest = '';
       escapeData.forEach(it => {
-        const norm = normalizeDateStr(it['플레이일자']);
+        const norm = normalizeDateStr(getEscapeDate(it));
         if (norm && norm > latest) latest = norm;
       });
       if (latest) {
@@ -2539,7 +2961,7 @@
       let monthPlays = [];
 
       escapeData.forEach((item, idx) => {
-        const norm = normalizeDateStr(item['플레이일자']);
+        const norm = normalizeDateStr(getEscapeDate(item));
         if (norm && norm.startsWith(ymPrefix)) {
           if (!dayMap[norm]) dayMap[norm] = [];
           dayMap[norm].push({ item, index: idx });
@@ -2639,7 +3061,7 @@
       listEl.innerHTML = plays.map((p, idx) => {
         const it = p.item;
         const myR = num(getEscapeRating(it));
-        const ratingTxt = myR !== null ? `⭐ ${myR.toFixed(1)}` : '별점 미기록';
+        const ratingTxt = myR !== null ? `⭐ ${myR.toFixed(1)}` : '평점 미기록';
         const compTxt = it['일행'] ? `👥 ${escHtml(it['일행'])}` : '';
         const orderBadge = plays.length > 1 ? `<span class="cal-log-order">${idx + 1}번째 테마</span>` : '';
         return `<div class="cal-log-item" onclick="openDetailModal(${p.index}, 'escape')">
@@ -2658,7 +3080,7 @@
     }
 
     /* =========================================================================
-       [B] 뮤지컬·연극 전용 필터 / 정렬 / 카드 / 캘린더 / 통계 (완전 분리)
+       [B] 뮤지컬·연극 전용 필터 / 정렬 / 카드 / 캘린더
        ========================================================================= */
     function handleStageSearch() {
       const query = document.getElementById('stageSearchInput').value.trim();
@@ -2773,8 +3195,8 @@
       };
 
       filtered = [...filtered].sort((a, b) => {
-        if (sortValue === 'dateDesc') return new Date(normalizeDateStr(b['플레이일자']) || '1900-01-01') - new Date(normalizeDateStr(a['플레이일자']) || '1900-01-01');
-        if (sortValue === 'dateAsc') return new Date(normalizeDateStr(a['플레이일자']) || '1900-01-01') - new Date(normalizeDateStr(b['플레이일자']) || '1900-01-01');
+        if (sortValue === 'dateDesc') return (normalizeDateStr(getStageDate(b)) || '1900-01-01').localeCompare(normalizeDateStr(getStageDate(a)) || '1900-01-01');
+        if (sortValue === 'dateAsc') return (normalizeDateStr(getStageDate(a)) || '1900-01-01').localeCompare(normalizeDateStr(getStageDate(b)) || '1900-01-01');
         if (sortValue === 'myRatingDesc') return cmpNum(getStageRating(a), getStageRating(b), false);
         if (sortValue === 'myRatingAsc') return cmpNum(getStageRating(a), getStageRating(b), true);
         if (sortValue === 'noDesc') return cmpNum(a['NO'], b['NO'], false);
@@ -2791,6 +3213,11 @@
       renderStageCards(filtered);
     }
 
+    /* ★ 뮤지컬·연극 메인 포스터 카드
+       - No.3, No.4 뱃지 제거 & Q열 재회차 관람("2회차" 등) 기재 시에만 우측 상단 노출
+       - 러닝타임(150분) 메인 포스터 시간 뱃지로 표기
+       - 관람일(관람일자) 날짜 형태로 뱃지 표기
+       - 티켓 정보 우측 정렬 */
     function renderStageCards(data) {
       const grid = document.getElementById('stageGrid');
       grid.innerHTML = '';
@@ -2800,9 +3227,7 @@
         grid.innerHTML = `<div class="url-notice" style="border-color:var(--accent);">
           <strong style="color:var(--accent); font-size:calc(16px * var(--fs));">⚠️ 구글 앱스 스크립트가 '${sName}' 대신 방탈출(시트1) 데이터를 반환하고 있습니다!</strong><br><br>
           관극 통계와 캘린더에 방탈출 데이터가 섞이지 않도록 자동 차단했습니다.<br>
-          <b>해결 방법:</b><br>
-          1) 구글 스프레드시트 하단 탭 이름이 정확히 <b>${sName}</b>인지 확인해 주세요.<br>
-          2) 구글 스프레드시트 <b>[확장 프로그램 → Apps Script]</b>의 <code>doGet</code> 코드를 최신 버전으로 업데이트 후 <b>[새 배포]</b> 해주세요.
+          구글 스프레드시트 <b>[확장 프로그램 → Apps Script]</b>에서 <b>[배포 → 새 배포]</b>를 진행한 뒤 새 URL을 설정에 넣어주세요.
         </div>`;
         return;
       }
@@ -2824,28 +3249,26 @@
 
         const stageType = String(item['구분'] || '').trim();
         const typeClass = stageType.includes('뮤지컬') ? 'musical' : (stageType.includes('연극') ? 'play' : '');
-        const typeEmoji = stageType.includes('뮤지컬') ? '🎵' : (stageType.includes('연극') ? '🎬' : '🎭');
-        const noVal = item['NO'] !== undefined && String(item['NO']).trim() !== '' ? `No.${item['NO']}` : '';
+        const nthVal = getStageNth(item);
 
         const topBadgesHTML = `<div class="award-container">
-          ${stageType ? `<div class="stage-type-badge ${typeClass}">${typeEmoji} ${escHtml(stageType)}</div>` : ''}
+          ${stageType ? `<div class="stage-type-badge ${typeClass}">✦ ${escHtml(stageType)}</div>` : ''}
         </div>`;
 
-        const timeG = getStageTimeG(item) || '-';
-        const timeI = getStageTimeI(item);
-        let timeIDisplay = timeI ? String(timeI).trim() : '-';
-        if (timeIDisplay !== '-' && !isNaN(timeIDisplay)) timeIDisplay += '분';
-        const ticketVal = item['티켓'] || '-';
+        const runningTimeFormatted = formatRunningTime(getStageTimeI(item));
+        const runningTimeBadge = runningTimeFormatted || '-';
+        const ticketVal = item['티켓'] || '';
 
-        let castHTML = '<span class="genre-row">🌟 캐스팅 미기록</span>';
+        let castHTML = '<span class="genre-row">✦ 캐스팅 미기록</span>';
         if (item['캐스팅']) {
           const castList = String(item['캐스팅']).split(',').map(c => c.trim()).filter(c => c !== '');
           if (castList.length > 0) {
-            castHTML = `<div class="genre-container">` + castList.map(c => `<span class="genre-row cast-chip">🌟 ${escHtml(c)}</span>`).join('') + `</div>`;
+            castHTML = `<div class="genre-container">` + castList.map(c => `<span class="genre-row cast-chip">✦ ${escHtml(c)}</span>`).join('') + `</div>`;
           }
         }
 
-        let playDate = normalizeDateStr(item['플레이일자']) || (item['플레이일자'] ? String(item['플레이일자']) : '-');
+        const rawDate = getStageDate(item);
+        let playDate = normalizeDateStr(rawDate) || (rawDate ? String(rawDate) : '-');
         let rawPax = getStagePax(item);
         let pax = '-';
         if (rawPax !== undefined && rawPax !== null && String(rawPax).trim() !== '') {
@@ -2853,15 +3276,13 @@
           if (!isNaN(pax)) pax += '인';
         }
 
-        let myRatingFormat = getStageRating(item) || '-';
-        if (myRatingFormat !== '-' && !isNaN(parseFloat(myRatingFormat))) {
-          myRatingFormat = parseFloat(myRatingFormat).toFixed(1);
-        }
+        const rawRating = getStageRating(item);
+        const ratingNum = num(rawRating);
+        const myRatingFormat = ratingNum !== null ? ratingNum.toFixed(1) : '-';
 
-        const ratingNum = num(getStageRating(item));
         const ratingBarHTML = ratingNum !== null
           ? `<div class="rating-bar"><div class="rating-fill" style="width:${Math.min(100, Math.max(0, (ratingNum / 10) * 100)).toFixed(0)}%"></div></div>`
-          : `<div class="rating-bar" style="visibility:hidden;"></div>`;
+          : `<div class="rating-bar"><div class="rating-fill" style="width:0%"></div></div>`;
 
         const cardHTML = `
           <div class="card ${life ? 'life' : ''}">
@@ -2873,31 +3294,21 @@
               </div>
               <div class="card-info">
                 <div class="store-row">
-                  <div class="store-name">🏛️ ${escHtml(item['장소'] || '장소 미상')}</div>
-                  ${noVal ? `<span class="region-pill">${escHtml(noVal)}</span>` : ''}
+                  <div class="store-name">📍 ${escHtml(item['장소'] || '공연장 미상')}</div>
+                  ${nthVal ? `<span class="region-pill nth-pill">${escHtml(nthVal)}</span>` : ''}
                 </div>
                 <div class="theme-name">${escHtml(item['제목'] || '-')}</div>
-                <div class="rating-header">
-                  <div class="my-rating">⭐ ${escHtml(myRatingFormat)} <span>/ 10.0</span></div>
-                </div>
-                ${ratingBarHTML}
-                <div class="sub-info">
-                  <div class="sub-info-col">
-                    <span class="sub-info-label">공연 시간</span>
-                    <span class="sub-info-val">⏰ ${escHtml(timeG)}</span>
+                <div class="rating-diff-box">
+                  <div class="rating-header">
+                    <div class="my-rating">⭐ ${escHtml(myRatingFormat)} <span>/ 10</span></div>
+                    <div class="ko-diff-badge">⏱️ <b>${escHtml(runningTimeBadge)}</b></div>
                   </div>
-                  <div class="sub-info-col">
-                    <span class="sub-info-label">러닝타임</span>
-                    <span class="sub-info-val">⏱️ ${escHtml(timeIDisplay)}</span>
-                  </div>
-                  <div class="sub-info-col">
-                    <span class="sub-info-label">티켓</span>
-                    <span class="sub-info-val" title="${escHtml(ticketVal)}">🎟️ ${escHtml(ticketVal)}</span>
-                  </div>
+                  ${ratingBarHTML}
+                  ${ticketVal ? `<div class="ticket-info-right">🎫 ${escHtml(ticketVal)}</div>` : ''}
                 </div>
                 <div class="bottom-info">
                   <div class="info-row">
-                    <div>📅 ${escHtml(playDate)}</div>
+                    <span class="date-badge">📅 ${escHtml(playDate)}</span>
                     <div class="pax-tooltip" onclick="togglePaxTooltip(this, event)">👥 ${escHtml(pax)} <span class="tooltip-text">일행: ${companions}</span></div>
                   </div>
                   ${castHTML}
@@ -2921,7 +3332,7 @@
       const currentY = new Date().getFullYear();
       let years = new Set([currentY, currentY - 1, currentY + 1]);
       stageData.forEach(it => {
-        const norm = normalizeDateStr(it['플레이일자']);
+        const norm = normalizeDateStr(getStageDate(it));
         if (norm) years.add(parseInt(norm.slice(0, 4), 10));
       });
       const sortedYears = [...years].filter(y => !isNaN(y) && y > 1990).sort((a, b) => b - a);
@@ -2959,7 +3370,7 @@
     function jumpStageCalLatest(silent = false) {
       let latest = '';
       stageData.forEach(it => {
-        const norm = normalizeDateStr(it['플레이일자']);
+        const norm = normalizeDateStr(getStageDate(it));
         if (norm && norm > latest) latest = norm;
       });
       if (latest) {
@@ -2990,7 +3401,7 @@
       let monthPlays = [];
 
       stageData.forEach((item, idx) => {
-        const norm = normalizeDateStr(item['플레이일자']);
+        const norm = normalizeDateStr(getStageDate(item));
         if (norm && norm.startsWith(ymPrefix)) {
           if (!dayMap[norm]) dayMap[norm] = [];
           dayMap[norm].push({ item, index: idx });
@@ -3093,15 +3504,17 @@
         const ratingTxt = myR !== null ? `⭐ ${myR.toFixed(1)}` : '평점 미기록';
         const compTxt = it['일행'] ? `👥 ${escHtml(it['일행'])}` : '';
         const tG = getStageTimeG(it);
+        const nthVal = getStageNth(it);
         const orderBadge = plays.length > 1
           ? `<span class="cal-log-order">${idx + 1}회차 ${tG ? '(' + escHtml(tG) + ')' : ''}</span>`
-          : (tG ? `<span class="cal-log-order">⏰ ${escHtml(tG)}</span>` : '');
-        const castShort = it['캐스팅'] ? `🌟 ${escHtml(it['캐스팅'])}` : '';
+          : (tG ? `<span class="cal-log-order">🕒 ${escHtml(tG)}</span>` : '');
+        const nthBadge = nthVal ? `<span class="cal-log-order" style="margin-left:4px;">${escHtml(nthVal)}</span>` : '';
+        const castShort = it['캐스팅'] ? `✦ ${escHtml(it['캐스팅'])}` : '';
 
         return `<div class="cal-log-item" onclick="openDetailModal(${p.index}, 'stage')">
           <img class="cal-log-thumb" src="${escHtml(it['포스터'] || NO_POSTER)}" loading="lazy" onerror="this.onerror=null;this.src=window.NO_POSTER;">
           <div class="cal-log-body">
-            ${orderBadge}
+            ${orderBadge}${nthBadge}
             <div class="cal-log-store">${it['구분'] ? '[' + escHtml(it['구분']) + '] ' : ''}${escHtml(it['장소'] || '-')}</div>
             <div class="cal-log-theme">${isStageLife(it) ? '👑 ' : ''}${escHtml(it['제목'] || '-')}</div>
             <div class="cal-log-meta">
@@ -3124,7 +3537,7 @@
     }
 
     /* =========================================================================
-       통계 대시보드 완전 분리: openEscapeDashboard() vs openStageDashboard()
+       통계 대시보드 (방탈출 vs 뮤지컬·연극 완전 분리)
        ========================================================================= */
     const KNOWN_BRANDS = [
       "후즈데어", "황금열쇠", "호텔 레토 성수", "해피앤딩", "플레이포인트랩", "플레이더월드", "플레이33", "프랭크의 골동품가게", "포인트나인", "판타스트릭", "파노라마", "티켓 투 이스케이프", "트릭 이스케이프", "토끼굴", "키이스케이프", "클레버타운", "퀘스천마크", "코드케이", "코드이스케이프", "초상화 강남", "체셔하우스", "채널27", "찰리이스케이프", "지구별 방탈출", "제로월드", "이스케이프시티", "이스케이퍼스", "이머시브스튜디오", "이룸에이트", "위욜", "오아시스", "오늘의 한 페이지", "엔터팟", "엑소더스", "에필로그", "에피소드 방탈출", "어메이즈드", "씨이스케이프", "싸인 이스케이프", "쇼룸404", "셜록홈즈", "서울 이스케이프 룸", "상상의문", "비트포비아", "비밀의 화원", "블랙헤이븐", "버스티드", "방탈출, 둡두", "무비무드 강남점", "머더파커", "마스터키", "룸즈에이", "룸익스케이프", "룸엘이스케이프", "레다스퀘어", "라이브시네마", "딥띵커", "디코더", "드림이스케이프", "둠 이스케이프", "돌로이스케이프", "도어이스케이프", "더챕터", "단편선", "넥스트에디션", "나의신방", "나비잠", "꿈소풍", "괴담저장소 제일기숙학원", "괴담저장소", "골든타임 이스케이프", "겟어웨이 방탈출", "개꿀이스케이프"
@@ -3230,10 +3643,9 @@
       globalBtn.innerText = allExpanded ? '전체 순위 접기 ▲' : '전체 순위 펼치기 ▼';
     }
 
-    /* 1) 방탈출 전용 통계 모달 열기 (escapeData만 집계) */
     function openEscapeDashboard() {
       if (!escapeData || escapeData.length === 0) {
-        alert("분석할 방탈출 데이터가 없습니다. 테마 기록을 먼저 추가해주세요.");
+        showToast("분석할 방탈출 데이터가 없습니다. 테마 기록을 먼저 추가해주세요.");
         return;
       }
 
@@ -3249,7 +3661,7 @@
         const r = num(getEscapeRating(item));
         if (r !== null && r > 0) { totalRating += r; ratingCount++; }
 
-        const norm = normalizeDateStr(item['플레이일자']);
+        const norm = normalizeDateStr(getEscapeDate(item));
         if (norm && norm.startsWith(String(currentYear))) {
           yearCount++;
           const mIdx = parseInt(norm.slice(5, 7), 10) - 1;
@@ -3296,10 +3708,9 @@
       showModal('escapeDashboardModal');
     }
 
-    /* 2) 뮤지컬·연극 전용 통계 모달 열기 (stageData만 집계, 방탈출과 100% 독립) */
     function openStageDashboard() {
       if (!stageData || stageData.length === 0) {
-        alert("분석할 뮤지컬·연극 관극 데이터가 없습니다. 관극 기록을 먼저 추가해주세요.");
+        showToast("분석할 뮤지컬·연극 관극 데이터가 없습니다. 관극 기록을 먼저 추가해주세요.");
         return;
       }
 
@@ -3316,7 +3727,7 @@
         const r = num(getStageRating(item));
         if (r !== null && r > 0) { totalRating += r; ratingCount++; }
 
-        const norm = normalizeDateStr(item['플레이일자']);
+        const norm = normalizeDateStr(getStageDate(item));
         if (norm && norm.startsWith(String(currentYear))) {
           yearCount++;
           const mIdx = parseInt(norm.slice(5, 7), 10) - 1;
@@ -3346,7 +3757,7 @@
       document.getElementById('stgStatYearLabel').innerText = `${currentYear}년 관극`;
       document.getElementById('stgStatYear').innerText = `${yearCount}편`;
       document.getElementById('stgStatAvg').innerText = `⭐ ${avgRating}`;
-      document.getElementById('stgStatRatio').innerText = `🎵${musicalCnt} : 🎬${playCnt}`;
+      document.getElementById('stgStatRatio').innerText = `뮤지컬 ${musicalCnt} : 연극 ${playCnt}`;
 
       document.getElementById('stgChartTitle').innerText = `📈 ${currentYear}년 월별 관극 추이`;
       const maxCount = Math.max(...monthCounts, 1);
@@ -3368,10 +3779,20 @@
       showModal('stageDashboardModal');
     }
 
-    /* ===== 상세 모달 & CRUD ===== */
-    const ESCAPE_COLUMN_KEYS = ['포스터', '지역', '매장명', '테마명', '검색어', '별점', '난이도(코방)', '리뷰', '수상', '장르', '테마시간', '추천인원', '난이도(매장)', '공포도(매장)', '플레이일자', '나의 별점', '플레이인원', '일행', '시놉시스', '비고', '인생테마'];
-    const ESCAPE_FORM_IDS = ['m_poster', 'm_region', 'm_store', 'm_theme', 'm_keyword', 'm_star', 'm_diffKo', 'm_reviews', 'm_awards', 'm_genre', 'm_time', 'm_recPax', 'm_diffStore', 'm_horror', 'm_playDate', 'm_myRating', 'm_playPax', 'm_companions', 'm_synopsis', 'm_notes', 'm_life'];
-    const STAGE_FORM_IDS = ['st_no', 'st_poster', 'st_type', 'st_place', 'st_title', 'st_date', 'st_time1', 'st_ticket', 'st_time2', 'st_pax', 'st_companions', 'st_cast', 'st_notes', 'st_synopsis', 'st_rating', 'st_life'];
+    /* =========================================================================
+       상세 모달 & 시트 구조 자동 감지형 CRUD
+       ========================================================================= */
+    const ESCAPE_FORM_IDS = ['m_poster', 'm_region', 'm_store', 'm_theme', 'm_keyword', 'm_diffKo', 'm_diffStore', 'm_horror', 'm_recPax', 'm_time', 'm_genre', 'm_awards', 'm_playDate', 'm_myRating', 'm_playPax', 'm_companions', 'm_synopsis', 'm_notes', 'm_life'];
+    const STAGE_FORM_IDS = ['st_no', 'st_poster', 'st_type', 'st_place', 'st_title', 'st_date', 'st_time1', 'st_ticket', 'st_time2', 'st_pax', 'st_companions', 'st_cast', 'st_notes', 'st_synopsis', 'st_rating', 'st_life', 'st_nth'];
+
+    function buildEscapeRowPayload(valuesObj) {
+      const sample = escapeData[0];
+      const hasLegacyCols = sample && (('별점' in sample) || ('리뷰' in sample));
+      const schema = hasLegacyCols
+        ? ['포스터', '지역', '매장명', '테마명', '검색어', '별점', '난이도(코방)', '리뷰', '수상', '장르', '테마시간', '추천인원', '난이도(매장)', '공포도(매장)', '플레이일자', '나의 평점', '플레이인원', '일행', '시놉시스', '비고', '인생테마']
+        : ['포스터', '지역', '매장명', '테마명', '검색어', '난이도(코방)', '수상', '장르', '테마시간', '추천인원', '난이도(매장)', '공포도(매장)', '플레이일자', '나의 평점', '플레이인원', '일행', '시놉시스', '비고', '인생테마'];
+      return schema.map(k => valuesObj[k] ?? '');
+    }
 
     function escapeItemToRow(item, overrides = {}) {
       const merged = {
@@ -3389,8 +3810,8 @@
         '추천인원': item['추천인원'] ?? '',
         '난이도(매장)': item['난이도(매장)'] ?? '',
         '공포도(매장)': getEscapeHorror(item),
-        '플레이일자': item['플레이일자'] ?? '',
-        '나의 별점': getEscapeRating(item) ?? '',
+        '플레이일자': normalizeDateStr(getEscapeDate(item)) || getEscapeDate(item),
+        '나의 평점': getEscapeRating(item) ?? '',
         '플레이인원': getEscapePax(item),
         '일행': item['일행'] ?? '',
         '시놉시스': item['시놉시스'] ?? '',
@@ -3398,7 +3819,7 @@
         '인생테마': item['인생테마'] ?? ''
       };
       Object.assign(merged, overrides);
-      return ESCAPE_COLUMN_KEYS.map(k => merged[k]);
+      return buildEscapeRowPayload(merged);
     }
 
     function stageItemToRow(item, overrides = {}) {
@@ -3408,24 +3829,26 @@
         type: item['구분'] ?? '',
         place: item['장소'] ?? '',
         title: item['제목'] ?? '',
-        date: item['플레이일자'] ?? '',
+        date: normalizeDateStr(getStageDate(item)) || getStageDate(item),
         time1: getStageTimeG(item),
         ticket: item['티켓'] ?? '',
-        time2: getStageTimeI(item),
+        time2: formatRunningTime(getStageTimeI(item)),
         pax: getStagePax(item),
         companions: item['일행'] ?? '',
         cast: item['캐스팅'] ?? '',
         notes: item['비고'] ?? '',
         synopsis: item['시놉시스'] ?? '',
         rating: getStageRating(item) ?? '',
-        life: item['인생극'] ?? ''
+        life: item['인생극'] ?? '',
+        nth: getStageNth(item)
       };
       Object.assign(rowObj, overrides);
       return [
         rowObj.no, rowObj.poster, rowObj.type, rowObj.place,
         rowObj.title, rowObj.date, rowObj.time1, rowObj.ticket,
         rowObj.time2, rowObj.pax, rowObj.companions, rowObj.cast,
-        rowObj.notes, rowObj.synopsis, rowObj.rating, rowObj.life
+        rowObj.notes, rowObj.synopsis, rowObj.rating, rowObj.life,
+        rowObj.nth
       ];
     }
 
@@ -3456,8 +3879,8 @@
       const awardsContainer = document.getElementById('d_awards');
 
       if (!isStage) {
-        let myR = getEscapeRating(item);
-        const myRatingFormatted = (myR && !isNaN(parseFloat(myR))) ? `⭐ ${parseFloat(myR).toFixed(1)}` : '-';
+        let myR = num(getEscapeRating(item));
+        const myRatingFormatted = myR !== null ? `⭐ ${myR.toFixed(1)}` : '-';
 
         document.getElementById('d_store_region').innerText = `${item['매장명'] || '매장미상'} ${item['지역'] ? '[' + item['지역'] + ']' : ''}`;
         document.getElementById('d_theme').innerText = item['테마명'] || '테마명 없음';
@@ -3487,38 +3910,38 @@
         castSection.style.display = 'none';
 
         gridBox.innerHTML = `
-          <div class="d-grid-item"><span class="d-grid-label">매장 난이도</span><span class="d-grid-val">${escHtml(item['난이도(매장)'] || '-')}</span></div>
           <div class="d-grid-item"><span class="d-grid-label">코방 난이도</span><span class="d-grid-val">${escHtml(item['난이도(코방)'] || '-')}</span></div>
+          <div class="d-grid-item"><span class="d-grid-label">매장 난이도</span><span class="d-grid-val">${escHtml(item['난이도(매장)'] || '-')}</span></div>
           <div class="d-grid-item"><span class="d-grid-label">매장 공포도</span><span class="d-grid-val">${escHtml(getEscapeHorror(item) || '-')}</span></div>
-          <div class="d-grid-item"><span class="d-grid-label">추천 평점</span><span class="d-grid-val">${escHtml(item['별점'] || '-')}</span></div>
           <div class="d-grid-item"><span class="d-grid-label">추천 인원</span><span class="d-grid-val">${escHtml(item['추천인원'] || '-')}</span></div>
-          <div class="d-grid-item"><span class="d-grid-label">나의 별점</span><span class="d-grid-val point">${escHtml(myRatingFormatted)}</span></div>
+          <div class="d-grid-item"><span class="d-grid-label">테마 시간</span><span class="d-grid-val">${escHtml(item['테마시간'] ? (isNaN(item['테마시간']) ? item['테마시간'] : item['테마시간'] + '분') : '-')}</span></div>
+          <div class="d-grid-item"><span class="d-grid-label">나의 평점</span><span class="d-grid-val point">${escHtml(myRatingFormatted)}</span></div>
         `;
         document.getElementById('d_record_box_title').innerText = '📝 나의 플레이 기록';
         document.getElementById('d_date_label').innerText = '플레이 일자';
+
+        const rawEscDate = getEscapeDate(item);
+        document.getElementById('d_playDate').innerText = normalizeDateStr(rawEscDate) || (rawEscDate || '-');
 
         let pax = getEscapePax(item) || '-';
         if (pax !== '-' && !isNaN(String(pax).trim())) pax = String(pax).trim() + '인';
         document.getElementById('d_playPax').innerText = `${pax} ${item['일행'] ? '(' + item['일행'] + ')' : ''}`;
       } else {
-        let myR = getStageRating(item);
-        const myRatingFormatted = (myR && !isNaN(parseFloat(myR))) ? `⭐ ${parseFloat(myR).toFixed(1)}` : '-';
+        let myR = num(getStageRating(item));
+        const myRatingFormatted = myR !== null ? `⭐ ${myR.toFixed(1)}` : '-';
 
-        const noStr = item['NO'] ? `No.${item['NO']} · ` : '';
-        document.getElementById('d_store_region').innerText = `${noStr}🏛️ ${item['장소'] || '장소 미상'}`;
+        const nthVal = getStageNth(item);
+        document.getElementById('d_store_region').innerText = `📍 ${item['장소'] || '공연장 미상'}`;
         document.getElementById('d_theme').innerText = item['제목'] || '제목 없음';
 
         let badgesHTML = '';
         if (isStageLife(item)) badgesHTML += `<span class="d-badge life">👑 인생극</span>`;
-        if (item['구분']) badgesHTML += `<span class="d-badge">🎭 ${escHtml(item['구분'])}</span>`;
+        if (item['구분']) badgesHTML += `<span class="d-badge">✦ ${escHtml(item['구분'])}</span>`;
+        if (nthVal) badgesHTML += `<span class="d-badge cast-chip">🔁 ${escHtml(nthVal)}</span>`;
         const tG = getStageTimeG(item);
-        const tI = getStageTimeI(item);
-        if (tG) badgesHTML += `<span class="d-badge">⏰ ${escHtml(tG)}</span>`;
-        if (tI) {
-          let tFormatted = String(tI).trim();
-          if (!isNaN(tFormatted)) tFormatted += '분';
-          badgesHTML += `<span class="d-badge">⏱️ ${escHtml(tFormatted)}</span>`;
-        }
+        const tIDisplay = formatRunningTime(getStageTimeI(item));
+        if (tG) badgesHTML += `<span class="d-badge">🕒 ${escHtml(tG)}</span>`;
+        if (tIDisplay) badgesHTML += `<span class="d-badge">⏱️ ${escHtml(tIDisplay)}</span>`;
         document.getElementById('d_badges').innerHTML = badgesHTML;
         awardsContainer.style.display = 'none';
 
@@ -3526,23 +3949,23 @@
           const casts = String(item['캐스팅']).split(',').map(c => c.trim()).filter(c => c !== '');
           if (casts.length > 0) {
             castSection.style.display = 'block';
-            castBadges.innerHTML = casts.map(c => `<span class="d-badge cast-chip">🌟 ${escHtml(c)}</span>`).join('');
+            castBadges.innerHTML = casts.map(c => `<span class="d-badge cast-chip">✦ ${escHtml(c)}</span>`).join('');
           } else castSection.style.display = 'none';
         } else castSection.style.display = 'none';
-
-        let tIDisplay = tI ? String(tI).trim() : '-';
-        if (tIDisplay !== '-' && !isNaN(tIDisplay)) tIDisplay += '분';
 
         gridBox.innerHTML = `
           <div class="d-grid-item"><span class="d-grid-label">구분</span><span class="d-grid-val">${escHtml(item['구분'] || '-')}</span></div>
           <div class="d-grid-item"><span class="d-grid-label">공연장 (장소)</span><span class="d-grid-val">${escHtml(item['장소'] || '-')}</span></div>
-          <div class="d-grid-item"><span class="d-grid-label">공연 시간 (G열)</span><span class="d-grid-val">${escHtml(tG || '-')}</span></div>
-          <div class="d-grid-item"><span class="d-grid-label">러닝타임 (I열)</span><span class="d-grid-val">${escHtml(tIDisplay)}</span></div>
+          <div class="d-grid-item"><span class="d-grid-label">공연시간</span><span class="d-grid-val">${escHtml(tG || '-')}</span></div>
+          <div class="d-grid-item"><span class="d-grid-label">러닝타임</span><span class="d-grid-val">${escHtml(tIDisplay || '-')}</span></div>
           <div class="d-grid-item"><span class="d-grid-label">티켓 정보</span><span class="d-grid-val">${escHtml(item['티켓'] || '-')}</span></div>
           <div class="d-grid-item"><span class="d-grid-label">나의 평점</span><span class="d-grid-val point">${escHtml(myRatingFormatted)}</span></div>
         `;
         document.getElementById('d_record_box_title').innerText = '📝 나의 관극 기록';
-        document.getElementById('d_date_label').innerText = '관람 일자';
+        document.getElementById('d_date_label').innerText = '관람일';
+
+        const rawStgDate = getStageDate(item);
+        document.getElementById('d_playDate').innerText = normalizeDateStr(rawStgDate) || (rawStgDate || '-');
 
         let pax = getStagePax(item) || '-';
         if (pax !== '-' && !isNaN(String(pax).trim())) pax = String(pax).trim() + '인';
@@ -3550,7 +3973,6 @@
       }
 
       document.getElementById('d_synopsis').innerText = item['시놉시스'] || '등록된 시놉시스가 없습니다.';
-      document.getElementById('d_playDate').innerText = normalizeDateStr(item['플레이일자']) || (item['플레이일자'] || '-');
       document.getElementById('d_notes').innerText = item['비고'] || '';
 
       showModal('detailModal');
@@ -3561,7 +3983,7 @@
       document.getElementById('editDomain').value = domain;
       const isStage = domain === 'stage';
 
-      document.getElementById('dataModalTitle').innerText = isStage ? '🎭 뮤지컬·연극 관극 기록' : '🔒 방탈출 플레이 기록';
+      document.getElementById('dataModalTitle').innerText = isStage ? '🎫 뮤지컬·연극 관극 기록' : '🔒 방탈출 플레이 기록';
       document.getElementById('escapeFormGrid').style.display = isStage ? 'none' : 'grid';
       document.getElementById('stageFormGrid').style.display = isStage ? 'grid' : 'none';
 
@@ -3570,14 +3992,15 @@
           ESCAPE_FORM_IDS.forEach(id => document.getElementById(id).value = '');
         } else {
           const item = escapeData[index];
+          const rawEscDate = getEscapeDate(item);
           const values = {
             m_poster: item['포스터'], m_region: item['지역'], m_store: item['매장명'],
-            m_theme: item['테마명'], m_keyword: item['검색어'], m_star: item['별점'],
-            m_diffKo: item['난이도(코방)'], m_reviews: item['리뷰'], m_awards: item['수상'],
+            m_theme: item['테마명'], m_keyword: item['검색어'],
+            m_diffKo: item['난이도(코방)'], m_awards: item['수상'],
             m_genre: item['장르'], m_time: item['테마시간'], m_recPax: item['추천인원'],
             m_diffStore: item['난이도(매장)'],
             m_horror: getEscapeHorror(item),
-            m_playDate: normalizeDateStr(item['플레이일자']) || item['플레이일자'],
+            m_playDate: normalizeDateStr(rawEscDate) || rawEscDate,
             m_myRating: getEscapeRating(item),
             m_playPax: getEscapePax(item),
             m_companions: item['일행'], m_synopsis: item['시놉시스'], m_notes: item['비고'],
@@ -3591,23 +4014,25 @@
           document.getElementById('st_no').value = stageData.length + 1;
         } else {
           const item = stageData[index];
+          const rawStgDate = getStageDate(item);
           const values = {
             st_no: item['NO'],
             st_poster: item['포스터'],
             st_type: item['구분'],
             st_place: item['장소'],
             st_title: item['제목'],
-            st_date: normalizeDateStr(item['플레이일자']) || item['플레이일자'],
+            st_date: normalizeDateStr(rawStgDate) || rawStgDate,
             st_time1: getStageTimeG(item),
             st_ticket: item['티켓'],
-            st_time2: getStageTimeI(item),
+            st_time2: formatRunningTime(getStageTimeI(item)),
             st_pax: getStagePax(item),
             st_companions: item['일행'],
             st_cast: item['캐스팅'],
             st_notes: item['비고'],
             st_synopsis: item['시놉시스'],
             st_rating: getStageRating(item),
-            st_life: isStageManualLife(item) ? '👑' : ''
+            st_life: isStageManualLife(item) ? '👑' : '',
+            st_nth: getStageNth(item)
           };
           STAGE_FORM_IDS.forEach(id => { document.getElementById(id).value = values[id] ?? ''; });
         }
@@ -3618,18 +4043,58 @@
     function saveRecord() {
       const domain = document.getElementById('editDomain').value || currentDomain;
       const isStage = domain === 'stage';
-      const rowData = (isStage ? STAGE_FORM_IDS : ESCAPE_FORM_IDS).map(id => document.getElementById(id).value);
       const editIdx = document.getElementById('editIndex').value;
+
+      let rowData;
+      if (!isStage) {
+        const existing = editIdx !== "" ? (escapeData[parseInt(editIdx)] || {}) : {};
+        const formValues = {
+          '포스터': document.getElementById('m_poster').value,
+          '지역': document.getElementById('m_region').value,
+          '매장명': document.getElementById('m_store').value,
+          '테마명': document.getElementById('m_theme').value,
+          '검색어': document.getElementById('m_keyword').value,
+          '별점': existing['별점'] ?? '',
+          '난이도(코방)': document.getElementById('m_diffKo').value,
+          '리뷰': existing['리뷰'] ?? '',
+          '수상': document.getElementById('m_awards').value,
+          '장르': document.getElementById('m_genre').value,
+          '테마시간': document.getElementById('m_time').value,
+          '추천인원': document.getElementById('m_recPax').value,
+          '난이도(매장)': document.getElementById('m_diffStore').value,
+          '공포도(매장)': document.getElementById('m_horror').value,
+          '플레이일자': document.getElementById('m_playDate').value,
+          '나의 평점': document.getElementById('m_myRating').value,
+          '플레이인원': document.getElementById('m_playPax').value,
+          '일행': document.getElementById('m_companions').value,
+          '시놉시스': document.getElementById('m_synopsis').value,
+          '비고': document.getElementById('m_notes').value,
+          '인생테마': document.getElementById('m_life').value
+        };
+        rowData = buildEscapeRowPayload(formValues);
+      } else {
+        rowData = STAGE_FORM_IDS.map(id => document.getElementById(id).value);
+      }
+
       closeModal('dataModal');
       sendDataToServer(domain, editIdx === "" ? 'add' : 'edit', rowData, editIdx === "" ? null : parseInt(editIdx));
     }
 
     function deleteRecord(index, domain) {
-      if (confirm("정말 이 기록을 삭제하시겠습니까?")) sendDataToServer(domain, 'delete', null, index);
+      pendingDelete = { index, domain };
+      showModal('confirmModal');
+    }
+
+    function confirmDeleteAction() {
+      if (!pendingDelete) return;
+      const { index, domain } = pendingDelete;
+      pendingDelete = null;
+      closeModal('confirmModal');
+      sendDataToServer(domain, 'delete', null, index);
     }
 
     async function sendDataToServer(domain, action, rowData, index) {
-      if (!appSettings.url) { alert("설정창에서 URL을 먼저 입력해주세요!"); return; }
+      if (!appSettings.url) { showToast("설정창에서 URL을 먼저 입력해주세요!"); return; }
       const isStage = domain === 'stage';
       renderSkeletonTo(isStage ? 'stageGrid' : 'escapeGrid', 4);
       const sheetName = isStage ? (appSettings.stageSheet || '뮤지컬연극') : (appSettings.escapeSheet || '시트1');
@@ -3638,7 +4103,7 @@
         await fetch(appSettings.url, { method: 'POST', body: JSON.stringify(payload) });
         if (isStage) fetchStageData(); else fetchEscapeData();
       } catch (e) {
-        alert("서버 연동 중 오류가 발생했습니다.");
+        showToast("서버 연동 중 오류가 발생했습니다.");
         if (isStage) fetchStageData(); else fetchEscapeData();
       }
     }
@@ -3659,7 +4124,7 @@
       if (name.includes('감성') || name.includes('드라마') || name.includes('로맨스')) return '🌸';
       if (name.includes('액션') || name.includes('어드벤처') || name.includes('활동성') || name.includes('탐험')) return '🧭';
       if (name.includes('추리') || name.includes('미스터리') || name.includes('범죄')) return '🕵️';
-      if (name.includes('코미디') || name.includes('코믹') || name.includes('개그') || name.includes('유머') || name.includes('일상')) return '🎭';
+      if (name.includes('코미디') || name.includes('코믹') || name.includes('개그') || name.includes('유머') || name.includes('일상')) return '😊';
       if (name.includes('SF') || name.includes('판타지') || name.includes('에스에프')) return '🚀';
       if (name.includes('잠입') || name.includes('아케이드')) return '🥷';
       if (name.includes('역사') || name.includes('동양') || name.includes('사극')) return '📜';
@@ -3806,7 +4271,7 @@
     window.addEventListener('popstate', () => {
       document.querySelectorAll('.modal-overlay').forEach(m => m.style.display = 'none');
     });
-    document.addEventListener('keydown', (e) => {
+    window.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
         const open = [...document.querySelectorAll('.modal-overlay')].find(m => m.style.display === 'flex');
         if (open) closeModal(open.id);
@@ -3828,6 +4293,7 @@
     function applySettingsToUI() {
       const body = document.body;
       const isStage = currentDomain === 'stage';
+      updateHeaderIcons();
       document.getElementById('pageTitle').innerText = isStage
         ? (appSettings.stageTitle || "노유's 관극리스트")
         : (appSettings.title || "노유's 방탈리스트");
@@ -3869,7 +4335,9 @@
       appSettings.darkMode = document.getElementById('s_darkMode').value;
       const th = parseFloat(document.getElementById('s_lifeThreshold').value);
       appSettings.lifeThreshold = isNaN(th) ? 9.0 : th;
-      localStorage.setItem('myEscapeSettingsV6', JSON.stringify(appSettings));
+      try {
+        localStorage.setItem('myEscapeSettingsV6', JSON.stringify(appSettings));
+      } catch (e) {}
 
       escapeLoaded = false;
       stageLoaded = false;
