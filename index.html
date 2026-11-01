@@ -155,6 +155,565 @@
       flex-shrink: 0;
     }
 
+
+    /* ===== 톤앤매너 통일 SVG 아이콘 & 프리미엄 배지 시스템 ===== */
+    .ui-ico {
+      width: 15px;
+      height: 15px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2.1;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      flex-shrink: 0;
+      vertical-align: -2.5px;
+    }
+    .ui-ico.fill-star {
+      fill: currentColor;
+      stroke-width: 1.6;
+    }
+    .star-gold-ico {
+      width: 15px;
+      height: 15px;
+      fill: #f59e0b;
+      stroke: #d97706;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      flex-shrink: 0;
+      vertical-align: -2px;
+      filter: drop-shadow(0 1px 2px rgba(245, 158, 11, 0.25));
+    }
+    body.dark .star-gold-ico {
+      fill: #fbbf24;
+      stroke: #f59e0b;
+    }
+    .crown-gold-ico {
+      width: 15px;
+      height: 15px;
+      fill: #f59e0b;
+      stroke: #b45309;
+      stroke-width: 1.7;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      flex-shrink: 0;
+      vertical-align: -2px;
+    }
+    body.dark .crown-gold-ico {
+      fill: #fbbf24;
+      stroke: #fde047;
+    }
+
+    /* 상단 요약 스탯 뱃지 업그레이드 */
+    .strip-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-size: calc(12.5px * var(--fs));
+      font-weight: 700;
+      color: var(--sub);
+      background: linear-gradient(180deg, var(--bg-elevated) 0%, var(--bg-faint) 100%);
+      border: 1px solid var(--line);
+      padding: 5px 13px 5px 7px;
+      border-radius: 11px;
+      white-space: nowrap;
+      box-shadow: 0 2px 6px var(--shadow-1);
+    }
+    .strip-ico-box {
+      width: 22px;
+      height: 22px;
+      border-radius: 7px;
+      background: var(--accent-bg);
+      border: 1px solid var(--accent-line);
+      color: var(--accent);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .strip-ico-box svg {
+      width: 13px;
+      height: 13px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2.2;
+    }
+    .strip-item.gold .strip-ico-box {
+      background: var(--gold-bg);
+      border-color: var(--gold-border);
+      color: #d97706;
+    }
+    body.dark .strip-item.gold .strip-ico-box {
+      color: #fbbf24;
+    }
+    .strip-item.grad-strip {
+      background: linear-gradient(135deg, var(--bg-elevated) 0%, var(--gold-bg) 100%);
+      border-color: var(--gold-border);
+      cursor: pointer;
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+    }
+    .strip-item.grad-strip:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 10px rgba(245, 158, 11, 0.2);
+    }
+    .strip-item.grad-strip .strip-ico-box {
+      background: #111827;
+      border-color: var(--gold-border);
+      color: #fbbf24;
+    }
+
+    /* 카테고리 필터 뱃지 아이콘 박스화 */
+    .filter-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 15px 8px 10px;
+      border-radius: 12px;
+      background-color: var(--bg-card);
+      border: 1px solid var(--line);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 5px var(--shadow-1);
+      flex-shrink: 0;
+    }
+    .filter-icon {
+      width: 24px;
+      height: 24px;
+      border-radius: 7px;
+      background: var(--bg-soft);
+      border: 1px solid var(--line-soft);
+      color: var(--accent);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+    }
+    .filter-icon svg {
+      width: 13.5px;
+      height: 13.5px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2.2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .filter-item.active .filter-icon {
+      background: rgba(255, 255, 255, 0.14);
+      border-color: rgba(255, 255, 255, 0.22);
+      color: #fbbf24;
+    }
+    body.dark .filter-item.active .filter-icon {
+      background: rgba(15, 23, 42, 0.18);
+      border-color: rgba(15, 23, 42, 0.25);
+      color: var(--accent);
+    }
+
+    /* 커스텀 드롭다운(Select) 뱃지 스타일 */
+    .search-filter, .sort-select, .cal-select, .form-group select {
+      appearance: none;
+      -webkit-appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 10px center;
+      padding-right: 30px !important;
+      border-radius: 10px;
+      box-shadow: 0 1px 3px var(--shadow-1);
+      transition: border-color 0.18s ease, box-shadow 0.18s ease;
+    }
+    .search-filter:hover, .sort-select:hover, .cal-select:hover {
+      border-color: var(--muted);
+    }
+    .search-box {
+      border-radius: 10px;
+      box-shadow: 0 1px 3px var(--shadow-1);
+    }
+    .search-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      margin-right: 8px;
+    }
+    .search-icon svg {
+      width: 15px;
+      height: 15px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2.2;
+    }
+    .total-count {
+      border-radius: 10px;
+      gap: 6px;
+      box-shadow: 0 1px 3px var(--shadow-1);
+    }
+    .total-count svg {
+      width: 14px;
+      height: 14px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2.2;
+    }
+
+    /* 카드 수정/삭제 버튼 아이콘 정돈 */
+    .action-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+    }
+    .action-btn svg {
+      width: 13.5px;
+      height: 13.5px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2.1;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .action-btn.delete-btn:hover {
+      color: var(--accent);
+      background: var(--accent-bg);
+    }
+
+    /* 어워즈 CLEAR 스탬프 뱃지 업그레이드 */
+    .clear-badge {
+      position: absolute;
+      bottom: 8px;
+      right: 8px;
+      background: linear-gradient(135deg, rgba(6, 78, 59, 0.94) 0%, rgba(15, 23, 42, 0.94) 100%);
+      color: #34d399;
+      padding: 4px 9px 4px 7px;
+      border-radius: 999px;
+      font-size: calc(10.5px * var(--fs));
+      font-weight: 900;
+      letter-spacing: 0.04em;
+      backdrop-filter: blur(4px);
+      border: 1.5px solid rgba(52, 211, 153, 0.65);
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.35);
+      z-index: 10;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .clear-badge svg {
+      width: 12px;
+      height: 12px;
+      stroke: #34d399;
+      fill: none;
+      stroke-width: 2.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .award-svg-ico {
+      width: 15px;
+      height: 15px;
+      stroke: var(--gold);
+      fill: none;
+      stroke-width: 2.1;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      vertical-align: -2px;
+    }
+
+    /* ===== 졸업매장 (X열 졸업) 전용 페이지 & 스탬프 보드 ===== */
+    .grad-section {
+      display: none;
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 18px 20px 60px;
+    }
+    .grad-section.active {
+      display: block;
+    }
+    .grad-hero-bar {
+      background: linear-gradient(135deg, var(--bg-elevated) 0%, var(--gold-bg) 100%);
+      border: 1.5px solid var(--gold-border);
+      border-radius: var(--radius-lg);
+      padding: 20px 24px;
+      margin-bottom: 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      box-shadow: 0 6px 20px rgba(245, 158, 11, 0.12);
+    }
+    .grad-hero-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .grad-emblem {
+      width: 50px;
+      height: 50px;
+      border-radius: 14px;
+      background: #111827;
+      border: 1.5px solid var(--gold-border);
+      color: #fbbf24;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      box-shadow: 0 4px 12px rgba(245, 158, 11, 0.25);
+    }
+    .grad-emblem svg {
+      width: 26px;
+      height: 26px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+    }
+    .grad-hero-title {
+      font-size: calc(20px * var(--fs));
+      font-weight: 900;
+      color: var(--strong);
+      letter-spacing: -0.02em;
+    }
+    .grad-hero-sub {
+      font-size: calc(12.5px * var(--fs));
+      color: var(--sub);
+      font-weight: 600;
+      margin-top: 2px;
+    }
+    .grad-stats-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .grad-stat-pill {
+      background: var(--bg-card);
+      border: 1px solid var(--gold-border);
+      border-radius: 12px;
+      padding: 8px 14px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-width: 96px;
+      box-shadow: 0 2px 6px var(--shadow-1);
+    }
+    .grad-stat-label {
+      font-size: calc(10.5px * var(--fs));
+      font-weight: 700;
+      color: var(--muted);
+    }
+    .grad-stat-val {
+      font-size: calc(17px * var(--fs));
+      font-weight: 900;
+      color: #d97706;
+      margin-top: 1px;
+    }
+    body.dark .grad-stat-val { color: #fbbf24; }
+
+    .grad-toolbar {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .grad-store-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+      width: 100%;
+    }
+    .grad-store-card {
+      position: relative;
+      background: var(--bg-card);
+      border: 1.5px solid var(--gold-border);
+      border-radius: var(--radius-lg);
+      padding: 20px 20px 18px;
+      box-shadow: 0 6px 18px var(--shadow-1);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .grad-store-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 26px rgba(245, 158, 11, 0.16);
+    }
+    .grad-store-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      padding-right: 78px;
+    }
+    .grad-store-title-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      min-width: 0;
+    }
+    .grad-store-badges {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .grad-store-name {
+      font-size: calc(19px * var(--fs));
+      font-weight: 900;
+      color: var(--strong);
+      letter-spacing: -0.02em;
+      word-break: keep-all;
+      line-height: 1.25;
+    }
+    .grad-store-meta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      font-size: calc(12px * var(--fs));
+      font-weight: 700;
+      color: var(--sub);
+    }
+    .grad-meta-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: var(--bg-soft);
+      border: 1px solid var(--line);
+      padding: 3px 9px;
+      border-radius: 8px;
+      font-size: calc(11.5px * var(--fs));
+      font-weight: 700;
+    }
+
+    /* 졸업 도장(스탬프) 뱃지 */
+    .grad-stamp {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      width: 68px;
+      height: 68px;
+      border-radius: 50%;
+      border: 2.5px double #e11d48;
+      background: rgba(225, 29, 72, 0.06);
+      color: #e11d48;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transform: rotate(-12deg);
+      box-shadow: inset 0 0 0 2px rgba(225, 29, 72, 0.15), 0 3px 8px rgba(225, 29, 72, 0.14);
+      pointer-events: none;
+      user-select: none;
+      z-index: 3;
+    }
+    body.dark .grad-stamp {
+      border-color: #fb7185;
+      color: #fb7185;
+      background: rgba(251, 113, 133, 0.09);
+      box-shadow: inset 0 0 0 2px rgba(251, 113, 133, 0.2), 0 3px 10px rgba(0, 0, 0, 0.4);
+    }
+    .grad-stamp-top {
+      font-size: calc(7.5px * var(--fs));
+      font-weight: 900;
+      letter-spacing: 0.1em;
+      line-height: 1;
+      opacity: 0.85;
+    }
+    .grad-stamp-main {
+      font-size: calc(13px * var(--fs));
+      font-weight: 900;
+      letter-spacing: 0.04em;
+      line-height: 1.15;
+      margin: 2px 0 1px;
+      border-top: 1px solid currentColor;
+      border-bottom: 1px solid currentColor;
+      padding: 1px 4px;
+    }
+    .grad-stamp-sub {
+      font-size: calc(7.5px * var(--fs));
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      line-height: 1;
+    }
+
+    /* 매장 내 테마 포스터 선반 (주르륵 나열) */
+    .grad-theme-shelf {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(92px, 1fr));
+      gap: 10px;
+      padding-top: 12px;
+      border-top: 1.5px dashed var(--line-dashed);
+    }
+    .grad-theme-item {
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      transition: transform 0.18s ease;
+    }
+    .grad-theme-item:hover {
+      transform: translateY(-3px);
+    }
+    .grad-theme-thumb-wrap {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      border-radius: 9px;
+      overflow: hidden;
+      background: var(--bg-soft);
+      border: 1px solid var(--line);
+      box-shadow: 0 3px 8px var(--shadow-1);
+    }
+    .grad-theme-thumb-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .grad-theme-rating-pill {
+      position: absolute;
+      bottom: 5px;
+      right: 5px;
+      background: rgba(15, 23, 42, 0.86);
+      color: #fde047;
+      padding: 2px 6px;
+      border-radius: 6px;
+      font-size: calc(10px * var(--fs));
+      font-weight: 800;
+      display: inline-flex;
+      align-items: center;
+      gap: 2.5px;
+      backdrop-filter: blur(3px);
+    }
+    .grad-theme-life-pin {
+      position: absolute;
+      top: 5px;
+      left: 5px;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid #fbbf24;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .grad-theme-title {
+      font-size: calc(11.5px * var(--fs));
+      font-weight: 700;
+      color: var(--strong);
+      line-height: 1.25;
+      word-break: keep-all;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .grad-theme-date {
+      font-size: calc(10px * var(--fs));
+      color: var(--muted);
+      font-weight: 600;
+    }
+
     /* ===== 방탈로그 스타일 좌측 고정 사이드바 (PC) & 하단 탭바 (모바일) ===== */
     .app-shell {
       display: flex;
@@ -784,16 +1343,79 @@
 
     .sub-filter-container {
       display: none;
-      flex-wrap: wrap;
-      gap: 6px;
-      padding: 4px 20px 16px;
-      justify-content: center;
-      max-width: 1000px;
+      align-items: center;
+      gap: 10px;
+      padding: 2px 20px 14px;
+      max-width: 1240px;
       margin: 0 auto;
     }
     .sub-filter-container.active { display: flex; }
+
+    .sub-select-wrap {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      background: var(--bg-card);
+      border: 1.5px solid var(--accent-line);
+      border-radius: 11px;
+      padding: 4px 6px 4px 10px;
+      flex-shrink: 0;
+      box-shadow: 0 2px 6px var(--shadow-1);
+    }
+    .sub-select-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: calc(11.5px * var(--fs));
+      font-weight: 800;
+      color: var(--accent);
+      white-space: nowrap;
+    }
+    .sub-select-label svg {
+      width: 13.5px;
+      height: 13.5px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2.2;
+    }
+    .sub-filter-select {
+      appearance: none;
+      -webkit-appearance: none;
+      border: 1px solid var(--line);
+      background-color: var(--bg-faint);
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='13' height='13' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 8px center;
+      padding: 5px 26px 5px 10px;
+      border-radius: 8px;
+      font-size: calc(12px * var(--fs));
+      font-weight: 700;
+      color: var(--strong);
+      font-family: inherit;
+      cursor: pointer;
+      outline: none;
+      min-width: 140px;
+      max-width: 220px;
+    }
+    .sub-filter-select:focus {
+      border-color: var(--accent);
+    }
+
+    .sub-quick-rail {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      overflow-x: auto;
+      flex-wrap: nowrap;
+      scrollbar-width: none;
+      padding: 2px 2px;
+      flex: 1;
+      min-width: 0;
+    }
+    .sub-quick-rail::-webkit-scrollbar { display: none; }
+
     .sub-filter-item {
-      padding: 6px 13px;
+      padding: 6px 12px;
       background: var(--bg-card);
       color: var(--sub);
       border-radius: 999px;
@@ -803,12 +1425,19 @@
       white-space: nowrap;
       transition: 0.18s;
       border: 1px solid var(--line);
+      flex-shrink: 0;
     }
     .sub-filter-item:hover { background: var(--bg-soft); }
     .sub-filter-item.active {
       background: var(--accent);
       color: #fff;
       border-color: var(--accent);
+    }
+    .sub-chip-cnt {
+      font-size: calc(10.5px * var(--fs));
+      font-weight: 700;
+      opacity: 0.72;
+      margin-left: 2px;
     }
 
     /* 툴바 */
@@ -1120,16 +1749,39 @@
     .date-badge {
       display: inline-flex;
       align-items: center;
-      gap: 4px;
-      font-size: calc(11.5px * var(--fs));
-      font-weight: 700;
+      gap: 5px;
+      font-size: calc(11px * var(--fs));
+      font-weight: 800;
       color: var(--sub);
-      background: var(--bg-soft);
+      background: linear-gradient(180deg, var(--bg-elevated) 0%, var(--bg-soft) 100%);
       border: 1px solid var(--line);
-      padding: 2px 9px;
-      border-radius: 999px;
-      line-height: 1.35;
+      padding: 3px 8.5px 3px 6.5px;
+      border-radius: 8px;
+      line-height: 1.3;
       white-space: nowrap;
+      box-shadow: 0 1px 2px var(--shadow-1);
+      letter-spacing: -0.01em;
+    }
+    .date-ico-wrap {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 17px;
+      height: 17px;
+      border-radius: 5px;
+      background: var(--accent-bg);
+      color: var(--accent);
+      border: 1px solid var(--accent-line);
+      flex-shrink: 0;
+    }
+    .date-ico-wrap svg {
+      width: 11px;
+      height: 11px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2.3;
+      stroke-linecap: round;
+      stroke-linejoin: round;
     }
 
     .rating-bar { height: 5px; border-radius: 999px; background: var(--bg-softer); overflow: hidden; margin: 0; }
@@ -1302,16 +1954,47 @@
       position: relative;
       cursor: pointer;
       color: #0284c7;
-      background: rgba(2, 132, 199, 0.08);
-      padding: 2px 8px;
-      border-radius: 999px;
-      font-weight: 700;
+      background: rgba(2, 132, 199, 0.09);
+      border: 1px solid rgba(2, 132, 199, 0.22);
+      padding: 3px 8px 3px 6.5px;
+      border-radius: 8px;
+      font-size: calc(11px * var(--fs));
+      font-weight: 800;
       display: inline-flex;
       align-items: center;
-      gap: 3px;
+      gap: 4px;
+      line-height: 1.3;
+      white-space: nowrap;
+      box-shadow: 0 1px 2px var(--shadow-1);
       -webkit-tap-highlight-color: transparent;
     }
-    body.dark .pax-tooltip { color: #38bdf8; background: rgba(56, 189, 248, 0.12); }
+    body.dark .pax-tooltip {
+      color: #38bdf8;
+      background: rgba(56, 189, 248, 0.13);
+      border-color: rgba(56, 189, 248, 0.28);
+    }
+    .pax-icons-wrap {
+      display: inline-flex;
+      align-items: center;
+      line-height: 1;
+    }
+    .pax-person-svg {
+      width: 12px;
+      height: 12px;
+      stroke: currentColor;
+      fill: currentColor;
+      fill-opacity: 0.18;
+      stroke-width: 2.1;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      flex-shrink: 0;
+    }
+    .pax-person-svg + .pax-person-svg {
+      margin-left: -2.5px;
+    }
+    .pax-icons-wrap.many .pax-person-svg + .pax-person-svg {
+      margin-left: -4px;
+    }
     .pax-tooltip .tooltip-text {
       visibility: hidden;
       width: max-content;
@@ -1893,6 +2576,7 @@
       .app-sidebar { width: 210px; padding: 14px 10px; }
       .app-main { margin-left: 210px; }
       .grid-container { grid-template-columns: repeat(2, 1fr); }
+      .grad-store-grid { grid-template-columns: 1fr; }
     }
     @media (max-width: 768px) {
       .app-sidebar { display: none; }
@@ -1941,8 +2625,12 @@
       .my-rating { font-size: calc(14px * var(--fs)); }
       .my-rating span { font-size: calc(9px * var(--fs)); }
       .ko-diff-badge { font-size: calc(10px * var(--fs)); padding: 2px 6px; }
-      .date-badge { font-size: calc(10px * var(--fs)); padding: 2px 6px; }
-      .pax-tooltip { font-size: calc(10px * var(--fs)); padding: 2px 6px; }
+      .date-badge { font-size: calc(10px * var(--fs)); padding: 2px 6px 2px 4.5px; gap: 3.5px; border-radius: 7px; }
+      .date-ico-wrap { width: 14px; height: 14px; border-radius: 4px; }
+      .date-ico-wrap svg { width: 9.5px; height: 9.5px; }
+      .pax-tooltip { font-size: calc(10px * var(--fs)); padding: 2px 6px 2px 5px; gap: 3px; border-radius: 7px; }
+      .pax-person-svg { width: 10.5px; height: 10.5px; }
+      .pax-person-svg + .pax-person-svg { margin-left: -3px; }
       .genre-row { font-size: calc(10px * var(--fs)); padding: 2px 6px; }
       .escape-genre-container { min-height: calc(44px * var(--fs)); }
       .stage-cast-container { min-height: calc(88px * var(--fs)); }
@@ -1951,6 +2639,22 @@
       .life-toggle { width: 28px; height: 28px; font-size: 13px; top: 7px; left: 7px; }
       .action-btn { padding: 8px 4px; font-size: calc(11px * var(--fs)); }
 
+      .sub-filter-container { flex-direction: column; align-items: stretch; gap: 8px; padding: 2px 14px 12px; }
+      .sub-select-wrap { width: 100%; justify-content: space-between; }
+      .sub-filter-select { flex: 1; max-width: none; }
+      .sub-quick-rail { width: 100%; }
+
+      .grad-section { padding: 14px 12px 50px; overflow-x: hidden; }
+      .grad-hero-bar { padding: 15px 14px; gap: 12px; }
+      .grad-stats-row { width: 100%; display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+      .grad-stat-pill { min-width: 0; padding: 8px 6px; }
+      .grad-store-grid { grid-template-columns: 1fr !important; gap: 16px; width: 100%; }
+      .grad-store-card { padding: 16px 14px; width: 100%; max-width: 100%; box-sizing: border-box; }
+      .grad-store-header { padding-right: 62px; }
+      .grad-store-name { font-size: calc(16.5px * var(--fs)); }
+      .grad-stamp { width: 56px; height: 56px; top: 12px; right: 12px; }
+      .grad-stamp-main { font-size: calc(11.5px * var(--fs)); }
+      .grad-theme-shelf { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; width: 100%; }
       .calendar-section { padding: 14px 10px 50px; }
       .cal-top-bar { padding: 12px; gap: 10px; }
       .cal-summary-bar { grid-template-columns: repeat(2, 1fr); gap: 8px; }
@@ -2033,6 +2737,14 @@
             <span id="sbNavCalendarText">포스터 캘린더</span>
           </span>
         </button>
+
+        <button class="sb-nav-item" id="sbNavGrad" onclick="handleNavAction('grad')">
+          <span class="sb-nav-left">
+            <svg viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+            <span>졸업 매장</span>
+          </span>
+          <span class="sb-badge gold" id="sbBadgeGrad">0</span>
+        </button>
       </div>
 
       <div class="sb-divider"></div>
@@ -2054,9 +2766,18 @@
       </div>
 
       <div class="sb-footer">
-        <button class="sb-util-btn" onclick="handleNavAction('refresh')" title="데이터 새로고침">🔄 새로고침</button>
-        <button class="sb-util-btn" onclick="toggleQuickDarkMode()" id="sbThemeToggleBtn" title="라이트/다크 전환">🌙 테마</button>
-        <button class="sb-util-btn" onclick="openSettings()" title="환경 설정">⚙️ 설정</button>
+        <button class="sb-util-btn" onclick="handleNavAction('refresh')" title="데이터 새로고침">
+          <svg class="ui-ico" viewBox="0 0 24 24"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 16h5v5"/></svg>
+          <span>새로고침</span>
+        </button>
+        <button class="sb-util-btn" onclick="toggleQuickDarkMode()" id="sbThemeToggleBtn" title="라이트/다크 전환">
+          <svg class="ui-ico" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          <span>다크</span>
+        </button>
+        <button class="sb-util-btn" onclick="openSettings()" title="환경 설정">
+          <svg class="ui-ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+          <span>설정</span>
+        </button>
       </div>
     </aside>
 
@@ -2064,8 +2785,15 @@
     <div class="app-main">
     <header>
       <div class="header-mobile-actions">
-        <button class="mobile-util-btn" onclick="handleNavAction('refresh')" title="새로고침">🔄</button>
-        <button class="mobile-util-btn" onclick="openSettings()" title="환경 설정">⚙️</button>
+        <button class="mobile-util-btn" onclick="openAwardsModal()" id="mobileAwardsBtn" title="방탈 어워즈">
+          <svg class="ui-ico" viewBox="0 0 24 24"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>
+        </button>
+        <button class="mobile-util-btn" onclick="handleNavAction('refresh')" title="새로고침">
+          <svg class="ui-ico" viewBox="0 0 24 24"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 16h5v5"/></svg>
+        </button>
+        <button class="mobile-util-btn" onclick="openSettings()" title="환경 설정">
+          <svg class="ui-ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        </button>
       </div>
 
       <!-- 모바일 전용 상단 모드 스위처 (PC는 좌측 사이드바 사용) -->
@@ -2097,16 +2825,38 @@
 
       <!-- 1) 방탈출 전용 상단 스탯 스트립 -->
       <div class="stat-strip" id="escapeStatStrip" style="margin-bottom:0;">
-        <span class="strip-item">🎫 총 <b id="escapeStripTotal">0</b>방</span>
-        <span class="strip-item gold">👑 인생테마 <b id="escapeStripLife">0</b></span>
-        <span class="strip-item">📅 올해 <b id="escapeStripYear">0</b>방</span>
+        <span class="strip-item">
+          <span class="strip-ico-box"><svg viewBox="0 0 24 24"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M13 5v2"/><path d="M13 17v2"/><path d="M13 11v2"/></svg></span>
+          <span>총 <b id="escapeStripTotal">0</b>방</span>
+        </span>
+        <span class="strip-item gold">
+          <span class="strip-ico-box"><svg viewBox="0 0 24 24"><path d="m2 4 3 12h14l3-12-6 7-4-7-4 7-6-7zm3 16h14"/></svg></span>
+          <span>인생테마 <b id="escapeStripLife">0</b></span>
+        </span>
+        <span class="strip-item">
+          <span class="strip-ico-box"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></span>
+          <span>올해 <b id="escapeStripYear">0</b>방</span>
+        </span>
+        <span class="strip-item grad-strip" onclick="handleNavAction('grad')" title="졸업 매장 페이지로 이동">
+          <span class="strip-ico-box"><svg viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></span>
+          <span>졸업매장 <b id="escapeStripGrad">0</b>곳</span>
+        </span>
       </div>
 
       <!-- 2) 뮤지컬·연극 전용 상단 스탯 스트립 -->
       <div class="stat-strip" id="stageStatStrip" style="display:none; margin-bottom:0;">
-        <span class="strip-item">🎫 총 <b id="stageStripTotal">0</b>편</span>
-        <span class="strip-item gold">👑 인생극 <b id="stageStripLife">0</b></span>
-        <span class="strip-item">📅 올해 <b id="stageStripYear">0</b>편</span>
+        <span class="strip-item">
+          <span class="strip-ico-box"><svg viewBox="0 0 24 24"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M13 5v2"/><path d="M13 17v2"/><path d="M13 11v2"/></svg></span>
+          <span>총 <b id="stageStripTotal">0</b>편</span>
+        </span>
+        <span class="strip-item gold">
+          <span class="strip-ico-box"><svg viewBox="0 0 24 24"><path d="m2 4 3 12h14l3-12-6 7-4-7-4 7-6-7zm3 16h14"/></svg></span>
+          <span>인생극 <b id="stageStripLife">0</b></span>
+        </span>
+        <span class="strip-item">
+          <span class="strip-ico-box"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></span>
+          <span>올해 <b id="stageStripYear">0</b>편</span>
+        </span>
       </div>
     </header>
 
@@ -2116,23 +2866,38 @@
     <div id="escapeDomainContainer">
       <div id="escapeListFilterSection">
         <nav class="filter-container" id="escapePrimaryNav">
-          <div class="filter-item active" onclick="setEscapePrimaryFilter('all', this)"><span class="filter-icon">✦</span><span class="filter-name">전체보기</span></div>
-          <div class="filter-item" onclick="setEscapePrimaryFilter('life', this)"><span class="filter-icon">👑</span><span class="filter-name">인생테마</span></div>
-          <div class="filter-item" onclick="setEscapePrimaryFilter('genre', this)"><span class="filter-icon">#</span><span class="filter-name">장르별</span></div>
-          <div class="filter-item" onclick="setEscapePrimaryFilter('region', this)"><span class="filter-icon">📍</span><span class="filter-name">지역별</span></div>
-          <div class="filter-item" onclick="setEscapePrimaryFilter('store', this)"><span class="filter-icon">🏠</span><span class="filter-name">매장별</span></div>
+          <div class="filter-item active" onclick="setEscapePrimaryFilter('all', this)">
+            <span class="filter-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg></span>
+            <span class="filter-name">전체보기</span>
+          </div>
+          <div class="filter-item" onclick="setEscapePrimaryFilter('life', this)">
+            <span class="filter-icon"><svg viewBox="0 0 24 24"><path d="m2 4 3 12h14l3-12-6 7-4-7-4 7-6-7zm3 16h14"/></svg></span>
+            <span class="filter-name">인생테마</span>
+          </div>
+          <div class="filter-item" onclick="setEscapePrimaryFilter('genre', this)">
+            <span class="filter-icon"><svg viewBox="0 0 24 24"><path d="M12 2H2v10l9.29 9.29c.94.94 2.48.94 3.42 0l6.58-6.58c.94-.94.94-2.48 0-3.42L12 2Z"/><path d="M7 7h.01"/></svg></span>
+            <span class="filter-name">장르별</span>
+          </div>
+          <div class="filter-item" onclick="setEscapePrimaryFilter('region', this)">
+            <span class="filter-icon"><svg viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></span>
+            <span class="filter-name">지역별</span>
+          </div>
+          <div class="filter-item" onclick="setEscapePrimaryFilter('store', this)">
+            <span class="filter-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span>
+            <span class="filter-name">매장별</span>
+          </div>
         </nav>
         <div class="sub-filter-container" id="escapeSubNav"></div>
 
         <div class="toolbar">
           <div class="search-wrapper">
             <select id="escapeSearchType" class="search-filter" onchange="handleEscapeSearch()">
-              <option value="all">전체</option>
-              <option value="theme">테마/검색어</option>
-              <option value="companion">일행</option>
+              <option value="all">전체 검색</option>
+              <option value="theme">테마 / 검색어</option>
+              <option value="companion">동행 일행</option>
             </select>
             <div class="search-box">
-              <span class="search-icon">🔍</span>
+              <span class="search-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg></span>
               <input type="text" id="escapeSearchInput" class="search-input" placeholder="테마명, 매장, 일행 검색..." oninput="handleEscapeSearch()">
             </div>
           </div>
@@ -2140,13 +2905,13 @@
           <div class="sort-wrapper">
             <div class="total-count" id="escapeTotalCountDisplay">총 0방</div>
             <select class="sort-select" id="escapeSortSelect" onchange="applyEscapeFiltersAndSort()">
-              <option value="dateDesc">📅 날짜 (최신순)</option>
-              <option value="dateAsc">📅 날짜 (오래된순)</option>
-              <option value="myRatingDesc">⭐ 나의 평점 (높은순)</option>
-              <option value="myRatingAsc">⭐ 나의 평점 (낮은순)</option>
-              <option value="diffKoDesc">🔒 코방 난이도 (높은순)</option>
-              <option value="diffKoAsc">🔒 코방 난이도 (낮은순)</option>
-              <option value="titleAsc">🔤 테마명 (가나다순)</option>
+              <option value="dateDesc">플레이일 · 최신순</option>
+              <option value="dateAsc">플레이일 · 오래된순</option>
+              <option value="myRatingDesc">나의 평점 · 높은순</option>
+              <option value="myRatingAsc">나의 평점 · 낮은순</option>
+              <option value="diffKoDesc">코방 난이도 · 높은순</option>
+              <option value="diffKoAsc">코방 난이도 · 낮은순</option>
+              <option value="titleAsc">테마명 · 가나다순</option>
             </select>
           </div>
         </div>
@@ -2167,9 +2932,18 @@
           </div>
 
           <div class="cal-quick-btns">
-            <button class="cal-sub-btn" id="escapeCalSplitBtn" onclick="toggleEscapeCalSplit()">🖼️ 연방 분할보기: ON</button>
-            <button class="cal-sub-btn" onclick="jumpEscapeCalLatest()">⏮️ 최근 플레이 달</button>
-            <button class="cal-sub-btn" onclick="jumpEscapeCalToday()">📍 이번 달</button>
+            <button class="cal-sub-btn" id="escapeCalSplitBtn" onclick="toggleEscapeCalSplit()">
+              <svg class="ui-ico" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 12h18"/><path d="M12 3v18"/></svg>
+              <span id="escapeCalSplitText">연방 분할보기: ON</span>
+            </button>
+            <button class="cal-sub-btn" onclick="jumpEscapeCalLatest()">
+              <svg class="ui-ico" viewBox="0 0 24 24"><polygon points="19 20 9 12 19 4 19 20"/><line x1="5" y1="19" x2="5" y2="5"/></svg>
+              <span>최근 플레이 달</span>
+            </button>
+            <button class="cal-sub-btn" onclick="jumpEscapeCalToday()">
+              <svg class="ui-ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/></svg>
+              <span>이번 달</span>
+            </button>
           </div>
         </div>
 
@@ -2184,11 +2958,11 @@
           </div>
           <div class="cal-sum-card">
             <span class="cal-sum-label">이달의 평균 평점</span>
-            <span class="cal-sum-val" id="escapeCalSumAvg">⭐ 0.00</span>
+            <span class="cal-sum-val" id="escapeCalSumAvg">0.00</span>
           </div>
           <div class="cal-sum-card">
             <span class="cal-sum-label">이달의 인생테마</span>
-            <span class="cal-sum-val" id="escapeCalSumLife">👑 0개</span>
+            <span class="cal-sum-val" id="escapeCalSumLife">0개</span>
           </div>
         </div>
 
@@ -2201,11 +2975,56 @@
 
         <div class="cal-day-detail">
           <div class="cal-day-header">
-            <div class="cal-day-title" id="escapeCalDateTitle">📅 날짜를 선택하면 방탈출 기록이 표시됩니다</div>
-            <button class="btn" id="escapeCalAddBtn" style="display:none;" onclick="openDataModalForCalDate('escape')">➕ 이 날짜로 테마 추가</button>
+            <div class="cal-day-title" id="escapeCalDateTitle">날짜를 선택하면 방탈출 기록이 표시됩니다</div>
+            <button class="btn" id="escapeCalAddBtn" style="display:none;" onclick="openDataModalForCalDate('escape')">
+              <svg class="ui-ico" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+              <span>이 날짜로 테마 추가</span>
+            </button>
           </div>
           <div class="cal-day-list" id="escapeCalDayList"></div>
         </div>
+      </section>
+
+      <!-- 방탈출 전용 졸업매장 (X열 졸업 스탬프 보드) -->
+      <section class="grad-section" id="escapeGradSection">
+        <div class="grad-hero-bar">
+          <div class="grad-hero-left">
+            <div class="grad-emblem">
+              <svg viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+            </div>
+            <div>
+              <h2 class="grad-hero-title">명예의 졸업 매장 스탬프북</h2>
+              <p class="grad-hero-sub">매장 내 전 테마 클리어로 졸업 도장을 달성한 매장 컬렉션</p>
+            </div>
+          </div>
+          <div class="grad-stats-row">
+            <div class="grad-stat-pill">
+              <span class="grad-stat-label">총 졸업 매장</span>
+              <span class="grad-stat-val" id="gradSumStores">0곳</span>
+            </div>
+            <div class="grad-stat-pill">
+              <span class="grad-stat-label">졸업 매장 테마 수</span>
+              <span class="grad-stat-val" id="gradSumThemes">0방</span>
+            </div>
+            <div class="grad-stat-pill">
+              <span class="grad-stat-label">졸업 매장 평균 평점</span>
+              <span class="grad-stat-val" id="gradSumAvg">0.00</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="grad-toolbar">
+          <div class="sort-wrapper">
+            <select class="sort-select" id="gradSortSelect" onchange="renderEscapeGraduation()">
+              <option value="dateDesc">최근 졸업일순</option>
+              <option value="themeCountDesc">클리어 테마 많은순</option>
+              <option value="ratingDesc">매장 평균 평점순</option>
+              <option value="nameAsc">매장명 가나다순</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="grad-store-grid" id="escapeGradGrid"></div>
       </section>
     </div>
 
@@ -2215,26 +3034,44 @@
     <div id="stageDomainContainer" style="display:none;">
       <div id="stageListFilterSection">
         <nav class="filter-container" id="stagePrimaryNav">
-          <div class="filter-item active" onclick="setStagePrimaryFilter('all', this)"><span class="filter-icon">✦</span><span class="filter-name">전체보기</span></div>
-          <div class="filter-item" onclick="setStagePrimaryFilter('life', this)"><span class="filter-icon">👑</span><span class="filter-name">인생극</span></div>
-          <div class="filter-item" onclick="setStagePrimaryFilter('type', this)"><span class="filter-icon">🎫</span><span class="filter-name">구분 (뮤지컬/연극)</span></div>
-          <div class="filter-item" onclick="setStagePrimaryFilter('place', this)"><span class="filter-icon">🏠</span><span class="filter-name">공연장별</span></div>
-          <div class="filter-item" onclick="setStagePrimaryFilter('cast', this)"><span class="filter-icon">★</span><span class="filter-name">캐스팅별</span></div>
-          <div class="filter-item" onclick="setStagePrimaryFilter('title', this)"><span class="filter-icon">📖</span><span class="filter-name">작품별</span></div>
+          <div class="filter-item active" onclick="setStagePrimaryFilter('all', this)">
+            <span class="filter-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg></span>
+            <span class="filter-name">전체보기</span>
+          </div>
+          <div class="filter-item" onclick="setStagePrimaryFilter('life', this)">
+            <span class="filter-icon"><svg viewBox="0 0 24 24"><path d="m2 4 3 12h14l3-12-6 7-4-7-4 7-6-7zm3 16h14"/></svg></span>
+            <span class="filter-name">인생극</span>
+          </div>
+          <div class="filter-item" onclick="setStagePrimaryFilter('type', this)">
+            <span class="filter-icon"><svg viewBox="0 0 24 24"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M13 5v2"/><path d="M13 17v2"/><path d="M13 11v2"/></svg></span>
+            <span class="filter-name">구분 (뮤지컬/연극)</span>
+          </div>
+          <div class="filter-item" onclick="setStagePrimaryFilter('place', this)">
+            <span class="filter-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span>
+            <span class="filter-name">공연장별</span>
+          </div>
+          <div class="filter-item" onclick="setStagePrimaryFilter('cast', this)">
+            <span class="filter-icon"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span>
+            <span class="filter-name">캐스팅별</span>
+          </div>
+          <div class="filter-item" onclick="setStagePrimaryFilter('title', this)">
+            <span class="filter-icon"><svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></span>
+            <span class="filter-name">작품별</span>
+          </div>
         </nav>
         <div class="sub-filter-container" id="stageSubNav"></div>
 
         <div class="toolbar">
           <div class="search-wrapper">
             <select id="stageSearchType" class="search-filter" onchange="handleStageSearch()">
-              <option value="all">전체</option>
-              <option value="title">제목(작품명)</option>
-              <option value="cast">캐스팅(배우)</option>
-              <option value="place">장소(공연장)</option>
-              <option value="companion">일행</option>
+              <option value="all">전체 검색</option>
+              <option value="title">제목 (작품명)</option>
+              <option value="cast">캐스팅 (배우)</option>
+              <option value="place">장소 (공연장)</option>
+              <option value="companion">동행 일행</option>
             </select>
             <div class="search-box">
-              <span class="search-icon">🔍</span>
+              <span class="search-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg></span>
               <input type="text" id="stageSearchInput" class="search-input" placeholder="작품 제목, 캐스팅 배우, 공연장, 일행 검색..." oninput="handleStageSearch()">
             </div>
           </div>
@@ -2242,13 +3079,13 @@
           <div class="sort-wrapper">
             <div class="total-count" id="stageTotalCountDisplay">총 0편</div>
             <select class="sort-select" id="stageSortSelect" onchange="applyStageFiltersAndSort()">
-              <option value="dateDesc">📅 관람일 (최신순)</option>
-              <option value="dateAsc">📅 관람일 (오래된순)</option>
-              <option value="myRatingDesc">⭐ 나의 평점 (높은순)</option>
-              <option value="myRatingAsc">⭐ 나의 평점 (낮은순)</option>
-              <option value="noDesc">🔢 NO (최신 번호순)</option>
-              <option value="noAsc">🔢 NO (1번부터)</option>
-              <option value="titleAsc">🔤 제목 (가나다순)</option>
+              <option value="dateDesc">관람일 · 최신순</option>
+              <option value="dateAsc">관람일 · 오래된순</option>
+              <option value="myRatingDesc">나의 평점 · 높은순</option>
+              <option value="myRatingAsc">나의 평점 · 낮은순</option>
+              <option value="noDesc">NO · 최신 번호순</option>
+              <option value="noAsc">NO · 1번부터</option>
+              <option value="titleAsc">제목 · 가나다순</option>
             </select>
           </div>
         </div>
@@ -2269,9 +3106,18 @@
           </div>
 
           <div class="cal-quick-btns">
-            <button class="cal-sub-btn" id="stageCalSplitBtn" onclick="toggleStageCalSplit()">🖼️ 종일반 분할보기: ON</button>
-            <button class="cal-sub-btn" onclick="jumpStageCalLatest()">⏮️ 최근 관극 달</button>
-            <button class="cal-sub-btn" onclick="jumpStageCalToday()">📍 이번 달</button>
+            <button class="cal-sub-btn" id="stageCalSplitBtn" onclick="toggleStageCalSplit()">
+              <svg class="ui-ico" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 12h18"/><path d="M12 3v18"/></svg>
+              <span id="stageCalSplitText">종일반 분할보기: ON</span>
+            </button>
+            <button class="cal-sub-btn" onclick="jumpStageCalLatest()">
+              <svg class="ui-ico" viewBox="0 0 24 24"><polygon points="19 20 9 12 19 4 19 20"/><line x1="5" y1="19" x2="5" y2="5"/></svg>
+              <span>최근 관극 달</span>
+            </button>
+            <button class="cal-sub-btn" onclick="jumpStageCalToday()">
+              <svg class="ui-ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/></svg>
+              <span>이번 달</span>
+            </button>
           </div>
         </div>
 
@@ -2286,11 +3132,11 @@
           </div>
           <div class="cal-sum-card">
             <span class="cal-sum-label">이달의 평균 평점</span>
-            <span class="cal-sum-val" id="stageCalSumAvg">⭐ 0.00</span>
+            <span class="cal-sum-val" id="stageCalSumAvg">0.00</span>
           </div>
           <div class="cal-sum-card">
             <span class="cal-sum-label">이달의 인생극</span>
-            <span class="cal-sum-val" id="stageCalSumLife">👑 0편</span>
+            <span class="cal-sum-val" id="stageCalSumLife">0편</span>
           </div>
         </div>
 
@@ -2303,8 +3149,11 @@
 
         <div class="cal-day-detail">
           <div class="cal-day-header">
-            <div class="cal-day-title" id="stageCalDateTitle">📅 날짜를 선택하면 관극 기록이 표시됩니다</div>
-            <button class="btn" id="stageCalAddBtn" style="display:none;" onclick="openDataModalForCalDate('stage')">➕ 이 날짜로 관극 추가</button>
+            <div class="cal-day-title" id="stageCalDateTitle">날짜를 선택하면 관극 기록이 표시됩니다</div>
+            <button class="btn" id="stageCalAddBtn" style="display:none;" onclick="openDataModalForCalDate('stage')">
+              <svg class="ui-ico" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+              <span>이 날짜로 관극 추가</span>
+            </button>
           </div>
           <div class="cal-day-list" id="stageCalDayList"></div>
         </div>
@@ -2356,17 +3205,17 @@
           <div class="detail-grid" id="d_grid_box"></div>
           <div class="detail-section" id="d_cast_section" style="display:none;">
             <h3 style="justify-content:space-between; flex-wrap:wrap;">
-              <span>✦ 캐스팅 (출연 배우)</span>
-              <span style="font-size:calc(11px * var(--fs)); font-weight:600; color:var(--muted);">💡 이름 앞 * 표기 또는 배우 뱃지 탭 시 하이라이트 지정/해제</span>
+              <span style="display:inline-flex; align-items:center; gap:6px;"><svg class="ui-ico" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg> 캐스팅 (출연 배우)</span>
+              <span style="font-size:calc(11px * var(--fs)); font-weight:600; color:var(--muted);">이름 앞 * 표기 또는 배우 뱃지 탭 시 하이라이트 지정/해제</span>
             </h3>
             <div class="detail-badges" id="d_cast_badges" style="margin-top:4px;"></div>
           </div>
           <div class="detail-section">
-            <h3>📖 시놉시스 (줄거리)</h3>
+            <h3><svg class="ui-ico" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg> 시놉시스 (줄거리)</h3>
             <p id="d_synopsis"></p>
           </div>
           <div class="my-record-box">
-            <h3 id="d_record_box_title">📝 나의 기록</h3>
+            <h3 id="d_record_box_title">나의 기록</h3>
             <div class="mr-grid">
               <div><span id="d_date_label">플레이 일자</span> <b id="d_playDate"></b></div>
               <div><span>인원/일행</span> <b id="d_playPax"></b></div>
@@ -2403,10 +3252,17 @@
         <div class="form-group"><label>나의 평점 (예: 9.5)</label><input type="text" id="m_myRating" style="border-color:var(--accent);"></div>
         <div class="form-group"><label>플레이 인원</label><input type="text" id="m_playPax"></div>
         <div class="form-group"><label>일행 (쉼표로 구분)</label><input type="text" id="m_companions" placeholder="예: 철수, 영희"></div>
-        <div class="form-group full"><label>👑 인생테마 직접 지정</label>
+        <div class="form-group"><label>W열 · 매장분류 (브랜드명)</label><input type="text" id="m_brand" placeholder="예: 키이스케이프, 제로월드"></div>
+        <div class="form-group"><label>X열 · 매장 졸업 여부</label>
+          <select id="m_grad">
+            <option value="">미졸업 (진행중)</option>
+            <option value="졸업">졸업 (매장 올클리어)</option>
+          </select>
+        </div>
+        <div class="form-group full"><label>인생테마 직접 지정</label>
           <select id="m_life">
             <option value="">자동 (평점 기준)</option>
-            <option value="👑">👑 인생테마 지정</option>
+            <option value="👑">인생테마 고정 지정</option>
           </select>
         </div>
         <div class="form-group full"><label>시놉시스 (줄거리)</label><textarea id="m_synopsis" rows="3"></textarea></div>
@@ -2434,10 +3290,10 @@
         <div class="form-group"><label>K열 · 일행 (쉼표로 구분)</label><input type="text" id="st_companions" placeholder="예: 철수, 영희"></div>
         <div class="form-group full"><label>L열 · 캐스팅 (쉼표로 구분 · 인상적인 배우는 이름 앞에 * 추가)</label><input type="text" id="st_cast" placeholder="예: *홍광호, 아이비, 민경아"></div>
         <div class="form-group"><label>O열 · 나의 평점 (예: 9.5)</label><input type="text" id="st_rating" style="border-color:var(--accent);"></div>
-        <div class="form-group"><label>P열 · 👑 인생극 직접 지정</label>
+        <div class="form-group"><label>P열 · 인생극 직접 지정</label>
           <select id="st_life">
             <option value="">자동 (평점 기준)</option>
-            <option value="👑">👑 인생극 지정</option>
+            <option value="👑">인생극 고정 지정</option>
           </select>
         </div>
         <div class="form-group full"><label>Q열 · 재회차 관람 (입력 시 카드 우측 상단 뱃지 노출)</label><input type="text" id="st_nth" placeholder="예: 2회차, 3회차 (초연/1회차 등 미표기 시 비워두세요)"></div>
@@ -2457,36 +3313,36 @@
     <div class="modal-content dashboard-content">
       <button class="close-btn" onclick="closeModal('escapeDashboardModal')">✕</button>
       <div class="stat-modal-header">
-        <h2>📊 방탈출 통계 요약</h2>
+        <h2 style="display:inline-flex; align-items:center; gap:8px;"><svg class="ui-ico" style="width:20px; height:20px; color:var(--accent);" viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg> 방탈출 통계 요약</h2>
         <button class="cal-sub-btn" id="toggleAllEscapeStatsBtn" onclick="toggleAllDomainStatLists('escape')">전체 순위 펼치기 ▼</button>
       </div>
       <div class="stat-grid">
         <div class="stat-box full">
           <div><div class="stat-label">총 플레이 횟수</div><div class="stat-highlight" id="escStatTotal">0방</div></div>
           <div><div class="stat-label" id="escStatYearLabel">올해 플레이</div><div class="stat-highlight" id="escStatYear">0방</div></div>
-          <div><div class="stat-label">평균 나의 평점</div><div class="stat-highlight" id="escStatAvg">⭐ 0.00</div></div>
+          <div><div class="stat-label">평균 나의 평점</div><div class="stat-highlight" id="escStatAvg">0.00</div></div>
         </div>
         <div class="stat-box full chart-box">
-          <h3 id="escChartTitle">📈 월별 방탈출 추이</h3>
+          <h3 id="escChartTitle">월별 방탈출 추이</h3>
           <div class="bar-chart" id="escStatMonthly"></div>
         </div>
         <div class="stat-box">
-          <h3><span>👥 일행 랭킹</span><span class="stat-count-pill" id="escCountComps">0명</span></h3>
+          <h3><span style="display:inline-flex; align-items:center; gap:6px;"><svg class="ui-ico" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> 일행 랭킹</span><span class="stat-count-pill" id="escCountComps">0명</span></h3>
           <ul class="stat-list" id="escStatComps"></ul>
           <div id="escMoreCompsWrap"></div>
         </div>
         <div class="stat-box">
-          <h3><span># 장르 랭킹</span><span class="stat-count-pill" id="escCountGenres">0개</span></h3>
+          <h3><span style="display:inline-flex; align-items:center; gap:6px;"><svg class="ui-ico" viewBox="0 0 24 24"><path d="M12 2H2v10l9.29 9.29c.94.94 2.48.94 3.42 0l6.58-6.58c.94-.94.94-2.48 0-3.42L12 2Z"/><path d="M7 7h.01"/></svg> 장르 랭킹</span><span class="stat-count-pill" id="escCountGenres">0개</span></h3>
           <ul class="stat-list" id="escStatGenres"></ul>
           <div id="escMoreGenresWrap"></div>
         </div>
         <div class="stat-box">
-          <h3><span>🏠 브랜드별 랭킹</span><span class="stat-count-pill" id="escCountBrands">0곳</span></h3>
+          <h3><span style="display:inline-flex; align-items:center; gap:6px;"><svg class="ui-ico" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg> 브랜드별 랭킹</span><span class="stat-count-pill" id="escCountBrands">0곳</span></h3>
           <ul class="stat-list" id="escStatBrands"></ul>
           <div id="escMoreBrandsWrap"></div>
         </div>
         <div class="stat-box">
-          <h3><span>📍 지역별 랭킹</span><span class="stat-count-pill" id="escCountRegions">0곳</span></h3>
+          <h3><span style="display:inline-flex; align-items:center; gap:6px;"><svg class="ui-ico" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg> 지역별 랭킹</span><span class="stat-count-pill" id="escCountRegions">0곳</span></h3>
           <ul class="stat-list" id="escStatRegions"></ul>
           <div id="escMoreRegionsWrap"></div>
         </div>
@@ -2499,37 +3355,37 @@
     <div class="modal-content dashboard-content">
       <button class="close-btn" onclick="closeModal('stageDashboardModal')">✕</button>
       <div class="stat-modal-header">
-        <h2>📊 뮤지컬·연극 관극 통계</h2>
+        <h2 style="display:inline-flex; align-items:center; gap:8px;"><svg class="ui-ico" style="width:20px; height:20px; color:var(--accent);" viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg> 뮤지컬·연극 관극 통계</h2>
         <button class="cal-sub-btn" id="toggleAllStageStatsBtn" onclick="toggleAllDomainStatLists('stage')">전체 순위 펼치기 ▼</button>
       </div>
       <div class="stat-grid">
         <div class="stat-box full">
           <div><div class="stat-label">총 관극 횟수</div><div class="stat-highlight" id="stgStatTotal">0편</div></div>
           <div><div class="stat-label" id="stgStatYearLabel">올해 관극</div><div class="stat-highlight" id="stgStatYear">0편</div></div>
-          <div><div class="stat-label">평균 나의 평점</div><div class="stat-highlight" id="stgStatAvg">⭐ 0.00</div></div>
+          <div><div class="stat-label">평균 나의 평점</div><div class="stat-highlight" id="stgStatAvg">0.00</div></div>
           <div><div class="stat-label">뮤지컬 / 연극 비중</div><div class="stat-highlight" id="stgStatRatio" style="font-size:calc(16px * var(--fs)); margin-top:10px;">0 : 0</div></div>
         </div>
         <div class="stat-box full chart-box">
-          <h3 id="stgChartTitle">📈 월별 관극 추이</h3>
+          <h3 id="stgChartTitle">월별 관극 추이</h3>
           <div class="bar-chart" id="stgStatMonthly"></div>
         </div>
         <div class="stat-box">
-          <h3><span>✦ 캐스팅(배우) 랭킹</span><span class="stat-count-pill" id="stgCountCast">0명</span></h3>
+          <h3><span style="display:inline-flex; align-items:center; gap:6px;"><svg class="ui-ico" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg> 캐스팅(배우) 랭킹</span><span class="stat-count-pill" id="stgCountCast">0명</span></h3>
           <ul class="stat-list" id="stgStatCast"></ul>
           <div id="stgMoreCastWrap"></div>
         </div>
         <div class="stat-box">
-          <h3><span>📖 다회차 작품 랭킹</span><span class="stat-count-pill" id="stgCountTitles">0작품</span></h3>
+          <h3><span style="display:inline-flex; align-items:center; gap:6px;"><svg class="ui-ico" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg> 다회차 작품 랭킹</span><span class="stat-count-pill" id="stgCountTitles">0작품</span></h3>
           <ul class="stat-list" id="stgStatTitles"></ul>
           <div id="stgMoreTitlesWrap"></div>
         </div>
         <div class="stat-box">
-          <h3><span>🏠 공연장(장소) 랭킹</span><span class="stat-count-pill" id="stgCountPlaces">0곳</span></h3>
+          <h3><span style="display:inline-flex; align-items:center; gap:6px;"><svg class="ui-ico" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg> 공연장(장소) 랭킹</span><span class="stat-count-pill" id="stgCountPlaces">0곳</span></h3>
           <ul class="stat-list" id="stgStatPlaces"></ul>
           <div id="stgMorePlacesWrap"></div>
         </div>
         <div class="stat-box">
-          <h3><span>👥 관극 동행 일행 랭킹</span><span class="stat-count-pill" id="stgCountComps">0명</span></h3>
+          <h3><span style="display:inline-flex; align-items:center; gap:6px;"><svg class="ui-ico" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> 관극 동행 일행 랭킹</span><span class="stat-count-pill" id="stgCountComps">0명</span></h3>
           <ul class="stat-list" id="stgStatComps"></ul>
           <div id="stgMoreCompsWrap"></div>
         </div>
@@ -2541,7 +3397,7 @@
   <div class="modal-overlay" id="awardsModal">
     <div class="modal-content awards-content">
       <button class="close-btn" onclick="closeModal('awardsModal')">✕</button>
-      <h2 class="awards-title">🏆 한국 방탈출 어워즈<br class="mobile-break"> 명예의 전당</h2>
+      <h2 class="awards-title"><svg class="ui-ico" style="width:26px; height:26px; color:var(--gold); vertical-align:-4px;" viewBox="0 0 24 24"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg> 한국 방탈출 어워즈<br class="mobile-break"> 명예의 전당</h2>
       <div class="awards-tabs" id="awardsTabs"></div>
       <div id="awardsContainer"></div>
     </div>
@@ -2552,7 +3408,7 @@
     <div class="modal-content">
       <h2 style="margin-bottom:15px; border-bottom:2px solid var(--strong); padding-bottom:10px;">환경 설정</h2>
       <div class="form-group" style="background:var(--bg-soft); padding:15px; border-radius:10px; margin-bottom:15px;">
-        <label style="color:var(--accent); font-size:calc(13px * var(--fs));">🔗 구글 웹 앱 URL (필수)</label>
+        <label style="color:var(--accent); font-size:calc(13px * var(--fs));">구글 웹 앱 URL (필수)</label>
         <input type="text" id="s_url" placeholder="https://script.google.com/macros/s/...">
       </div>
       <div class="form-grid">
@@ -2583,13 +3439,13 @@
         <div class="form-group">
           <label>화면 테마</label>
           <select id="s_darkMode">
-            <option value="light">☀️ 라이트 모드</option>
-            <option value="dark">🌙 다크 모드</option>
+            <option value="light">라이트 모드 (Light)</option>
+            <option value="dark">다크 모드 (Dark)</option>
           </select>
         </div>
       </div>
       <div class="form-group">
-        <label>👑 인생테마 / 인생극 자동 기준 (평점이 이 점수 이상이면 자동 포함)</label>
+        <label>인생테마 / 인생극 자동 기준 (평점이 이 점수 이상이면 자동 포함)</label>
         <input type="number" id="s_lifeThreshold" step="0.1" min="0" max="10" placeholder="예: 9.0">
       </div>
       <div style="display:flex; gap:10px; margin-top:20px;">
@@ -2618,6 +3474,19 @@
     const SVG_KEY = '<svg viewBox="0 0 24 24"><circle cx="7.5" cy="15.5" r="5.5"/><path d="m21 2-9.6 9.6"/><path d="m15.5 7.5 3 3L22 7l-3-3"/></svg>';
     const SVG_TICKET = '<svg viewBox="0 0 24 24"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M13 5v2"/><path d="M13 17v2"/><path d="M13 11v2"/></svg>';
     const SVG_SPARKLE = '<svg viewBox="0 0 24 24"><path d="M12 3l2.4 6.6L21 12l-6.6 2.4L12 21l-2.4-6.6L3 12l6.6-2.4L12 3z"/></svg>';
+    const SVG_STAR_GOLD = '<svg class="star-gold-ico" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>';
+    const SVG_CROWN_GOLD = '<svg class="crown-gold-ico" viewBox="0 0 24 24"><path d="m2 4 3 12h14l3-12-6 7-4-7-4 7-6-7zm3 16h14"/></svg>';
+    const SVG_LOCK_MINI = '<svg class="ui-ico" style="width:12.5px;height:12.5px;" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>';
+    const SVG_CLOCK_MINI = '<svg class="ui-ico" style="width:12.5px;height:12.5px;" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>';
+    const SVG_TICKET_MINI = '<svg class="ui-ico" style="width:12.5px;height:12.5px;" viewBox="0 0 24 24"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M13 5v2"/><path d="M13 17v2"/><path d="M13 11v2"/></svg>';
+    const SVG_TROPHY_MINI = '<svg class="ui-ico" style="width:12.5px;height:12.5px;stroke:#fde047;" viewBox="0 0 24 24"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>';
+    const SVG_EDIT_MINI = '<svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>';
+    const SVG_TRASH_MINI = '<svg viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg>';
+    const SVG_CHECK_STAMP = '<svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>';
+    const SVG_MOON = '<svg class="ui-ico" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+    const SVG_SUN = '<svg class="ui-ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>';
+
+    let gradRegionFilter = 'all';
 
     let currentDomain = 'escape'; // 'escape' | 'stage'
     let currentMainView = 'list'; // 'list' | 'calendar'
@@ -2835,6 +3704,153 @@
         }
       }
       return '';
+    }
+
+    const SVG_CALENDAR_BADGE = '<span class="date-ico-wrap"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="3" ry="3"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><circle cx="8.5" cy="14.5" r="1"/><circle cx="12" cy="14.5" r="1"/><circle cx="15.5" cy="14.5" r="1"/></svg></span>';
+    const SVG_PAX_PERSON = '<svg class="pax-person-svg" viewBox="0 0 24 24"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>';
+
+    function buildDateBadgeHTML(dateText) {
+      return `<span class="date-badge">${SVG_CALENDAR_BADGE}<span>${escHtml(dateText)}</span></span>`;
+    }
+
+    function resolvePaxCount(rawPax, rawCompanions) {
+      if (rawPax !== undefined && rawPax !== null && String(rawPax).trim() !== '') {
+        const m = String(rawPax).match(/\d+/);
+        if (m) {
+          const n = parseInt(m[0], 10);
+          if (!isNaN(n) && n > 0) return n;
+        }
+      }
+      if (rawCompanions !== undefined && rawCompanions !== null && String(rawCompanions).trim() !== '') {
+        const list = String(rawCompanions).split(',').map(s => s.trim()).filter(Boolean);
+        if (list.length > 0) return list.length + 1;
+      }
+      return 1;
+    }
+
+    function buildPaxIconsHTML(rawPax, rawCompanions) {
+      const count = resolvePaxCount(rawPax, rawCompanions);
+      const iconCount = Math.min(Math.max(count, 1), 6);
+      const manyCls = iconCount >= 4 ? ' many' : '';
+      let icons = '';
+      for (let i = 0; i < iconCount; i++) {
+        icons += SVG_PAX_PERSON;
+      }
+      return `<span class="pax-icons-wrap${manyCls}">${icons}</span>`;
+    }
+
+    function isExcludedCompanionName(name) {
+      if (!name) return true;
+      const clean = String(name).trim();
+      if (!clean || clean === '-') return true;
+      const normalized = clean.replace(/\s+/g, '');
+      const excluded = new Set(['모름', '미상', '기억안남', '기억나지않음', '없음', '혼자', '솔플', '1인']);
+      return excluded.has(normalized);
+    }
+
+    function getEscapeBrandCategory(item) {
+      if (!item || typeof item !== 'object') return '';
+      const directKeys = ['매장분류', '매장 분류', '브랜드', '브랜드명', '브랜드분류', 'W', 'W열'];
+      for (const k of directKeys) {
+        if (k in item) {
+          const val = String(item[k] ?? '').trim();
+          if (val !== '' && val !== '-') return val;
+        }
+      }
+      for (const key of Object.keys(item)) {
+        const clean = key.replace(/\s+/g, '');
+        if (clean.includes('매장분류') || clean.includes('브랜드')) {
+          const val = String(item[key] ?? '').trim();
+          if (val !== '' && val !== '-') return val;
+        }
+      }
+      const keys = Object.keys(item);
+      if (keys.length >= 23) {
+        const wKey = keys[22];
+        const wVal = String(item[wKey] ?? '').trim();
+        if (wVal !== '' && wVal !== '-') return wVal;
+      }
+      return '';
+    }
+
+    function getEscapeGradVal(item) {
+      if (!item || typeof item !== 'object') return '';
+      const directKeys = ['졸업', '졸업여부', '졸업 매장', '졸업매장', 'X', 'X열'];
+      for (const k of directKeys) {
+        if (k in item) {
+          const val = String(item[k] ?? '').trim();
+          if (val !== '' && val !== '-' && val.toUpperCase() !== 'FALSE' && val !== '0' && val.toUpperCase() !== 'X') return val;
+        }
+      }
+      for (const key of Object.keys(item)) {
+        const clean = key.replace(/\s+/g, '');
+        if (clean.includes('졸업')) {
+          const val = String(item[key] ?? '').trim();
+          if (val !== '' && val !== '-' && val.toUpperCase() !== 'FALSE' && val !== '0' && val.toUpperCase() !== 'X') return val;
+        }
+      }
+      const keys = Object.keys(item);
+      if (keys.length >= 24) {
+        const xKey = keys[23];
+        const xVal = String(item[xKey] ?? '').trim();
+        if (xVal !== '' && xVal !== '-' && xVal.toUpperCase() !== 'FALSE' && xVal !== '0' && xVal.toUpperCase() !== 'X') return xVal;
+      }
+      return '';
+    }
+
+    function isEscapeGraduatedItem(item) {
+      return getEscapeGradVal(item) !== '';
+    }
+
+    function getGraduatedStoreGroups() {
+      const storeMap = {};
+      const gradStoreNames = new Set();
+
+      escapeData.forEach((item, index) => {
+        const storeName = String(item['매장명'] || '').trim();
+        if (!storeName) return;
+        if (!storeMap[storeName]) {
+          storeMap[storeName] = {
+            storeName,
+            region: String(item['지역'] || '').trim(),
+            brand: getEscapeBrandCategory(item) || getBrandName(storeName),
+            themes: []
+          };
+        }
+        if (!storeMap[storeName].region && item['지역']) {
+          storeMap[storeName].region = String(item['지역']).trim();
+        }
+        if (isEscapeGraduatedItem(item)) {
+          gradStoreNames.add(storeName);
+        }
+        storeMap[storeName].themes.push({ item, index });
+      });
+
+      const result = [];
+      gradStoreNames.forEach(sName => {
+        const group = storeMap[sName];
+        if (!group) return;
+        // Sort themes chronologically or by rating
+        group.themes.sort((a, b) => {
+          const da = normalizeDateStr(getEscapeDate(a.item)) || '1900-01-01';
+          const db = normalizeDateStr(getEscapeDate(b.item)) || '1900-01-01';
+          return da.localeCompare(db);
+        });
+        let latestDate = '';
+        let ratingSum = 0, ratingCnt = 0, lifeCnt = 0;
+        group.themes.forEach(t => {
+          const d = normalizeDateStr(getEscapeDate(t.item));
+          if (d && d > latestDate) latestDate = d;
+          const r = num(getEscapeRating(t.item));
+          if (r !== null && r > 0) { ratingSum += r; ratingCnt++; }
+          if (isEscapeLife(t.item)) lifeCnt++;
+        });
+        group.gradDate = latestDate || '-';
+        group.avgRating = ratingCnt > 0 ? (ratingSum / ratingCnt) : 0;
+        group.lifeCount = lifeCnt;
+        result.push(group);
+      });
+      return result;
     }
 
     function getEscapeHorror(item) {
@@ -3072,8 +4088,9 @@
     function syncSidebarAndBottomNav() {
       const isStage = currentDomain === 'stage';
       const isCal = currentMainView === 'calendar';
-      const isLifeActive = !isCal && ((isStage && stagePrimary === 'life') || (!isStage && escapePrimary === 'life'));
-      const isExploreActive = !isCal && !isLifeActive;
+      const isGrad = !isStage && currentMainView === 'grad';
+      const isLifeActive = !isCal && !isGrad && ((isStage && stagePrimary === 'life') || (!isStage && escapePrimary === 'life'));
+      const isExploreActive = !isCal && !isGrad && !isLifeActive;
 
       const sbEsc = document.getElementById('sbDomainEscape');
       const sbStg = document.getElementById('sbDomainStage');
@@ -3102,13 +4119,20 @@
 
       const sbNavAwards = document.getElementById('sbNavAwards');
       if (sbNavAwards) sbNavAwards.style.display = isStage ? 'none' : 'flex';
+      const sbNavGrad = document.getElementById('sbNavGrad');
+      if (sbNavGrad) sbNavGrad.style.display = isStage ? 'none' : 'flex';
+      const mobileAwardsBtn = document.getElementById('mobileAwardsBtn');
+      if (mobileAwardsBtn) mobileAwardsBtn.style.display = isStage ? 'none' : 'flex';
 
       const totalCnt = isStage ? stageData.length : escapeData.length;
       const lifeCnt = isStage ? stageData.filter(it => isStageLife(it)).length : escapeData.filter(it => isEscapeLife(it)).length;
+      const gradCnt = getGraduatedStoreGroups().length;
       const sbBadgeTotal = document.getElementById('sbBadgeTotal');
       if (sbBadgeTotal) sbBadgeTotal.innerText = totalCnt;
       const sbBadgeLife = document.getElementById('sbBadgeLife');
       if (sbBadgeLife) sbBadgeLife.innerText = lifeCnt;
+      const sbBadgeGrad = document.getElementById('sbBadgeGrad');
+      if (sbBadgeGrad) sbBadgeGrad.innerText = gradCnt;
 
       const sbNavExplore = document.getElementById('sbNavExplore');
       const sbNavLife = document.getElementById('sbNavLife');
@@ -3116,21 +4140,22 @@
       if (sbNavExplore) sbNavExplore.classList.toggle('active', isExploreActive);
       if (sbNavLife) sbNavLife.classList.toggle('active', isLifeActive);
       if (sbNavCalendar) sbNavCalendar.classList.toggle('active', isCal);
+      if (sbNavGrad) sbNavGrad.classList.toggle('active', isGrad);
 
       const mbTabExplore = document.getElementById('mbTabExplore');
       const mbTabCalendar = document.getElementById('mbTabCalendar');
       const mbTabExtra = document.getElementById('mbTabExtra');
       const mbTabExtraText = document.getElementById('mbTabExtraText');
       const mbTabExtraIcon = document.getElementById('mbTabExtraIcon');
-      if (mbTabExplore) mbTabExplore.classList.toggle('active', !isCal && (!isStage || !isLifeActive));
+      if (mbTabExplore) mbTabExplore.classList.toggle('active', !isCal && !isGrad && (!isStage || !isLifeActive));
       if (mbTabCalendar) mbTabCalendar.classList.toggle('active', isCal);
-      if (mbTabExtraText) mbTabExtraText.innerText = isStage ? '인생극' : '어워즈';
+      if (mbTabExtraText) mbTabExtraText.innerText = isStage ? '인생극' : '졸업매장';
       if (mbTabExtraIcon) {
         mbTabExtraIcon.innerHTML = isStage
           ? '<path d="m2 4 3 12h14l3-12-6 7-4-7-4 7-6-7zm3 16h14"/>'
-          : '<path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/>';
+          : '<path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/>';
       }
-      if (mbTabExtra) mbTabExtra.classList.toggle('active', isStage && isLifeActive);
+      if (mbTabExtra) mbTabExtra.classList.toggle('active', isStage ? isLifeActive : isGrad);
     }
 
     function handleNavAction(action) {
@@ -3155,13 +4180,16 @@
         }
       } else if (action === 'calendar') {
         switchMainView('calendar');
+      } else if (action === 'grad') {
+        if (isStage) switchDomain('escape');
+        switchMainView('grad');
       } else if (action === 'stats') {
         if (!isStage) openEscapeDashboard();
         else openStageDashboard();
       } else if (action === 'awards') {
         openAwardsModal();
       } else if (action === 'extra') {
-        if (!isStage) openAwardsModal();
+        if (!isStage) handleNavAction('grad');
         else handleNavAction('life');
       } else if (action === 'refresh') {
         if (!isStage) fetchEscapeData();
@@ -3176,7 +4204,7 @@
         localStorage.setItem('myEscapeSettingsV6', JSON.stringify(appSettings));
       } catch (e) {}
       applySettingsToUI();
-      showToast(appSettings.darkMode === 'dark' ? '🌙 다크 모드가 적용되었습니다' : '☀️ 라이트 모드가 적용되었습니다');
+      showToast(appSettings.darkMode === 'dark' ? '다크 모드가 적용되었습니다' : '라이트 모드가 적용되었습니다');
     }
 
     function switchDomain(domain) {
@@ -3200,6 +4228,7 @@
       document.getElementById('escapeDomainContainer').style.display = isStage ? 'none' : 'block';
       document.getElementById('stageDomainContainer').style.display = isStage ? 'block' : 'none';
 
+      if (isStage && currentMainView === 'grad') currentMainView = 'list';
       updateTicketStubNo();
       syncMainViewDisplay();
 
@@ -3231,10 +4260,14 @@
 
     function syncMainViewDisplay() {
       const isCal = currentMainView === 'calendar';
+      const isGrad = currentMainView === 'grad' && currentDomain === 'escape';
+      const isList = !isCal && !isGrad;
 
-      document.getElementById('escapeListFilterSection').style.display = isCal ? 'none' : 'block';
-      document.getElementById('escapeGrid').style.display = isCal ? 'none' : 'grid';
+      document.getElementById('escapeListFilterSection').style.display = isList ? 'block' : 'none';
+      document.getElementById('escapeGrid').style.display = isList ? 'grid' : 'none';
       document.getElementById('escapeCalendarSection').classList.toggle('active', isCal);
+      const escGradSec = document.getElementById('escapeGradSection');
+      if (escGradSec) escGradSec.classList.toggle('active', isGrad);
 
       document.getElementById('stageListFilterSection').style.display = isCal ? 'none' : 'block';
       document.getElementById('stageGrid').style.display = isCal ? 'none' : 'grid';
@@ -3257,6 +4290,8 @@
             renderStageCalendar();
           }
         }
+      } else if (isGrad) {
+        renderEscapeGraduation();
       }
     }
 
@@ -3335,11 +4370,15 @@
       const y = new Date().getFullYear();
       const yearCount = escapeData.filter(it => normalizeDateStr(getEscapeDate(it)).startsWith(String(y))).length;
 
+      const gradCount = getGraduatedStoreGroups().length;
       document.getElementById('escapeStripTotal').innerText = total;
       document.getElementById('escapeStripLife').innerText = lifeCount;
       document.getElementById('escapeStripYear').innerText = yearCount;
+      const gradEl = document.getElementById('escapeStripGrad');
+      if (gradEl) gradEl.innerText = gradCount;
       if (currentDomain === 'escape') updateTicketStubNo();
       syncSidebarAndBottomNav();
+      if (currentDomain === 'escape' && currentMainView === 'grad') renderEscapeGraduation();
     }
 
     function updateStageHeaderStats() {
@@ -3452,21 +4491,42 @@
       applyEscapeFiltersAndSort();
     }
 
+    function selectEscapeSubValue(val) {
+      escapeSub = val;
+      const subNav = document.getElementById('escapeSubNav');
+      const sel = document.getElementById('escapeSubSelect');
+      if (sel && sel.value !== val) sel.value = val;
+      if (subNav) {
+        subNav.querySelectorAll('.sub-filter-item').forEach(el => {
+          const isMatch = el.getAttribute('data-val') === val;
+          el.classList.toggle('active', isMatch);
+          if (isMatch) {
+            try { el.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' }); } catch (e) {}
+          }
+        });
+      }
+      applyEscapeFiltersAndSort();
+    }
+
     function buildEscapeSubFilters(type) {
       const subNav = document.getElementById('escapeSubNav');
-      let values = [];
+      let countMap = {};
 
       escapeData.forEach(item => {
         if (type === 'genre' && item['장르']) {
-          String(item['장르']).split(',').forEach(v => values.push(v.trim()));
+          String(item['장르']).split(',').map(v => v.trim()).filter(Boolean).forEach(v => {
+            countMap[v] = (countMap[v] || 0) + 1;
+          });
         } else if (type === 'region' && item['지역']) {
-          values.push(String(item['지역']).trim());
+          const v = String(item['지역']).trim();
+          if (v) countMap[v] = (countMap[v] || 0) + 1;
         } else if (type === 'store' && item['매장명']) {
-          values.push(String(item['매장명']).trim());
+          const v = String(item['매장명']).trim();
+          if (v) countMap[v] = (countMap[v] || 0) + 1;
         }
       });
 
-      let uniqueValues = [...new Set(values)].filter(v => v !== '');
+      let uniqueValues = Object.keys(countMap);
 
       if (type === 'region') {
         const regionOrder = ['서울', '경기', '인천', '강원', '충북', '충남', '대전', '경북', '경남', '대구', '울산', '부산', '전북', '전남', '광주', '제주'];
@@ -3479,38 +4539,46 @@
           return a.localeCompare(b);
         });
       } else {
+        // 가나다순 정렬 (드롭다운 탐색 편의성)
         uniqueValues.sort((a, b) => a.localeCompare(b));
       }
 
-      subNav.innerHTML = '';
-      const allBtn = document.createElement('div');
-      allBtn.className = 'sub-filter-item active';
-      allBtn.textContent = '전체보기';
-      allBtn.addEventListener('click', () => {
-        subNav.querySelectorAll('.sub-filter-item').forEach(el => el.classList.remove('active'));
-        allBtn.classList.add('active');
-        escapeSub = 'all';
-        applyEscapeFiltersAndSort();
-      });
-      subNav.appendChild(allBtn);
+      // 퀵 레일은 많이 플레이한 순(또는 지역순)으로 정렬해 자주 찾는 항목이 바로 앞에 오도록 구성
+      const railValues = type === 'region'
+        ? [...uniqueValues]
+        : [...uniqueValues].sort((a, b) => (countMap[b] - countMap[a]) || a.localeCompare(b));
 
-      uniqueValues.forEach(val => {
-        const btn = document.createElement('div');
-        btn.className = 'sub-filter-item';
-        if (type === 'genre') {
-          const gs = getGenreStyle(val);
-          btn.innerHTML = `${gs.emoji} <span>${escHtml(val)}</span>`;
-        } else {
-          btn.textContent = val;
-        }
-        btn.addEventListener('click', () => {
-          subNav.querySelectorAll('.sub-filter-item').forEach(el => el.classList.remove('active'));
-          btn.classList.add('active');
-          escapeSub = val;
-          applyEscapeFiltersAndSort();
-        });
-        subNav.appendChild(btn);
-      });
+      const labelMap = {
+        genre: { text: '장르 선택', ico: '<svg viewBox="0 0 24 24"><path d="M12 2H2v10l9.29 9.29c.94.94 2.48.94 3.42 0l6.58-6.58c.94-.94.94-2.48 0-3.42L12 2Z"/><path d="M7 7h.01"/></svg>' },
+        region: { text: '지역 선택', ico: '<svg viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>' },
+        store: { text: '매장 선택', ico: '<svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>' }
+      };
+      const meta = labelMap[type] || labelMap.genre;
+
+      const optionsHTML = `<option value="all">전체보기 (${uniqueValues.length}개)</option>` +
+        uniqueValues.map(v => `<option value="${escHtml(v)}">${escHtml(v)} (${countMap[v]}방)</option>`).join('');
+
+      const railChipsHTML = `<button type="button" class="sub-filter-item active" data-val="all" onclick="selectEscapeSubValue('all')">전체보기</button>` +
+        railValues.map(val => {
+          const cntSpan = `<span class="sub-chip-cnt">${countMap[val]}</span>`;
+          if (type === 'genre') {
+            const gs = getGenreStyle(val);
+            return `<button type="button" class="sub-filter-item" data-val="${escHtml(val)}" onclick="selectEscapeSubValue(this.getAttribute('data-val'))">${gs.emoji}<span>${escHtml(val)}</span>${cntSpan}</button>`;
+          }
+          return `<button type="button" class="sub-filter-item" data-val="${escHtml(val)}" onclick="selectEscapeSubValue(this.getAttribute('data-val'))"><span>${escHtml(val)}</span>${cntSpan}</button>`;
+        }).join('');
+
+      subNav.innerHTML = `
+        <div class="sub-select-wrap">
+          <span class="sub-select-label">${meta.ico}<span>${meta.text}</span></span>
+          <select id="escapeSubSelect" class="sub-filter-select" onchange="selectEscapeSubValue(this.value)">
+            ${optionsHTML}
+          </select>
+        </div>
+        <div class="sub-quick-rail">
+          ${railChipsHTML}
+        </div>
+      `;
     }
 
     function applyEscapeFiltersAndSort() {
@@ -3564,9 +4632,9 @@
       });
 
       const isFiltered = (filtered.length !== escapeData.length);
-      document.getElementById('escapeTotalCountDisplay').innerText = isFiltered
-        ? `검색결과: ${filtered.length}방`
-        : `총 ${escapeData.length}방`;
+      document.getElementById('escapeTotalCountDisplay').innerHTML = isFiltered
+        ? `${SVG_LOCK_MINI}<span>검색결과: ${filtered.length}방</span>`
+        : `${SVG_LOCK_MINI}<span>총 ${escapeData.length}방</span>`;
 
       renderEscapeCards(filtered);
     }
@@ -3588,13 +4656,13 @@
         const manual = isEscapeManualLife(item);
         const life = isEscapeLife(item);
         const crownTitle = manual ? '인생테마 지정 해제' : (life ? '자동 인생테마 (평점 기준) · 탭하여 고정 지정' : '인생테마로 지정');
-        const lifeToggleHTML = `<button class="life-toggle ${life ? 'on' : 'off'}" title="${crownTitle}" onclick="toggleLife(${index}, 'escape', event)">👑</button>`;
+        const lifeToggleHTML = `<button class="life-toggle ${life ? 'on' : 'off'}" title="${crownTitle}" onclick="toggleLife(${index}, 'escape', event)">${SVG_CROWN_GOLD}</button>`;
 
         let awardHTML = '';
         if (item['수상']) {
           const awardsList = String(item['수상']).split(',').map(a => a.trim()).filter(a => a !== '');
           if (awardsList.length > 0) {
-            awardHTML = `<div class="award-container">` + awardsList.map(a => `<div class="award-badge">🏆 ${escHtml(a)}</div>`).join('') + `</div>`;
+            awardHTML = `<div class="award-container">` + awardsList.map(a => `<div class="award-badge">${SVG_TROPHY_MINI} ${escHtml(a)}</div>`).join('') + `</div>`;
           }
         }
 
@@ -3646,23 +4714,23 @@
                 <div class="theme-name">${escHtml(item['테마명'] || '-')}</div>
                 <div class="rating-diff-box">
                   <div class="rating-header">
-                    <div class="my-rating">⭐ ${escHtml(myRatingFormat)} <span>/ 10</span></div>
-                    <div class="ko-diff-badge">🔒 코방 <b>${escHtml(diffKoVal)}</b></div>
+                    <div class="my-rating">${SVG_STAR_GOLD} ${escHtml(myRatingFormat)} <span>/ 10</span></div>
+                    <div class="ko-diff-badge">${SVG_LOCK_MINI} 코방 <b>${escHtml(diffKoVal)}</b></div>
                   </div>
                   ${ratingBarHTML}
                 </div>
                 <div class="bottom-info">
                   <div class="info-row">
-                    <span class="date-badge">📅 ${escHtml(playDate)}</span>
-                    <div class="pax-tooltip" onclick="togglePaxTooltip(this, event)">👥 ${escHtml(pax)} <span class="tooltip-text">일행: ${companions}</span></div>
+                    ${buildDateBadgeHTML(playDate)}
+                    <div class="pax-tooltip" onclick="togglePaxTooltip(this, event)">${buildPaxIconsHTML(rawPax, item['일행'])} <span>${escHtml(pax)}</span> <span class="tooltip-text">일행: ${companions}</span></div>
                   </div>
                   ${genreHTML}
                 </div>
               </div>
             </div>
             <div class="card-actions">
-              <button class="action-btn" onclick="openDataModal(${index}, 'escape')">✏️ 수정</button>
-              <button class="action-btn" onclick="deleteRecord(${index}, 'escape')">🗑️ 삭제</button>
+              <button class="action-btn" onclick="openDataModal(${index}, 'escape')">${SVG_EDIT_MINI}<span>수정</span></button>
+              <button class="action-btn delete-btn" onclick="deleteRecord(${index}, 'escape')">${SVG_TRASH_MINI}<span>삭제</span></button>
             </div>
           </div>
         `;
@@ -3733,7 +4801,8 @@
     function toggleEscapeCalSplit() {
       escapeCalState.splitMode = !escapeCalState.splitMode;
       const btn = document.getElementById('escapeCalSplitBtn');
-      btn.textContent = escapeCalState.splitMode ? '🖼️ 연방 분할보기: ON' : '🖼️ 대표 포스터만 보기';
+      const txt = document.getElementById('escapeCalSplitText');
+      if (txt) txt.textContent = escapeCalState.splitMode ? '연방 분할보기: ON' : '대표 포스터만 보기';
       btn.classList.toggle('active', !escapeCalState.splitMode);
       renderEscapeCalendar();
     }
@@ -3762,8 +4831,8 @@
       });
       document.getElementById('escapeCalSumCount').innerText = `${monthPlays.length}방`;
       document.getElementById('escapeCalSumDays').innerText = `${Object.keys(dayMap).length}일`;
-      document.getElementById('escapeCalSumAvg').innerText = ratingCnt > 0 ? `⭐ ${(ratingSum / ratingCnt).toFixed(2)}` : '⭐ 0.00';
-      document.getElementById('escapeCalSumLife').innerText = `👑 ${lifeCnt}개`;
+      document.getElementById('escapeCalSumAvg').innerHTML = ratingCnt > 0 ? `${SVG_STAR_GOLD} ${(ratingSum / ratingCnt).toFixed(2)}` : `${SVG_STAR_GOLD} 0.00`;
+      document.getElementById('escapeCalSumLife').innerHTML = `${SVG_CROWN_GOLD} ${lifeCnt}개`;
 
       const firstDayWeek = new Date(year, month - 1, 1).getDay();
       const lastDate = new Date(year, month, 0).getDate();
@@ -3829,14 +4898,14 @@
       const addBtn = document.getElementById('escapeCalAddBtn');
 
       if (!dateStr) {
-        titleEl.innerText = '📅 날짜를 클릭하면 해당 일자의 방탈출 기록이 표시됩니다';
+        titleEl.innerText = '날짜를 클릭하면 해당 일자의 방탈출 기록이 표시됩니다';
         addBtn.style.display = 'none';
         listEl.innerHTML = '<p style="color:var(--muted); font-size:calc(13px * var(--fs));">이달에 등록된 방탈출 기록이 없습니다.</p>';
         return;
       }
 
       addBtn.style.display = 'inline-flex';
-      titleEl.innerHTML = `📅 ${escHtml(dateStr)} 방탈출 기록 <span class="stat-count-pill">${plays.length}방</span>`;
+      titleEl.innerHTML = `${buildDateBadgeHTML(dateStr)} <span>방탈출 기록</span> <span class="stat-count-pill">${plays.length}방</span>`;
 
       if (plays.length === 0) {
         listEl.innerHTML = `<p style="color:var(--muted); font-size:calc(13px * var(--fs)); grid-column:1/-1;">이 날짜에 기록된 테마가 없습니다.</p>`;
@@ -3846,22 +4915,115 @@
       listEl.innerHTML = plays.map((p, idx) => {
         const it = p.item;
         const myR = num(getEscapeRating(it));
-        const ratingTxt = myR !== null ? `⭐ ${myR.toFixed(1)}` : '평점 미기록';
-        const compTxt = it['일행'] ? `👥 ${escHtml(it['일행'])}` : '';
+        const ratingTxt = myR !== null ? `${SVG_STAR_GOLD} ${myR.toFixed(1)}` : '평점 미기록';
+        const compTxt = it['일행'] ? `${buildPaxIconsHTML(getEscapePax(it), it['일행'])} ${escHtml(it['일행'])}` : '';
         const orderBadge = plays.length > 1 ? `<span class="cal-log-order">${idx + 1}번째 테마</span>` : '';
         return `<div class="cal-log-item" onclick="openDetailModal(${p.index}, 'escape')">
           <img class="cal-log-thumb" src="${escHtml(it['포스터'] || NO_POSTER)}" loading="lazy" onerror="this.onerror=null;this.src=window.NO_POSTER;">
           <div class="cal-log-body">
             ${orderBadge}
             <div class="cal-log-store">${escHtml(it['매장명'] || '-')} ${it['지역'] ? '[' + escHtml(it['지역']) + ']' : ''}</div>
-            <div class="cal-log-theme">${isEscapeLife(it) ? '👑 ' : ''}${escHtml(it['테마명'] || '-')}</div>
+            <div class="cal-log-theme">${isEscapeLife(it) ? SVG_CROWN_GOLD + ' ' : ''}${escHtml(it['테마명'] || '-')}</div>
             <div class="cal-log-meta">
               <span style="color:var(--accent); font-weight:800;">${ratingTxt}</span>
-              <span>${compTxt}</span>
+              <span style="display:inline-flex; align-items:center; gap:4px;">${compTxt}</span>
             </div>
           </div>
         </div>`;
       }).join('');
+    }
+
+    /* ★ 방탈출 졸업매장 (X열 '졸업') 스탬프 보드 렌더링 */
+    function renderEscapeGraduation() {
+      const grid = document.getElementById('escapeGradGrid');
+      if (!grid) return;
+
+      const allGroups = getGraduatedStoreGroups();
+      let totalGradThemes = 0;
+      let ratingSum = 0, ratingCnt = 0;
+
+      allGroups.forEach(g => {
+        totalGradThemes += g.themes.length;
+        g.themes.forEach(t => {
+          const r = num(getEscapeRating(t.item));
+          if (r !== null && r > 0) { ratingSum += r; ratingCnt++; }
+        });
+      });
+
+      document.getElementById('gradSumStores').innerText = `${allGroups.length}곳`;
+      document.getElementById('gradSumThemes').innerText = `${totalGradThemes}방`;
+      document.getElementById('gradSumAvg').innerHTML = ratingCnt > 0 ? `${SVG_STAR_GOLD} ${(ratingSum / ratingCnt).toFixed(2)}` : `${SVG_STAR_GOLD} 0.00`;
+
+      let filteredGroups = [...allGroups];
+
+      const sortBy = document.getElementById('gradSortSelect')?.value || 'dateDesc';
+      filteredGroups.sort((a, b) => {
+        if (sortBy === 'dateDesc') return (b.gradDate || '').localeCompare(a.gradDate || '') || b.themes.length - a.themes.length;
+        if (sortBy === 'themeCountDesc') return b.themes.length - a.themes.length || (b.gradDate || '').localeCompare(a.gradDate || '');
+        if (sortBy === 'ratingDesc') return b.avgRating - a.avgRating || b.themes.length - a.themes.length;
+        if (sortBy === 'nameAsc') return a.storeName.localeCompare(b.storeName);
+        return 0;
+      });
+
+      if (filteredGroups.length === 0) {
+        grid.innerHTML = `<div class="url-notice" style="grid-column:1/-1;">
+          <strong style="font-size:calc(15px * var(--fs)); color:var(--strong);">아직 등록된 졸업 매장이 없습니다.</strong><br><br>
+          구글 시트의 <b>X열(졸업)</b>에 <b>졸업</b>이라고 입력하거나, 테마 수정 창에서 <b>[X열 · 매장 졸업 여부 → 졸업]</b>으로 지정하면<br>
+          해당 매장의 모든 테마 포스터와 함께 졸업 도장(스탬프) 보드가 자동으로 생성됩니다.
+        </div>`;
+        return;
+      }
+
+      grid.innerHTML = filteredGroups.map(group => {
+        const avgStr = group.avgRating > 0 ? group.avgRating.toFixed(2) : '-';
+        const shelvesHTML = group.themes.map(t => {
+          const it = t.item;
+          const rNum = num(getEscapeRating(it));
+          const rTxt = rNum !== null ? rNum.toFixed(1) : '-';
+          const dStr = normalizeDateStr(getEscapeDate(it)) || '-';
+          const lifePin = isEscapeLife(it) ? `<div class="grad-theme-life-pin" title="인생테마">${SVG_CROWN_GOLD}</div>` : '';
+          return `<div class="grad-theme-item" onclick="openDetailModal(${t.index}, 'escape')">
+            <div class="grad-theme-thumb-wrap">
+              <img src="${escHtml(it['포스터'] || NO_POSTER)}" loading="lazy" onerror="this.onerror=null;this.src=window.NO_POSTER;">
+              ${lifePin}
+              <div class="grad-theme-rating-pill">${SVG_STAR_GOLD}<span>${escHtml(rTxt)}</span></div>
+            </div>
+            <div class="grad-theme-title">${escHtml(it['테마명'] || '-')}</div>
+            <div class="grad-theme-date">${escHtml(dStr)}</div>
+          </div>`;
+        }).join('');
+
+        return `<div class="grad-store-card">
+          <div class="grad-stamp">
+            <span class="grad-stamp-top">ALL CLEAR</span>
+            <span class="grad-stamp-main">졸 업</span>
+            <span class="grad-stamp-sub">MASTERED</span>
+          </div>
+          <div class="grad-store-header">
+            <div class="grad-store-title-wrap">
+              <div class="grad-store-badges">
+                ${group.region ? `<span class="region-pill">${escHtml(group.region)}</span>` : ''}
+                ${group.brand && group.brand !== group.storeName ? `<span class="region-pill" style="color:var(--accent); border-color:var(--accent-line); background:var(--accent-bg);">${escHtml(group.brand)}</span>` : ''}
+              </div>
+              <div class="grad-store-name">${escHtml(group.storeName)}</div>
+            </div>
+          </div>
+          <div class="grad-store-meta">
+            ${buildDateBadgeHTML('졸업일 · ' + group.gradDate)}
+            <span class="grad-meta-chip">${SVG_LOCK_MINI} <span>총 <b>${group.themes.length}</b>테마 클리어</span></span>
+            <span class="grad-meta-chip">${SVG_STAR_GOLD} <span>평균 <b>${avgStr}</b></span></span>
+            ${group.lifeCount > 0 ? `<span class="grad-meta-chip">${SVG_CROWN_GOLD} <span>인생테마 <b>${group.lifeCount}</b></span></span>` : ''}
+          </div>
+          <div class="grad-theme-shelf">
+            ${shelvesHTML}
+          </div>
+        </div>`;
+      }).join('');
+    }
+
+    function setGradRegionFilter(reg) {
+      gradRegionFilter = reg;
+      renderEscapeGraduation();
     }
 
     /* =========================================================================
@@ -3899,48 +5061,74 @@
       applyStageFiltersAndSort();
     }
 
+    function selectStageSubValue(val) {
+      stageSub = val;
+      const subNav = document.getElementById('stageSubNav');
+      const sel = document.getElementById('stageSubSelect');
+      if (sel && sel.value !== val) sel.value = val;
+      if (subNav) {
+        subNav.querySelectorAll('.sub-filter-item').forEach(el => {
+          const isMatch = el.getAttribute('data-val') === val;
+          el.classList.toggle('active', isMatch);
+          if (isMatch) {
+            try { el.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' }); } catch (e) {}
+          }
+        });
+      }
+      applyStageFiltersAndSort();
+    }
+
     function buildStageSubFilters(type) {
       const subNav = document.getElementById('stageSubNav');
-      let values = [];
+      let countMap = {};
 
       stageData.forEach(item => {
         if (type === 'type' && item['구분']) {
-          values.push(String(item['구분']).trim());
+          const v = String(item['구분']).trim();
+          if (v) countMap[v] = (countMap[v] || 0) + 1;
         } else if (type === 'place' && item['장소']) {
-          values.push(String(item['장소']).trim());
+          const v = String(item['장소']).trim();
+          if (v) countMap[v] = (countMap[v] || 0) + 1;
         } else if (type === 'cast' && item['캐스팅']) {
-          parseCastList(item).forEach(c => values.push(c.name));
+          parseCastList(item).forEach(c => {
+            if (c.name) countMap[c.name] = (countMap[c.name] || 0) + 1;
+          });
         } else if (type === 'title' && item['제목']) {
-          values.push(String(item['제목']).trim());
+          const v = String(item['제목']).trim();
+          if (v) countMap[v] = (countMap[v] || 0) + 1;
         }
       });
 
-      let uniqueValues = [...new Set(values)].filter(v => v !== '').sort((a, b) => a.localeCompare(b));
+      let uniqueValues = Object.keys(countMap).sort((a, b) => a.localeCompare(b));
+      const railValues = [...uniqueValues].sort((a, b) => (countMap[b] - countMap[a]) || a.localeCompare(b));
 
-      subNav.innerHTML = '';
-      const allBtn = document.createElement('div');
-      allBtn.className = 'sub-filter-item active';
-      allBtn.textContent = '전체보기';
-      allBtn.addEventListener('click', () => {
-        subNav.querySelectorAll('.sub-filter-item').forEach(el => el.classList.remove('active'));
-        allBtn.classList.add('active');
-        stageSub = 'all';
-        applyStageFiltersAndSort();
-      });
-      subNav.appendChild(allBtn);
+      const labelMap = {
+        type: { text: '구분 선택', ico: SVG_TICKET },
+        place: { text: '공연장 선택', ico: '<svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>' },
+        cast: { text: '배우 선택', ico: '<svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>' },
+        title: { text: '작품 선택', ico: '<svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>' }
+      };
+      const meta = labelMap[type] || labelMap.type;
 
-      uniqueValues.forEach(val => {
-        const btn = document.createElement('div');
-        btn.className = 'sub-filter-item';
-        btn.textContent = val;
-        btn.addEventListener('click', () => {
-          subNav.querySelectorAll('.sub-filter-item').forEach(el => el.classList.remove('active'));
-          btn.classList.add('active');
-          stageSub = val;
-          applyStageFiltersAndSort();
-        });
-        subNav.appendChild(btn);
-      });
+      const optionsHTML = `<option value="all">전체보기 (${uniqueValues.length}개)</option>` +
+        uniqueValues.map(v => `<option value="${escHtml(v)}">${escHtml(v)} (${countMap[v]}편)</option>`).join('');
+
+      const railChipsHTML = `<button type="button" class="sub-filter-item active" data-val="all" onclick="selectStageSubValue('all')">전체보기</button>` +
+        railValues.map(val => {
+          return `<button type="button" class="sub-filter-item" data-val="${escHtml(val)}" onclick="selectStageSubValue(this.getAttribute('data-val'))"><span>${escHtml(val)}</span><span class="sub-chip-cnt">${countMap[val]}</span></button>`;
+        }).join('');
+
+      subNav.innerHTML = `
+        <div class="sub-select-wrap">
+          <span class="sub-select-label">${meta.ico}<span>${meta.text}</span></span>
+          <select id="stageSubSelect" class="sub-filter-select" onchange="selectStageSubValue(this.value)">
+            ${optionsHTML}
+          </select>
+        </div>
+        <div class="sub-quick-rail">
+          ${railChipsHTML}
+        </div>
+      `;
     }
 
     function applyStageFiltersAndSort() {
@@ -3992,9 +5180,9 @@
       });
 
       const isFiltered = (filtered.length !== stageData.length);
-      document.getElementById('stageTotalCountDisplay').innerText = isFiltered
-        ? `검색결과: ${filtered.length}편`
-        : `총 ${stageData.length}편`;
+      document.getElementById('stageTotalCountDisplay').innerHTML = isFiltered
+        ? `${SVG_TICKET_MINI}<span>검색결과: ${filtered.length}편</span>`
+        : `${SVG_TICKET_MINI}<span>총 ${stageData.length}편</span>`;
 
       renderStageCards(filtered);
     }
@@ -4031,7 +5219,7 @@
         const manual = isStageManualLife(item);
         const life = isStageLife(item);
         const crownTitle = manual ? '인생극 지정 해제' : (life ? '자동 인생극 (평점 기준) · 탭하여 고정 지정' : '인생극으로 지정');
-        const lifeToggleHTML = `<button class="life-toggle ${life ? 'on' : 'off'}" title="${crownTitle}" onclick="toggleLife(${index}, 'stage', event)">👑</button>`;
+        const lifeToggleHTML = `<button class="life-toggle ${life ? 'on' : 'off'}" title="${crownTitle}" onclick="toggleLife(${index}, 'stage', event)">${SVG_CROWN_GOLD}</button>`;
 
         const stageType = String(item['구분'] || '').trim();
         const typeClass = stageType.includes('뮤지컬') ? 'musical' : (stageType.includes('연극') ? 'play' : '');
@@ -4088,24 +5276,24 @@
                 <div class="theme-name">${escHtml(item['제목'] || '-')}</div>
                 <div class="rating-diff-box">
                   <div class="rating-header">
-                    <div class="my-rating">⭐ ${escHtml(myRatingFormat)} <span>/ 10</span></div>
-                    <div class="ko-diff-badge">⏱️ <b>${escHtml(runningTimeBadge)}</b></div>
+                    <div class="my-rating">${SVG_STAR_GOLD} ${escHtml(myRatingFormat)} <span>/ 10</span></div>
+                    <div class="ko-diff-badge">${SVG_CLOCK_MINI} <b>${escHtml(runningTimeBadge)}</b></div>
                   </div>
                   ${ratingBarHTML}
-                  <div class="ticket-info-right">${ticketVal ? `🎫 ${escHtml(ticketVal)}` : '&nbsp;'}</div>
+                  <div class="ticket-info-right">${ticketVal ? `${SVG_TICKET_MINI} <span>${escHtml(ticketVal)}</span>` : '&nbsp;'}</div>
                 </div>
                 <div class="bottom-info">
                   <div class="info-row">
-                    <span class="date-badge">📅 ${escHtml(playDate)}</span>
-                    <div class="pax-tooltip" onclick="togglePaxTooltip(this, event)">👥 ${escHtml(pax)} <span class="tooltip-text">일행: ${companions}</span></div>
+                    ${buildDateBadgeHTML(playDate)}
+                    <div class="pax-tooltip" onclick="togglePaxTooltip(this, event)">${buildPaxIconsHTML(rawPax, item['일행'])} <span>${escHtml(pax)}</span> <span class="tooltip-text">일행: ${companions}</span></div>
                   </div>
                   ${castHTML}
                 </div>
               </div>
             </div>
             <div class="card-actions">
-              <button class="action-btn" onclick="openDataModal(${index}, 'stage')">✏️ 수정</button>
-              <button class="action-btn" onclick="deleteRecord(${index}, 'stage')">🗑️ 삭제</button>
+              <button class="action-btn" onclick="openDataModal(${index}, 'stage')">${SVG_EDIT_MINI}<span>수정</span></button>
+              <button class="action-btn delete-btn" onclick="deleteRecord(${index}, 'stage')">${SVG_TRASH_MINI}<span>삭제</span></button>
             </div>
           </div>
         `;
@@ -4176,7 +5364,8 @@
     function toggleStageCalSplit() {
       stageCalState.splitMode = !stageCalState.splitMode;
       const btn = document.getElementById('stageCalSplitBtn');
-      btn.textContent = stageCalState.splitMode ? '🖼️ 종일반 분할보기: ON' : '🖼️ 대표 포스터만 보기';
+      const txt = document.getElementById('stageCalSplitText');
+      if (txt) txt.textContent = stageCalState.splitMode ? '종일반 분할보기: ON' : '대표 포스터만 보기';
       btn.classList.toggle('active', !stageCalState.splitMode);
       renderStageCalendar();
     }
@@ -4205,8 +5394,8 @@
       });
       document.getElementById('stageCalSumCount').innerText = `${monthPlays.length}편`;
       document.getElementById('stageCalSumDays').innerText = `${Object.keys(dayMap).length}일`;
-      document.getElementById('stageCalSumAvg').innerText = ratingCnt > 0 ? `⭐ ${(ratingSum / ratingCnt).toFixed(2)}` : '⭐ 0.00';
-      document.getElementById('stageCalSumLife').innerText = `👑 ${lifeCnt}편`;
+      document.getElementById('stageCalSumAvg').innerHTML = ratingCnt > 0 ? `${SVG_STAR_GOLD} ${(ratingSum / ratingCnt).toFixed(2)}` : `${SVG_STAR_GOLD} 0.00`;
+      document.getElementById('stageCalSumLife').innerHTML = `${SVG_CROWN_GOLD} ${lifeCnt}편`;
 
       const firstDayWeek = new Date(year, month - 1, 1).getDay();
       const lastDate = new Date(year, month, 0).getDate();
@@ -4272,14 +5461,14 @@
       const addBtn = document.getElementById('stageCalAddBtn');
 
       if (!dateStr) {
-        titleEl.innerText = '📅 날짜를 클릭하면 해당 일자의 관극 기록이 표시됩니다';
+        titleEl.innerText = '날짜를 클릭하면 해당 일자의 관극 기록이 표시됩니다';
         addBtn.style.display = 'none';
         listEl.innerHTML = '<p style="color:var(--muted); font-size:calc(13px * var(--fs));">이달에 등록된 관극 기록이 없습니다.</p>';
         return;
       }
 
       addBtn.style.display = 'inline-flex';
-      titleEl.innerHTML = `📅 ${escHtml(dateStr)} 관극 기록 <span class="stat-count-pill">${plays.length}편</span>`;
+      titleEl.innerHTML = `${buildDateBadgeHTML(dateStr)} <span>관극 기록</span> <span class="stat-count-pill">${plays.length}편</span>`;
 
       if (plays.length === 0) {
         listEl.innerHTML = `<p style="color:var(--muted); font-size:calc(13px * var(--fs)); grid-column:1/-1;">이 날짜에 기록된 공연이 없습니다.</p>`;
@@ -4289,13 +5478,13 @@
       listEl.innerHTML = plays.map((p, idx) => {
         const it = p.item;
         const myR = num(getStageRating(it));
-        const ratingTxt = myR !== null ? `⭐ ${myR.toFixed(1)}` : '평점 미기록';
-        const compTxt = it['일행'] ? `👥 ${escHtml(it['일행'])}` : '';
+        const ratingTxt = myR !== null ? `${SVG_STAR_GOLD} ${myR.toFixed(1)}` : '평점 미기록';
+        const compTxt = it['일행'] ? `${buildPaxIconsHTML(getStagePax(it), it['일행'])} ${escHtml(it['일행'])}` : '';
         const tG = getStageTimeG(it);
         const nthVal = getStageNth(it);
         const orderBadge = plays.length > 1
           ? `<span class="cal-log-order">${idx + 1}회차 ${tG ? '(' + escHtml(tG) + ')' : ''}</span>`
-          : (tG ? `<span class="cal-log-order">🕒 ${escHtml(tG)}</span>` : '');
+          : (tG ? `<span class="cal-log-order">${SVG_CLOCK_MINI} ${escHtml(tG)}</span>` : '');
         const nthBadge = nthVal ? `<span class="cal-log-order" style="margin-left:4px;">${escHtml(nthVal)}</span>` : '';
         const parsedCalCast = parseCastList(it);
         const castShort = parsedCalCast.length > 0
@@ -4307,11 +5496,11 @@
           <div class="cal-log-body">
             ${orderBadge}${nthBadge}
             <div class="cal-log-store">${it['구분'] ? '[' + escHtml(it['구분']) + '] ' : ''}${escHtml(it['장소'] || '-')}</div>
-            <div class="cal-log-theme">${isStageLife(it) ? '👑 ' : ''}${escHtml(it['제목'] || '-')}</div>
+            <div class="cal-log-theme">${isStageLife(it) ? SVG_CROWN_GOLD + ' ' : ''}${escHtml(it['제목'] || '-')}</div>
             <div class="cal-log-meta">
               <span style="color:var(--accent); font-weight:800;">${ratingTxt}</span>
               <span>${castShort}</span>
-              <span>${compTxt}</span>
+              <span style="display:inline-flex; align-items:center; gap:4px;">${compTxt}</span>
             </div>
           </div>
         </div>`;
@@ -4459,12 +5648,15 @@
           if (mIdx >= 0 && mIdx < 12) monthCounts[mIdx]++;
         }
 
-        if (item['일행']) String(item['일행']).split(',').map(c => c.trim()).filter(c => c !== '').forEach(c => { compMap[c] = (compMap[c] || 0) + 1; });
-        if (item['장르']) String(item['장르']).split(',').map(g => g.trim()).filter(g => g !== '').forEach(g => { genreMap[g] = (genreMap[g] || 0) + 1; });
-        if (item['매장명']) {
-          const brand = getBrandName(item['매장명']);
-          if (brand) brandMap[brand] = (brandMap[brand] || 0) + 1;
+        if (item['일행']) {
+          String(item['일행']).split(',').map(c => c.trim()).filter(c => !isExcludedCompanionName(c)).forEach(c => {
+            compMap[c] = (compMap[c] || 0) + 1;
+          });
         }
+        if (item['장르']) String(item['장르']).split(',').map(g => g.trim()).filter(g => g !== '').forEach(g => { genreMap[g] = (genreMap[g] || 0) + 1; });
+        const sheetBrand = getEscapeBrandCategory(item);
+        const brand = sheetBrand || (item['매장명'] ? getBrandName(item['매장명']) : '');
+        if (brand) brandMap[brand] = (brandMap[brand] || 0) + 1;
         if (item['지역']) {
           const reg = String(item['지역']).trim();
           if (reg) regionMap[reg] = (regionMap[reg] || 0) + 1;
@@ -4477,9 +5669,9 @@
       document.getElementById('escStatTotal').innerText = `${totalRooms}방`;
       document.getElementById('escStatYearLabel').innerText = `${currentYear}년 플레이`;
       document.getElementById('escStatYear').innerText = `${yearCount}방`;
-      document.getElementById('escStatAvg').innerText = `⭐ ${avgRating}`;
+      document.getElementById('escStatAvg').innerHTML = `${SVG_STAR_GOLD} ${avgRating}`;
 
-      document.getElementById('escChartTitle').innerText = `📈 ${currentYear}년 월별 방탈출 플레이 추이`;
+      document.getElementById('escChartTitle').innerText = `${currentYear}년 월별 방탈출 플레이 추이`;
       const maxCount = Math.max(...monthCounts, 1);
       document.getElementById('escStatMonthly').innerHTML = monthCounts.map((cnt, i) => {
         const h = cnt === 0 ? 3 : Math.max(8, Math.round((cnt / maxCount) * 88));
@@ -4538,7 +5730,11 @@
           const p = String(item['장소']).trim();
           if (p) placeMap[p] = (placeMap[p] || 0) + 1;
         }
-        if (item['일행']) String(item['일행']).split(',').map(c => c.trim()).filter(c => c !== '').forEach(c => { compMap[c] = (compMap[c] || 0) + 1; });
+        if (item['일행']) {
+          String(item['일행']).split(',').map(c => c.trim()).filter(c => !isExcludedCompanionName(c)).forEach(c => {
+            compMap[c] = (compMap[c] || 0) + 1;
+          });
+        }
       });
 
       const avgRating = ratingCount > 0 ? (totalRating / ratingCount).toFixed(2) : "0.00";
@@ -4547,10 +5743,10 @@
       document.getElementById('stgStatTotal').innerText = `${totalPlays}편`;
       document.getElementById('stgStatYearLabel').innerText = `${currentYear}년 관극`;
       document.getElementById('stgStatYear').innerText = `${yearCount}편`;
-      document.getElementById('stgStatAvg').innerText = `⭐ ${avgRating}`;
+      document.getElementById('stgStatAvg').innerHTML = `${SVG_STAR_GOLD} ${avgRating}`;
       document.getElementById('stgStatRatio').innerText = `뮤지컬 ${musicalCnt} : 연극 ${playCnt}`;
 
-      document.getElementById('stgChartTitle').innerText = `📈 ${currentYear}년 월별 관극 추이`;
+      document.getElementById('stgChartTitle').innerText = `${currentYear}년 월별 관극 추이`;
       const maxCount = Math.max(...monthCounts, 1);
       document.getElementById('stgStatMonthly').innerHTML = monthCounts.map((cnt, i) => {
         const h = cnt === 0 ? 3 : Math.max(8, Math.round((cnt / maxCount) * 88));
@@ -4573,15 +5769,28 @@
     /* =========================================================================
        상세 모달 & 시트 구조 자동 감지형 CRUD
        ========================================================================= */
-    const ESCAPE_FORM_IDS = ['m_poster', 'm_region', 'm_store', 'm_theme', 'm_keyword', 'm_diffKo', 'm_diffStore', 'm_horror', 'm_recPax', 'm_time', 'm_genre', 'm_awards', 'm_playDate', 'm_myRating', 'm_playPax', 'm_companions', 'm_synopsis', 'm_notes', 'm_life'];
+    const ESCAPE_FORM_IDS = ['m_poster', 'm_region', 'm_store', 'm_theme', 'm_keyword', 'm_diffKo', 'm_diffStore', 'm_horror', 'm_recPax', 'm_time', 'm_genre', 'm_awards', 'm_playDate', 'm_myRating', 'm_playPax', 'm_companions', 'm_synopsis', 'm_notes', 'm_brand', 'm_grad', 'm_life'];
     const STAGE_FORM_IDS = ['st_no', 'st_poster', 'st_type', 'st_place', 'st_title', 'st_date', 'st_time1', 'st_ticket', 'st_time2', 'st_pax', 'st_companions', 'st_cast', 'st_notes', 'st_synopsis', 'st_rating', 'st_life', 'st_nth'];
 
-    function buildEscapeRowPayload(valuesObj) {
-      const sample = escapeData[0];
+    function buildEscapeRowPayload(valuesObj, existingItem = null) {
+      const sample = existingItem || escapeData[0];
+      if (sample && Object.keys(sample).length >= 19) {
+        return Object.keys(sample).map(colKey => {
+          const clean = colKey.replace(/\s+/g, '');
+          if (colKey in valuesObj) return valuesObj[colKey] ?? '';
+          if (clean.includes('플레이일') || clean.includes('관람일')) return valuesObj['플레이일자'] ?? '';
+          if (clean.includes('나의평점') || clean.includes('나의별점') || clean === '평점') return valuesObj['나의 평점'] ?? '';
+          if (clean.includes('플레이인원') || clean === '인원') return valuesObj['플레이인원'] ?? '';
+          if (clean.includes('공포도')) return valuesObj['공포도(매장)'] ?? '';
+          if (clean.includes('매장분류') || clean.includes('브랜드')) return valuesObj['매장분류'] ?? '';
+          if (clean.includes('졸업')) return valuesObj['졸업'] ?? '';
+          return existingItem ? (existingItem[colKey] ?? '') : '';
+        });
+      }
       const hasLegacyCols = sample && (('별점' in sample) || ('리뷰' in sample));
       const schema = hasLegacyCols
-        ? ['포스터', '지역', '매장명', '테마명', '검색어', '별점', '난이도(코방)', '리뷰', '수상', '장르', '테마시간', '추천인원', '난이도(매장)', '공포도(매장)', '플레이일자', '나의 평점', '플레이인원', '일행', '시놉시스', '비고', '인생테마']
-        : ['포스터', '지역', '매장명', '테마명', '검색어', '난이도(코방)', '수상', '장르', '테마시간', '추천인원', '난이도(매장)', '공포도(매장)', '플레이일자', '나의 평점', '플레이인원', '일행', '시놉시스', '비고', '인생테마'];
+        ? ['포스터', '지역', '매장명', '테마명', '검색어', '별점', '난이도(코방)', '리뷰', '수상', '장르', '테마시간', '추천인원', '난이도(매장)', '공포도(매장)', '플레이일자', '나의 평점', '플레이인원', '일행', '시놉시스', '비고', '인생테마', '', '매장분류', '졸업']
+        : ['포스터', '지역', '매장명', '테마명', '검색어', '난이도(코방)', '수상', '장르', '테마시간', '추천인원', '난이도(매장)', '공포도(매장)', '플레이일자', '나의 평점', '플레이인원', '일행', '시놉시스', '비고', '인생테마', '', '', '', '매장분류', '졸업'];
       return schema.map(k => valuesObj[k] ?? '');
     }
 
@@ -4607,10 +5816,12 @@
         '일행': item['일행'] ?? '',
         '시놉시스': item['시놉시스'] ?? '',
         '비고': item['비고'] ?? '',
-        '인생테마': item['인생테마'] ?? ''
+        '인생테마': item['인생테마'] ?? '',
+        '매장분류': getEscapeBrandCategory(item),
+        '졸업': getEscapeGradVal(item)
       };
       Object.assign(merged, overrides);
-      return buildEscapeRowPayload(merged);
+      return buildEscapeRowPayload(merged, item);
     }
 
     function stageItemToRow(item, overrides = {}) {
@@ -4671,13 +5882,13 @@
 
       if (!isStage) {
         let myR = num(getEscapeRating(item));
-        const myRatingFormatted = myR !== null ? `⭐ ${myR.toFixed(1)}` : '-';
+        const myRatingFormatted = myR !== null ? `${SVG_STAR_GOLD} ${myR.toFixed(1)}` : '-';
 
         document.getElementById('d_store_region').innerText = `${item['매장명'] || '매장미상'} ${item['지역'] ? '[' + item['지역'] + ']' : ''}`;
         document.getElementById('d_theme').innerText = item['테마명'] || '테마명 없음';
 
         let badgesHTML = '';
-        if (isEscapeLife(item)) badgesHTML += `<span class="d-badge life">👑 인생테마</span>`;
+        if (isEscapeLife(item)) badgesHTML += `<span class="d-badge life">${SVG_CROWN_GOLD} 인생테마</span>`;
         if (item['장르']) String(item['장르']).split(',').forEach(g => {
           const gName = g.trim();
           if (!gName) return;
@@ -4688,13 +5899,13 @@
         if (timeVal !== undefined && timeVal !== null && String(timeVal).trim() !== '') {
           let t = String(timeVal).trim();
           if (!isNaN(t)) t += '분';
-          badgesHTML += `<span class="d-badge">⏱️ ${escHtml(t)}</span>`;
+          badgesHTML += `<span class="d-badge">${SVG_CLOCK_MINI} ${escHtml(t)}</span>`;
         }
         document.getElementById('d_badges').innerHTML = badgesHTML;
 
         let awardsHTML = '';
         if (item['수상']) String(item['수상']).split(',').forEach(a => {
-          if (a.trim()) awardsHTML += `<span class="d-badge award">🏆 ${escHtml(a.trim())}</span>`;
+          if (a.trim()) awardsHTML += `<span class="d-badge award">${SVG_TROPHY_MINI} ${escHtml(a.trim())}</span>`;
         });
         awardsContainer.innerHTML = awardsHTML;
         awardsContainer.style.display = awardsHTML ? 'flex' : 'none';
@@ -4706,9 +5917,9 @@
           <div class="d-grid-item"><span class="d-grid-label">매장 공포도</span><span class="d-grid-val">${escHtml(getEscapeHorror(item) || '-')}</span></div>
           <div class="d-grid-item"><span class="d-grid-label">추천 인원</span><span class="d-grid-val">${escHtml(item['추천인원'] || '-')}</span></div>
           <div class="d-grid-item"><span class="d-grid-label">테마 시간</span><span class="d-grid-val">${escHtml(item['테마시간'] ? (isNaN(item['테마시간']) ? item['테마시간'] : item['테마시간'] + '분') : '-')}</span></div>
-          <div class="d-grid-item"><span class="d-grid-label">나의 평점</span><span class="d-grid-val point">${escHtml(myRatingFormatted)}</span></div>
+          <div class="d-grid-item"><span class="d-grid-label">나의 평점</span><span class="d-grid-val point">${myRatingFormatted}</span></div>
         `;
-        document.getElementById('d_record_box_title').innerText = '📝 나의 플레이 기록';
+        document.getElementById('d_record_box_title').innerText = '나의 플레이 기록';
         document.getElementById('d_date_label').innerText = '플레이 일자';
 
         const rawEscDate = getEscapeDate(item);
@@ -4719,20 +5930,20 @@
         document.getElementById('d_playPax').innerText = `${pax} ${item['일행'] ? '(' + item['일행'] + ')' : ''}`;
       } else {
         let myR = num(getStageRating(item));
-        const myRatingFormatted = myR !== null ? `⭐ ${myR.toFixed(1)}` : '-';
+        const myRatingFormatted = myR !== null ? `${SVG_STAR_GOLD} ${myR.toFixed(1)}` : '-';
 
         const nthVal = getStageNth(item);
         document.getElementById('d_store_region').innerText = `${item['장소'] || '공연장 미상'}`;
         document.getElementById('d_theme').innerText = item['제목'] || '제목 없음';
 
         let badgesHTML = '';
-        if (isStageLife(item)) badgesHTML += `<span class="d-badge life">👑 인생극</span>`;
+        if (isStageLife(item)) badgesHTML += `<span class="d-badge life">${SVG_CROWN_GOLD} 인생극</span>`;
         if (item['구분']) badgesHTML += `<span class="d-badge">✦ ${escHtml(item['구분'])}</span>`;
-        if (nthVal) badgesHTML += `<span class="d-badge nth-badge">🔁 ${escHtml(nthVal)}</span>`;
+        if (nthVal) badgesHTML += `<span class="d-badge nth-badge">${escHtml(nthVal)}</span>`;
         const tG = getStageTimeG(item);
         const tIDisplay = formatRunningTime(getStageTimeI(item));
-        if (tG) badgesHTML += `<span class="d-badge">🕒 ${escHtml(tG)}</span>`;
-        if (tIDisplay) badgesHTML += `<span class="d-badge">⏱️ ${escHtml(tIDisplay)}</span>`;
+        if (tG) badgesHTML += `<span class="d-badge">${SVG_CLOCK_MINI} ${escHtml(tG)}</span>`;
+        if (tIDisplay) badgesHTML += `<span class="d-badge">${SVG_CLOCK_MINI} ${escHtml(tIDisplay)}</span>`;
         document.getElementById('d_badges').innerHTML = badgesHTML;
         awardsContainer.style.display = 'none';
 
@@ -4752,9 +5963,9 @@
           <div class="d-grid-item"><span class="d-grid-label">공연시간</span><span class="d-grid-val">${escHtml(tG || '-')}</span></div>
           <div class="d-grid-item"><span class="d-grid-label">러닝타임</span><span class="d-grid-val">${escHtml(tIDisplay || '-')}</span></div>
           <div class="d-grid-item"><span class="d-grid-label">티켓 정보</span><span class="d-grid-val">${escHtml(item['티켓'] || '-')}</span></div>
-          <div class="d-grid-item"><span class="d-grid-label">나의 평점</span><span class="d-grid-val point">${escHtml(myRatingFormatted)}</span></div>
+          <div class="d-grid-item"><span class="d-grid-label">나의 평점</span><span class="d-grid-val point">${myRatingFormatted}</span></div>
         `;
-        document.getElementById('d_record_box_title').innerText = '📝 나의 관극 기록';
+        document.getElementById('d_record_box_title').innerText = '나의 관극 기록';
         document.getElementById('d_date_label').innerText = '관람일';
 
         const rawStgDate = getStageDate(item);
@@ -4776,7 +5987,7 @@
       document.getElementById('editDomain').value = domain;
       const isStage = domain === 'stage';
 
-      document.getElementById('dataModalTitle').innerText = isStage ? '🎫 뮤지컬·연극 관극 기록' : '🔒 방탈출 플레이 기록';
+      document.getElementById('dataModalTitle').innerText = isStage ? '뮤지컬·연극 관극 기록' : '방탈출 플레이 기록';
       document.getElementById('escapeFormGrid').style.display = isStage ? 'none' : 'grid';
       document.getElementById('stageFormGrid').style.display = isStage ? 'grid' : 'none';
 
@@ -4797,6 +6008,8 @@
             m_myRating: getEscapeRating(item),
             m_playPax: getEscapePax(item),
             m_companions: item['일행'], m_synopsis: item['시놉시스'], m_notes: item['비고'],
+            m_brand: getEscapeBrandCategory(item),
+            m_grad: isEscapeGraduatedItem(item) ? '졸업' : '',
             m_life: isEscapeManualLife(item) ? '👑' : ''
           };
           ESCAPE_FORM_IDS.forEach(id => { document.getElementById(id).value = values[id] ?? ''; });
@@ -4862,9 +6075,11 @@
           '일행': document.getElementById('m_companions').value,
           '시놉시스': document.getElementById('m_synopsis').value,
           '비고': document.getElementById('m_notes').value,
+          '매장분류': document.getElementById('m_brand').value,
+          '졸업': document.getElementById('m_grad').value,
           '인생테마': document.getElementById('m_life').value
         };
-        rowData = buildEscapeRowPayload(formValues);
+        rowData = buildEscapeRowPayload(formValues, editIdx !== "" ? existing : null);
       } else {
         rowData = STAGE_FORM_IDS.map(id => document.getElementById(id).value);
       }
@@ -4903,27 +6118,26 @@
 
     /* ===== 어워즈 모달 (방탈출 전용) ===== */
     function getAwardEmoji(name) {
-      if (name.includes('최고의 테마') || name.includes('올해의 테마')) return '👑';
-      if (name.includes('최고의 카페') || name.includes('올해의 카페') || name.includes('매장') || name.includes('브랜드') || name.includes('제작사')) return '🥇';
-      if (name.includes('비수도권') || name.includes('지방')) return '🚆';
-      if (name.includes('공포')) return '💀';
-      if (name.includes('스릴러')) return '🔪';
-      if (name.includes('문제/기타') || name.includes('문제 / 기타') || name.includes('문제/아케이드') || name.includes('문제 / 아케이드')) return '🎲';
-      if (name.includes('문제') || name.includes('퍼즐')) return '🧠';
-      if (name.includes('스토리') || name.includes('세계관') || name.includes('시나리오')) return '📖';
-      if (name.includes('연출') || name.includes('미술') || name.includes('시각')) return '🎬';
-      if (name.includes('인테리어')) return '🖼️';
-      if (name.includes('장치') || name.includes('기계')) return '⚙️';
-      if (name.includes('감성') || name.includes('드라마') || name.includes('로맨스')) return '🌸';
-      if (name.includes('액션') || name.includes('어드벤처') || name.includes('활동성') || name.includes('탐험')) return '🧭';
-      if (name.includes('추리') || name.includes('미스터리') || name.includes('범죄')) return '🕵️';
-      if (name.includes('코미디') || name.includes('코믹') || name.includes('개그') || name.includes('유머') || name.includes('일상')) return '😊';
-      if (name.includes('SF') || name.includes('판타지') || name.includes('에스에프')) return '🚀';
-      if (name.includes('잠입') || name.includes('아케이드')) return '🥷';
-      if (name.includes('역사') || name.includes('동양') || name.includes('사극')) return '📜';
-      if (name.includes('실험') || name.includes('혁신') || name.includes('기타')) return '🧪';
-      if (name.includes('입문') || name.includes('영업')) return '🐥';
-      return '🌿';
+      if (name.includes('최고의 테마') || name.includes('올해의 테마')) return SVG_CROWN_GOLD;
+      if (name.includes('최고의 카페') || name.includes('올해의 카페') || name.includes('매장') || name.includes('브랜드') || name.includes('제작사')) return `<svg class="award-svg-ico" viewBox="0 0 24 24"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>`;
+      if (name.includes('비수도권') || name.includes('지방')) return GENRE_SVGS.outdoor;
+      if (name.includes('공포')) return GENRE_SVGS.horror;
+      if (name.includes('스릴러')) return GENRE_SVGS.thriller;
+      if (name.includes('문제/기타') || name.includes('문제 / 기타') || name.includes('문제/아케이드') || name.includes('문제 / 아케이드')) return GENRE_SVGS.arcade;
+      if (name.includes('문제') || name.includes('퍼즐')) return GENRE_SVGS.puzzle;
+      if (name.includes('스토리') || name.includes('세계관') || name.includes('시나리오')) return GENRE_SVGS.story;
+      if (name.includes('연출') || name.includes('미술') || name.includes('시각') || name.includes('인테리어')) return GENRE_SVGS.drama;
+      if (name.includes('장치') || name.includes('기계')) return `<svg class="award-svg-ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>`;
+      if (name.includes('감성') || name.includes('드라마') || name.includes('로맨스')) return GENRE_SVGS.emotion;
+      if (name.includes('액션') || name.includes('어드벤처') || name.includes('활동성') || name.includes('탐험')) return GENRE_SVGS.adventure;
+      if (name.includes('추리') || name.includes('미스터리') || name.includes('범죄')) return GENRE_SVGS.reasoning;
+      if (name.includes('코미디') || name.includes('코믹') || name.includes('개그') || name.includes('유머') || name.includes('일상')) return GENRE_SVGS.comic;
+      if (name.includes('SF') || name.includes('판타지') || name.includes('에스에프')) return GENRE_SVGS.sf;
+      if (name.includes('잠입') || name.includes('아케이드')) return GENRE_SVGS.stealth;
+      if (name.includes('역사') || name.includes('동양') || name.includes('사극')) return GENRE_SVGS.history;
+      if (name.includes('실험') || name.includes('혁신') || name.includes('기타')) return GENRE_SVGS.fantasy;
+      if (name.includes('입문') || name.includes('영업')) return GENRE_SVGS.healing;
+      return `<svg class="award-svg-ico" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`;
     }
 
     async function openAwardsModal() {
@@ -5004,7 +6218,7 @@
         if (!isStoreAward && aw['테마명']) {
           const awardThemeClean = String(aw['테마명']).replace(/\s+/g, '').toLowerCase();
           const isPlayed = escapeData.some(played => String(played['테마명'] || '').replace(/\s+/g, '').toLowerCase() === awardThemeClean);
-          if (isPlayed) clearBadgeHtml = `<div class="clear-badge">✅ CLEAR</div>`;
+          if (isPlayed) clearBadgeHtml = `<div class="clear-badge">${SVG_CHECK_STAMP}<span>CLEAR</span></div>`;
         }
         if (isStoreAward) {
           storeHtml = `<div class="award-store" style="color:transparent; user-select:none;">-</div>`;
@@ -5103,7 +6317,7 @@
       body.classList.toggle('dark', appSettings.darkMode === 'dark');
       document.getElementById('metaThemeColor').setAttribute('content', appSettings.darkMode === 'dark' ? '#0f1115' : '#f5f6f8');
       const sbThemeBtn = document.getElementById('sbThemeToggleBtn');
-      if (sbThemeBtn) sbThemeBtn.innerText = appSettings.darkMode === 'dark' ? '☀️ 라이트' : '🌙 다크';
+      if (sbThemeBtn) sbThemeBtn.innerHTML = appSettings.darkMode === 'dark' ? `${SVG_SUN}<span>라이트</span>` : `${SVG_MOON}<span>다크</span>`;
       syncSidebarAndBottomNav();
     }
 
