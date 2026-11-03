@@ -346,6 +346,69 @@
       gap: 6px;
       box-shadow: 0 1px 3px var(--shadow-1);
     }
+    .total-avg {
+      font-size: calc(13px * var(--fs));
+      font-weight: 800;
+      color: var(--strong);
+      background: var(--gold-bg);
+      padding: 0 12px;
+      height: 38px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      border-radius: 10px;
+      border: 1px solid var(--gold-border);
+      white-space: nowrap;
+      box-shadow: 0 1px 3px var(--shadow-1);
+    }
+    .total-avg b {
+      color: #d97706;
+      font-weight: 900;
+    }
+    body.dark .total-avg b {
+      color: #fbbf24;
+    }
+
+    /* 프로필 시트 A열-B열 세로 키-값 항목 그리드 */
+    .prof-traits-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+    .prof-trait-item {
+      background: var(--bg-faint);
+      border: 1px solid var(--line-soft);
+      border-radius: 11px;
+      padding: 12px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .prof-trait-item.full {
+      grid-column: 1 / -1;
+    }
+    .prof-trait-label {
+      font-size: calc(11px * var(--fs));
+      font-weight: 800;
+      color: var(--muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .prof-trait-label svg {
+      width: 13.5px;
+      height: 13.5px;
+      stroke: var(--accent);
+      fill: none;
+      stroke-width: 2.1;
+    }
+    .prof-trait-val {
+      font-size: calc(14.5px * var(--fs));
+      font-weight: 800;
+      color: var(--strong);
+      word-break: keep-all;
+      line-height: 1.4;
+    }
     .total-count svg {
       width: 14px;
       height: 14px;
@@ -713,12 +776,614 @@
       -webkit-box-orient: vertical;
       overflow: hidden;
     }
+
+    /* 졸업예정 매장 카드 & 흐린 미플레이(예정) 포스터 스타일 */
+    .grad-store-card.upcoming-card {
+      border-color: var(--line);
+    }
+    .grad-store-card.upcoming-card:hover {
+      border-color: #60a5fa;
+      box-shadow: 0 12px 26px rgba(59, 130, 246, 0.14);
+    }
+    .grad-stamp.upcoming-stamp {
+      border-color: #2563eb;
+      color: #2563eb;
+      background: rgba(37, 99, 235, 0.06);
+      box-shadow: inset 0 0 0 2px rgba(37, 99, 235, 0.15), 0 3px 8px rgba(37, 99, 235, 0.14);
+    }
+    body.dark .grad-stamp.upcoming-stamp {
+      border-color: #60a5fa;
+      color: #60a5fa;
+      background: rgba(96, 165, 250, 0.1);
+      box-shadow: inset 0 0 0 2px rgba(96, 165, 250, 0.2), 0 3px 10px rgba(0, 0, 0, 0.4);
+    }
+
+    .upcoming-prog-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .upcoming-prog-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: calc(11.5px * var(--fs));
+      font-weight: 800;
+      color: var(--sub);
+    }
+    .upcoming-prog-bar {
+      width: 100%;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--bg-softer);
+      overflow: hidden;
+    }
+    .upcoming-prog-fill {
+      height: 100%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #3b82f6 0%, #06b6d4 100%);
+      transition: width 0.35s ease;
+    }
+
+    /* 미플레이(예정) 테마 포스터 흐리게 표시 */
+    .grad-theme-item.unplayed {
+      cursor: default;
+    }
+    .grad-theme-item.unplayed.clickable {
+      cursor: pointer;
+    }
+    .grad-theme-item.unplayed .grad-theme-thumb-wrap {
+      border: 1.5px dashed var(--line-dashed);
+      background: var(--bg-faint);
+    }
+    .grad-theme-item.unplayed .grad-theme-thumb-wrap img {
+      filter: grayscale(68%) brightness(0.68);
+      opacity: 0.46;
+      transition: filter 0.22s ease, opacity 0.22s ease;
+    }
+    .grad-theme-item.unplayed:hover .grad-theme-thumb-wrap img {
+      filter: grayscale(35%) brightness(0.82);
+      opacity: 0.72;
+    }
+    .grad-theme-unplayed-badge {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(15, 23, 42, 0.84);
+      color: #e2e8f0;
+      border: 1px solid rgba(255, 255, 255, 0.24);
+      padding: 3.5px 8px;
+      border-radius: 999px;
+      font-size: calc(10px * var(--fs));
+      font-weight: 800;
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      white-space: nowrap;
+      backdrop-filter: blur(3px);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+    }
+    .grad-theme-item.unplayed .grad-theme-title {
+      color: var(--muted);
+    }
+    .grad-theme-item.unplayed .grad-theme-date {
+      color: var(--faint);
+    }
     .grad-theme-date {
       font-size: calc(10px * var(--fs));
       color: var(--muted);
       font-weight: 600;
       line-height: 1.2;
       margin-top: auto;
+    }
+
+
+    /* ===== 1줄 컴팩트 기록(Record) 뷰 디자인 ===== */
+    .record-section {
+      display: none;
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 16px 20px 60px;
+      width: 100%;
+    }
+    .record-section.active {
+      display: block;
+    }
+    .record-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      width: 100%;
+    }
+    .rec-row-card {
+      display: flex;
+      align-items: stretch;
+      background: var(--bg-card);
+      border: 1.5px solid var(--line);
+      border-radius: 14px;
+      overflow: hidden;
+      cursor: pointer;
+      box-shadow: 0 3px 10px var(--shadow-1);
+      transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+      position: relative;
+    }
+    .rec-row-card:hover {
+      transform: translateY(-2px);
+      border-color: var(--accent);
+      box-shadow: 0 8px 20px var(--shadow-2);
+    }
+    .rec-row-card.life {
+      border-color: var(--gold-border);
+      background: linear-gradient(90deg, var(--bg-card) 0%, var(--gold-bg) 160%);
+    }
+    .rec-date-col {
+      width: 68px;
+      flex-shrink: 0;
+      border-right: 1.5px dashed var(--line-dashed);
+      background: var(--bg-faint);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 4px;
+      gap: 1px;
+      text-align: center;
+    }
+    .rec-date-ym {
+      font-size: calc(10px * var(--fs));
+      font-weight: 700;
+      color: var(--muted);
+      line-height: 1.15;
+    }
+    .rec-date-day {
+      font-size: calc(21px * var(--fs));
+      font-weight: 900;
+      color: var(--strong);
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+    }
+    .rec-date-pill {
+      margin-top: 3px;
+      font-size: calc(9.5px * var(--fs));
+      font-weight: 800;
+      padding: 1px 6px;
+      border-radius: 5px;
+      background: var(--bg-soft);
+      color: var(--sub);
+      border: 1px solid var(--line);
+      line-height: 1.25;
+    }
+    .rec-date-pill.today {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+    .rec-date-pill.sun { color: #ef4444; }
+    .rec-date-pill.sat { color: #3b82f6; }
+
+    .rec-body-col {
+      flex: 1;
+      min-width: 0;
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      gap: 13px;
+    }
+    .rec-poster-wrap {
+      position: relative;
+      width: 48px;
+      height: 64px;
+      flex-shrink: 0;
+      border-radius: 7px;
+      background: var(--bg-soft);
+      border: 1.5px solid var(--line);
+      box-shadow: 0 3px 8px var(--shadow-2);
+    }
+    .rec-row-card.life .rec-poster-wrap {
+      border-color: #fbbf24;
+    }
+    .rec-poster-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 5.5px;
+      display: block;
+    }
+    .rec-nth-badge {
+      position: absolute;
+      top: -6px;
+      left: -6px;
+      background: var(--bg-elevated);
+      color: var(--accent);
+      border: 1.5px solid var(--accent);
+      font-size: calc(9.5px * var(--fs));
+      font-weight: 900;
+      padding: 1px 5.5px;
+      border-radius: 5px;
+      line-height: 1.2;
+      letter-spacing: 0.02em;
+      box-shadow: 0 2px 6px var(--shadow-2);
+      z-index: 2;
+    }
+    .rec-row-card.life .rec-nth-badge {
+      color: #d97706;
+      border-color: #f59e0b;
+    }
+    body.dark .rec-row-card.life .rec-nth-badge {
+      color: #fbbf24;
+      border-color: #fbbf24;
+    }
+
+    .rec-info-col {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 4px;
+    }
+    .rec-title-row {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      min-width: 0;
+    }
+    .rec-theme-title {
+      font-size: calc(15.5px * var(--fs));
+      font-weight: 800;
+      color: var(--strong);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      line-height: 1.3;
+    }
+    .rec-meta-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: nowrap;
+      font-size: calc(12px * var(--fs));
+      font-weight: 600;
+      color: var(--muted);
+      min-width: 0;
+    }
+    .rec-store-txt {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      color: var(--sub);
+      font-weight: 700;
+    }
+    .rec-dot {
+      color: var(--ghost);
+      flex-shrink: 0;
+    }
+    .rec-pax-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      color: #0284c7;
+      font-weight: 700;
+      flex-shrink: 0;
+      white-space: nowrap;
+    }
+    body.dark .rec-pax-chip { color: #38bdf8; }
+
+    .rec-right-col {
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      justify-content: center;
+      gap: 4px;
+      padding-left: 6px;
+    }
+    .rec-rating-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: var(--bg-soft);
+      border: 1px solid var(--line);
+      padding: 4px 10px;
+      border-radius: 9px;
+      font-size: calc(14px * var(--fs));
+      font-weight: 900;
+      color: var(--accent);
+      white-space: nowrap;
+    }
+    .rec-row-card.life .rec-rating-badge {
+      background: var(--gold-bg);
+      border-color: var(--gold-border);
+      color: #d97706;
+    }
+    body.dark .rec-row-card.life .rec-rating-badge {
+      color: #fbbf24;
+    }
+    .rec-full-date {
+      font-size: calc(10px * var(--fs));
+      color: var(--faint);
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    /* ===== 프로필(Profile) 시트 연동 뷰 디자인 ===== */
+    .profile-section {
+      display: none;
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 18px 20px 60px;
+      width: 100%;
+    }
+    .profile-section.active {
+      display: block;
+    }
+    .profile-top-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.35fr;
+      gap: 18px;
+      margin-bottom: 18px;
+    }
+    .prof-card {
+      background: var(--bg-card);
+      border: 1.5px solid var(--line);
+      border-radius: var(--radius-lg);
+      padding: 22px;
+      box-shadow: 0 6px 18px var(--shadow-1);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .prof-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding-bottom: 10px;
+      border-bottom: 1.5px solid var(--line-soft);
+    }
+    .prof-card-title {
+      font-size: calc(15.5px * var(--fs));
+      font-weight: 900;
+      color: var(--strong);
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+    }
+    .prof-card-title svg {
+      width: 18px;
+      height: 18px;
+      stroke: var(--accent);
+      fill: none;
+      stroke-width: 2.2;
+    }
+
+    /* MBTI 쇼케이스 박스 */
+    .mbti-hero-box {
+      background: linear-gradient(135deg, var(--bg-faint) 0%, var(--accent-bg) 100%);
+      border: 1.5px solid var(--accent-line);
+      border-radius: 14px;
+      padding: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+    }
+    .prof-avatar-box {
+      width: 68px;
+      height: 68px;
+      border-radius: 16px;
+      background: #111827;
+      border: 2px solid var(--gold-border);
+      color: #fbbf24;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(245, 158, 11, 0.22);
+    }
+    .prof-avatar-box svg {
+      width: 28px;
+      height: 28px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+    }
+    .prof-avatar-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .mbti-badge-big {
+      font-size: calc(28px * var(--fs));
+      font-weight: 900;
+      letter-spacing: 0.06em;
+      color: var(--accent);
+      line-height: 1.1;
+    }
+    .mbti-desc-txt {
+      font-size: calc(12.5px * var(--fs));
+      font-weight: 700;
+      color: var(--sub);
+      margin-top: 4px;
+    }
+    .prof-mini-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-top: auto;
+    }
+    .prof-mini-stat {
+      background: var(--bg-faint);
+      border: 1px solid var(--line-soft);
+      border-radius: 10px;
+      padding: 10px 8px;
+      text-align: center;
+    }
+    .prof-mini-label {
+      font-size: calc(10.5px * var(--fs));
+      color: var(--muted);
+      font-weight: 600;
+    }
+    .prof-mini-val {
+      font-size: calc(15px * var(--fs));
+      color: var(--strong);
+      font-weight: 900;
+      margin-top: 2px;
+    }
+
+    /* 방탈출 요소 중요도 순위 */
+    .priority-flow-wrap {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 6px;
+      background: var(--bg-faint);
+      border: 1px solid var(--line-soft);
+      padding: 12px 14px;
+      border-radius: 12px;
+    }
+    .prio-Node {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 6px 11px;
+      border-radius: 9px;
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      font-size: calc(12.5px * var(--fs));
+      font-weight: 800;
+      color: var(--strong);
+      box-shadow: 0 2px 5px var(--shadow-1);
+    }
+    .prio-Node.rank-1 {
+      background: var(--accent-bg);
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+    .prio-rank-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--bg-soft);
+      color: var(--sub);
+      font-size: calc(10px * var(--fs));
+      font-weight: 900;
+    }
+    .prio-Node.rank-1 .prio-rank-num {
+      background: var(--accent);
+      color: #fff;
+    }
+    .prio-arrow {
+      color: var(--faint);
+      font-weight: 900;
+      font-size: calc(13px * var(--fs));
+      padding: 0 2px;
+    }
+    .prio-bars-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .prio-bar-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .prio-bar-label {
+      width: 92px;
+      flex-shrink: 0;
+      font-size: calc(12px * var(--fs));
+      font-weight: 800;
+      color: var(--sub);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .prio-bar-track {
+      flex: 1;
+      height: 8px;
+      background: var(--bg-soft);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+    .prio-bar-fill {
+      height: 100%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--accent) 0%, #fb923c 100%);
+    }
+
+    /* 나의 평점 기준표 (세로형 타임라인/사다리) */
+    .rating-guide-vertical {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      position: relative;
+    }
+    .rg-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 12px 16px;
+      border-radius: 12px;
+      background: var(--bg-faint);
+      border: 1px solid var(--line-soft);
+      transition: transform 0.16s ease, border-color 0.16s ease;
+    }
+    .rg-row:hover {
+      transform: translateX(3px);
+      border-color: var(--muted);
+    }
+    .rg-row.tier-top {
+      background: linear-gradient(90deg, var(--gold-bg) 0%, var(--bg-card) 100%);
+      border-color: var(--gold-border);
+    }
+    .rg-score-badge {
+      min-width: 72px;
+      padding: 6px 10px;
+      border-radius: 9px;
+      background: var(--bg-card);
+      border: 1.5px solid var(--line);
+      font-size: calc(14px * var(--fs));
+      font-weight: 900;
+      color: var(--strong);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      flex-shrink: 0;
+      box-shadow: 0 2px 5px var(--shadow-1);
+    }
+    .rg-row.tier-top .rg-score-badge {
+      border-color: var(--gold-border);
+      color: #d97706;
+    }
+    body.dark .rg-row.tier-top .rg-score-badge {
+      color: #fbbf24;
+    }
+    .rg-desc {
+      flex: 1;
+      font-size: calc(13.5px * var(--fs));
+      font-weight: 700;
+      color: var(--text);
+      word-break: keep-all;
+      line-height: 1.4;
+    }
+    .rg-count-pill {
+      font-size: calc(11px * var(--fs));
+      font-weight: 800;
+      color: var(--muted);
+      background: var(--bg-soft);
+      border: 1px solid var(--line);
+      padding: 3px 9px;
+      border-radius: 999px;
+      flex-shrink: 0;
+      white-space: nowrap;
     }
 
     /* ===== 방탈로그 스타일 좌측 고정 사이드바 (PC) & 하단 탭바 (모바일) ===== */
@@ -2760,7 +3425,10 @@
 
       .toolbar { flex-direction: column; align-items: stretch; gap: 8px; padding: 0 14px 12px; }
       .search-wrapper { max-width: 100%; }
-      .sort-wrapper { justify-content: space-between; width: 100%; }
+      .sort-wrapper { justify-content: space-between; width: 100%; flex-wrap: nowrap; gap: 6px; }
+      .total-count, .total-avg { font-size: calc(11.5px * var(--fs)); padding: 0 9px; height: 36px; flex-shrink: 0; }
+      .sort-select { flex: 1; min-width: 0; height: 36px; font-size: calc(11.5px * var(--fs)); padding-left: 8px; }
+      .prof-traits-grid { grid-template-columns: 1fr; }
 
       .grid-container { grid-template-columns: repeat(2, 1fr) !important; gap: 12px; padding: 16px 12px 40px; }
       .card-info { padding: 11px 10px; }
@@ -2801,6 +3469,28 @@
       .grad-stamp { width: 56px; height: 56px; top: 12px; right: 12px; }
       .grad-stamp-main { font-size: calc(11.5px * var(--fs)); }
       .grad-theme-shelf { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; width: 100%; }
+      .record-section { padding: 12px 12px 50px; overflow-x: hidden; }
+      .rec-date-col { width: 54px; padding: 6px 2px; }
+      .rec-date-ym { font-size: calc(9px * var(--fs)); }
+      .rec-date-day { font-size: calc(17.5px * var(--fs)); }
+      .rec-date-pill { font-size: calc(8.5px * var(--fs)); padding: 1px 4.5px; }
+      .rec-body-col { padding: 8px 10px; gap: 10px; }
+      .rec-poster-wrap { width: 42px; height: 56px; }
+      .rec-nth-badge { font-size: calc(8.5px * var(--fs)); padding: 1px 4px; top: -5px; left: -5px; }
+      .rec-theme-title { font-size: calc(13.5px * var(--fs)); }
+      .rec-meta-row { font-size: calc(11px * var(--fs)); gap: 4px; }
+      .rec-rating-badge { font-size: calc(12.5px * var(--fs)); padding: 3px 7px; border-radius: 7px; }
+      .rec-full-date { font-size: calc(9px * var(--fs)); }
+
+      .profile-section { padding: 14px 12px 50px; overflow-x: hidden; }
+      .profile-top-grid { grid-template-columns: 1fr; gap: 14px; }
+      .prof-card { padding: 16px 14px; }
+      .mbti-badge-big { font-size: calc(24px * var(--fs)); }
+      .prio-bar-label { width: 78px; font-size: calc(11px * var(--fs)); }
+      .rg-row { padding: 10px 12px; gap: 10px; }
+      .rg-score-badge { min-width: 62px; font-size: calc(12.5px * var(--fs)); padding: 5px 8px; }
+      .rg-desc { font-size: calc(12.5px * var(--fs)); }
+
       .calendar-section { padding: 14px 10px 50px; overflow-x: hidden; }
       .cal-top-bar { padding: 12px; gap: 10px; flex-direction: column; align-items: stretch; }
       .cal-nav-group { justify-content: space-between; width: 100%; }
@@ -2907,6 +3597,13 @@
           <span class="sb-badge" id="sbBadgeTotal">0</span>
         </button>
 
+        <button class="sb-nav-item" id="sbNavRecord" onclick="handleNavAction('record')">
+          <span class="sb-nav-left">
+            <svg viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+            <span id="sbNavRecordText">기록</span>
+          </span>
+        </button>
+
         <button class="sb-nav-item" id="sbNavLife" onclick="handleNavAction('life')">
           <span class="sb-nav-left">
             <svg viewBox="0 0 24 24"><path d="m2 4 3 12h14l3-12-6 7-4-7-4 7-6-7zm3 16h14"/></svg>
@@ -2929,6 +3626,14 @@
           </span>
           <span class="sb-badge gold" id="sbBadgeGrad">0</span>
         </button>
+
+        <button class="sb-nav-item" id="sbNavGradSoon" onclick="handleNavAction('gradSoon')">
+          <span class="sb-nav-left">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <span>졸업 예정</span>
+          </span>
+          <span class="sb-badge" id="sbBadgeGradSoon">0</span>
+        </button>
       </div>
 
       <div class="sb-divider"></div>
@@ -2945,6 +3650,13 @@
           <span class="sb-nav-left">
             <svg viewBox="0 0 24 24"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>
             <span>방탈 어워즈</span>
+          </span>
+        </button>
+
+        <button class="sb-nav-item" id="sbNavProfile" onclick="handleNavAction('profile')">
+          <span class="sb-nav-left">
+            <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            <span>프로필</span>
           </span>
         </button>
       </div>
@@ -2982,6 +3694,9 @@
         </div>
 
         <div class="header-mobile-actions">
+          <button class="mobile-util-btn" onclick="handleNavAction('stats')" title="통계 요약">
+            <svg class="ui-ico" viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          </button>
           <button class="mobile-util-btn" onclick="openAwardsModal()" id="mobileAwardsBtn" title="방탈 어워즈">
             <svg class="ui-ico" viewBox="0 0 24 24"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>
           </button>
@@ -3000,7 +3715,7 @@
         <span class="ticket-edge-notch right" aria-hidden="true"></span>
         <div class="ticket-main">
           <div class="ticket-kicker">
-            <span class="ticket-kicker-pill" id="ticketKickerText">VIP PASS · ESCAPE ARCHIVE</span>
+            <span class="ticket-kicker-pill" id="ticketKickerText">ESCAPE ARCHIVE</span>
             <span class="ticket-serial">ADMIT ONE</span>
           </div>
           <div class="ticket-title-row">
@@ -3098,6 +3813,7 @@
 
           <div class="sort-wrapper">
             <div class="total-count" id="escapeTotalCountDisplay">총 0방</div>
+            <div class="total-avg" id="escapeAvgRatingDisplay">평균 <b>0.00</b></div>
             <select class="sort-select" id="escapeSortSelect" onchange="applyEscapeFiltersAndSort()">
               <option value="dateDesc">플레이일 · 최신순</option>
               <option value="dateAsc">플레이일 · 오래된순</option>
@@ -3112,6 +3828,9 @@
       </div>
 
       <main class="grid-container" id="escapeGrid"></main>
+      <section class="record-section" id="escapeRecordSection">
+        <div class="record-list" id="escapeRecordList"></div>
+      </section>
 
       <!-- 방탈출 전용 포스터 캘린더 -->
       <section class="calendar-section" id="escapeCalendarSection">
@@ -3155,8 +3874,8 @@
             <span class="cal-sum-val" id="escapeCalSumAvg">0.00</span>
           </div>
           <div class="cal-sum-card">
-            <span class="cal-sum-label">이달의 인생테마</span>
-            <span class="cal-sum-val" id="escapeCalSumLife">0개</span>
+            <span class="cal-sum-label">이달의 최다 연방</span>
+            <span class="cal-sum-val" id="escapeCalSumLife">-</span>
           </div>
         </div>
 
@@ -3188,7 +3907,6 @@
             </div>
             <div>
               <h2 class="grad-hero-title">명예의 졸업 매장 스탬프북</h2>
-              <p class="grad-hero-sub">매장 내 전 테마 클리어로 졸업 도장을 달성한 매장 컬렉션</p>
             </div>
           </div>
           <div class="grad-stats-row">
@@ -3219,6 +3937,51 @@
         </div>
 
         <div class="grad-store-grid" id="escapeGradGrid"></div>
+      </section>
+
+      <!-- 방탈출 전용 졸업예정 (시트1 클리어 테마 + 예정 시트 미플레이 테마 합산 보드) -->
+      <section class="grad-section" id="escapeGradSoonSection">
+        <div class="grad-hero-bar" style="background:linear-gradient(135deg, var(--bg-elevated) 0%, var(--record-bg) 100%); border-color:var(--record-line);">
+          <div class="grad-hero-left">
+            <div class="grad-emblem" style="border-color:#60a5fa; color:#60a5fa;">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <div>
+              <h2 class="grad-hero-title">졸업 예정 매장 보드</h2>
+            </div>
+          </div>
+          <div class="grad-stats-row">
+            <div class="grad-stat-pill" style="border-color:var(--record-line);">
+              <span class="grad-stat-label">졸업 예정 매장</span>
+              <span class="grad-stat-val" style="color:var(--record-title);" id="gradSoonSumStores">0곳</span>
+            </div>
+            <div class="grad-stat-pill" style="border-color:var(--record-line);">
+              <span class="grad-stat-label">완료 / 전체 테마</span>
+              <span class="grad-stat-val" style="color:var(--record-title);" id="gradSoonSumThemes">0 / 0</span>
+            </div>
+            <div class="grad-stat-pill" style="border-color:var(--record-line);">
+              <span class="grad-stat-label">남은 테마 수</span>
+              <span class="grad-stat-val" style="color:var(--accent);" id="gradSoonSumRemain">0방</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="grad-toolbar" style="justify-content:space-between;">
+          <button class="cal-sub-btn" onclick="fetchPlannedData(true)" title="예정 시트 동기화">
+            <svg class="ui-ico" viewBox="0 0 24 24"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 16h5v5"/></svg>
+            <span>예정 시트 동기화</span>
+          </button>
+          <div class="sort-wrapper">
+            <select class="sort-select" id="gradSoonSortSelect" onchange="renderEscapeGradSoon()">
+              <option value="remainAsc">졸업 임박순 (남은 테마 적은순)</option>
+              <option value="rateDesc">진행률 높은순 (%)</option>
+              <option value="totalDesc">전체 테마 많은순</option>
+              <option value="nameAsc">매장명 가나다순</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="grad-store-grid" id="escapeGradSoonGrid"></div>
       </section>
     </div>
 
@@ -3272,6 +4035,7 @@
 
           <div class="sort-wrapper">
             <div class="total-count" id="stageTotalCountDisplay">총 0편</div>
+            <div class="total-avg" id="stageAvgRatingDisplay">평균 <b>0.00</b></div>
             <select class="sort-select" id="stageSortSelect" onchange="applyStageFiltersAndSort()">
               <option value="dateDesc">관람일 · 최신순</option>
               <option value="dateAsc">관람일 · 오래된순</option>
@@ -3286,6 +4050,9 @@
       </div>
 
       <main class="grid-container" id="stageGrid"></main>
+      <section class="record-section" id="stageRecordSection">
+        <div class="record-list" id="stageRecordList"></div>
+      </section>
 
       <!-- 뮤지컬·연극 전용 포스터 캘린더 -->
       <section class="calendar-section" id="stageCalendarSection">
@@ -3353,6 +4120,80 @@
         </div>
       </section>
     </div>
+
+    <!-- ==========================================================
+         [C] 프로필 시트 연동 뷰 영역 (방탈출 요소 중요도 순위 · MBTI · 평점 가이드)
+         ========================================================== -->
+    <section class="profile-section" id="profileSection">
+      <div style="display:flex; flex-direction:column; gap:16px;">
+        <!-- 1. 플레이어 프로필 (닉네임 · MBTI · 쫄/탱 · 장치/자물쇠 · 기타 성향) -->
+        <div class="prof-card">
+          <div class="prof-card-header">
+            <span class="prof-card-title">
+              <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              <span>플레이어 프로필</span>
+            </span>
+            <button class="cal-sub-btn" onclick="fetchProfileData(true)" title="프로필 시트 새로고침">
+              <svg class="ui-ico" viewBox="0 0 24 24"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 16h5v5"/></svg>
+              <span>시트 동기화</span>
+            </button>
+          </div>
+          <div class="mbti-hero-box">
+            <div style="display:flex; align-items:center; gap:14px; min-width:0; width:100%;">
+              <div class="prof-avatar-box" id="profAvatarWrap">
+                <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              </div>
+              <div style="min-width:0; flex:1;">
+                <div style="font-size:calc(11px * var(--fs)); font-weight:800; color:var(--muted); letter-spacing:0.06em;" id="profNicknameLabel">PLAYER PROFILE</div>
+                <div class="mbti-badge-big" id="profMainTitle">-</div>
+                <div class="mbti-desc-txt" id="profMbtiSub">프로필 시트 데이터를 불러옵니다</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="prof-traits-grid" id="profTraitsGrid"></div>
+
+          <div class="prof-mini-stats">
+            <div class="prof-mini-stat">
+              <div class="prof-mini-label">총 방탈출</div>
+              <div class="prof-mini-val" id="profSumEscape">0방</div>
+            </div>
+            <div class="prof-mini-stat">
+              <div class="prof-mini-label">인생테마</div>
+              <div class="prof-mini-val" id="profSumLife">0개</div>
+            </div>
+            <div class="prof-mini-stat">
+              <div class="prof-mini-label">평균 평점</div>
+              <div class="prof-mini-val" id="profSumAvg">0.00</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. 중요도 (막대그래프 없이 > 부등호 표기만 노출) -->
+        <div class="prof-card">
+          <div class="prof-card-header">
+            <span class="prof-card-title">
+              <svg viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+              <span>중요도</span>
+            </span>
+            <span class="stat-count-pill" id="profPriorityBadge">PRIORITY</span>
+          </div>
+          <div class="priority-flow-wrap" id="profPriorityFlow"></div>
+        </div>
+
+        <!-- 3. 나의 평점 기준표 (중요도 바로 아래에 세로형 배치) -->
+        <div class="prof-card">
+          <div class="prof-card-header">
+            <span class="prof-card-title">
+              <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <span>나의 평점 기준표</span>
+            </span>
+            <span class="stat-count-pill" id="profRatingCountPill">세로형 가이드</span>
+          </div>
+          <div class="rating-guide-vertical" id="profRatingVerticalList"></div>
+        </div>
+      </div>
+    </section>
     </div><!-- /.app-main -->
 
     <!-- 모바일 하단 고정 탭바 -->
@@ -3361,22 +4202,22 @@
         <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
         <span id="mbTabExploreText">탐색</span>
       </button>
-      <button class="mb-tab" id="mbTabCalendar" onclick="handleNavAction('calendar')">
-        <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-        <span>캘린더</span>
+      <button class="mb-tab" id="mbTabRecord" onclick="handleNavAction('record')">
+        <svg viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+        <span>기록</span>
       </button>
       <button class="mb-tab cta-tab" onclick="openDataModal(-1, currentDomain)" aria-label="기록 추가">
         <div class="mb-cta-circle">
           <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
         </div>
       </button>
-      <button class="mb-tab" id="mbTabStats" onclick="handleNavAction('stats')">
-        <svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-        <span>통계</span>
+      <button class="mb-tab" id="mbTabCalendar" onclick="handleNavAction('calendar')">
+        <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        <span>캘린더</span>
       </button>
-      <button class="mb-tab" id="mbTabExtra" onclick="handleNavAction('extra')">
-        <svg viewBox="0 0 24 24" id="mbTabExtraIcon"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>
-        <span id="mbTabExtraText">어워즈</span>
+      <button class="mb-tab" id="mbTabProfile" onclick="handleNavAction('profile')">
+        <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <span>프로필</span>
       </button>
     </nav>
   </div><!-- /.app-shell -->
@@ -3446,7 +4287,7 @@
         <div class="form-group"><label>나의 평점 (예: 9.5)</label><input type="text" id="m_myRating" style="border-color:var(--accent);"></div>
         <div class="form-group"><label>플레이 인원</label><input type="text" id="m_playPax"></div>
         <div class="form-group"><label>일행 (쉼표로 구분)</label><input type="text" id="m_companions" placeholder="예: 철수, 영희"></div>
-        <div class="form-group"><label>W열 · 매장분류 (브랜드명)</label><input type="text" id="m_brand" placeholder="예: 키이스케이프, 제로월드"></div>
+        <div class="form-group"><label>매장분류 (브랜드명 · U열/W열)</label><input type="text" id="m_brand" placeholder="예: 키이스케이프, 제로월드"></div>
         <div class="form-group"><label>X열 · 매장 졸업 여부</label>
           <select id="m_grad">
             <option value="">미졸업 (진행중)</option>
@@ -3540,6 +4381,26 @@
           <ul class="stat-list" id="escStatRegions"></ul>
           <div id="escMoreRegionsWrap"></div>
         </div>
+        <div class="stat-box">
+          <h3><span style="display:inline-flex; align-items:center; gap:6px;"><svg class="ui-ico" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg> 평점 (일행 · 3회 이상)</span><span class="stat-count-pill" id="escCountCompRatings">0명</span></h3>
+          <ul class="stat-list" id="escStatCompRatings"></ul>
+          <div id="escMoreCompRatingsWrap"></div>
+        </div>
+        <div class="stat-box">
+          <h3><span style="display:inline-flex; align-items:center; gap:6px;"><svg class="ui-ico" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg> 평점 (브랜드)</span><span class="stat-count-pill" id="escCountStoreRatings">0곳</span></h3>
+          <ul class="stat-list" id="escStatStoreRatings"></ul>
+          <div id="escMoreStoreRatingsWrap"></div>
+        </div>
+        <div class="stat-box">
+          <h3><span style="display:inline-flex; align-items:center; gap:6px;"><svg class="ui-ico" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg> 평점</span><span class="stat-count-pill" id="escCountScoreDist">0개</span></h3>
+          <ul class="stat-list" id="escStatScoreDist"></ul>
+          <div id="escMoreScoreDistWrap"></div>
+        </div>
+        <div class="stat-box">
+          <h3><span style="display:inline-flex; align-items:center; gap:6px;"><svg class="ui-ico" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> 연방 기록 (하루 2테마 이상)</span><span class="stat-count-pill" id="escCountStreaks">총 0일</span></h3>
+          <ul class="stat-list" id="escStatStreaks"></ul>
+          <div id="escMoreStreaksWrap"></div>
+        </div>
       </div>
     </div>
   </div>
@@ -3610,6 +4471,8 @@
         <div class="form-group"><label>뮤지컬·연극 메인 제목</label><input type="text" id="s_stageTitle" placeholder="노유's 관극리스트"></div>
         <div class="form-group"><label>방탈출 시트 이름</label><input type="text" id="s_escapeSheet" placeholder="시트1"></div>
         <div class="form-group"><label>뮤지컬·연극 시트 이름</label><input type="text" id="s_stageSheet" placeholder="뮤지컬연극"></div>
+        <div class="form-group"><label>프로필 시트 이름</label><input type="text" id="s_profileSheet" placeholder="프로필"></div>
+        <div class="form-group"><label>졸업예정 시트 이름</label><input type="text" id="s_plannedSheet" placeholder="예정"></div>
       </div>
       <div class="form-group">
         <label>기본 폰트 설정</label>
@@ -3713,6 +4576,10 @@
     };
 
     let allAwardsData = [];
+    let profileRawData = [];
+    let profileLoaded = false;
+    let plannedData = [];
+    let plannedLoaded = false;
     let pendingDelete = null;
 
     const NO_POSTER = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(
@@ -3729,6 +4596,8 @@
       stageTitle: "노유's 관극리스트",
       escapeSheet: "시트1",
       stageSheet: "뮤지컬연극",
+      profileSheet: "프로필",
+      plannedSheet: "예정",
       font: "'Pretendard Variable', Pretendard, sans-serif",
       fontSize: "fs-m",
       darkMode: "light",
@@ -3944,7 +4813,7 @@
 
     function getEscapeBrandCategory(item) {
       if (!item || typeof item !== 'object') return '';
-      const directKeys = ['매장분류', '매장 분류', '브랜드', '브랜드명', '브랜드분류', 'W', 'W열'];
+      const directKeys = ['매장분류', '매장 분류', '브랜드', '브랜드명', '브랜드분류', 'U', 'U열', 'W', 'W열'];
       for (const k of directKeys) {
         if (k in item) {
           const val = String(item[k] ?? '').trim();
@@ -3959,10 +4828,16 @@
         }
       }
       const keys = Object.keys(item);
-      if (keys.length >= 23) {
-        const wKey = keys[22];
-        const wVal = String(item[wKey] ?? '').trim();
-        if (wVal !== '' && wVal !== '-') return wVal;
+      // U열(인덱스 20) 또는 W열(인덱스 22) 확인 (단, 해당 열이 인생테마/졸업 열이 아닐 때)
+      for (const colIdx of [20, 22]) {
+        if (keys.length > colIdx) {
+          const cKey = keys[colIdx];
+          const cleanKey = cKey.replace(/\s+/g, '');
+          if (!cleanKey.includes('인생') && !cleanKey.includes('졸업') && !cleanKey.includes('비고') && !cleanKey.includes('시놉시스')) {
+            const cVal = String(item[cKey] ?? '').trim();
+            if (cVal !== '' && cVal !== '-' && cVal !== '👑' && cVal !== '졸업') return cVal;
+          }
+        }
       }
       return '';
     }
@@ -4282,9 +5157,12 @@
     function syncSidebarAndBottomNav() {
       const isStage = currentDomain === 'stage';
       const isCal = currentMainView === 'calendar';
+      const isRecord = currentMainView === 'record';
+      const isProfile = currentMainView === 'profile';
       const isGrad = !isStage && currentMainView === 'grad';
-      const isLifeActive = !isCal && !isGrad && ((isStage && stagePrimary === 'life') || (!isStage && escapePrimary === 'life'));
-      const isExploreActive = !isCal && !isGrad && !isLifeActive;
+      const isGradSoon = !isStage && currentMainView === 'gradSoon';
+      const isLifeActive = !isCal && !isRecord && !isProfile && !isGrad && !isGradSoon && ((isStage && stagePrimary === 'life') || (!isStage && escapePrimary === 'life'));
+      const isExploreActive = !isCal && !isRecord && !isProfile && !isGrad && !isGradSoon && !isLifeActive;
 
       const sbEsc = document.getElementById('sbDomainEscape');
       const sbStg = document.getElementById('sbDomainStage');
@@ -4315,6 +5193,8 @@
       if (sbNavAwards) sbNavAwards.style.display = isStage ? 'none' : 'flex';
       const sbNavGrad = document.getElementById('sbNavGrad');
       if (sbNavGrad) sbNavGrad.style.display = isStage ? 'none' : 'flex';
+      const sbNavGradSoon = document.getElementById('sbNavGradSoon');
+      if (sbNavGradSoon) sbNavGradSoon.style.display = isStage ? 'none' : 'flex';
       const mobileAwardsBtn = document.getElementById('mobileAwardsBtn');
       if (mobileAwardsBtn) mobileAwardsBtn.style.display = isStage ? 'none' : 'flex';
 
@@ -4325,31 +5205,33 @@
       if (sbBadgeTotal) sbBadgeTotal.innerText = totalCnt;
       const sbBadgeLife = document.getElementById('sbBadgeLife');
       if (sbBadgeLife) sbBadgeLife.innerText = lifeCnt;
+      const gradSoonCnt = getGradSoonStoreGroups().length;
       const sbBadgeGrad = document.getElementById('sbBadgeGrad');
       if (sbBadgeGrad) sbBadgeGrad.innerText = gradCnt;
+      const sbBadgeGradSoon = document.getElementById('sbBadgeGradSoon');
+      if (sbBadgeGradSoon) sbBadgeGradSoon.innerText = gradSoonCnt;
 
       const sbNavExplore = document.getElementById('sbNavExplore');
+      const sbNavRecord = document.getElementById('sbNavRecord');
       const sbNavLife = document.getElementById('sbNavLife');
       const sbNavCalendar = document.getElementById('sbNavCalendar');
+      const sbNavProfile = document.getElementById('sbNavProfile');
       if (sbNavExplore) sbNavExplore.classList.toggle('active', isExploreActive);
+      if (sbNavRecord) sbNavRecord.classList.toggle('active', isRecord);
       if (sbNavLife) sbNavLife.classList.toggle('active', isLifeActive);
       if (sbNavCalendar) sbNavCalendar.classList.toggle('active', isCal);
       if (sbNavGrad) sbNavGrad.classList.toggle('active', isGrad);
+      if (sbNavGradSoon) sbNavGradSoon.classList.toggle('active', isGradSoon);
+      if (sbNavProfile) sbNavProfile.classList.toggle('active', isProfile);
 
       const mbTabExplore = document.getElementById('mbTabExplore');
+      const mbTabRecord = document.getElementById('mbTabRecord');
       const mbTabCalendar = document.getElementById('mbTabCalendar');
-      const mbTabExtra = document.getElementById('mbTabExtra');
-      const mbTabExtraText = document.getElementById('mbTabExtraText');
-      const mbTabExtraIcon = document.getElementById('mbTabExtraIcon');
-      if (mbTabExplore) mbTabExplore.classList.toggle('active', !isCal && !isGrad && (!isStage || !isLifeActive));
+      const mbTabProfile = document.getElementById('mbTabProfile');
+      if (mbTabExplore) mbTabExplore.classList.toggle('active', isExploreActive || isLifeActive || isGrad || isGradSoon);
+      if (mbTabRecord) mbTabRecord.classList.toggle('active', isRecord);
       if (mbTabCalendar) mbTabCalendar.classList.toggle('active', isCal);
-      if (mbTabExtraText) mbTabExtraText.innerText = isStage ? '인생극' : '졸업매장';
-      if (mbTabExtraIcon) {
-        mbTabExtraIcon.innerHTML = isStage
-          ? '<path d="m2 4 3 12h14l3-12-6 7-4-7-4 7-6-7zm3 16h14"/>'
-          : '<path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/>';
-      }
-      if (mbTabExtra) mbTabExtra.classList.toggle('active', isStage ? isLifeActive : isGrad);
+      if (mbTabProfile) mbTabProfile.classList.toggle('active', isProfile);
     }
 
     function handleNavAction(action) {
@@ -4372,11 +5254,18 @@
           const lifeChip = document.querySelectorAll('#stagePrimaryNav .filter-item')[1];
           if (lifeChip) setStagePrimaryFilter('life', lifeChip);
         }
+      } else if (action === 'record') {
+        switchMainView('record');
       } else if (action === 'calendar') {
         switchMainView('calendar');
       } else if (action === 'grad') {
         if (isStage) switchDomain('escape');
         switchMainView('grad');
+      } else if (action === 'gradSoon') {
+        if (isStage) switchDomain('escape');
+        switchMainView('gradSoon');
+      } else if (action === 'profile') {
+        switchMainView('profile');
       } else if (action === 'stats') {
         if (!isStage) openEscapeDashboard();
         else openStageDashboard();
@@ -4417,14 +5306,14 @@
       document.getElementById('stubLabelBottom').innerText = 'TICKET';
 
       const ticketKicker = document.getElementById('ticketKickerText');
-      if (ticketKicker) ticketKicker.innerText = isStage ? 'ROYAL BOX · STAGE ARCHIVE' : 'VIP PASS · ESCAPE ARCHIVE';
+      if (ticketKicker) ticketKicker.innerText = isStage ? 'STAGE ARCHIVE' : 'ESCAPE ARCHIVE';
       document.getElementById('escapeStatStrip').style.display = isStage ? 'none' : '';
       document.getElementById('stageStatStrip').style.display = isStage ? '' : 'none';
 
       document.getElementById('escapeDomainContainer').style.display = isStage ? 'none' : 'block';
       document.getElementById('stageDomainContainer').style.display = isStage ? 'block' : 'none';
 
-      if (isStage && currentMainView === 'grad') currentMainView = 'list';
+      if (isStage && (currentMainView === 'grad' || currentMainView === 'gradSoon')) currentMainView = 'list';
       updateTicketStubNo();
       syncMainViewDisplay();
 
@@ -4455,23 +5344,40 @@
     }
 
     function syncMainViewDisplay() {
+      const isStage = currentDomain === 'stage';
       const isCal = currentMainView === 'calendar';
-      const isGrad = currentMainView === 'grad' && currentDomain === 'escape';
-      const isList = !isCal && !isGrad;
+      const isRecord = currentMainView === 'record';
+      const isProfile = currentMainView === 'profile';
+      const isGrad = currentMainView === 'grad' && !isStage;
+      const isGradSoon = currentMainView === 'gradSoon' && !isStage;
+      const isList = currentMainView === 'list';
+      const showFilterBar = isList || isRecord;
 
-      document.getElementById('escapeListFilterSection').style.display = isList ? 'block' : 'none';
+      document.getElementById('escapeDomainContainer').style.display = (!isStage && !isProfile) ? 'block' : 'none';
+      document.getElementById('stageDomainContainer').style.display = (isStage && !isProfile) ? 'block' : 'none';
+
+      const profSec = document.getElementById('profileSection');
+      if (profSec) profSec.classList.toggle('active', isProfile);
+
+      document.getElementById('escapeListFilterSection').style.display = showFilterBar ? 'block' : 'none';
       document.getElementById('escapeGrid').style.display = isList ? 'grid' : 'none';
+      const escRecSec = document.getElementById('escapeRecordSection');
+      if (escRecSec) escRecSec.classList.toggle('active', isRecord);
       document.getElementById('escapeCalendarSection').classList.toggle('active', isCal);
       const escGradSec = document.getElementById('escapeGradSection');
       if (escGradSec) escGradSec.classList.toggle('active', isGrad);
+      const escGradSoonSec = document.getElementById('escapeGradSoonSection');
+      if (escGradSoonSec) escGradSoonSec.classList.toggle('active', isGradSoon);
 
-      document.getElementById('stageListFilterSection').style.display = isCal ? 'none' : 'block';
-      document.getElementById('stageGrid').style.display = isCal ? 'none' : 'grid';
+      document.getElementById('stageListFilterSection').style.display = showFilterBar ? 'block' : 'none';
+      document.getElementById('stageGrid').style.display = isList ? 'grid' : 'none';
+      const stgRecSec = document.getElementById('stageRecordSection');
+      if (stgRecSec) stgRecSec.classList.toggle('active', isRecord);
       document.getElementById('stageCalendarSection').classList.toggle('active', isCal);
       syncSidebarAndBottomNav();
 
       if (isCal) {
-        if (currentDomain === 'escape') {
+        if (!isStage) {
           if (!escapeCalState.initialized && escapeData.length > 0) {
             jumpEscapeCalLatest(true);
             escapeCalState.initialized = true;
@@ -4488,6 +5394,15 @@
         }
       } else if (isGrad) {
         renderEscapeGraduation();
+      } else if (isGradSoon) {
+        if (!plannedLoaded) fetchPlannedData();
+        else renderEscapeGradSoon();
+      } else if (isProfile) {
+        if (!profileLoaded) fetchProfileData();
+        else renderProfileSection();
+      } else if (isRecord) {
+        if (!isStage) applyEscapeFiltersAndSort();
+        else applyStageFiltersAndSort();
       }
     }
 
@@ -4519,6 +5434,7 @@
         const raw = await res.json();
         escapeData = Array.isArray(raw) ? raw.filter(r => isEscapeSchemaRow(r)) : [];
         escapeLoaded = true;
+        if (!plannedLoaded) fetchPlannedData();
         updateEscapeHeaderStats();
         initEscapeCalSelectors();
         applyEscapeFiltersAndSort();
@@ -4832,7 +5748,17 @@
         ? `${SVG_LOCK_MINI}<span>검색결과: ${filtered.length}방</span>`
         : `${SVG_LOCK_MINI}<span>총 ${escapeData.length}방</span>`;
 
+      let escFiltRatingSum = 0, escFiltRatingCnt = 0;
+      filtered.forEach(it => {
+        const r = num(getEscapeRating(it));
+        if (r !== null && r > 0) { escFiltRatingSum += r; escFiltRatingCnt++; }
+      });
+      const escFiltAvg = escFiltRatingCnt > 0 ? (escFiltRatingSum / escFiltRatingCnt).toFixed(2) : '0.00';
+      const escAvgEl = document.getElementById('escapeAvgRatingDisplay');
+      if (escAvgEl) escAvgEl.innerHTML = `${SVG_STAR_GOLD}<span>평균 <b>${escFiltAvg}</b></span>`;
+
       renderEscapeCards(filtered);
+      renderEscapeRecordList(filtered);
     }
 
     function renderEscapeCards(data) {
@@ -4934,6 +5860,146 @@
       });
     }
 
+    function computeEscapeOrderMap() {
+      const orderMap = new Map();
+      const indexed = escapeData.map((item, idx) => ({
+        item,
+        idx,
+        date: normalizeDateStr(getEscapeDate(item)) || '9999-99-99'
+      }));
+      indexed.sort((a, b) => a.date.localeCompare(b.date) || (a.idx - b.idx));
+      indexed.forEach((entry, orderIdx) => {
+        orderMap.set(entry.item, orderIdx + 1);
+      });
+      return orderMap;
+    }
+
+    function computeStageOrderMap() {
+      const orderMap = new Map();
+      const indexed = stageData.map((item, idx) => ({
+        item,
+        idx,
+        no: num(item['NO']),
+        date: normalizeDateStr(getStageDate(item)) || '9999-99-99'
+      }));
+      indexed.sort((a, b) => {
+        if (a.no !== null && b.no !== null && a.no !== b.no) return a.no - b.no;
+        return a.date.localeCompare(b.date) || (a.idx - b.idx);
+      });
+      indexed.forEach((entry, orderIdx) => {
+        const numVal = entry.no !== null ? entry.no : (orderIdx + 1);
+        orderMap.set(entry.item, numVal);
+      });
+      return orderMap;
+    }
+
+    function buildRecordDateColHTML(rawDate) {
+      const norm = normalizeDateStr(rawDate);
+      if (!norm) {
+        return `<div class="rec-date-col">
+          <span class="rec-date-ym">일자</span>
+          <span class="rec-date-day">-</span>
+          <span class="rec-date-pill">미기록</span>
+        </div>`;
+      }
+      const parts = norm.split('-');
+      const y = parseInt(parts[0], 10);
+      const m = parseInt(parts[1], 10);
+      const d = parts[2];
+
+      const now = new Date();
+      const todayStr = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
+      const currentY = now.getFullYear();
+
+      const ymLabel = (y === currentY) ? `${m}월` : `${String(y).slice(2)}.${String(m).padStart(2, '0')}`;
+      const dt = new Date(y, m - 1, parseInt(d, 10));
+      const dowNames = ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'];
+      const dowShort = ['일', '월', '화', '수', '목', '금', '토'];
+      const dow = dt.getDay();
+
+      let pillCls = 'rec-date-pill';
+      let pillTxt = `${dowShort[dow]}요일`;
+      if (norm === todayStr) {
+        pillCls += ' today';
+        pillTxt = '오늘';
+      } else if (dow === 0) {
+        pillCls += ' sun';
+      } else if (dow === 6) {
+        pillCls += ' sat';
+      }
+
+      return `<div class="rec-date-col">
+        <span class="rec-date-ym">${escHtml(ymLabel)}</span>
+        <span class="rec-date-day">${escHtml(d)}</span>
+        <span class="${pillCls}">${escHtml(pillTxt)}</span>
+      </div>`;
+    }
+
+    function renderEscapeRecordList(data) {
+      const listEl = document.getElementById('escapeRecordList');
+      if (!listEl) return;
+      listEl.innerHTML = '';
+
+      if (data.length === 0) {
+        listEl.innerHTML = `<p style="text-align:center; padding: 50px; color: var(--faint); font-weight: 600;">조건에 맞는 방탈출 기록이 없습니다.</p>`;
+        return;
+      }
+
+      const orderMap = computeEscapeOrderMap();
+      const htmlRows = data.map(item => {
+        const index = escapeData.findIndex(orig => orig === item);
+        const orderNum = orderMap.get(item) || (index + 1);
+        const orderBadgeStr = String(orderNum).padStart(3, '0');
+        const imgSrc = escHtml(item['포스터'] || NO_POSTER);
+        const life = isEscapeLife(item);
+
+        const rawDate = getEscapeDate(item);
+        const playDate = normalizeDateStr(rawDate) || (rawDate ? String(rawDate) : '-');
+        const dateColHTML = buildRecordDateColHTML(rawDate);
+
+        let rawPax = getEscapePax(item);
+        let pax = '-';
+        if (rawPax !== undefined && rawPax !== null && String(rawPax).trim() !== '') {
+          pax = String(rawPax).trim();
+          if (!isNaN(pax)) pax += '인';
+        }
+
+        const rawRating = getEscapeRating(item);
+        const ratingNum = num(rawRating);
+        const myRatingFormat = ratingNum !== null ? ratingNum.toFixed(1) : '-';
+
+        const storeText = item['매장명'] || '-';
+
+        return `<div class="rec-row-card ${life ? 'life' : ''}" onclick="openDetailModal(${index}, 'escape')">
+          ${dateColHTML}
+          <div class="rec-body-col">
+            <div class="rec-poster-wrap">
+              <span class="rec-nth-badge">${escHtml(orderBadgeStr)}</span>
+              <img src="${imgSrc}" loading="lazy" onerror="this.onerror=null;this.src=window.NO_POSTER;">
+            </div>
+            <div class="rec-info-col">
+              <div class="rec-title-row">
+                ${life ? SVG_CROWN_GOLD : ''}
+                <span class="rec-theme-title">${escHtml(item['테마명'] || '-')}</span>
+              </div>
+              <div class="rec-meta-row">
+                <span class="rec-store-txt">${escHtml(storeText)}</span>
+                <span class="rec-dot">·</span>
+                <span class="rec-pax-chip">${buildPaxIconsHTML(rawPax, item['일행'])}<span>${escHtml(pax)}</span></span>
+              </div>
+            </div>
+            <div class="rec-right-col">
+              <div class="rec-rating-badge">${SVG_STAR_GOLD}<span>${escHtml(myRatingFormat)}</span></div>
+              <span class="rec-full-date">${escHtml(playDate)}</span>
+            </div>
+          </div>
+        </div>`;
+      }).join('');
+
+      listEl.innerHTML = htmlRows;
+    }
+
+
     /* 방탈출 전용 캘린더 */
     function initEscapeCalSelectors() {
       const ySel = document.getElementById('escapeCalYearSelect');
@@ -5019,16 +6085,35 @@
         }
       });
 
-      let ratingSum = 0, ratingCnt = 0, lifeCnt = 0;
+      let ratingSum = 0, ratingCnt = 0;
       monthPlays.forEach(it => {
         const r = num(getEscapeRating(it));
         if (r !== null && r > 0) { ratingSum += r; ratingCnt++; }
-        if (isEscapeLife(it)) lifeCnt++;
       });
+
+      let maxStreak = 0;
+      let maxStreakDays = 0;
+      Object.values(dayMap).forEach(playsArr => {
+        const len = playsArr.length;
+        if (len > maxStreak) {
+          maxStreak = len;
+          maxStreakDays = 1;
+        } else if (len === maxStreak && len > 0) {
+          maxStreakDays++;
+        }
+      });
+
+      let streakHTML = '-';
+      if (maxStreak >= 2) {
+        streakHTML = `${maxStreak}연방` + (maxStreakDays >= 2 ? ` <span style="font-size:calc(12px * var(--fs)); color:var(--muted); font-weight:700;">(${maxStreakDays}회)</span>` : '');
+      } else if (maxStreak === 1) {
+        streakHTML = `1방 (단일)`;
+      }
+
       document.getElementById('escapeCalSumCount').innerText = `${monthPlays.length}방`;
       document.getElementById('escapeCalSumDays').innerText = `${Object.keys(dayMap).length}일`;
       document.getElementById('escapeCalSumAvg').innerHTML = ratingCnt > 0 ? `${SVG_STAR_GOLD} ${(ratingSum / ratingCnt).toFixed(2)}` : `${SVG_STAR_GOLD} 0.00`;
-      document.getElementById('escapeCalSumLife').innerHTML = `${SVG_CROWN_GOLD} ${lifeCnt}개`;
+      document.getElementById('escapeCalSumLife').innerHTML = streakHTML;
 
       const firstDayWeek = new Date(year, month - 1, 1).getDay();
       const lastDate = new Date(year, month, 0).getDate();
@@ -5101,7 +6186,15 @@
       }
 
       addBtn.style.display = 'inline-flex';
-      titleEl.innerHTML = `${buildDateBadgeHTML(dateStr)} <span>방탈출 기록</span> <span class="stat-count-pill">${plays.length}방</span>`;
+      let dayRatingSum = 0, dayRatingCnt = 0;
+      plays.forEach(p => {
+        const r = num(getEscapeRating(p.item));
+        if (r !== null && r > 0) { dayRatingSum += r; dayRatingCnt++; }
+      });
+      const dayAvgHTML = dayRatingCnt > 0
+        ? ` <span class="stat-count-pill" style="background:var(--gold-bg); color:#d97706; border:1px solid var(--gold-border); display:inline-flex; align-items:center; gap:3px;">${SVG_STAR_GOLD}<span>평균 ${(dayRatingSum / dayRatingCnt).toFixed(2)}</span></span>`
+        : '';
+      titleEl.innerHTML = `${buildDateBadgeHTML(dateStr)} <span>방탈출 기록</span> <span class="stat-count-pill">${plays.length}방</span>${dayAvgHTML}`;
 
       if (plays.length === 0) {
         listEl.innerHTML = `<p style="color:var(--muted); font-size:calc(13px * var(--fs)); grid-column:1/-1;">이 날짜에 기록된 테마가 없습니다.</p>`;
@@ -5209,6 +6302,294 @@
             <span class="grad-meta-chip">${SVG_LOCK_MINI} <span>총 <b>${group.themes.length}</b>테마 클리어</span></span>
             <span class="grad-meta-chip">${SVG_STAR_GOLD} <span>평균 <b>${avgStr}</b></span></span>
             ${group.lifeCount > 0 ? `<span class="grad-meta-chip">${SVG_CROWN_GOLD} <span>인생테마 <b>${group.lifeCount}</b></span></span>` : ''}
+          </div>
+          <div class="grad-theme-shelf">
+            ${shelvesHTML}
+          </div>
+        </div>`;
+      }).join('');
+    }
+
+
+    /* ★ 졸업예정 ('예정' 시트 + '시트1' 합산) 데이터 연동 & 렌더링 */
+    async function fetchPlannedData(showToastOnComplete = false) {
+      const sheetName = appSettings.plannedSheet || '예정';
+      if (!appSettings.url || !appSettings.url.startsWith('http')) {
+        plannedData = [];
+        plannedLoaded = true;
+        syncSidebarAndBottomNav();
+        if (currentMainView === 'gradSoon') renderEscapeGradSoon();
+        return;
+      }
+      try {
+        const res = await fetch(getApiUrl(sheetName));
+        const raw = await res.json();
+        const arr = Array.isArray(raw) ? raw : [];
+        // 만약 시트1과 완전히 동일한 행 수 & 동일한 플레이일자가 들어온 경우(시트 미생성으로 시트1 폴백된 경우)만 차단
+        const isExactSheet1Fallback = arr.length > 0 && arr.length === escapeData.length && arr.every((r, i) => {
+          const d1 = normalizeDateStr(getEscapeDate(r));
+          const d2 = normalizeDateStr(getEscapeDate(escapeData[i]));
+          return d1 !== '' && d1 === d2 && String(r['테마명'] || '') === String(escapeData[i]['테마명'] || '');
+        });
+        plannedData = isExactSheet1Fallback ? [] : arr.filter(r => r && typeof r === 'object' && (r['매장명'] || r['테마명'] || r['매장'] || r['테마']));
+        plannedLoaded = true;
+        syncSidebarAndBottomNav();
+        if (currentMainView === 'gradSoon') renderEscapeGradSoon();
+        if (showToastOnComplete) showToast(`'${sheetName}' 시트 데이터를 동기화했습니다.`);
+      } catch (e) {
+        plannedData = [];
+        plannedLoaded = true;
+        syncSidebarAndBottomNav();
+        if (currentMainView === 'gradSoon') renderEscapeGradSoon();
+        if (showToastOnComplete) showToast(`'${sheetName}' 시트를 불러오지 못했습니다.`);
+      }
+    }
+
+    function getPlannedStoreName(item) {
+      return String(item['매장명'] ?? item['매장'] ?? '').trim();
+    }
+    function getPlannedThemeName(item) {
+      return String(item['테마명'] ?? item['테마'] ?? item['제목'] ?? '').trim();
+    }
+
+    function getGradSoonStoreGroups() {
+      if (!Array.isArray(plannedData) || plannedData.length === 0) return [];
+
+      // 1) 예정 시트에 등장하는 매장명 수집
+      const targetStores = new Map();
+      plannedData.forEach((pItem, pIdx) => {
+        const sName = getPlannedStoreName(pItem);
+        const tName = getPlannedThemeName(pItem);
+        if (!sName || !tName) return;
+        if (!targetStores.has(sName)) {
+          targetStores.set(sName, {
+            storeName: sName,
+            region: String(pItem['지역'] || '').trim(),
+            brand: getEscapeBrandCategory(pItem) || getBrandName(sName),
+            playedThemes: [],
+            unplayedThemes: [],
+            allThemes: []
+          });
+        }
+        const g = targetStores.get(sName);
+        if (!g.region && pItem['지역']) g.region = String(pItem['지역']).trim();
+      });
+
+      // 2) 시트1(escapeData)에서 해당 매장의 이미 클리어한 테마들 매칭
+      const playedKeySetByStore = new Map();
+      escapeData.forEach((eItem, eIdx) => {
+        const sName = String(eItem['매장명'] || '').trim();
+        if (!targetStores.has(sName)) return;
+        const g = targetStores.get(sName);
+        if (!g.region && eItem['지역']) g.region = String(eItem['지역']).trim();
+        const bCat = getEscapeBrandCategory(eItem);
+        if (bCat) g.brand = bCat;
+
+        const tClean = String(eItem['테마명'] || '').replace(/\s+/g, '').toLowerCase();
+        if (!playedKeySetByStore.has(sName)) playedKeySetByStore.set(sName, new Set());
+        playedKeySetByStore.get(sName).add(tClean);
+
+        g.playedThemes.push({
+          isPlayed: true,
+          item: eItem,
+          index: eIdx,
+          date: normalizeDateStr(getEscapeDate(eItem)) || '1900-01-01'
+        });
+      });
+
+      // 3) 예정 시트(plannedData)에서 아직 안 한 테마들 추가 (만약 이미 시트1에 있는 테마면 중복 제외)
+      plannedData.forEach((pItem, pIdx) => {
+        const sName = getPlannedStoreName(pItem);
+        const tName = getPlannedThemeName(pItem);
+        if (!sName || !tName || !targetStores.has(sName)) return;
+
+        const tClean = tName.replace(/\s+/g, '').toLowerCase();
+        const playedSet = playedKeySetByStore.get(sName);
+        if (playedSet && playedSet.has(tClean)) return; // 이미 클리어한 테마는 시트1 데이터로 표시
+
+        const g = targetStores.get(sName);
+        g.unplayedThemes.push({
+          isPlayed: false,
+          item: pItem,
+          plannedIndex: pIdx
+        });
+      });
+
+      // 4) 매장별 통계 및 정렬 구성
+      const result = [];
+      targetStores.forEach(g => {
+        // 클리어한 테마는 날짜순 정렬
+        g.playedThemes.sort((a, b) => a.date.localeCompare(b.date));
+        g.allThemes = [...g.playedThemes, ...g.unplayedThemes];
+
+        const playedCnt = g.playedThemes.length;
+        const remainCnt = g.unplayedThemes.length;
+        const totalCnt = playedCnt + remainCnt;
+        if (totalCnt === 0) return;
+
+        let ratingSum = 0, ratingCnt = 0;
+        g.playedThemes.forEach(pt => {
+          const r = num(getEscapeRating(pt.item));
+          if (r !== null && r > 0) { ratingSum += r; ratingCnt++; }
+        });
+
+        g.playedCount = playedCnt;
+        g.remainCount = remainCnt;
+        g.totalCount = totalCnt;
+        g.progressPct = Math.round((playedCnt / totalCnt) * 100);
+        g.avgRating = ratingCnt > 0 ? (ratingSum / ratingCnt) : 0;
+        result.push(g);
+      });
+
+      return result;
+    }
+
+    function openPlannedDetailModal(plannedIdx) {
+      const item = plannedData[plannedIdx];
+      if (!item) return;
+
+      const posterEl = document.getElementById('d_poster');
+      posterEl.onerror = function() { this.onerror = null; this.src = NO_POSTER; };
+      posterEl.src = item['포스터'] || NO_POSTER;
+
+      const sName = getPlannedStoreName(item) || '매장미상';
+      const tName = getPlannedThemeName(item) || '테마명 없음';
+      document.getElementById('d_store_region').innerText = `${sName} ${item['지역'] ? '[' + item['지역'] + ']' : ''}`;
+      document.getElementById('d_theme').innerText = tName;
+
+      let badgesHTML = `<span class="d-badge nth-badge">${SVG_LOCK_MINI} 미플레이 (졸업예정)</span>`;
+      if (item['장르']) String(item['장르']).split(',').forEach(g => {
+        const gName = g.trim();
+        if (!gName) return;
+        const gs = getGenreStyle(gName);
+        badgesHTML += `<span class="d-badge ${gs.cls}">${gs.emoji} ${escHtml(gName)}</span>`;
+      });
+      let timeVal = item['테마시간'];
+      if (timeVal !== undefined && timeVal !== null && String(timeVal).trim() !== '') {
+        let t = String(timeVal).trim();
+        if (!isNaN(t)) t += '분';
+        badgesHTML += `<span class="d-badge">${SVG_CLOCK_MINI} ${escHtml(t)}</span>`;
+      }
+      document.getElementById('d_badges').innerHTML = badgesHTML;
+      document.getElementById('d_awards').style.display = 'none';
+      document.getElementById('d_cast_section').style.display = 'none';
+
+      document.getElementById('d_grid_box').innerHTML = `
+        <div class="d-grid-item"><span class="d-grid-label">코방 난이도</span><span class="d-grid-val">${escHtml(item['난이도(코방)'] || '-')}</span></div>
+        <div class="d-grid-item"><span class="d-grid-label">매장 난이도</span><span class="d-grid-val">${escHtml(item['난이도(매장)'] || '-')}</span></div>
+        <div class="d-grid-item"><span class="d-grid-label">매장 공포도</span><span class="d-grid-val">${escHtml(getEscapeHorror(item) || '-')}</span></div>
+        <div class="d-grid-item"><span class="d-grid-label">추천 인원</span><span class="d-grid-val">${escHtml(item['추천인원'] || '-')}</span></div>
+        <div class="d-grid-item"><span class="d-grid-label">테마 시간</span><span class="d-grid-val">${escHtml(item['테마시간'] ? (isNaN(item['테마시간']) ? item['테마시간'] : item['테마시간'] + '분') : '-')}</span></div>
+        <div class="d-grid-item"><span class="d-grid-label">상태</span><span class="d-grid-val point">예정 테마</span></div>
+      `;
+      document.getElementById('d_synopsis').innerText = item['시놉시스'] || '등록된 시놉시스가 없습니다.';
+      document.getElementById('d_record_box_title').innerText = '예정 메모';
+      document.getElementById('d_date_label').innerText = '예정/메모';
+      const rawDate = getEscapeDate(item);
+      document.getElementById('d_playDate').innerText = normalizeDateStr(rawDate) || (rawDate || '미정');
+      document.getElementById('d_playPax').innerText = item['일행'] || '-';
+      document.getElementById('d_notes').innerText = item['비고'] || '';
+
+      showModal('detailModal');
+    }
+
+    function renderEscapeGradSoon() {
+      const grid = document.getElementById('escapeGradSoonGrid');
+      if (!grid) return;
+
+      const groups = getGradSoonStoreGroups();
+      let totalPlayed = 0, totalAll = 0, totalRemain = 0;
+
+      groups.forEach(g => {
+        totalPlayed += g.playedCount;
+        totalAll += g.totalCount;
+        totalRemain += g.remainCount;
+      });
+
+      document.getElementById('gradSoonSumStores').innerText = `${groups.length}곳`;
+      document.getElementById('gradSoonSumThemes').innerText = `${totalPlayed} / ${totalAll}`;
+      document.getElementById('gradSoonSumRemain').innerText = `${totalRemain}방`;
+
+      const sortBy = document.getElementById('gradSoonSortSelect')?.value || 'remainAsc';
+      groups.sort((a, b) => {
+        if (sortBy === 'remainAsc') return a.remainCount - b.remainCount || b.progressPct - a.progressPct || a.storeName.localeCompare(b.storeName);
+        if (sortBy === 'rateDesc') return b.progressPct - a.progressPct || a.remainCount - b.remainCount;
+        if (sortBy === 'totalDesc') return b.totalCount - a.totalCount || b.progressPct - a.progressPct;
+        if (sortBy === 'nameAsc') return a.storeName.localeCompare(b.storeName);
+        return 0;
+      });
+
+      const sheetName = appSettings.plannedSheet || '예정';
+      if (groups.length === 0) {
+        grid.innerHTML = `<div class="url-notice" style="grid-column:1/-1;">
+          <strong style="font-size:calc(15px * var(--fs)); color:var(--strong);">구글 스프레드시트에 '${escHtml(sheetName)}' 시트를 추가해 주세요!</strong><br><br>
+          <b>'${escHtml(sheetName)}'</b> 시트에 졸업 예정인 매장의 남은 테마들(<b>매장명, 테마명, 포스터, 지역</b> 등 기존 시트1과 동일한 열 구조)을 넣어주시면,<br>
+          기존 <b>시트1</b>에서 이미 플레이한 같은 매장 테마들(선명한 컬러)과 <b>'${escHtml(sheetName)}'</b> 시트의 안 한 테마들(흐린 표시)이 합쳐져 한눈에 표시됩니다.
+        </div>`;
+        return;
+      }
+
+      grid.innerHTML = groups.map(group => {
+        const avgStr = group.avgRating > 0 ? group.avgRating.toFixed(2) : '-';
+        const stampTop = group.remainCount === 0 ? 'ALL CLEAR' : 'PROGRESS';
+        const stampMain = `${group.progressPct}%`;
+        const stampSub = `${group.playedCount}/${group.totalCount} CLEAR`;
+
+        const shelvesHTML = group.allThemes.map(t => {
+          const it = t.item;
+          if (t.isPlayed) {
+            const rNum = num(getEscapeRating(it));
+            const rTxt = rNum !== null ? rNum.toFixed(1) : '-';
+            const dStr = normalizeDateStr(getEscapeDate(it)) || '-';
+            const lifePin = isEscapeLife(it) ? `<div class="grad-theme-life-pin" title="인생테마">${SVG_CROWN_GOLD}</div>` : '';
+            return `<div class="grad-theme-item" onclick="openDetailModal(${t.index}, 'escape')">
+              <div class="grad-theme-thumb-wrap">
+                <img src="${escHtml(it['포스터'] || NO_POSTER)}" loading="lazy" onerror="this.onerror=null;this.src=window.NO_POSTER;">
+                ${lifePin}
+                <div class="grad-theme-rating-pill">${SVG_STAR_GOLD}<span>${escHtml(rTxt)}</span></div>
+              </div>
+              <div class="grad-theme-title">${escHtml(it['테마명'] || '-')}</div>
+              <div class="grad-theme-date">${escHtml(dStr)}</div>
+            </div>`;
+          } else {
+            const tName = getPlannedThemeName(it) || '-';
+            const rawDate = getEscapeDate(it);
+            const dStr = normalizeDateStr(rawDate) || (rawDate ? String(rawDate) : '미플레이');
+            return `<div class="grad-theme-item unplayed clickable" onclick="openPlannedDetailModal(${t.plannedIndex})">
+              <div class="grad-theme-thumb-wrap">
+                <img src="${escHtml(it['포스터'] || NO_POSTER)}" loading="lazy" onerror="this.onerror=null;this.src=window.NO_POSTER;">
+                <div class="grad-theme-unplayed-badge">${SVG_LOCK_MINI}<span>미플레이</span></div>
+              </div>
+              <div class="grad-theme-title">${escHtml(tName)}</div>
+              <div class="grad-theme-date">${escHtml(dStr)}</div>
+            </div>`;
+          }
+        }).join('');
+
+        return `<div class="grad-store-card upcoming-card">
+          <div class="grad-stamp ${group.remainCount === 0 ? '' : 'upcoming-stamp'}">
+            <span class="grad-stamp-top">${escHtml(stampTop)}</span>
+            <span class="grad-stamp-main">${escHtml(stampMain)}</span>
+            <span class="grad-stamp-sub">${escHtml(stampSub)}</span>
+          </div>
+          <div class="grad-store-header">
+            <div class="grad-store-title-wrap">
+              <div class="grad-store-badges">
+                ${group.region ? `<span class="region-pill">${escHtml(group.region)}</span>` : ''}
+                ${group.brand && group.brand !== group.storeName ? `<span class="region-pill" style="color:var(--accent); border-color:var(--accent-line); background:var(--accent-bg);">${escHtml(group.brand)}</span>` : ''}
+              </div>
+              <div class="grad-store-name">${escHtml(group.storeName)}</div>
+            </div>
+          </div>
+          <div class="grad-store-meta">
+            <span class="grad-meta-chip">${SVG_LOCK_MINI} <span>진행률 <b>${group.playedCount} / ${group.totalCount}</b> (${group.progressPct}%)</span></span>
+            <span class="grad-meta-chip" style="color:var(--accent); border-color:var(--accent-line); background:var(--accent-bg);"><span>남은 테마 <b>${group.remainCount}</b>방</span></span>
+            ${group.playedCount > 0 ? `<span class="grad-meta-chip">${SVG_STAR_GOLD} <span>현재 평균 <b>${avgStr}</b></span></span>` : ''}
+          </div>
+          <div class="upcoming-prog-wrap">
+            <div class="upcoming-prog-bar">
+              <div class="upcoming-prog-fill" style="width:${group.progressPct}%;"></div>
+            </div>
           </div>
           <div class="grad-theme-shelf">
             ${shelvesHTML}
@@ -5380,7 +6761,17 @@
         ? `${SVG_TICKET_MINI}<span>검색결과: ${filtered.length}편</span>`
         : `${SVG_TICKET_MINI}<span>총 ${stageData.length}편</span>`;
 
+      let stgFiltRatingSum = 0, stgFiltRatingCnt = 0;
+      filtered.forEach(it => {
+        const r = num(getStageRating(it));
+        if (r !== null && r > 0) { stgFiltRatingSum += r; stgFiltRatingCnt++; }
+      });
+      const stgFiltAvg = stgFiltRatingCnt > 0 ? (stgFiltRatingSum / stgFiltRatingCnt).toFixed(2) : '0.00';
+      const stgAvgEl = document.getElementById('stageAvgRatingDisplay');
+      if (stgAvgEl) stgAvgEl.innerHTML = `${SVG_STAR_GOLD}<span>평균 <b>${stgFiltAvg}</b></span>`;
+
       renderStageCards(filtered);
+      renderStageRecordList(filtered);
     }
 
     /* ★ 뮤지컬·연극 메인 포스터 카드
@@ -5495,6 +6886,70 @@
         `;
         grid.insertAdjacentHTML('beforeend', cardHTML);
       });
+    }
+
+    function renderStageRecordList(data) {
+      const listEl = document.getElementById('stageRecordList');
+      if (!listEl) return;
+      listEl.innerHTML = '';
+
+      if (stageSheetFallbackDetected || data.length === 0) {
+        listEl.innerHTML = `<p style="text-align:center; padding: 50px; color: var(--faint); font-weight: 600;">조건에 맞는 관극 기록이 없습니다.</p>`;
+        return;
+      }
+
+      const orderMap = computeStageOrderMap();
+      const htmlRows = data.map(item => {
+        const index = stageData.findIndex(orig => orig === item);
+        const orderNum = orderMap.get(item) || (index + 1);
+        const orderBadgeStr = String(orderNum).padStart(3, '0');
+        const imgSrc = escHtml(item['포스터'] || NO_POSTER);
+        const life = isStageLife(item);
+
+        const rawDate = getStageDate(item);
+        const playDate = normalizeDateStr(rawDate) || (rawDate ? String(rawDate) : '-');
+        const dateColHTML = buildRecordDateColHTML(rawDate);
+
+        let rawPax = getStagePax(item);
+        let pax = '-';
+        if (rawPax !== undefined && rawPax !== null && String(rawPax).trim() !== '') {
+          pax = String(rawPax).trim();
+          if (!isNaN(pax)) pax += '인';
+        }
+
+        const rawRating = getStageRating(item);
+        const ratingNum = num(rawRating);
+        const myRatingFormat = ratingNum !== null ? ratingNum.toFixed(1) : '-';
+
+        const placeText = item['장소'] || '공연장 미상';
+
+        return `<div class="rec-row-card ${life ? 'life' : ''}" onclick="openDetailModal(${index}, 'stage')">
+          ${dateColHTML}
+          <div class="rec-body-col">
+            <div class="rec-poster-wrap">
+              <span class="rec-nth-badge">${escHtml(orderBadgeStr)}</span>
+              <img src="${imgSrc}" loading="lazy" onerror="this.onerror=null;this.src=window.NO_POSTER;">
+            </div>
+            <div class="rec-info-col">
+              <div class="rec-title-row">
+                ${life ? SVG_CROWN_GOLD : ''}
+                <span class="rec-theme-title">${escHtml(item['제목'] || '-')}</span>
+              </div>
+              <div class="rec-meta-row">
+                <span class="rec-store-txt">${escHtml(placeText)}</span>
+                <span class="rec-dot">·</span>
+                <span class="rec-pax-chip">${buildPaxIconsHTML(rawPax, item['일행'])}<span>${escHtml(pax)}</span></span>
+              </div>
+            </div>
+            <div class="rec-right-col">
+              <div class="rec-rating-badge">${SVG_STAR_GOLD}<span>${escHtml(myRatingFormat)}</span></div>
+              <span class="rec-full-date">${escHtml(playDate)}</span>
+            </div>
+          </div>
+        </div>`;
+      }).join('');
+
+      listEl.innerHTML = htmlRows;
     }
 
     /* 뮤지컬·연극 전용 캘린더 */
@@ -5664,7 +7119,15 @@
       }
 
       addBtn.style.display = 'inline-flex';
-      titleEl.innerHTML = `${buildDateBadgeHTML(dateStr)} <span>관극 기록</span> <span class="stat-count-pill">${plays.length}편</span>`;
+      let dayRatingSum = 0, dayRatingCnt = 0;
+      plays.forEach(p => {
+        const r = num(getStageRating(p.item));
+        if (r !== null && r > 0) { dayRatingSum += r; dayRatingCnt++; }
+      });
+      const dayAvgHTML = dayRatingCnt > 0
+        ? ` <span class="stat-count-pill" style="background:var(--gold-bg); color:#d97706; border:1px solid var(--gold-border); display:inline-flex; align-items:center; gap:3px;">${SVG_STAR_GOLD}<span>평균 ${(dayRatingSum / dayRatingCnt).toFixed(2)}</span></span>`
+        : '';
+      titleEl.innerHTML = `${buildDateBadgeHTML(dateStr)} <span>관극 기록</span> <span class="stat-count-pill">${plays.length}편</span>${dayAvgHTML}`;
 
       if (plays.length === 0) {
         listEl.innerHTML = `<p style="color:var(--muted); font-size:calc(13px * var(--fs)); grid-column:1/-1;">이 날짜에 기록된 공연이 없습니다.</p>`;
@@ -5781,9 +7244,47 @@
       syncDomainStatToggleBtn(domain);
     }
 
+    function renderExpandableRatingList(listId, wrapId, countPillId, unitLabel, sortedArr, domain) {
+      const listEl = document.getElementById(listId);
+      const wrapEl = document.getElementById(wrapId);
+      const pillEl = document.getElementById(countPillId);
+
+      pillEl.innerText = `총 ${sortedArr.length}${unitLabel}`;
+      listEl.classList.remove('expanded');
+
+      if (sortedArr.length === 0) {
+        listEl.innerHTML = '<li><span style="color:var(--faint);">데이터 없음</span></li>';
+        wrapEl.innerHTML = '';
+        return;
+      }
+
+      listEl.innerHTML = sortedArr.map((entry, idx) => {
+        const name = entry.name;
+        const avgStr = entry.avg.toFixed(2);
+        const count = entry.count;
+        const barW = Math.max(8, Math.min(100, Math.round((entry.avg / 10) * 100)));
+        const extraCls = idx >= 5 ? 'extra-rank' : '';
+
+        return `<li class="${extraCls}">
+          <div class="stat-row-top">
+            <span class="stat-rank-name"><span class="stat-rank-num">${idx + 1}.</span>${escHtml(name)}</span>
+            <span class="stat-rank-val">${SVG_STAR_GOLD} ${avgStr} <span class="stat-rank-pct">(${count}방)</span></span>
+          </div>
+          <div class="stat-mini-bar"><div class="stat-mini-fill" style="width:${barW}%"></div></div>
+        </li>`;
+      }).join('');
+
+      if (sortedArr.length > 5) {
+        const remain = sortedArr.length - 5;
+        wrapEl.innerHTML = `<button class="stat-more-btn" data-remain="${remain}" data-domain="${domain}" onclick="toggleSingleStatList('${listId}', this)">더보기 (+${remain}개 전체 순위) ▼</button>`;
+      } else {
+        wrapEl.innerHTML = '';
+      }
+    }
+
     function getDomainStatIds(domain) {
       return domain === 'escape'
-        ? { listIds: ['escStatComps', 'escStatGenres', 'escStatBrands', 'escStatRegions'], btnId: 'toggleAllEscapeStatsBtn', modalId: 'escapeDashboardModal' }
+        ? { listIds: ['escStatComps', 'escStatGenres', 'escStatBrands', 'escStatRegions', 'escStatCompRatings', 'escStatStoreRatings', 'escStatScoreDist', 'escStatStreaks'], btnId: 'toggleAllEscapeStatsBtn', modalId: 'escapeDashboardModal' }
         : { listIds: ['stgStatCast', 'stgStatTitles', 'stgStatPlaces', 'stgStatComps'], btnId: 'toggleAllStageStatsBtn', modalId: 'stageDashboardModal' };
     }
 
@@ -5828,6 +7329,8 @@
       const totalRooms = escapeData.length;
       let totalRating = 0, ratingCount = 0;
       let compMap = {}, genreMap = {}, brandMap = {}, regionMap = {};
+      let compRatingMap = {};
+      let storeRatingMap = {};
 
       const currentYear = new Date().getFullYear();
       let yearCount = 0;
@@ -5835,7 +7338,8 @@
 
       escapeData.forEach(item => {
         const r = num(getEscapeRating(item));
-        if (r !== null && r > 0) { totalRating += r; ratingCount++; }
+        const hasValidRating = (r !== null && r > 0);
+        if (hasValidRating) { totalRating += r; ratingCount++; }
 
         const norm = normalizeDateStr(getEscapeDate(item));
         if (norm && norm.startsWith(String(currentYear))) {
@@ -5847,20 +7351,82 @@
         if (item['일행']) {
           String(item['일행']).split(',').map(c => c.trim()).filter(c => !isExcludedCompanionName(c)).forEach(c => {
             compMap[c] = (compMap[c] || 0) + 1;
+            if (!compRatingMap[c]) compRatingMap[c] = { totalCount: 0, ratedCount: 0, sum: 0 };
+            compRatingMap[c].totalCount++;
+            if (hasValidRating) {
+              compRatingMap[c].ratedCount++;
+              compRatingMap[c].sum += r;
+            }
           });
         }
         if (item['장르']) String(item['장르']).split(',').map(g => g.trim()).filter(g => g !== '').forEach(g => { genreMap[g] = (genreMap[g] || 0) + 1; });
         const sheetBrand = getEscapeBrandCategory(item);
         const brand = sheetBrand || (item['매장명'] ? getBrandName(item['매장명']) : '');
-        if (brand) brandMap[brand] = (brandMap[brand] || 0) + 1;
+        if (brand) {
+          brandMap[brand] = (brandMap[brand] || 0) + 1;
+          if (!storeRatingMap[brand]) storeRatingMap[brand] = { totalCount: 0, ratedCount: 0, sum: 0 };
+          storeRatingMap[brand].totalCount++;
+          if (hasValidRating) {
+            storeRatingMap[brand].ratedCount++;
+            storeRatingMap[brand].sum += r;
+          }
+        }
         if (item['지역']) {
           const reg = String(item['지역']).trim();
           if (reg) regionMap[reg] = (regionMap[reg] || 0) + 1;
         }
       });
 
+      // 연방(하루 2테마 이상 플레이) 통계 집계
+      const dateCountMap = {};
+      escapeData.forEach(item => {
+        const norm = normalizeDateStr(getEscapeDate(item));
+        if (norm) dateCountMap[norm] = (dateCountMap[norm] || 0) + 1;
+      });
+      const streakFreqMap = {};
+      let totalStreakDays = 0;
+      Object.values(dateCountMap).forEach(cnt => {
+        if (cnt >= 2) {
+          const label = `${cnt}연방`;
+          streakFreqMap[label] = (streakFreqMap[label] || 0) + 1;
+          totalStreakDays++;
+        }
+      });
+      const sortedStreaks = Object.entries(streakFreqMap).sort((a, b) => {
+        const numA = parseInt(a[0], 10) || 0;
+        const numB = parseInt(b[0], 10) || 0;
+        return numB - numA;
+      });
+
+      // 나의 평점 점수별 통계 집계 ('평점' 항목)
+      const scoreDistMap = {};
+      escapeData.forEach(item => {
+        const r = num(getEscapeRating(item));
+        if (r !== null && r > 0) {
+          const label = `${r.toFixed(1)}점`;
+          scoreDistMap[label] = (scoreDistMap[label] || 0) + 1;
+        }
+      });
+      const sortedScoreDist = Object.entries(scoreDistMap).sort((a, b) => {
+        const numA = parseFloat(a[0]) || 0;
+        const numB = parseFloat(b[0]) || 0;
+        return numB - numA;
+      });
+
       const avgRating = ratingCount > 0 ? (totalRating / ratingCount).toFixed(2) : "0.00";
       const sortAll = (map) => Object.entries(map).sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
+
+      // 평점(일행): 3회 이상 플레이한 사람만 표기
+      const sortedCompRatings = Object.entries(compRatingMap)
+        .filter(([, d]) => d.totalCount >= 3 && d.ratedCount > 0)
+        .map(([name, d]) => ({ name, avg: d.sum / d.ratedCount, count: d.totalCount }))
+        .sort((a, b) => b.avg - a.avg || b.count - a.count || a.name.localeCompare(b.name));
+
+      // 평점(브랜드): U열(매장분류/브랜드) 기준 평균 평점 순위 (몇방인지 표기)
+      const sortedStoreRatings = Object.entries(storeRatingMap)
+        .filter(([, d]) => d.ratedCount > 0)
+        .map(([name, d]) => ({ name, avg: d.sum / d.ratedCount, count: d.totalCount }))
+        .sort((a, b) => b.avg - a.avg || b.count - a.count || a.name.localeCompare(b.name));
 
       document.getElementById('escStatTotal').innerText = `${totalRooms}방`;
       document.getElementById('escStatYearLabel').innerText = `${currentYear}년 플레이`;
@@ -5882,6 +7448,10 @@
       renderExpandableRankList('escStatGenres', 'escMoreGenresWrap', 'escCountGenres', '개', sortAll(genreMap), totalRooms, 'escape');
       renderExpandableRankList('escStatBrands', 'escMoreBrandsWrap', 'escCountBrands', '곳', sortAll(brandMap), totalRooms, 'escape');
       renderExpandableRankList('escStatRegions', 'escMoreRegionsWrap', 'escCountRegions', '곳', sortAll(regionMap), totalRooms, 'escape');
+      renderExpandableRatingList('escStatCompRatings', 'escMoreCompRatingsWrap', 'escCountCompRatings', '명', sortedCompRatings, 'escape');
+      renderExpandableRatingList('escStatStoreRatings', 'escMoreStoreRatingsWrap', 'escCountStoreRatings', '곳', sortedStoreRatings, 'escape');
+      renderExpandableRankList('escStatScoreDist', 'escMoreScoreDistWrap', 'escCountScoreDist', '점수대', sortedScoreDist, Math.max(1, ratingCount), 'escape');
+      renderExpandableRankList('escStatStreaks', 'escMoreStreaksWrap', 'escCountStreaks', '종류 (' + totalStreakDays + '일)', sortedStreaks, Math.max(1, totalStreakDays), 'escape');
       syncDomainStatToggleBtn('escape');
 
       showModal('escapeDashboardModal');
@@ -6517,12 +8087,355 @@
       syncSidebarAndBottomNav();
     }
 
+
+    /* ===== 프로필(Profile) 시트 연동 & 파싱 (방탈출 요소 중요도 · MBTI · 평점 기준표) ===== */
+    async function fetchProfileData(showToastOnComplete = false) {
+      const sheetName = appSettings.profileSheet || '프로필';
+      if (!appSettings.url || !appSettings.url.startsWith('http')) {
+        profileRawData = [];
+        profileLoaded = true;
+        renderProfileSection();
+        return;
+      }
+      try {
+        const res = await fetch(getApiUrl(sheetName));
+        const raw = await res.json();
+        const arr = Array.isArray(raw) ? raw : [];
+        // 방탈출 시트1 폴백 방지
+        const isEscapeFallback = arr.length > 0 && arr.every(r => isEscapeSchemaRow(r) && !('MBTI' in r) && !('평점' in r) && !('중요도' in r));
+        profileRawData = isEscapeFallback ? [] : arr;
+        profileLoaded = true;
+        renderProfileSection();
+        if (showToastOnComplete) showToast(`프로필 시트 데이터를 동기화했습니다.`);
+      } catch (e) {
+        profileRawData = [];
+        profileLoaded = true;
+        renderProfileSection();
+        if (showToastOnComplete) showToast(`프로필 시트 데이터를 불러오지 못했습니다.`);
+      }
+    }
+
+    /* ★ 프로필 시트 A열(항목/숫자) · B열(데이터) 완벽 파서
+       - 1행에 헤더가 없어도 (예: 1행 A1='닉네임', B1='노유') 첫 줄의 key-value까지 손실 없이 100% 복원
+       - 인식 항목: 닉네임, MBTI, 쫄/탱, 선호도, 장치/자물쇠, 점수(A열에 숫자만 적힌 경우 ex. 9, 8.9 등), 기타 성향 */
+    function parseProfileSheetData(rows) {
+      const result = {
+        photo: '',          // 사진 (B열 이미지 URL)
+        nickname: '',
+        mbti: '',
+        fearType: '',       // 쫄/탱
+        preferenceRaw: '',  // 선호도 원문
+        priorityItems: [],      // 선호도 / 중요도 분리 배열
+        lockDevice: '',     // 장치/자물쇠
+        etcTraits: [],          // 기타 성향 (또는 추가 커스텀 항목)
+        ratingItems: []         // 점수 (A열 숫자 : B열 설명)
+      };
+
+      if (!Array.isArray(rows) || rows.length === 0) return result;
+
+      const pairs = [];
+      const firstRow = rows[0];
+      const keys = Object.keys(firstRow);
+
+      if (keys.length >= 2) {
+        const k0 = String(keys[0] ?? '').trim();
+        const k1 = String(keys[1] ?? '').trim();
+        const k0Clean = k0.replace(/\s+/g, '').toLowerCase();
+        const genericHeaders = new Set(['항목', '구분', '분류', '카테고리', '키', 'key', 'item', '이름']);
+
+        // 만약 1행에 별도 헤더 없이 바로 A1="닉네임", B1="노유" 처럼 데이터를 넣은 경우 -> 1행(keys[0], keys[1])도 첫 번째 데이터 쌍으로 복원!
+        if (k0 && !genericHeaders.has(k0Clean)) {
+          pairs.push([k0, k1]);
+        }
+
+        // 2행부터의 모든 행에서 A열(keys[0])과 B열(keys[1]) 추출 (C열 등에 추가 메모가 있으면 합침)
+        rows.forEach(r => {
+          if (!r || typeof r !== 'object') return;
+          const aVal = String(r[keys[0]] ?? '').trim();
+          const bVal = String(r[keys[1]] ?? '').trim();
+          const extraVals = keys.slice(2).map(k => String(r[k] ?? '').trim()).filter(Boolean);
+          const combinedB = [bVal, ...extraVals].filter(Boolean).join(' · ');
+          if (aVal !== '' || combinedB !== '') {
+            pairs.push([aVal, combinedB]);
+          }
+        });
+      } else if (keys.length === 1) {
+        const k0 = String(keys[0] ?? '').trim();
+        if (k0) pairs.push([k0, '']);
+        rows.forEach(r => {
+          const aVal = String(r[keys[0]] ?? '').trim();
+          if (aVal) pairs.push([aVal, '']);
+        });
+      }
+
+      pairs.forEach(([rawKey, rawVal]) => {
+        const k = String(rawKey ?? '').trim();
+        const v = String(rawVal ?? '').trim();
+        if (!k && !v) return;
+
+        // 헤더 구분선 역할인 행(예: A열="점수", B열="" 또는 B열="기준/설명")은 스킵
+        const kClean = k.replace(/\s+/g, '').toLowerCase();
+        if ((kClean === '점수' || kClean === '평점' || kClean === '평점기준' || kClean === '나의평점') && (!v || v === '설명' || v === '기준' || v === '느낌' || v === '의미')) {
+          return;
+        }
+
+        // 1) A열이 숫자이거나 '7점 이하', '7이하', '7.0 이하' 등 점수 범위 표기인 경우 -> 평점 기준표로 분류!
+        const rangeMatch = k.match(/^([0-9]+(?:\.[0-9]+)?)\s*점?\s*(이하|미만|이상|초과)?$/);
+        if (rangeMatch && v) {
+          const score = parseFloat(rangeMatch[1]);
+          const cond = rangeMatch[2] || 'exact';
+          if (!isNaN(score) && score >= 0 && score <= 10) {
+            if (!result.ratingItems.some(item => item.rawLabel === k && item.desc === v)) {
+              result.ratingItems.push({ score, cond, rawLabel: k, desc: v });
+            }
+            return;
+          }
+        }
+
+        // 혹시 한 셀에 "9.5 : 인생테마" 형태로 적힌 경우
+        const inlineScore = k.match(/^([0-9]+(?:\.[0-9]+)?)\s*(?:점)?\s*[:\-·]\s*(.+)$/);
+        if (inlineScore && !v) {
+          const score = parseFloat(inlineScore[1]);
+          if (!isNaN(score) && score >= 0 && score <= 10) {
+            result.ratingItems.push({ score, rawLabel: inlineScore[1], desc: inlineScore[2].trim() });
+            return;
+          }
+        }
+
+        // 2) 항목명(A열) 매칭
+        if (kClean.includes('사진') || kClean.includes('이미지') || kClean.includes('프로필사진') || kClean.includes('프사') || kClean === 'photo' || kClean === 'image') {
+          if (v) result.photo = v;
+        } else if (kClean.includes('닉네임') || kClean === '이름' || kClean === '플레이어' || kClean === '별명') {
+          if (v) result.nickname = v;
+        } else if (kClean.includes('mbti') || kClean.includes('엠비티아이')) {
+          if (v) result.mbti = v;
+        } else if (kClean.includes('쫄') || kClean.includes('탱') || kClean.includes('공포') || kClean.includes('담력')) {
+          if (v) result.fearType = v;
+        } else if (kClean.includes('선호') || kClean.includes('중요') || kClean.includes('우선순위') || kClean.includes('요소')) {
+          if (v) {
+            result.preferenceRaw = result.preferenceRaw ? (result.preferenceRaw + ' / ' + v) : v;
+            const splitPrio = v.split(/[>＞→,]/).map(s => s.trim()).filter(Boolean);
+            if (splitPrio.length > 0) {
+              splitPrio.forEach(sp => {
+                if (!result.priorityItems.includes(sp)) result.priorityItems.push(sp);
+              });
+            }
+          }
+        } else if (kClean.includes('장치') || kClean.includes('자물쇠') || kClean.includes('문제유형')) {
+          if (v) result.lockDevice = v;
+        } else if (kClean.includes('기타') || kClean.includes('성향') || kClean.includes('스타일') || kClean.includes('특징') || kClean.includes('포지션') || kClean.includes('한줄') || kClean.includes('메모') || kClean.includes('소개')) {
+          if (v) result.etcTraits.push({ label: k, value: v });
+        } else if (k && v) {
+          // 만약 B열 값 자체가 부등호(>)로 연결된 중요도 순위라면 선호도로 자동 인식
+          if ((v.includes('>') || v.includes('＞') || v.includes('→')) && result.priorityItems.length === 0) {
+            result.preferenceRaw = v;
+            result.priorityItems = v.split(/[>＞→]/).map(s => s.trim()).filter(Boolean);
+          } else {
+            result.etcTraits.push({ label: k, value: v });
+          }
+        }
+      });
+
+      result.ratingItems.sort((a, b) => b.score - a.score);
+      return result;
+    }
+
+    function getPriorityElementIcon(name) {
+      const n = String(name);
+      if (n.includes('인테리어') || n.includes('연출') || n.includes('미술') || n.includes('공간') || n.includes('스케일')) return GENRE_SVGS.drama;
+      if (n.includes('문제') || n.includes('퍼즐') || n.includes('가이드') || n.includes('개연성')) return GENRE_SVGS.puzzle;
+      if (n.includes('일행') || n.includes('동행') || n.includes('사람') || n.includes('멤버')) return SVG_PAX_PERSON;
+      if (n.includes('스토리') || n.includes('서사') || n.includes('감성') || n.includes('줄거리')) return GENRE_SVGS.story;
+      if (n.includes('장치') || n.includes('기계') || n.includes('활동')) return GENRE_SVGS.action;
+      if (n.includes('공포') || n.includes('스릴') || n.includes('조도')) return GENRE_SVGS.horror;
+      return GENRE_SVGS.emotion;
+    }
+
+    function renderProfileSection() {
+      const totalEsc = escapeData.length;
+      const lifeEsc = escapeData.filter(it => isEscapeLife(it)).length;
+      let rSum = 0, rCnt = 0;
+      escapeData.forEach(it => {
+        const r = num(getEscapeRating(it));
+        if (r !== null && r > 0) { rSum += r; rCnt++; }
+      });
+      const avgEsc = rCnt > 0 ? (rSum / rCnt).toFixed(2) : '0.00';
+
+      document.getElementById('profSumEscape').innerText = `${totalEsc}방`;
+      document.getElementById('profSumLife').innerText = `${lifeEsc}개`;
+      document.getElementById('profSumAvg').innerHTML = `${SVG_STAR_GOLD} ${avgEsc}`;
+
+      const parsed = parseProfileSheetData(profileRawData);
+      const sheetName = appSettings.profileSheet || '프로필';
+
+      // 1) 상단 히어로 박스 (사진 & 닉네임 & MBTI)
+      const avatarWrapEl = document.getElementById('profAvatarWrap');
+      if (avatarWrapEl) {
+        if (parsed.photo) {
+          avatarWrapEl.innerHTML = `<img src="${escHtml(parsed.photo)}" alt="프로필 사진" onerror="this.onerror=null;this.parentElement.innerHTML='<svg viewBox=\'0 0 24 24\'><path d=\'M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2\'/><circle cx=\'12\' cy=\'7\' r=\'4\'/></svg>';">`;
+        } else {
+          avatarWrapEl.innerHTML = `<svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>`;
+        }
+      }
+      const nickLabelEl = document.getElementById('profNicknameLabel');
+      const mainTitleEl = document.getElementById('profMainTitle');
+      const mbtiSubEl = document.getElementById('profMbtiSub');
+
+      if (parsed.nickname || parsed.mbti) {
+        nickLabelEl.innerText = parsed.mbti ? `MBTI · ${parsed.mbti}` : 'PLAYER PROFILE';
+        mainTitleEl.innerText = parsed.nickname || parsed.mbti;
+        const subParts = [];
+        if (parsed.nickname && parsed.mbti) subParts.push(`MBTI: ${parsed.mbti}`);
+        if (parsed.fearType) subParts.push(`포지션: ${parsed.fearType}`);
+        if (parsed.lockDevice) subParts.push(`선호 유형: ${parsed.lockDevice}`);
+        mbtiSubEl.innerText = subParts.length > 0 ? subParts.join('  |  ') : '나의 방탈출 프로필 & 성향 카드';
+      } else {
+        nickLabelEl.innerText = 'PLAYER PROFILE';
+        mainTitleEl.innerText = '프로필 시트 연동 대기';
+        mbtiSubEl.innerHTML = `구글 스프레드시트 <b>'${escHtml(sheetName)}'</b> 시트의 A열에 항목, B열에 내용을 입력해 주세요.`;
+      }
+
+      // 2) 프로필 성향 그리드 (닉네임, MBTI, 쫄/탱, 장치/자물쇠, 기타 성향)
+      const traitsGridEl = document.getElementById('profTraitsGrid');
+      const traitCards = [];
+
+      if (parsed.nickname) {
+        traitCards.push({
+          label: '닉네임',
+          ico: '<svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>',
+          val: parsed.nickname,
+          full: false
+        });
+      }
+      if (parsed.mbti) {
+        traitCards.push({
+          label: 'MBTI',
+          ico: '<svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>',
+          val: parsed.mbti,
+          full: false
+        });
+      }
+      if (parsed.fearType) {
+        traitCards.push({
+          label: '쫄 / 탱 포지션',
+          ico: '<svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>',
+          val: parsed.fearType,
+          full: false
+        });
+      }
+      if (parsed.lockDevice) {
+        traitCards.push({
+          label: '장치 / 자물쇠',
+          ico: '<svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>',
+          val: parsed.lockDevice,
+          full: false
+        });
+      }
+      parsed.etcTraits.forEach(et => {
+        traitCards.push({
+          label: et.label || '기타 성향',
+          ico: '<svg viewBox="0 0 24 24"><path d="M12 3l1.9 5.8a2 2 0 0 0 1.3 1.3L21 12l-5.8 1.9a2 2 0 0 0-1.3 1.3L12 21l-1.9-5.8a2 2 0 0 0-1.3-1.3L3 12l5.8-1.9a2 2 0 0 0 1.3-1.3L12 3z"/></svg>',
+          val: et.value,
+          full: true
+        });
+      });
+
+      if (traitCards.length > 0) {
+        traitsGridEl.style.display = 'grid';
+        traitsGridEl.innerHTML = traitCards.map(tc => `
+          <div class="prof-trait-item ${tc.full ? 'full' : ''}">
+            <span class="prof-trait-label">${tc.ico}<span>${escHtml(tc.label)}</span></span>
+            <div class="prof-trait-val">${escHtml(tc.val)}</div>
+          </div>
+        `).join('');
+      } else {
+        traitsGridEl.style.display = 'none';
+        traitsGridEl.innerHTML = '';
+      }
+
+      // 3) 중요도 (막대그래프 제거, > 부등호 표기만 노출)
+      const flowEl = document.getElementById('profPriorityFlow');
+      const prioItems = parsed.priorityItems;
+
+      if (prioItems.length > 0) {
+        document.getElementById('profPriorityBadge').innerText = `총 ${prioItems.length}개 요소`;
+        flowEl.innerHTML = prioItems.map((item, idx) => {
+          const ico = getPriorityElementIcon(item);
+          const node = `<span class="prio-Node ${idx === 0 ? 'rank-1' : ''}">
+            <span class="prio-rank-num">${idx + 1}</span>
+            ${ico}
+            <span>${escHtml(item)}</span>
+          </span>`;
+          return idx < prioItems.length - 1 ? `${node}<span class="prio-arrow">&gt;</span>` : node;
+        }).join('');
+      } else {
+        document.getElementById('profPriorityBadge').innerText = '시트 연동 대기';
+        flowEl.innerHTML = `<span style="color:var(--muted); font-size:calc(12.5px * var(--fs));"><b>'${escHtml(sheetName)}'</b> 시트 A열에 <b>중요도</b>(또는 <b>선호도</b>), B열에 <code>인테리어 &gt; 문제 &gt; 일행 &gt; 스토리</code> 형태로 입력해 주세요.</span>`;
+      }
+
+      // 4) 나의 평점 기준표 (A열 숫자 또는 '7점 이하' · B열 설명 세로 형태)
+      const vertListEl = document.getElementById('profRatingVerticalList');
+      const ratingList = parsed.ratingItems;
+
+      if (ratingList.length > 0) {
+        document.getElementById('profRatingCountPill').innerText = `총 ${ratingList.length}단계 기준`;
+        const threshold = num(appSettings.lifeThreshold) ?? 9.0;
+
+        vertListEl.innerHTML = ratingList.map((rItem, idx) => {
+          const sc = rItem.score;
+          const cond = rItem.cond || 'exact';
+          const scStr = (cond !== 'exact' && rItem.rawLabel)
+            ? String(rItem.rawLabel)
+            : (rItem.rawLabel ? String(rItem.rawLabel).replace(/점$/, '') : (Number.isInteger(sc) ? String(sc) : sc.toFixed(1)));
+          const isTop = (cond === 'exact' || cond === '이상') && (sc >= threshold || idx === 0);
+
+          const matchedCount = escapeData.filter(it => {
+            const myR = num(getEscapeRating(it));
+            if (myR === null || myR <= 0) return false;
+            if (cond === '이하') return myR <= sc + 0.001;
+            if (cond === '미만') return myR < sc - 0.001;
+            if (cond === '이상') return myR >= sc - 0.001;
+            if (cond === '초과') return myR > sc + 0.001;
+            return Math.abs(myR - sc) < 0.001;
+          }).length;
+
+          return `<div class="rg-row ${isTop ? 'tier-top' : ''}">
+            <div class="rg-score-badge">
+              ${isTop ? SVG_CROWN_GOLD : SVG_STAR_GOLD}
+              <span>${escHtml(scStr)}</span>
+            </div>
+            <div class="rg-desc">${escHtml(rItem.desc)}</div>
+            <span class="rg-count-pill">${matchedCount}방 기록됨</span>
+          </div>`;
+        }).join('');
+      } else {
+        document.getElementById('profRatingCountPill').innerText = '작성 안내';
+        vertListEl.innerHTML = `<div class="url-notice" style="padding:26px 18px;">
+          <strong style="color:var(--strong); font-size:calc(14.5px * var(--fs));">구글 스프레드시트 '${escHtml(sheetName)}' 시트 작성 방법 (A열 항목 · B열 데이터)</strong><br><br>
+          1행 헤더 없이 바로 <b>A열에 항목명(또는 점수 숫자)</b>, <b>B열에 데이터</b>를 세로로 적어주시면 자동 인식됩니다.<br>
+          <span style="display:inline-block; margin-top:10px; font-size:calc(12px * var(--fs)); color:var(--sub); background:var(--bg-soft); padding:10px 14px; border-radius:8px; text-align:left; line-height:1.7;">
+            • A열 <b>닉네임</b> &nbsp;|&nbsp; B열 <code>노유</code><br>
+            • A열 <b>MBTI</b> &nbsp;|&nbsp; B열 <code>ISTP</code><br>
+            • A열 <b>쫄/탱</b> &nbsp;|&nbsp; B열 <code>극탱 (또는 마지모탱)</code><br>
+            • A열 <b>선호도</b> &nbsp;|&nbsp; B열 <code>인테리어 &gt; 문제 &gt; 일행 &gt; 스토리</code><br>
+            • A열 <b>장치/자물쇠</b> &nbsp;|&nbsp; B열 <code>장치 선호 (6:4)</code><br>
+            • A열 <b>기타 성향</b> &nbsp;|&nbsp; B열 <code>관찰력 좋음, 스토리 과몰입러</code><br>
+            • A열 <b>9.5</b> &nbsp;|&nbsp; B열 <code>인생테마</code><br>
+            • A열 <b>9</b> &nbsp;|&nbsp; B열 <code>진짜 재미있는 테마</code><br>
+            • A열 <b>8.5</b> &nbsp;|&nbsp; B열 <code>무난하게 추천할 만한 테마</code>
+          </span>
+        </div>`;
+      }
+    }
+
     function openSettings() {
       document.getElementById('s_url').value = appSettings.url;
       document.getElementById('s_title').value = appSettings.title || "노유's 방탈리스트";
       document.getElementById('s_stageTitle').value = appSettings.stageTitle || "노유's 관극리스트";
       document.getElementById('s_escapeSheet').value = appSettings.escapeSheet || '시트1';
       document.getElementById('s_stageSheet').value = appSettings.stageSheet || '뮤지컬연극';
+      document.getElementById('s_profileSheet').value = appSettings.profileSheet || '프로필';
+      document.getElementById('s_plannedSheet').value = appSettings.plannedSheet || '예정';
       document.getElementById('s_font').value = appSettings.font;
       document.getElementById('s_fontSize').value = appSettings.fontSize || 'fs-m';
       document.getElementById('s_darkMode').value = appSettings.darkMode || 'light';
@@ -6536,6 +8449,8 @@
       appSettings.stageTitle = document.getElementById('s_stageTitle').value.trim() || "노유's 관극리스트";
       appSettings.escapeSheet = document.getElementById('s_escapeSheet').value.trim() || '시트1';
       appSettings.stageSheet = document.getElementById('s_stageSheet').value.trim() || '뮤지컬연극';
+      appSettings.profileSheet = document.getElementById('s_profileSheet').value.trim() || '프로필';
+      appSettings.plannedSheet = document.getElementById('s_plannedSheet').value.trim() || '예정';
       appSettings.font = document.getElementById('s_font').value;
       appSettings.fontSize = document.getElementById('s_fontSize').value;
       appSettings.darkMode = document.getElementById('s_darkMode').value;
@@ -6547,8 +8462,14 @@
 
       escapeLoaded = false;
       stageLoaded = false;
+      profileLoaded = false;
+      plannedLoaded = false;
       applySettingsToUI();
-      if (currentDomain === 'escape') fetchEscapeData();
+      if (currentMainView === 'profile') fetchProfileData();
+      if (currentDomain === 'escape') {
+        fetchEscapeData();
+        fetchPlannedData();
+      }
       else fetchStageData();
       closeModal('settingsModal');
     }
