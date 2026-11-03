@@ -402,6 +402,50 @@
       fill: none;
       stroke-width: 2.1;
     }
+    .prof-etc-list {
+      list-style: none;
+      margin: 4px 0 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .prof-etc-li {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      padding: 8px 12px;
+      font-size: calc(13px * var(--fs));
+      font-weight: 700;
+      color: var(--strong);
+      line-height: 1.35;
+      word-break: keep-all;
+      box-shadow: 0 1px 3px var(--shadow-1);
+    }
+    .prof-etc-dot {
+      width: 18px;
+      height: 18px;
+      border-radius: 6px;
+      background: var(--accent-bg);
+      border: 1px solid var(--accent-line);
+      color: var(--accent);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .prof-etc-dot svg {
+      width: 11px;
+      height: 11px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
     .prof-trait-val {
       font-size: calc(14.5px * var(--fs));
       font-weight: 800;
@@ -8332,22 +8376,36 @@
         });
       }
       parsed.etcTraits.forEach(et => {
+        const items = String(et.value || '').split(',').map(s => s.trim()).filter(Boolean);
         traitCards.push({
           label: et.label || '기타 성향',
           ico: '<svg viewBox="0 0 24 24"><path d="M12 3l1.9 5.8a2 2 0 0 0 1.3 1.3L21 12l-5.8 1.9a2 2 0 0 0-1.3 1.3L12 21l-1.9-5.8a2 2 0 0 0-1.3-1.3L3 12l5.8-1.9a2 2 0 0 0 1.3-1.3L12 3z"/></svg>',
           val: et.value,
+          listItems: items,
           full: true
         });
       });
 
       if (traitCards.length > 0) {
         traitsGridEl.style.display = 'grid';
-        traitsGridEl.innerHTML = traitCards.map(tc => `
-          <div class="prof-trait-item ${tc.full ? 'full' : ''}">
-            <span class="prof-trait-label">${tc.ico}<span>${escHtml(tc.label)}</span></span>
-            <div class="prof-trait-val">${escHtml(tc.val)}</div>
-          </div>
-        `).join('');
+        const checkSvg = '<span class="prof-etc-dot"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>';
+        traitsGridEl.innerHTML = traitCards.map(tc => {
+          if (tc.listItems && tc.listItems.length > 0) {
+            const liHtml = tc.listItems.map(li => `<li class="prof-etc-li">${checkSvg}<span>${escHtml(li)}</span></li>`).join('');
+            return `
+              <div class="prof-trait-item full">
+                <span class="prof-trait-label">${tc.ico}<span>${escHtml(tc.label)}</span></span>
+                <ul class="prof-etc-list">${liHtml}</ul>
+              </div>
+            `;
+          }
+          return `
+            <div class="prof-trait-item ${tc.full ? 'full' : ''}">
+              <span class="prof-trait-label">${tc.ico}<span>${escHtml(tc.label)}</span></span>
+              <div class="prof-trait-val">${escHtml(tc.val)}</div>
+            </div>
+          `;
+        }).join('');
       } else {
         traitsGridEl.style.display = 'none';
         traitsGridEl.innerHTML = '';
