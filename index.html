@@ -1467,6 +1467,679 @@
       white-space: nowrap;
     }
 
+
+    /* ===== 연간 결산 (Annual Recap) 전용 페이지 디자인 ===== */
+    .recap-section {
+      display: none;
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 18px 20px 60px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    .recap-section.active {
+      display: block;
+    }
+    .recap-top-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 16px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    .recap-title-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .recap-back-btn {
+      width: 38px;
+      height: 38px;
+      border-radius: 11px;
+      border: 1.5px solid var(--line);
+      background: var(--bg-card);
+      color: var(--strong);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 2px 6px var(--shadow-1);
+      transition: all 0.18s ease;
+    }
+    .recap-back-btn:hover {
+      background: var(--invert-bg);
+      color: var(--invert-text);
+      border-color: var(--invert-bg);
+    }
+    .recap-back-btn svg {
+      width: 18px;
+      height: 18px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2.4;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .recap-page-title {
+      font-size: calc(22px * var(--fs));
+      font-weight: 900;
+      color: var(--strong);
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+    }
+    .recap-page-sub {
+      font-size: calc(11.5px * var(--fs));
+      color: var(--muted);
+      font-weight: 600;
+      margin-top: 2px;
+    }
+    .recap-year-pills {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: var(--bg-soft);
+      border: 1px solid var(--line);
+      padding: 4px;
+      border-radius: 999px;
+      overflow-x: auto;
+      max-width: 100%;
+      box-sizing: border-box;
+      scrollbar-width: none;
+    }
+    .recap-year-pills::-webkit-scrollbar { display: none; }
+    .recap-year-btn {
+      padding: 6px 15px;
+      border-radius: 999px;
+      border: none;
+      background: transparent;
+      color: var(--muted);
+      font-size: calc(12.5px * var(--fs));
+      font-weight: 800;
+      font-family: inherit;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.18s ease;
+    }
+    .recap-year-btn:hover { color: var(--strong); }
+    .recap-year-btn.active {
+      background: var(--accent);
+      color: #fff;
+      box-shadow: 0 3px 10px rgba(239, 68, 68, 0.28);
+    }
+
+    /* 상단 히어로 배너 (총 몇방 & 평균 평점 대칭 + 4대 핵심 지표, 좌우 끝선 정렬) */
+    .recap-hero-card {
+      background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-faint) 100%);
+      border: 1.5px solid var(--line);
+      border-top: 3.5px solid var(--accent);
+      border-radius: var(--radius-lg);
+      padding: 22px 24px;
+      margin-bottom: 16px;
+      box-shadow: 0 8px 24px var(--shadow-2);
+      display: flex;
+      align-items: stretch;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    .recap-hero-main-pair {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      flex-shrink: 0;
+    }
+    .recap-giant-metric {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .recap-giant-label {
+      font-size: calc(11px * var(--fs));
+      font-weight: 800;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+      margin-bottom: 3px;
+    }
+    .recap-giant-num-row {
+      display: flex;
+      align-items: baseline;
+      gap: 5px;
+    }
+    .recap-giant-num {
+      font-size: calc(44px * var(--fs));
+      font-weight: 900;
+      color: var(--strong);
+      line-height: 1;
+      letter-spacing: -0.04em;
+    }
+    .recap-giant-num.gold {
+      color: #d97706;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    body.dark .recap-giant-num.gold {
+      color: #fbbf24;
+    }
+    .recap-giant-num.gold svg {
+      width: calc(30px * var(--fs));
+      height: calc(30px * var(--fs));
+    }
+    .recap-giant-unit {
+      font-size: calc(16px * var(--fs));
+      font-weight: 800;
+      color: var(--sub);
+    }
+    .recap-giant-sub {
+      font-size: calc(11.5px * var(--fs));
+      font-weight: 700;
+      color: var(--muted);
+      margin-top: 6px;
+    }
+    .recap-pair-divider {
+      width: 1.5px;
+      align-self: stretch;
+      background: var(--line-dashed);
+      margin: 4px 0;
+    }
+
+    .recap-sub-metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      flex: 1 1 360px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    .recap-sub-pill {
+      background: var(--bg-soft);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 12px 14px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 4px;
+      box-sizing: border-box;
+    }
+    .recap-sub-pill-label {
+      font-size: calc(11px * var(--fs));
+      font-weight: 700;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+    .recap-sub-pill-val {
+      font-size: calc(20px * var(--fs));
+      font-weight: 900;
+      color: var(--strong);
+      white-space: nowrap;
+      line-height: 1.15;
+    }
+    .recap-sub-pill-val small {
+      font-size: calc(12px * var(--fs));
+      font-weight: 700;
+      color: var(--sub);
+      margin-left: 2px;
+    }
+
+    /* 월별 플레이 포스터 리본 보드 (1~6월 좌측 / 7~12월 우측, 좌우·상하 끝선 정렬) */
+    .recap-card {
+      background: var(--bg-card);
+      border: 1.5px solid var(--line);
+      border-radius: var(--radius-lg);
+      padding: 20px 22px;
+      box-shadow: 0 4px 14px var(--shadow-1);
+      margin-bottom: 16px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    .recap-card-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 14px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--line-soft);
+    }
+    .recap-card-title {
+      font-size: calc(15px * var(--fs));
+      font-weight: 900;
+      color: var(--strong);
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+    }
+    .recap-card-title svg {
+      width: 17px;
+      height: 17px;
+      stroke: var(--accent);
+      fill: none;
+      stroke-width: 2.2;
+    }
+    .recap-peak-badge {
+      font-size: calc(11.5px * var(--fs));
+      font-weight: 800;
+      color: var(--sub);
+      background: var(--bg-soft);
+      border: 1px solid var(--line);
+      padding: 4px 10px;
+      border-radius: 999px;
+    }
+    .recap-peak-badge b {
+      color: var(--accent);
+    }
+
+    .recap-months-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px 20px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    .recap-month-col {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      min-width: 0;
+      width: 100%;
+    }
+    .recap-month-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      height: 46px;
+      padding: 4px 8px;
+      border-radius: 9px;
+      background: var(--bg-faint);
+      border: 1px solid var(--line-lighter);
+      width: 100%;
+      box-sizing: border-box;
+    }
+    .recap-m-label {
+      width: 32px;
+      font-size: calc(12px * var(--fs));
+      font-weight: 800;
+      color: var(--muted);
+      text-align: right;
+      flex-shrink: 0;
+    }
+    .recap-m-cnt {
+      width: 26px;
+      font-size: calc(13px * var(--fs));
+      font-weight: 900;
+      color: var(--strong);
+      text-align: right;
+      flex-shrink: 0;
+    }
+    .recap-m-cnt.peak {
+      color: var(--accent);
+    }
+    .recap-m-cnt.zero {
+      color: var(--ghost);
+      font-weight: 600;
+    }
+    .recap-m-strip {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      overflow-x: auto;
+      flex: 1;
+      min-width: 0;
+      height: 100%;
+      scrollbar-width: none;
+    }
+    .recap-m-strip::-webkit-scrollbar { display: none; }
+    .recap-mini-poster {
+      width: 27px;
+      height: 36px;
+      border-radius: 5px;
+      object-fit: cover;
+      flex-shrink: 0;
+      border: 1px solid var(--line);
+      background: var(--bg-soft);
+      cursor: pointer;
+      transition: transform 0.15s ease, border-color 0.15s ease;
+    }
+    .recap-mini-poster:hover {
+      transform: scale(1.1);
+      border-color: var(--accent);
+      z-index: 2;
+    }
+
+    /* 하단 2열 인사이트 그리드: 상단(최고 평점 테마) 카드를 키워 좌우 컬럼 하단 끝선 정렬 */
+    .recap-bottom-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+      align-items: stretch;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    .recap-bottom-col {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      min-width: 0;
+      height: 100%;
+    }
+    .recap-bottom-col > .recap-card {
+      margin-bottom: 0;
+      display: flex;
+      flex-direction: column;
+    }
+    /* 상단 카드(최고 평점 테마 / 자주 간 매장)가 남는 높이를 채워 하단 끝선을 맞춤 */
+    .recap-bottom-col > .recap-card:first-child {
+      flex: 1;
+    }
+    #recapBestThemeBox,
+    #recapTopStoresList {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    #recapGenreBox,
+    #recapCompGrid {
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    /* 최고 평점 테마 스포트라이트 (대형 히어로 카드) */
+    .recap-best-box {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      padding: 20px 22px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--bg-faint) 0%, var(--gold-bg) 135%);
+      border: 1.5px solid var(--gold-border);
+      cursor: pointer;
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    .recap-best-box:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px var(--shadow-2);
+    }
+    .recap-best-poster {
+      width: 96px;
+      height: 132px;
+      border-radius: 10px;
+      object-fit: cover;
+      flex-shrink: 0;
+      border: 1.5px solid var(--gold-border);
+      box-shadow: 0 6px 16px var(--shadow-2);
+    }
+    .recap-best-info {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 6px;
+    }
+    .recap-best-tag {
+      display: inline-flex;
+      align-items: center;
+      align-self: flex-start;
+      padding: 3px 9px;
+      border-radius: 999px;
+      background: var(--gold-bg);
+      border: 1px solid var(--gold-border);
+      font-size: calc(11px * var(--fs));
+      font-weight: 800;
+      color: #d97706;
+    }
+    body.dark .recap-best-tag { color: #fbbf24; }
+    .recap-best-title {
+      font-size: calc(20px * var(--fs));
+      font-weight: 900;
+      color: var(--strong);
+      word-break: keep-all;
+      line-height: 1.25;
+      letter-spacing: -0.02em;
+    }
+    .recap-best-meta {
+      font-size: calc(13px * var(--fs));
+      color: var(--sub);
+      font-weight: 700;
+    }
+    .recap-best-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 2px;
+    }
+    .recap-best-chip {
+      font-size: calc(11px * var(--fs));
+      font-weight: 700;
+      color: var(--muted);
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      padding: 3px 8px;
+      border-radius: 7px;
+    }
+    .recap-best-score {
+      font-size: calc(34px * var(--fs));
+      font-weight: 900;
+      color: var(--accent);
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      justify-content: center;
+      line-height: 1;
+      padding-left: 8px;
+    }
+    .recap-best-score span {
+      font-size: calc(11.5px * var(--fs));
+      font-weight: 800;
+      color: #d97706;
+      margin-top: 6px;
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+    }
+    body.dark .recap-best-score span { color: #fbbf24; }
+
+    /* 많이 한 장르 멀티 세그먼트 데이터 바 (자연스러운 컴팩트 레이아웃) */
+    .recap-genre-top-row {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      margin-bottom: 10px;
+      width: 100%;
+    }
+    .recap-genre-top-name {
+      font-size: calc(22px * var(--fs));
+      font-weight: 900;
+      color: var(--strong);
+    }
+    .recap-genre-top-stat {
+      font-size: calc(12.5px * var(--fs));
+      font-weight: 700;
+      color: var(--muted);
+    }
+    .recap-seg-bar {
+      width: 100%;
+      height: 12px;
+      border-radius: 999px;
+      background: var(--bg-softer);
+      overflow: hidden;
+      display: flex;
+      gap: 2px;
+      margin-bottom: 12px;
+      box-sizing: border-box;
+    }
+    .recap-seg-piece {
+      height: 100%;
+      min-width: 6px;
+    }
+    .recap-genre-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 14px;
+      width: 100%;
+    }
+    .recap-legend-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: calc(12px * var(--fs));
+      font-weight: 700;
+      color: var(--sub);
+    }
+    .recap-legend-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .recap-legend-item b {
+      color: var(--strong);
+      font-weight: 900;
+    }
+
+    /* 자주 간 매장 리스트 */
+    .recap-store-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 8px;
+    }
+    .recap-store-li {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 9px 12px;
+      border-radius: 10px;
+      background: var(--bg-faint);
+      border: 1px solid var(--line-soft);
+      width: 100%;
+      box-sizing: border-box;
+    }
+    .recap-store-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+    }
+    .recap-store-rank {
+      font-size: calc(13px * var(--fs));
+      font-weight: 900;
+      color: var(--accent);
+      min-width: 18px;
+    }
+    .recap-store-name {
+      font-size: calc(13.5px * var(--fs));
+      font-weight: 800;
+      color: var(--strong);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .recap-store-cnt {
+      font-size: calc(12.5px * var(--fs));
+      font-weight: 800;
+      color: var(--muted);
+      flex-shrink: 0;
+    }
+
+    /* 함께한 일행 상위 5명 1열 대칭 그리드 (좌우 끝선 100% 정렬) */
+    .recap-comp-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 8px;
+      width: 100%;
+      box-sizing: border-box;
+      align-items: stretch;
+    }
+    .recap-comp-card {
+      background: var(--bg-faint);
+      border: 1px solid var(--line-soft);
+      border-radius: 12px;
+      padding: 14px 6px 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      gap: 5px;
+      position: relative;
+      min-width: 0;
+      box-sizing: border-box;
+    }
+    .recap-comp-card.rank-1 {
+      border-color: var(--gold-border);
+      background: linear-gradient(180deg, var(--gold-bg) 0%, var(--bg-card) 100%);
+    }
+    .recap-comp-rank-tag {
+      position: absolute;
+      top: 5px;
+      left: 6px;
+      font-size: calc(9.5px * var(--fs));
+      font-weight: 900;
+      color: var(--muted);
+    }
+    .recap-comp-card.rank-1 .recap-comp-rank-tag {
+      color: #d97706;
+    }
+    body.dark .recap-comp-card.rank-1 .recap-comp-rank-tag { color: #fbbf24; }
+    .recap-comp-avatar {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      background: var(--bg-soft);
+      border: 1px solid var(--line);
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: calc(13.5px * var(--fs));
+      font-weight: 900;
+      flex-shrink: 0;
+    }
+    .recap-comp-name {
+      font-size: calc(12.5px * var(--fs));
+      font-weight: 800;
+      color: var(--strong);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      width: 100%;
+    }
+    .recap-comp-cnt {
+      font-size: calc(11px * var(--fs));
+      font-weight: 700;
+      color: var(--muted);
+    }
+
+    .cal-sub-btn.recap-btn {
+      background: linear-gradient(135deg, #ff1744 0%, var(--accent) 100%);
+      color: #fff;
+      border-color: transparent;
+      font-weight: 800;
+      box-shadow: 0 3px 10px rgba(239, 68, 68, 0.25);
+    }
+    .cal-sub-btn.recap-btn:hover {
+      filter: brightness(1.06);
+      color: #fff;
+    }
+
     /* ===== 방탈로그 스타일 좌측 고정 사이드바 (PC) & 하단 탭바 (모바일) ===== */
     .app-shell {
       display: flex;
@@ -3572,6 +4245,33 @@
       .rg-score-badge { min-width: 62px; font-size: calc(12.5px * var(--fs)); padding: 5px 8px; }
       .rg-desc { font-size: calc(12.5px * var(--fs)); }
 
+      .recap-section { padding: 14px 12px 50px; overflow-x: hidden; width: 100%; box-sizing: border-box; }
+      .recap-top-nav { gap: 10px; }
+      .recap-year-pills { width: 100%; display: flex; justify-content: space-between; }
+      .recap-year-btn { flex: 1; text-align: center; padding: 6px 10px; }
+      .recap-hero-card { padding: 16px 14px; gap: 12px; }
+      .recap-hero-main-pair { width: 100%; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+      .recap-pair-divider { display: none; }
+      .recap-giant-metric { background: var(--bg-soft); border: 1px solid var(--line); border-radius: 12px; padding: 12px 12px; box-sizing: border-box; }
+      .recap-giant-num { font-size: calc(30px * var(--fs)); }
+      .recap-giant-num.gold svg { width: calc(22px * var(--fs)); height: calc(22px * var(--fs)); }
+      .recap-sub-metrics-grid { min-width: 100%; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+      .recap-sub-pill { padding: 10px 12px; }
+      .recap-sub-pill-val { font-size: calc(17px * var(--fs)); }
+      .recap-card { padding: 16px 14px; margin-bottom: 14px; }
+      .recap-months-grid { grid-template-columns: 1fr; gap: 8px; }
+      .recap-bottom-grid { grid-template-columns: 1fr; gap: 14px; }
+      .recap-bottom-col { gap: 14px; }
+      .recap-best-box { padding: 14px; gap: 14px; }
+      .recap-best-poster { width: 72px; height: 98px; }
+      .recap-best-title { font-size: calc(17px * var(--fs)); }
+      .recap-best-score { font-size: calc(26px * var(--fs)); }
+      .recap-comp-grid { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 6px; }
+      .recap-comp-card { padding: 12px 4px 10px; border-radius: 10px; gap: 4px; }
+      .recap-comp-avatar { width: 30px; height: 30px; border-radius: 9px; font-size: calc(11.5px * var(--fs)); }
+      .recap-comp-name { font-size: calc(11px * var(--fs)); }
+      .recap-comp-cnt { font-size: calc(10px * var(--fs)); }
+
       .calendar-section { padding: 14px 10px 50px; overflow-x: hidden; }
       .cal-top-bar { padding: 12px; gap: 10px; flex-direction: column; align-items: stretch; }
       .cal-nav-group { justify-content: space-between; width: 100%; }
@@ -3930,13 +4630,13 @@
               <svg class="ui-ico" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 12h18"/><path d="M12 3v18"/></svg>
               <span id="escapeCalSplitText">연방 분할보기: ON</span>
             </button>
-            <button class="cal-sub-btn" onclick="jumpEscapeCalLatest()">
-              <svg class="ui-ico" viewBox="0 0 24 24"><polygon points="19 20 9 12 19 4 19 20"/><line x1="5" y1="19" x2="5" y2="5"/></svg>
-              <span>최근 플레이 달</span>
-            </button>
             <button class="cal-sub-btn" onclick="jumpEscapeCalToday()">
               <svg class="ui-ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/></svg>
               <span>이번 달</span>
+            </button>
+            <button class="cal-sub-btn recap-btn" onclick="openEscapeRecapPage()">
+              <svg class="ui-ico" viewBox="0 0 24 24"><path d="M12 20V10"/><path d="M18 20V4"/><path d="M6 20v-4"/></svg>
+              <span>연간 결산</span>
             </button>
           </div>
         </div>
@@ -3976,6 +4676,123 @@
             </button>
           </div>
           <div class="cal-day-list" id="escapeCalDayList"></div>
+        </div>
+      </section>
+
+      <!-- 방탈출 전용 연간 결산 (Annual Recap) 페이지 -->
+      <section class="recap-section" id="escapeRecapSection">
+        <div class="recap-top-nav">
+          <div class="recap-title-group">
+            <button type="button" class="recap-back-btn" onclick="switchMainView('calendar')" title="캘린더로 돌아가기">
+              <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+            </button>
+            <div>
+              <h2 class="recap-page-title" id="recapPageTitle">2026 연간 결산</h2>
+              <div class="recap-page-sub" id="recapPageSub">연간 플레이 아카이브 리포트</div>
+            </div>
+          </div>
+          <div class="recap-year-pills" id="recapYearPills"></div>
+        </div>
+
+        <!-- 상단 히어로 배너: 총 몇방 & 평균 평점(동일 크기) + 플레이 일 · 최다 연방 · 매장 몇 곳 · 인생테마 몇 개 -->
+        <div class="recap-hero-card">
+          <div class="recap-hero-main-pair">
+            <div class="recap-giant-metric">
+              <span class="recap-giant-label">TOTAL PLAYED</span>
+              <div class="recap-giant-num-row">
+                <span class="recap-giant-num" id="recapHeroTotal">0</span>
+                <span class="recap-giant-unit">방</span>
+              </div>
+              <div class="recap-giant-sub" id="recapHeroOrderRange">기록 집계 중</div>
+            </div>
+            <div class="recap-pair-divider"></div>
+            <div class="recap-giant-metric">
+              <span class="recap-giant-label">AVERAGE RATING</span>
+              <div class="recap-giant-num-row">
+                <span class="recap-giant-num gold" id="recapHeroAvg">0.00</span>
+                <span class="recap-giant-unit">/ 10</span>
+              </div>
+              <div class="recap-giant-sub" id="recapHeroAvgSub">나의 평균 평점</div>
+            </div>
+          </div>
+
+          <div class="recap-sub-metrics-grid">
+            <div class="recap-sub-pill">
+              <span class="recap-sub-pill-label">플레이 일</span>
+              <span class="recap-sub-pill-val" id="recapMetricDays">0<small>일</small></span>
+            </div>
+            <div class="recap-sub-pill">
+              <span class="recap-sub-pill-label">최다 연방</span>
+              <span class="recap-sub-pill-val" id="recapMetricStreak">0<small>연방</small></span>
+            </div>
+            <div class="recap-sub-pill">
+              <span class="recap-sub-pill-label">방문 매장</span>
+              <span class="recap-sub-pill-val" id="recapMetricStores">0<small>곳</small></span>
+            </div>
+            <div class="recap-sub-pill">
+              <span class="recap-sub-pill-label">인생테마</span>
+              <span class="recap-sub-pill-val" id="recapMetricLife">0<small>개</small></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 월별 플레이 (1~12월 포스터 리본 & 방수) -->
+        <div class="recap-card">
+          <div class="recap-card-head">
+            <span class="recap-card-title">
+              <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              <span>월별 플레이</span>
+            </span>
+            <span class="recap-peak-badge" id="recapPeakMonthBadge">가장 많이 간 달 -</span>
+          </div>
+          <div class="recap-months-grid" id="recapMonthsGrid"></div>
+        </div>
+
+        <!-- 하단 2열: 최고 평점 테마 + 많이 한 장르 (데이터 바) / 자주 간 매장 + 함께한 일행 -->
+        <div class="recap-bottom-grid">
+          <div class="recap-bottom-col">
+            <div class="recap-card">
+              <div class="recap-card-head">
+                <span class="recap-card-title">
+                  <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <span>최고 평점 테마</span>
+                </span>
+              </div>
+              <div id="recapBestThemeBox"></div>
+            </div>
+
+            <div class="recap-card">
+              <div class="recap-card-head">
+                <span class="recap-card-title">
+                  <svg viewBox="0 0 24 24"><path d="M12 2H2v10l9.29 9.29c.94.94 2.48.94 3.42 0l6.58-6.58c.94-.94.94-2.48 0-3.42L12 2Z"/><path d="M7 7h.01"/></svg>
+                  <span>많이 한 장르</span>
+                </span>
+              </div>
+              <div id="recapGenreBox"></div>
+            </div>
+          </div>
+
+          <div class="recap-bottom-col">
+            <div class="recap-card">
+              <div class="recap-card-head">
+                <span class="recap-card-title">
+                  <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                  <span>자주 간 매장</span>
+                </span>
+              </div>
+              <ul class="recap-store-list" id="recapTopStoresList"></ul>
+            </div>
+
+            <div class="recap-card">
+              <div class="recap-card-head">
+                <span class="recap-card-title">
+                  <svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                  <span>함께한 일행</span>
+                </span>
+              </div>
+              <div class="recap-comp-grid" id="recapCompGrid"></div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -4472,12 +5289,12 @@
           <div id="escMoreRegionsWrap"></div>
         </div>
         <div class="stat-box">
-          <h3><span style="display:inline-flex; align-items:center; gap:6px;"><svg class="ui-ico" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg> 평점 (일행 · 3회 이상)</span><span class="stat-count-pill" id="escCountCompRatings">0명</span></h3>
+          <h3><span style="display:inline-flex; align-items:center; gap:6px;"><svg class="ui-ico" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg> 평점(일행)</span><span class="stat-count-pill" id="escCountCompRatings">0명</span></h3>
           <ul class="stat-list" id="escStatCompRatings"></ul>
           <div id="escMoreCompRatingsWrap"></div>
         </div>
         <div class="stat-box">
-          <h3><span style="display:inline-flex; align-items:center; gap:6px;"><svg class="ui-ico" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg> 평점 (브랜드)</span><span class="stat-count-pill" id="escCountStoreRatings">0곳</span></h3>
+          <h3><span style="display:inline-flex; align-items:center; gap:6px;"><svg class="ui-ico" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg> 평점(브랜드)</span><span class="stat-count-pill" id="escCountStoreRatings">0곳</span></h3>
           <ul class="stat-list" id="escStatStoreRatings"></ul>
           <div id="escMoreStoreRatingsWrap"></div>
         </div>
@@ -4487,7 +5304,7 @@
           <div id="escMoreScoreDistWrap"></div>
         </div>
         <div class="stat-box">
-          <h3><span style="display:inline-flex; align-items:center; gap:6px;"><svg class="ui-ico" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> 연방 기록 (하루 2테마 이상)</span><span class="stat-count-pill" id="escCountStreaks">총 0일</span></h3>
+          <h3><span style="display:inline-flex; align-items:center; gap:6px;"><svg class="ui-ico" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> 연방 기록</span><span class="stat-count-pill" id="escCountStreaks">총 0종류</span></h3>
           <ul class="stat-list" id="escStatStreaks"></ul>
           <div id="escMoreStreaksWrap"></div>
         </div>
@@ -4634,6 +5451,7 @@
     const SVG_SUN = '<svg class="ui-ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>';
 
     let gradRegionFilter = 'all';
+    let escapeRecapYear = null;
 
     let currentDomain = 'escape'; // 'escape' | 'stage'
     let currentMainView = 'list'; // 'list' | 'calendar'
@@ -5246,7 +6064,7 @@
     /* ===== 최상단 도메인 전환 (방탈출 <-> 뮤지컬·연극) ===== */
     function syncSidebarAndBottomNav() {
       const isStage = currentDomain === 'stage';
-      const isCal = currentMainView === 'calendar';
+      const isCal = currentMainView === 'calendar' || (!isStage && currentMainView === 'recap');
       const isRecord = currentMainView === 'record';
       const isProfile = currentMainView === 'profile';
       const isGrad = !isStage && currentMainView === 'grad';
@@ -5403,7 +6221,7 @@
       document.getElementById('escapeDomainContainer').style.display = isStage ? 'none' : 'block';
       document.getElementById('stageDomainContainer').style.display = isStage ? 'block' : 'none';
 
-      if (isStage && (currentMainView === 'grad' || currentMainView === 'gradSoon')) currentMainView = 'list';
+      if (isStage && (currentMainView === 'grad' || currentMainView === 'gradSoon' || currentMainView === 'recap')) currentMainView = 'list';
       updateTicketStubNo();
       syncMainViewDisplay();
 
@@ -5436,6 +6254,7 @@
     function syncMainViewDisplay() {
       const isStage = currentDomain === 'stage';
       const isCal = currentMainView === 'calendar';
+      const isRecap = currentMainView === 'recap' && !isStage;
       const isRecord = currentMainView === 'record';
       const isProfile = currentMainView === 'profile';
       const isGrad = currentMainView === 'grad' && !isStage;
@@ -5454,6 +6273,8 @@
       const escRecSec = document.getElementById('escapeRecordSection');
       if (escRecSec) escRecSec.classList.toggle('active', isRecord);
       document.getElementById('escapeCalendarSection').classList.toggle('active', isCal);
+      const escRecapSec = document.getElementById('escapeRecapSection');
+      if (escRecapSec) escRecapSec.classList.toggle('active', isRecap);
       const escGradSec = document.getElementById('escapeGradSection');
       if (escGradSec) escGradSec.classList.toggle('active', isGrad);
       const escGradSoonSec = document.getElementById('escapeGradSoonSection');
@@ -5482,6 +6303,8 @@
             renderStageCalendar();
           }
         }
+      } else if (isRecap) {
+        renderEscapeRecap();
       } else if (isGrad) {
         renderEscapeGraduation();
       } else if (isGradSoon) {
@@ -6311,6 +7134,286 @@
         </div>`;
       }).join('');
     }
+
+    /* ★ 방탈출 연간 결산 (Annual Recap) 페이지 렌더링 */
+    function openEscapeRecapPage() {
+      escapeRecapYear = escapeCalState.year || new Date().getFullYear();
+      switchMainView('recap');
+    }
+
+    function selectEscapeRecapYear(yr) {
+      escapeRecapYear = parseInt(yr, 10);
+      renderEscapeRecap();
+    }
+
+    function renderEscapeRecap() {
+      const currentY = new Date().getFullYear();
+      const yearsSet = new Set([currentY]);
+      escapeData.forEach(it => {
+        const norm = normalizeDateStr(getEscapeDate(it));
+        if (norm) {
+          const y = parseInt(norm.slice(0, 4), 10);
+          if (!isNaN(y) && y > 1990) yearsSet.add(y);
+        }
+      });
+      const sortedYears = [...yearsSet].sort((a, b) => b - a);
+      if (!escapeRecapYear || !yearsSet.has(escapeRecapYear)) {
+        // 기본값: 플레이 기록이 있는 가장 최근 연도 (또는 현재 연도)
+        const playedYears = sortedYears.filter(y => escapeData.some(it => normalizeDateStr(getEscapeDate(it)).startsWith(String(y))));
+        escapeRecapYear = playedYears.length > 0 ? playedYears[0] : sortedYears[0];
+      }
+
+      const yearStr = String(escapeRecapYear);
+      document.getElementById('recapPageTitle').innerText = `${yearStr} 연간 결산`;
+
+      // 연도 선택 알약 버튼 렌더링
+      document.getElementById('recapYearPills').innerHTML = sortedYears.map(y =>
+        `<button type="button" class="recap-year-btn ${y === escapeRecapYear ? 'active' : ''}" onclick="selectEscapeRecapYear(${y})">${y}</button>`
+      ).join('');
+
+      // 전체 방 번호 매핑 (몇 번째부터 몇 번째 방까지인지 계산)
+      const orderMap = computeEscapeOrderMap();
+      const yearPlays = [];
+      escapeData.forEach((item, index) => {
+        const norm = normalizeDateStr(getEscapeDate(item));
+        if (norm && norm.startsWith(yearStr)) {
+          yearPlays.push({
+            item,
+            index,
+            date: norm,
+            orderNum: orderMap.get(item) || (index + 1)
+          });
+        }
+      });
+
+      yearPlays.sort((a, b) => a.date.localeCompare(b.date) || (a.orderNum - b.orderNum));
+
+      const totalCnt = yearPlays.length;
+      document.getElementById('recapHeroTotal').innerText = totalCnt;
+
+      if (totalCnt > 0) {
+        const minOrder = Math.min(...yearPlays.map(p => p.orderNum));
+        const maxOrder = Math.max(...yearPlays.map(p => p.orderNum));
+        const latestDate = yearPlays[yearPlays.length - 1].date;
+        const mNum = parseInt(latestDate.slice(5, 7), 10);
+        const dNum = parseInt(latestDate.slice(8, 10), 10);
+        document.getElementById('recapPageSub').innerText = `${yearStr}년 ${mNum}월 ${dNum}일 기준 아카이브 리포트`;
+        document.getElementById('recapHeroOrderRange').innerText = `${minOrder}번째부터 ${maxOrder}번째 방까지`;
+      } else {
+        document.getElementById('recapPageSub').innerText = `${yearStr}년 플레이 기록이 없습니다`;
+        document.getElementById('recapHeroOrderRange').innerText = `기록된 테마 없음`;
+      }
+
+      // 평균 평점, 플레이 일, 최다 연방, 방문 매장 수, 인생테마 수 계산
+      let ratingSum = 0, ratingCnt = 0, lifeCnt = 0;
+      const dayCountMap = {};
+      const storeCountMap = {};
+      const genreCountMap = {};
+      const compCountMap = {};
+      const monthBuckets = Array.from({ length: 12 }, () => []);
+      let bestPlay = null;
+      let bestScore = -1;
+
+      yearPlays.forEach(p => {
+        const it = p.item;
+        const r = num(getEscapeRating(it));
+        if (r !== null && r > 0) {
+          ratingSum += r;
+          ratingCnt++;
+          if (r > bestScore || (r === bestScore && p.date >= (bestPlay?.date || ''))) {
+            bestScore = r;
+            bestPlay = p;
+          }
+        }
+        if (isEscapeLife(it)) lifeCnt++;
+        dayCountMap[p.date] = (dayCountMap[p.date] || 0) + 1;
+
+        const st = String(it['매장명'] || '').trim();
+        if (st) storeCountMap[st] = (storeCountMap[st] || 0) + 1;
+
+        if (it['장르']) {
+          String(it['장르']).split(',').map(g => g.trim()).filter(Boolean).forEach(g => {
+            genreCountMap[g] = (genreCountMap[g] || 0) + 1;
+          });
+        }
+
+        if (it['일행']) {
+          String(it['일행']).split(',').map(c => c.trim()).filter(c => !isExcludedCompanionName(c)).forEach(c => {
+            compCountMap[c] = (compCountMap[c] || 0) + 1;
+          });
+        }
+
+        const mIdx = parseInt(p.date.slice(5, 7), 10) - 1;
+        if (mIdx >= 0 && mIdx < 12) monthBuckets[mIdx].push(p);
+      });
+
+      const avgVal = ratingCnt > 0 ? (ratingSum / ratingCnt).toFixed(2) : '0.00';
+      document.getElementById('recapHeroAvg').innerHTML = `${SVG_STAR_GOLD}<span>${avgVal}</span>`;
+      document.getElementById('recapHeroAvgSub').innerText = ratingCnt > 0 ? `평점 기록 ${ratingCnt}방 기준` : '평점 기록 없음';
+
+      const uniqueDays = Object.keys(dayCountMap).length;
+      const maxStreak = uniqueDays > 0 ? Math.max(...Object.values(dayCountMap)) : 0;
+      const uniqueStores = Object.keys(storeCountMap).length;
+
+      document.getElementById('recapMetricDays').innerHTML = `${uniqueDays}<small>일</small>`;
+      document.getElementById('recapMetricStreak').innerHTML = `${maxStreak}<small>연방</small>`;
+      document.getElementById('recapMetricStores').innerHTML = `${uniqueStores}<small>곳</small>`;
+      document.getElementById('recapMetricLife').innerHTML = `${lifeCnt}<small>개</small>`;
+
+      // 달별 플레이 (1~6월 / 7~12월 2열 포스터 스트립)
+      let peakMonthIdx = -1;
+      let peakMonthCnt = 0;
+      monthBuckets.forEach((arr, idx) => {
+        if (arr.length > peakMonthCnt) {
+          peakMonthCnt = arr.length;
+          peakMonthIdx = idx;
+        }
+      });
+
+      const peakBadgeEl = document.getElementById('recapPeakMonthBadge');
+      if (peakMonthCnt > 0) {
+        peakBadgeEl.innerHTML = `가장 많이 간 달 <b>${peakMonthIdx + 1}월 · ${peakMonthCnt}방</b>`;
+      } else {
+        peakBadgeEl.innerText = '플레이 기록 없음';
+      }
+
+      const renderMonthRow = (mIdx) => {
+        const arr = monthBuckets[mIdx];
+        const cnt = arr.length;
+        const isPeak = cnt > 0 && cnt === peakMonthCnt;
+        const cntCls = cnt === 0 ? 'zero' : (isPeak ? 'peak' : '');
+        const postersHTML = arr.map(p =>
+          `<img class="recap-mini-poster" src="${escHtml(p.item['포스터'] || NO_POSTER)}" title="${escHtml(p.item['테마명'] || '')} (${p.date})" loading="lazy" onclick="openDetailModal(${p.index}, 'escape')" onerror="this.onerror=null;this.src=window.NO_POSTER;">`
+        ).join('');
+        return `<div class="recap-month-row">
+          <span class="recap-m-label">${mIdx + 1}월</span>
+          <span class="recap-m-cnt ${cntCls}">${cnt > 0 ? cnt : '-'}</span>
+          <div class="recap-m-strip">${postersHTML}</div>
+        </div>`;
+      };
+
+      const leftColHTML = [0, 1, 2, 3, 4, 5].map(renderMonthRow).join('');
+      const rightColHTML = [6, 7, 8, 9, 10, 11].map(renderMonthRow).join('');
+      document.getElementById('recapMonthsGrid').innerHTML = `
+        <div class="recap-month-col">${leftColHTML}</div>
+        <div class="recap-month-col">${rightColHTML}</div>
+      `;
+
+      // 1) 최고 평점 테마 (대형 히어로 카드)
+      const bestBoxEl = document.getElementById('recapBestThemeBox');
+      if (bestPlay) {
+        const bItem = bestPlay.item;
+        const mNum = parseInt(bestPlay.date.slice(5, 7), 10);
+        const dNum = parseInt(bestPlay.date.slice(8, 10), 10);
+        const bGenre = String(bItem['장르'] || '').trim();
+        const bComp = String(bItem['일행'] || '').split(',').map(c => c.trim()).filter(c => !isExcludedCompanionName(c)).join(', ');
+        const chipsHTML = [
+          bGenre ? `<span class="recap-best-chip">${escHtml(bGenre)}</span>` : '',
+          bComp ? `<span class="recap-best-chip">일행: ${escHtml(bComp)}</span>` : ''
+        ].filter(Boolean).join('');
+        bestBoxEl.innerHTML = `
+          <div class="recap-best-box" onclick="openDetailModal(${bestPlay.index}, 'escape')">
+            <img class="recap-best-poster" src="${escHtml(bItem['포스터'] || NO_POSTER)}" loading="lazy" onerror="this.onerror=null;this.src=window.NO_POSTER;">
+            <div class="recap-best-info">
+              <div class="recap-best-tag">${isEscapeLife(bItem) ? '👑 올해의 인생테마' : '★ 올해 최고 평점 테마'}</div>
+              <div class="recap-best-title">${escHtml(bItem['테마명'] || '-')}</div>
+              <div class="recap-best-meta">${escHtml(bItem['매장명'] || '-')} · ${mNum}월 ${dNum}일</div>
+              ${chipsHTML ? `<div class="recap-best-chips">${chipsHTML}</div>` : ''}
+            </div>
+            <div class="recap-best-score">
+              <div>${bestScore.toFixed(1)}</div>
+              <span>${SVG_STAR_GOLD} 최고점</span>
+            </div>
+          </div>
+        `;
+      } else {
+        bestBoxEl.innerHTML = `<p style="color:var(--faint); font-size:calc(12.5px * var(--fs));">기록된 평점 데이터가 없습니다.</p>`;
+      }
+
+      // 2) 많이 한 장르 (멀티 세그먼트 데이터 바 + 컴팩트 범례, 기타 종수 표기 제외)
+      const genreBoxEl = document.getElementById('recapGenreBox');
+      const sortedGenres = Object.entries(genreCountMap).sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
+      const totalGenreMentions = sortedGenres.reduce((acc, [, c]) => acc + c, 0);
+
+      if (sortedGenres.length > 0 && totalGenreMentions > 0) {
+        const topG = sortedGenres[0];
+        const topPct = Math.round((topG[1] / totalGenreMentions) * 100);
+        const top5 = sortedGenres.slice(0, 5);
+        const etcList = sortedGenres.slice(5);
+        const etcCnt = etcList.reduce((acc, [, c]) => acc + c, 0);
+
+        const segColors = ['#ef4444', '#f59e0b', '#10b981', '#3b82f6', '#8b5cf6', '#94a3b8'];
+        const barSegments = [...top5.map(([gName, gCnt], idx) => {
+          return `<div class="recap-seg-piece" style="flex:${gCnt} 1 0%; background:${segColors[idx]};" title="${escHtml(gName)}: ${gCnt}방"></div>`;
+        })];
+        if (etcCnt > 0) {
+          barSegments.push(`<div class="recap-seg-piece" style="flex:${etcCnt} 1 0%; background:${segColors[5]};" title="기타: ${etcCnt}방"></div>`);
+        }
+
+        const legendItems = top5.map(([gName, gCnt], idx) => `
+          <span class="recap-legend-item">
+            <span class="recap-legend-dot" style="background:${segColors[idx]};"></span>
+            <span>${escHtml(gName)} <b>${gCnt}</b></span>
+          </span>
+        `);
+        if (etcCnt > 0) {
+          legendItems.push(`
+            <span class="recap-legend-item">
+              <span class="recap-legend-dot" style="background:${segColors[5]};"></span>
+              <span>기타 <b>${etcCnt}</b></span>
+            </span>
+          `);
+        }
+
+        genreBoxEl.innerHTML = `
+          <div class="recap-genre-top-row">
+            <span class="recap-genre-top-name">${escHtml(topG[0])}</span>
+            <span class="recap-genre-top-stat">${topG[1]}방 · ${topPct}%</span>
+          </div>
+          <div class="recap-seg-bar">${barSegments.join('')}</div>
+          <div class="recap-genre-legend">${legendItems.join('')}</div>
+        `;
+      } else {
+        genreBoxEl.innerHTML = `<p style="color:var(--faint); font-size:calc(12.5px * var(--fs));">기록된 장르 데이터가 없습니다.</p>`;
+      }
+
+      // 3) 자주 간 매장 (상위 5곳)
+      const topStoresEl = document.getElementById('recapTopStoresList');
+      const sortedStores = Object.entries(storeCountMap).sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0])).slice(0, 5);
+      if (sortedStores.length > 0) {
+        topStoresEl.innerHTML = sortedStores.map(([sName, sCnt], idx) => `
+          <li class="recap-store-li">
+            <div class="recap-store-left">
+              <span class="recap-store-rank">${idx + 1}</span>
+              <span class="recap-store-name">${escHtml(sName)}</span>
+            </div>
+            <span class="recap-store-cnt">${sCnt}방</span>
+          </li>
+        `).join('');
+      } else {
+        topStoresEl.innerHTML = `<li style="color:var(--faint); font-size:calc(12.5px * var(--fs));">방문 매장 기록이 없습니다.</li>`;
+      }
+
+      // 4) 함께한 일행 (상위 5명만 노출 & 좌우 끝선 일치)
+      const compGridEl = document.getElementById('recapCompGrid');
+      const sortedComps = Object.entries(compCountMap).sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0])).slice(0, 5);
+      if (sortedComps.length > 0) {
+        compGridEl.style.gridTemplateColumns = `repeat(${sortedComps.length}, minmax(0, 1fr))`;
+        compGridEl.innerHTML = sortedComps.map(([cName, cCnt], idx) => {
+          const initial = String(cName).trim().slice(0, 2);
+          return `<div class="recap-comp-card ${idx === 0 ? 'rank-1' : ''}">
+            <span class="recap-comp-rank-tag">#${idx + 1}</span>
+            <div class="recap-comp-avatar">${escHtml(initial)}</div>
+            <div class="recap-comp-name">${escHtml(cName)}</div>
+            <div class="recap-comp-cnt">${cCnt}방</div>
+          </div>`;
+        }).join('');
+      } else {
+        compGridEl.style.gridTemplateColumns = '1fr';
+        compGridEl.innerHTML = `<p style="color:var(--faint); font-size:calc(12.5px * var(--fs)); grid-column:1/-1;">기록된 동행 일행이 없습니다.</p>`;
+      }
+    }
+
 
     /* ★ 방탈출 졸업매장 (X열 '졸업') 스탬프 보드 렌더링 */
     function renderEscapeGraduation() {
@@ -7467,7 +8570,7 @@
         }
       });
 
-      // 연방(하루 2테마 이상 플레이) 통계 집계
+      // 연방 기록 (1연방 포함 전체 일별 연방 횟수 집계)
       const dateCountMap = {};
       escapeData.forEach(item => {
         const norm = normalizeDateStr(getEscapeDate(item));
@@ -7476,7 +8579,7 @@
       const streakFreqMap = {};
       let totalStreakDays = 0;
       Object.values(dateCountMap).forEach(cnt => {
-        if (cnt >= 2) {
+        if (cnt >= 1) {
           const label = `${cnt}연방`;
           streakFreqMap[label] = (streakFreqMap[label] || 0) + 1;
           totalStreakDays++;
@@ -7512,9 +8615,9 @@
         .map(([name, d]) => ({ name, avg: d.sum / d.ratedCount, count: d.totalCount }))
         .sort((a, b) => b.avg - a.avg || b.count - a.count || a.name.localeCompare(b.name));
 
-      // 평점(브랜드): U열(매장분류/브랜드) 기준 평균 평점 순위 (몇방인지 표기)
+      // 평점(브랜드): 2회 이상 플레이한 브랜드만 통계에 포함
       const sortedStoreRatings = Object.entries(storeRatingMap)
-        .filter(([, d]) => d.ratedCount > 0)
+        .filter(([, d]) => d.totalCount >= 2 && d.ratedCount > 0)
         .map(([name, d]) => ({ name, avg: d.sum / d.ratedCount, count: d.totalCount }))
         .sort((a, b) => b.avg - a.avg || b.count - a.count || a.name.localeCompare(b.name));
 
@@ -7541,7 +8644,7 @@
       renderExpandableRatingList('escStatCompRatings', 'escMoreCompRatingsWrap', 'escCountCompRatings', '명', sortedCompRatings, 'escape');
       renderExpandableRatingList('escStatStoreRatings', 'escMoreStoreRatingsWrap', 'escCountStoreRatings', '곳', sortedStoreRatings, 'escape');
       renderExpandableRankList('escStatScoreDist', 'escMoreScoreDistWrap', 'escCountScoreDist', '점수대', sortedScoreDist, Math.max(1, ratingCount), 'escape');
-      renderExpandableRankList('escStatStreaks', 'escMoreStreaksWrap', 'escCountStreaks', '종류 (' + totalStreakDays + '일)', sortedStreaks, Math.max(1, totalStreakDays), 'escape');
+      renderExpandableRankList('escStatStreaks', 'escMoreStreaksWrap', 'escCountStreaks', '종류', sortedStreaks, Math.max(1, totalStreakDays), 'escape');
       syncDomainStatToggleBtn('escape');
 
       showModal('escapeDashboardModal');
